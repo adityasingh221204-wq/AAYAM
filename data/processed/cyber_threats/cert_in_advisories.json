@@ -1,0 +1,134 @@
+[
+  {
+    "advisory_id": "CIVN-2024-0412",
+    "title": "Widespread Phishing via Fake Electricity Disconnection & Bill Payment APKs",
+    "category": "Phishing / Malicious APK",
+    "attack_vector": "SMS / WhatsApp spoofing electricity boards, urging immediate APK installation to avoid power cut",
+    "indicators_and_triggers": [
+      "urgency",
+      "threat of disconnection",
+      "untrusted APK download link",
+      "request for SMS permission"
+    ],
+    "financial_impact": "Unauthorized debit via Accessibility Service and SMS OTP interception (average loss \u20b945,000 - \u20b92,50,000)",
+    "mitigation_steps": "Do not install APKs outside Google Play/Apple App Store; verify with official electricity DISCOM portal; report to 1930.",
+    "reference_url": "https://www.cert-in.org.in/",
+    "severity": "Critical",
+    "published_date": "2024-11-14"
+  },
+  {
+    "advisory_id": "CIVN-2024-0388",
+    "title": "Exploitation of Remote Screen Sharing Tools for Digital Banking Takeover",
+    "category": "Screen Sharing / Remote Access Fraud",
+    "attack_vector": "Caller impersonating bank customer care or telecom provider asks user to install AnyDesk, RustDesk, or TeamViewer QuickSupport",
+    "indicators_and_triggers": [
+      "bank customer support caller",
+      "asking to install screen viewer",
+      "request to approve remote code",
+      "performing transaction while app is open"
+    ],
+    "financial_impact": "Direct observation of net banking credentials, OTPs, and UPI PINs leading to total account drainage",
+    "mitigation_steps": "Never share 9-digit screen access codes; banks never ask to install third-party screen sharing apps.",
+    "reference_url": "https://www.cert-in.org.in/",
+    "severity": "Critical",
+    "published_date": "2024-10-05"
+  },
+  {
+    "advisory_id": "CIVN-2024-0355",
+    "title": "Digital Arrest Scams Impersonating Law Enforcement & Central Agencies",
+    "category": "Impersonation / Digital Arrest",
+    "attack_vector": "Video call by fraudsters wearing fake police/CBI/ED uniforms claiming parcel intercepted with narcotics/illicit funds",
+    "indicators_and_triggers": [
+      "Skype or WhatsApp video call from police",
+      "demand to stay on video call (digital arrest)",
+      "request to transfer funds to RBI/court verification account"
+    ],
+    "financial_impact": "Extortion of life savings under threat of immediate arrest (reported losses \u20b95,00,000 to \u20b910,00,00,000)",
+    "mitigation_steps": "Indian law enforcement does not conduct digital arrests or demand money transfers for verification; disconnect immediately and report to cybercrime.gov.in.",
+    "reference_url": "https://cybercrime.gov.in/",
+    "severity": "Critical",
+    "published_date": "2024-09-18"
+  },
+  {
+    "advisory_id": "CIVN-2024-0290",
+    "title": "Deceptive UPI Collect Requests & Reverse QR Code Scams",
+    "category": "UPI Payment Fraud",
+    "attack_vector": "Fraudster on OLX/marketplace claims to buy item, sends a QR code or UPI collect request saying scan/enter PIN to receive payment",
+    "indicators_and_triggers": [
+      "claims entering UPI PIN is required to receive money",
+      "reverse QR code",
+      "request money notification"
+    ],
+    "financial_impact": "Instant debit from user account instead of credit (\u20b95,000 to \u20b91,00,000)",
+    "mitigation_steps": "Remember the golden rule: Entering UPI PIN is strictly for paying money, NEVER for receiving money.",
+    "reference_url": "https://www.npci.org.in/",
+    "severity": "High",
+    "published_date": "2024-07-22"
+  },
+  {
+    "advisory_id": "CIVN-2024-0245",
+    "title": "Work-From-Home Part-Time Job Scams & Telegram Task Traps",
+    "category": "Employment / Investment Scam",
+    "attack_vector": "Unsolicited WhatsApp message offering \u20b93000-\u20b98000 daily for liking YouTube videos or rating Google Maps hotels, leading to Telegram prepaid investment tasks",
+    "indicators_and_triggers": [
+      "unsolicited job offer",
+      "high daily pay for trivial tasks",
+      "Telegram group redirection",
+      "deposit small amount to unlock large commission"
+    ],
+    "financial_impact": "Initial small payout followed by frozen deposits demanding further lakhs to withdraw",
+    "mitigation_steps": "Legitimate companies never ask job seekers to pay money or deposit security funds to withdraw earnings.",
+    "reference_url": "https://www.cert-in.org.in/",
+    "severity": "High",
+    "published_date": "2024-06-11"
+  },
+  {
+    "advisory_id": "CIVN-2024-0199",
+    "title": "Predatory Instant Loan Apps with Contact & Photo Harvesting",
+    "category": "Malicious App / Extortion",
+    "attack_vector": "Instant loan apps without RBI NBFC registration offering quick credit without collateral, requesting full contacts and gallery permissions",
+    "indicators_and_triggers": [
+      "disbursal within 2 minutes",
+      "demands gallery and contact permissions",
+      "deducts 30-40% processing fee upfront",
+      "7-day repayment cycle"
+    ],
+    "financial_impact": "High-interest extortion, morphing contacts, harassment of relatives and references",
+    "mitigation_steps": "Verify NBFC registration on RBI whitelist before borrowing; never grant contact and photo permissions to finance apps.",
+    "reference_url": "https://www.rbi.org.in/",
+    "severity": "High",
+    "published_date": "2024-05-02"
+  },
+  {
+    "advisory_id": "CIVN-2024-0130",
+    "title": "SIM Swap and eSIM Activation Fraud",
+    "category": "Identity Theft / SIM Swap",
+    "attack_vector": "Fraudster calls posing as telecom operator for 5G SIM upgrade, tricking user to forward SMS or approve eSIM QR transfer",
+    "indicators_and_triggers": [
+      "call offering free 5G upgrade",
+      "asking to forward SMS with 19-digit SIM number",
+      "eSIM activation request notification"
+    ],
+    "financial_impact": "Victim mobile network shuts off; fraudster intercepts all two-factor authentication SMS and resets bank accounts",
+    "mitigation_steps": "Never forward carrier SMS or share eSIM QR codes; if cellular service drops unexpectedly, contact telecom provider immediately from another phone.",
+    "reference_url": "https://www.cert-in.org.in/",
+    "severity": "Critical",
+    "published_date": "2024-03-15"
+  },
+  {
+    "advisory_id": "CIVN-2024-0072",
+    "title": "Credit Card Reward Points Expiry & KYC Update Smishing",
+    "category": "Phishing / Credential Harvesting",
+    "attack_vector": "SMS claiming credit card reward points worth \u20b98,500 expiring today or bank account blocked due to incomplete KYC",
+    "indicators_and_triggers": [
+      "shortened or lookalike bit.ly URL",
+      "urgent deadline (expiring today)",
+      "asks for card number, CVV, expiry, and OTP"
+    ],
+    "financial_impact": "Immediate card compromise and international e-commerce fraud",
+    "mitigation_steps": "Check reward points only inside official bank app; never click SMS links claiming KYC expiry; banks do not update KYC via web forms.",
+    "reference_url": "https://www.cert-in.org.in/",
+    "severity": "High",
+    "published_date": "2024-02-19"
+  }
+]

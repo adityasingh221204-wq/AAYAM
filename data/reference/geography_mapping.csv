@@ -1,0 +1,17 @@
+state_code,state_name,zone,capital,rural_urban_supported
+IN,All India,National,New Delhi,Both
+MH,Maharashtra,West,Mumbai,Both
+TN,Tamil Nadu,South,Chennai,Both
+KA,Karnataka,South,Bengaluru,Both
+GJ,Gujarat,West,Gandhinagar,Both
+UP,Uttar Pradesh,North,Lucknow,Both
+KL,Kerala,South,Thiruvananthapuram,Both
+WB,West Bengal,East,Kolkata,Both
+DL,Delhi,North,New Delhi,Urban
+RJ,Rajasthan,North,Jaipur,Both
+MP,Madhya Pradesh,Central,Bhopal,Both
+BR,Bihar,East,Patna,Both
+AP,Andhra Pradesh,South,Amaravati,Both
+TG,Telangana,South,Hyderabad,Both
+PB,Punjab,North,Chandigarh,Both
+HR,Haryana,North,Chandigarh,Both

@@ -1,0 +1,21 @@
+state,sector,gender,lfpr_pct,wpr_pct,ur_pct,avg_daily_earnings_regular_inr,avg_daily_earnings_casual_inr
+All India,Combined,Person,44.5,43.1,3.2,612.0,423.0
+All India,Rural,Person,46.1,45.0,2.5,538.0,408.0
+All India,Urban,Person,40.9,38.8,5.1,674.0,461.0
+All India,Combined,Male,58.2,56.4,3.2,658.0,449.0
+All India,Combined,Female,31.7,30.7,3.2,489.0,324.0
+Maharashtra,Combined,Person,46.8,45.4,3.1,665.0,415.0
+Tamil Nadu,Combined,Person,47.9,46.3,3.4,635.0,485.0
+Karnataka,Combined,Person,46.2,45.1,2.4,690.0,440.0
+Gujarat,Combined,Person,48.1,47.1,2.1,610.0,430.0
+Uttar Pradesh,Combined,Person,42.1,41.1,2.4,520.0,380.0
+Kerala,Combined,Person,43.5,40.5,6.8,785.0,765.0
+West Bengal,Combined,Person,45.4,43.9,3.3,545.0,390.0
+Delhi,Urban,Person,42.8,39.4,7.9,795.0,510.0
+Rajasthan,Combined,Person,47.3,45.2,4.4,570.0,435.0
+Madhya Pradesh,Combined,Person,48.6,47.7,1.8,515.0,365.0
+Bihar,Combined,Person,38.9,37.4,3.9,495.0,370.0
+Andhra Pradesh,Combined,Person,49.3,47.3,4.1,620.0,465.0
+Telangana,Combined,Person,48.0,45.8,4.6,670.0,475.0
+Punjab,Combined,Person,43.0,40.4,6.1,640.0,490.0
+Haryana,Combined,Person,41.5,38.0,8.4,685.0,515.0
