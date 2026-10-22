@@ -58,3 +58,6 @@ data/interim/*
 !data/interim/.gitkeep
 scratch/
 *.log
+
+# Team handoff docs — distributed separately, not in public repo
+team_handoff/
