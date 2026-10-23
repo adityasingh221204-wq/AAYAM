@@ -229,3 +229,62 @@ class TestRiskNarratives:
         result = calculate_financial_indicators(zero_income_profile)
         combined = " ".join(result["risk_factors"]).lower()
         assert "income" in combined
+
+    def test_high_dti_triggers_debt_risk(self):
+        profile = {
+            "monthly_take_home_income": 30000.0,
+            "monthly_debt_repayments": 18000.0,
+            "essential_monthly_expenses": 10000.0
+        }
+        res = calculate_financial_indicators(profile)
+        assert res["debt_to_income_ratio_pct"] == 60.0
+        assert any("debt" in r.lower() or "dti" in r.lower() for r in res["risk_factors"])
+
+    def test_short_runway_triggers_runway_recommendation(self):
+        profile = {
+            "monthly_take_home_income": 40000.0,
+            "essential_monthly_expenses": 25000.0,
+            "current_savings": 5000.0
+        }
+        res = calculate_financial_indicators(profile)
+        assert res["emergency_fund_months"] < 1.0
+        assert any("emergency" in rec.lower() for rec in res["recommendations"])
+
+    def test_component_scores_keys_present(self, demo_profile):
+        result = calculate_financial_indicators(demo_profile)
+        expected_keys = {"emergency_runway_points", "cashflow_surplus_points", "debt_health_points", "stability_points"}
+        assert set(result["component_scores"].keys()) == expected_keys
+
+    def test_positive_savings_rate_bounded(self):
+        profile = {
+            "monthly_take_home_income": 50000.0,
+            "essential_monthly_expenses": 15000.0,
+            "discretionary_expenses": 5000.0
+        }
+        res = calculate_financial_indicators(profile)
+        assert 0.0 <= res["savings_rate_pct"] <= 100.0
+        assert res["savings_rate_pct"] == 60.0
+
+    def test_negative_input_sanitization(self):
+        profile = {
+            "monthly_take_home_income": -1000.0,
+            "essential_monthly_expenses": -500.0,
+            "current_savings": -100.0
+        }
+        res = calculate_financial_indicators(profile)
+        assert res["total_monthly_income"] == 0.0
+        assert res["total_monthly_expenses"] == 0.0
+        assert res["resilience_score"] >= 0.0
+
+    def test_extreme_wealth_caps_score_100(self):
+        profile = {
+            "monthly_take_home_income": 500000.0,
+            "essential_monthly_expenses": 50000.0,
+            "current_savings": 5000000.0,
+            "outstanding_debt": 0.0,
+            "monthly_debt_repayments": 0.0
+        }
+        res = calculate_financial_indicators(profile)
+        assert res["resilience_score"] <= 100.0
+        assert res["resilience_category"] == "High Resilience"
+

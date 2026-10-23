@@ -145,3 +145,34 @@ class TestAssumptions:
         result = simulate_economic_scenario(base_profile, {"duration_months": 6})
         assert isinstance(result["disclaimer"], str)
         assert len(result["disclaimer"]) > 20
+
+    def test_medical_emergency_scenario(self, base_profile):
+        scenario = {
+            "scenario_type": "medical_emergency",
+            "lump_sum_loss_inr": 40000.0,
+            "new_monthly_expense_inr": 5000.0,
+            "duration_months": 12
+        }
+        res = simulate_economic_scenario(base_profile, scenario)
+        assert res["net_financial_impact_inr"] < 0
+        assert res["scenario_trajectory"][0]["savings_balance"] <= base_profile["current_savings"]
+
+    def test_business_startup_scenario(self, base_profile):
+        scenario = {
+            "scenario_type": "business_startup",
+            "lump_sum_loss_inr": 30000.0,
+            "income_change_pct": 25.0,
+            "duration_months": 24
+        }
+        res = simulate_economic_scenario(base_profile, scenario)
+        assert len(res["scenario_trajectory"]) == 24
+        assert res["scenario_trajectory"][-1]["income"] > base_profile["monthly_take_home_income"]
+
+    def test_lump_sum_loss_depletes_savings_at_month_1(self, base_profile):
+        scenario = {
+            "lump_sum_loss_inr": base_profile["current_savings"] + 10000.0,
+            "duration_months": 6
+        }
+        res = simulate_economic_scenario(base_profile, scenario)
+        assert res["scenario_trajectory"][0]["savings_balance"] >= 0.0
+

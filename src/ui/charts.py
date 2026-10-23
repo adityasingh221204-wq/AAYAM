@@ -224,3 +224,151 @@ def plot_hces_fractiles(df_hces: pd.DataFrame, sector: str = "Urban") -> go.Figu
         height=380
     )
     return fig
+
+
+def plot_resilience_gauge(score: float) -> go.Figure:
+    """Plotly gauge indicator (0 to 100) reflecting economic resilience."""
+    score_val = max(0.0, min(100.0, float(score)))
+    bar_color = "#10B981" if score_val >= 70 else ("#818CF8" if score_val >= 50 else ("#FBBF24" if score_val >= 30 else "#FB7185"))
+    
+    fig = go.Figure(go.Indicator(
+        mode="gauge+number+delta",
+        value=score_val,
+        domain={"x": [0, 1], "y": [0, 1]},
+        delta={"reference": 65.0, "position": "top", "prefix": "vs Median "},
+        number={"suffix": " / 100", "font": {"size": 28, "color": COLOR_TEXT_LIGHT}},
+        gauge={
+            "axis": {"range": [0, 100], "tickwidth": 1, "tickcolor": COLOR_BORDER},
+            "bar": {"color": bar_color, "thickness": 0.28},
+            "bgcolor": "rgba(30, 41, 59, 0.5)",
+            "borderwidth": 1,
+            "bordercolor": COLOR_BORDER,
+            "steps": [
+                {"range": [0, 30], "color": "rgba(244, 63, 94, 0.15)"},
+                {"range": [30, 50], "color": "rgba(245, 158, 11, 0.15)"},
+                {"range": [50, 75], "color": "rgba(99, 102, 241, 0.15)"},
+                {"range": [75, 100], "color": "rgba(16, 185, 129, 0.15)"}
+            ],
+            "threshold": {
+                "line": {"color": "#F8FAFC", "width": 3},
+                "thickness": 0.75,
+                "value": score_val
+            }
+        }
+    ))
+    
+    fig.update_layout(
+        **DARK_LAYOUT,
+        title={"text": "Composite Economic Resilience Index", "y": 0.95},
+        height=280,
+        margin=dict(l=30, r=30, t=50, b=20)
+    )
+    return fig
+
+
+def plot_resilience_components(component_scores: dict) -> go.Figure:
+    """Horizontal bar chart showing the 4 component scores of economic resilience."""
+    categories = [
+        "Income Stability<br>(Max 10)",
+        "Debt Health<br>(Max 25)",
+        "Cash Flow Surplus<br>(Max 30)",
+        "Emergency Runway<br>(Max 35)"
+    ]
+    scores = [
+        float(component_scores.get("stability_points", 0.0)),
+        float(component_scores.get("debt_health_points", 0.0)),
+        float(component_scores.get("cashflow_surplus_points", 0.0)),
+        float(component_scores.get("emergency_runway_points", 0.0))
+    ]
+    max_scores = [10.0, 25.0, 30.0, 35.0]
+    percentages = [f"{s:.1f} / {m:.0f} pts" for s, m in zip(scores, max_scores)]
+    colors = ["#818CF8", "#FBBF24", "#38BDF8", "#10B981"]
+
+    fig = go.Figure(go.Bar(
+        x=scores,
+        y=categories,
+        orientation="h",
+        text=percentages,
+        textposition="inside",
+        marker=dict(color=colors, line=dict(color=COLOR_BORDER, width=1))
+    ))
+
+    fig.update_layout(
+        **DARK_LAYOUT,
+        title="Component Scores Breakdown (0–100 Scale)",
+        xaxis=dict(range=[0, 38], title="Points Awarded", gridcolor=COLOR_BORDER),
+        yaxis=dict(gridcolor="rgba(0,0,0,0)"),
+        height=240,
+        margin=dict(l=150, r=20, t=40, b=30)
+    )
+    return fig
+
+
+def plot_opportunity_score_breakdown(opp: dict) -> go.Figure:
+    """Horizontal bar chart showing the 4 sub-scores of an opportunity match."""
+    bd = opp.get("score_breakdown", {})
+    categories = [
+        "Income Uplift<br>(Max 20)",
+        "Education Prerequisite<br>(Max 15)",
+        "Financial Affordability<br>(Max 25)",
+        "Skill Alignment<br>(Max 40)"
+    ]
+    scores = [
+        float(bd.get("uplift_points", 0.0)),
+        float(bd.get("education_points", 0.0)),
+        float(bd.get("affordability_points", 0.0)),
+        float(bd.get("skills_points", 0.0))
+    ]
+    max_scores = [20.0, 15.0, 25.0, 40.0]
+    percentages = [f"{s:.1f} / {m:.0f} pts" for s, m in zip(scores, max_scores)]
+    
+    colors = ["#38BDF8", "#818CF8", "#FBBF24", "#10B981"]
+    
+    fig = go.Figure(go.Bar(
+        x=scores,
+        y=categories,
+        orientation="h",
+        text=percentages,
+        textposition="inside",
+        marker=dict(color=colors, line=dict(color=COLOR_BORDER, width=1))
+    ))
+    
+    fig.update_layout(
+        **DARK_LAYOUT,
+        title=f"Score Breakdown: {opp.get('title', 'Opportunity')[:38]}",
+        xaxis=dict(range=[0, 42], title="Score Points", gridcolor=COLOR_BORDER),
+        yaxis=dict(gridcolor="rgba(0,0,0,0)"),
+        height=220,
+        margin=dict(l=140, r=20, t=40, b=30)
+    )
+    return fig
+
+
+def plot_rbi_system_trend(df_payments: pd.DataFrame, system_name: str = "UPI") -> go.Figure:
+    """Trend line chart for a specific payment channel's monthly volume."""
+    if df_payments is None or df_payments.empty:
+        return go.Figure()
+        
+    df_filtered = df_payments[df_payments["system_name"] == system_name]
+    if df_filtered.empty:
+        df_filtered = df_payments
+        
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=df_filtered["period"],
+        y=df_filtered["volume_crore"],
+        mode="lines+markers",
+        name=f"{system_name} Volume (Cr)",
+        line=dict(color="#10B981", width=3),
+        marker=dict(size=8, color="#34D399")
+    ))
+    
+    fig.update_layout(
+        **DARK_LAYOUT,
+        title=f"Monthly Transaction Volume: {system_name}",
+        xaxis_title="Reporting Period",
+        yaxis_title="Volume (Crore Transactions)",
+        height=360
+    )
+    return fig
+

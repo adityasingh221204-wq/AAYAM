@@ -8,7 +8,9 @@ from src.ui.theme import apply_theme
 from src.ui.components import (
     render_header, render_kpi_card, render_alert_box, render_footer
 )
-from src.ui.charts import plot_cashflow_breakdown
+from src.ui.charts import (
+    plot_cashflow_breakdown, plot_resilience_gauge, plot_resilience_components
+)
 from src.engines.economy import calculate_financial_indicators
 from src.utils.formatting import format_inr, format_pct
 
@@ -28,142 +30,126 @@ render_alert_box(
     alert_type="info"
 )
 
-# 1. Load or Initialize Session Profile
+# 1. Load Active Session Profile
 current_profile = st.session_state.get("user_profile", {})
 
-# 2. Input Form Layout (2 Columns)
-with st.form("digital_twin_form"):
-    st.markdown("### 📥 Profile Parameters")
-    f_col1, f_col2 = st.columns(2)
-    
-    with f_col1:
-        st.markdown("#### Cash Inflows & Liquid Assets")
+# 2. Sidebar Profile Update Form (Member 1 Enhanced Specification)
+with st.sidebar:
+    st.markdown("### ⚙️ Update Twin Profile")
+    st.caption("Adjust financial parameters in real-time:")
+    with st.form("digital_twin_sidebar_form"):
         take_home = st.number_input(
-            "Primary Monthly Take-Home Income (₹)",
+            "Primary Take-Home (₹/mo)",
             min_value=0.0,
             max_value=2000000.0,
             value=float(current_profile.get("monthly_take_home_income", 35000.0)),
-            step=1000.0,
-            help="Net post-tax salary or primary business withdrawal."
+            step=1000.0
         )
         other_income = st.number_input(
-            "Secondary / Other Monthly Income (₹)",
+            "Other Income (₹/mo)",
             min_value=0.0,
             max_value=1000000.0,
             value=float(current_profile.get("other_monthly_income", 5000.0)),
-            step=500.0,
-            help="Rental, freelance, seasonal, or family remittances."
+            step=500.0
         )
-        current_savings = st.number_input(
-            "Current Liquid Savings & Deposits (₹)",
-            min_value=0.0,
-            max_value=50000000.0,
-            value=float(current_profile.get("current_savings", 50000.0)),
-            step=5000.0,
-            help="Immediate accessible bank balance and liquid deposits."
-        )
-        
-        st.markdown("#### Career & Demographic Context")
-        education = st.selectbox(
-            "Highest Educational Attainment",
-            options=[
-                "Secondary (10th)",
-                "Higher Secondary (12th)",
-                "ITI / Vocational",
-                "Diploma",
-                "Graduate / B.Com / B.Sc / B.A",
-                "B.Tech / BE / STEM Graduate",
-                "Post Graduate"
-            ],
-            index=1
-        )
-        occupation = st.text_input(
-            "Current Occupation / Role",
-            value=str(current_profile.get("occupation", "Salaried / Support Role"))
-        )
-        skills_input = st.text_input(
-            "Key Skills (comma-separated)",
-            value=", ".join(current_profile.get("skills", ["Customer Service", "Computer Literacy", "Digital Payments"]))
-        )
-
-    with f_col2:
-        st.markdown("#### Living Expenses & Obligations")
         essential_exp = st.number_input(
-            "Essential Monthly Living Outflows (₹)",
+            "Essential Expenses (₹/mo)",
             min_value=0.0,
             max_value=1000000.0,
             value=float(current_profile.get("essential_monthly_expenses", 20000.0)),
-            step=1000.0,
-            help="Rent, groceries, utilities, children school fees, healthcare."
+            step=1000.0
         )
         discretionary_exp = st.number_input(
-            "Discretionary Monthly Expenses (₹)",
+            "Discretionary Exp (₹/mo)",
             min_value=0.0,
             max_value=500000.0,
             value=float(current_profile.get("discretionary_expenses", 6000.0)),
-            step=500.0,
-            help="Dining out, entertainment, subscriptions, personal lifestyle."
+            step=500.0
         )
-        
-        st.markdown("#### Debt Liabilities")
+        current_savings = st.number_input(
+            "Liquid Savings (₹)",
+            min_value=0.0,
+            max_value=50000000.0,
+            value=float(current_profile.get("current_savings", 50000.0)),
+            step=5000.0
+        )
         outstanding_debt = st.number_input(
-            "Total Outstanding Debt (₹)",
+            "Total Debt Balance (₹)",
             min_value=0.0,
             max_value=10000000.0,
             value=float(current_profile.get("outstanding_debt", 75000.0)),
-            step=5000.0,
-            help="Total principal remaining on personal, credit card, or vehicle loans."
+            step=5000.0
         )
         monthly_emi = st.number_input(
-            "Total Monthly Debt Repayments / EMIs (₹)",
+            "Monthly EMIs (₹)",
             min_value=0.0,
             max_value=500000.0,
             value=float(current_profile.get("monthly_debt_repayments", 4500.0)),
-            step=500.0,
-            help="Combined monthly EMI obligations."
+            step=500.0
         )
         emergency_obligations = st.number_input(
-            "Other Fixed Monthly Obligations (₹)",
+            "Emergency Obligations (₹/mo)",
             min_value=0.0,
             max_value=500000.0,
             value=float(current_profile.get("emergency_expenses_obligations", 0.0)),
-            step=500.0,
-            help="Dependent family medical support or ongoing recurring commitments."
-        )
-        region = st.selectbox(
-            "Geographic Region",
-            options=["Maharashtra", "Tamil Nadu", "Karnataka", "Gujarat", "Uttar Pradesh", "Delhi", "Kerala", "West Bengal", "Other"],
-            index=0
+            step=500.0
         )
         
-    submitted = st.form_submit_button("Update Economic Twin & Recalculate 🔄")
-    
-    if submitted:
-        skills_list = [s.strip() for s in skills_input.split(",") if s.strip()]
-        updated_profile = {
-            "monthly_take_home_income": take_home,
-            "other_monthly_income": other_income,
-            "essential_monthly_expenses": essential_exp,
-            "discretionary_expenses": discretionary_exp,
-            "current_savings": current_savings,
-            "outstanding_debt": outstanding_debt,
-            "monthly_debt_repayments": monthly_emi,
-            "emergency_expenses_obligations": emergency_obligations,
-            "education": education,
-            "occupation": occupation,
-            "skills": skills_list,
-            "region": region,
-            "economic_goals": "Build emergency buffer and transition to higher-wage career pathway"
-        }
-        st.session_state["user_profile"] = updated_profile
-        st.success("Economic Twin updated successfully!")
+        education_opts = [
+            "Secondary (10th)",
+            "Higher Secondary (12th)",
+            "ITI / Vocational",
+            "Diploma",
+            "Graduate / B.Com / B.Sc / B.A",
+            "B.Tech / BE / STEM Graduate",
+            "Post Graduate"
+        ]
+        curr_edu = current_profile.get("education", "Higher Secondary (12th)")
+        edu_idx = education_opts.index(curr_edu) if curr_edu in education_opts else 1
+        education = st.selectbox("Education Level", options=education_opts, index=edu_idx)
+        
+        occupation = st.text_input(
+            "Current Role",
+            value=str(current_profile.get("occupation", "Salaried / Support Role"))
+        )
+        
+        skills_input = st.text_input(
+            "Skills (comma-separated)",
+            value=", ".join(current_profile.get("skills", ["Customer Service", "Computer Literacy", "Digital Payments"]))
+        )
+        
+        region_opts = ["Maharashtra", "Tamil Nadu", "Karnataka", "Gujarat", "Uttar Pradesh", "Delhi", "Kerala", "West Bengal", "Other"]
+        curr_reg = current_profile.get("region", "Maharashtra")
+        reg_idx = region_opts.index(curr_reg) if curr_reg in region_opts else 0
+        region = st.selectbox("Region", options=region_opts, index=reg_idx)
+        
+        btn_update = st.form_submit_button("Apply Changes 🔄", use_container_width=True)
+        if btn_update:
+            skills_list = [s.strip() for s in skills_input.split(",") if s.strip()]
+            updated_profile = {
+                "monthly_take_home_income": take_home,
+                "other_monthly_income": other_income,
+                "essential_monthly_expenses": essential_exp,
+                "discretionary_expenses": discretionary_exp,
+                "current_savings": current_savings,
+                "outstanding_debt": outstanding_debt,
+                "monthly_debt_repayments": monthly_emi,
+                "emergency_expenses_obligations": emergency_obligations,
+                "education": education,
+                "occupation": occupation,
+                "skills": skills_list,
+                "region": region,
+                "economic_goals": "Build emergency buffer and transition to higher-wage career pathway"
+            }
+            st.session_state["user_profile"] = updated_profile
+            st.success("Twin Profile updated!")
+            st.rerun()
 
 # 3. Calculate Indicators on Active Session Profile
-active_profile = st.session_state["user_profile"]
+active_profile = st.session_state.get("user_profile", current_profile)
 indicators = calculate_financial_indicators(active_profile)
 
 # 4. Computed Metrics Output
-st.markdown("---")
 st.markdown("### 📊 Economic Resilience Assessment")
 
 r_col1, r_col2, r_col3, r_col4 = st.columns(4)
@@ -192,7 +178,7 @@ with r_col3:
     render_kpi_card(
         title="Emergency Runway",
         value=f"{indicators['emergency_fund_months']:.1f} Months",
-        subtext=f"Baseline Outflow: {format_inr(active_profile['essential_monthly_expenses'] + active_profile['monthly_debt_repayments'])}/mo",
+        subtext=f"Monthly Base: {format_inr(active_profile['essential_monthly_expenses'] + active_profile['monthly_debt_repayments'])}",
         delta_text="6 Mo Recommended",
         badge_color="emerald" if indicators["emergency_fund_months"] >= 6 else "amber"
     )
@@ -205,11 +191,21 @@ with r_col4:
         badge_color="emerald" if indicators["debt_to_income_ratio_pct"] <= 40 else "rose"
     )
 
-# 5. Visual Cash Flow Waterfall
+# 5. Resilience Score Progress & Category Badge
 st.markdown("---")
-cf_col1, cf_col2 = st.columns([3, 2])
+prog_col1, prog_col2 = st.columns([3, 1])
+with prog_col1:
+    st.markdown(f"#### Resilience Gauge: **{res_score} / 100** &bull; <span class='badge badge-{res_badge}'>{res_cat}</span>", unsafe_allow_html=True)
+    st.progress(float(min(1.0, max(0.0, res_score / 100.0))))
+with prog_col2:
+    st.caption(f"Profile Status: **{active_profile.get('occupation', 'Salaried')}** ({active_profile.get('region', 'India')})")
+    st.caption("Use the sidebar form to adjust inputs at any time.")
 
-with cf_col1:
+# 6. Visual Breakdown: Cashflow Waterfall + Component Breakdown Chart
+st.markdown("---")
+c_col1, c_col2 = st.columns([1, 1])
+
+with c_col1:
     st.plotly_chart(
         plot_cashflow_breakdown(
             income=indicators["total_monthly_income"],
@@ -221,27 +217,49 @@ with cf_col1:
         use_container_width=True
     )
 
-with cf_col2:
-    st.markdown("#### Scoring Components")
-    pts = indicators["component_scores"]
-    st.markdown(f"- **Emergency Runway Buffer:** `{pts['emergency_runway_points']:.1f} / 35.0 pts`")
-    st.markdown(f"- **Net Cash Flow Health:** `{pts['cashflow_surplus_points']:.1f} / 30.0 pts`")
-    st.markdown(f"- **Debt Burden Manageability:** `{pts['debt_health_points']:.1f} / 25.0 pts`")
-    st.markdown(f"- **Income Base Stability:** `{pts['stability_points']:.1f} / 10.0 pts`")
-    
-    st.markdown("#### Positive Drivers")
-    for pos in indicators["positive_indicators"]:
-        st.markdown(f"✅ <span style='font-size: 0.88rem; color: #34D399;'>{pos}</span>", unsafe_allow_html=True)
-        
-    if indicators["risk_factors"]:
-        st.markdown("#### Resilience Vulnerabilities")
-        for risk in indicators["risk_factors"]:
-            st.markdown(f"⚠️ <span style='font-size: 0.88rem; color: #FBBF24;'>{risk}</span>", unsafe_allow_html=True)
+with c_col2:
+    st.plotly_chart(
+        plot_resilience_components(indicators["component_scores"]),
+        use_container_width=True
+    )
 
-# 6. Strategic Recommendations
+# 7. Risk Factors & Positive Drivers as Distinct Alert Boxes (Member 1 Requirement)
 st.markdown("---")
-st.markdown("### 🎯 Decision-Support Recommendations")
-for rec in indicators["recommendations"]:
-    st.markdown(f"&bull; {rec}")
+st.markdown("### 🛡️ Diagnostic Findings: Positive Drivers & Risk Factors")
+
+d_col1, d_col2 = st.columns(2)
+
+with d_col1:
+    st.markdown("#### ✅ Positive Financial Indicators")
+    if indicators["positive_indicators"]:
+        for pos in indicators["positive_indicators"]:
+            render_alert_box("Positive Indicator", pos, alert_type="success")
+    else:
+        st.info("No positive drivers identified yet. Increasing savings will unlock positive markers.")
+
+with d_col2:
+    st.markdown("#### ⚠️ Resilience Vulnerabilities & Warnings")
+    if indicators["risk_factors"]:
+        for risk in indicators["risk_factors"]:
+            render_alert_box("Resilience Vulnerability", risk, alert_type="warning")
+    else:
+        render_alert_box("No Critical Vulnerabilities", "Your current cash flow parameters do not exhibit acute distress signals.", alert_type="success")
+
+# 8. Strategic Recommendations as Numbered Action Items
+st.markdown("---")
+st.markdown("### 🎯 Numbered Action Plan")
+if indicators["recommendations"]:
+    for idx, rec in enumerate(indicators["recommendations"], start=1):
+        st.markdown(
+            f"""
+            <div class="aayam-card-secondary" style="margin-bottom: 8px;">
+                <strong style="color: #10B981; font-size: 1rem;">Action Item {idx}:</strong> 
+                <span style="color: #F8FAFC; font-size: 0.92rem; margin-left: 6px;">{rec}</span>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+else:
+    st.info("No recommendations needed at this stage.")
 
 render_footer()

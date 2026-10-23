@@ -32,47 +32,50 @@ render_alert_box(
 # 1. Load Active Profile
 profile = st.session_state.get("user_profile", {})
 
-# 2. Scenario Configuration Controls
+# 2. Scenario Configuration Controls (Member 1 Enhanced Specification)
 st.markdown("### 🎛️ Scenario Simulation Parameters")
 
-preset = st.selectbox(
-    "Choose a Pre-Configured Shock Scenario or Build Custom:",
-    options=[
-        "Custom Scenario",
-        "Cyber Fraud Shock: Instant ₹50,000 unauthorized loss",
-        "Temporary Job Loss: 100% income drop for 3 months",
-        "Income Reduction: 25% salary cut",
-        "Micro-Enterprise Startup: ₹45,000 capital + ₹5,000 monthly cost",
-        "Inflation Shock: Essential living costs rise by 20%"
-    ]
+scenario_options = {
+    "job_loss": "Temporary Job Loss: 100% income drop with recovery runway",
+    "fraud_loss": "Cyber Fraud Shock: Instant ₹50,000 unauthorized loss",
+    "medical_emergency": "Medical Emergency: ₹75,000 lump sum + ₹8,000 monthly care",
+    "business_startup": "Micro-Enterprise Startup: ₹45,000 capital + ₹5,000 monthly cost",
+    "inflation_shock": "Inflation Shock: Living costs rise by 20%",
+    "custom": "Custom Scenario (Full Parameter Control)"
+}
+
+selected_key = st.selectbox(
+    "Choose Shock / Investment Scenario Type:",
+    options=list(scenario_options.keys()),
+    format_func=lambda k: scenario_options[k]
 )
 
-# Map preset to defaults
-if "Cyber Fraud" in preset:
+# Preset initial values based on selection
+if selected_key == "fraud_loss":
     def_lump = 50000.0
     def_inc_pct = 0.0
     def_exp_pct = 0.0
     def_new_exp = 0.0
     def_delay = 0
-elif "Job Loss" in preset:
+elif selected_key == "job_loss":
     def_lump = 0.0
     def_inc_pct = -100.0
     def_exp_pct = 0.0
     def_new_exp = 0.0
     def_delay = 3
-elif "Income Reduction" in preset:
-    def_lump = 0.0
-    def_inc_pct = -25.0
-    def_exp_pct = 0.0
-    def_new_exp = 0.0
+elif selected_key == "medical_emergency":
+    def_lump = 75000.0
+    def_inc_pct = 0.0
+    def_exp_pct = 10.0
+    def_new_exp = 8000.0
     def_delay = 0
-elif "Startup" in preset:
+elif selected_key == "business_startup":
     def_lump = 45000.0
-    def_inc_pct = 15.0
+    def_inc_pct = 20.0
     def_exp_pct = 0.0
     def_new_exp = 5000.0
     def_delay = 2
-elif "Inflation" in preset:
+elif selected_key == "inflation_shock":
     def_lump = 0.0
     def_inc_pct = 0.0
     def_exp_pct = 20.0
@@ -87,11 +90,11 @@ else:
 
 c1, c2, c3 = st.columns(3)
 with c1:
-    lump_sum_loss = st.number_input(
+    lump_sum_loss = st.slider(
         "Immediate Lump-Sum Deduction (₹)",
         min_value=0.0,
-        max_value=1000000.0,
-        value=def_lump,
+        max_value=250000.0,
+        value=float(def_lump),
         step=5000.0,
         help="One-off financial shock, such as fraud theft or medical bill."
     )
@@ -99,7 +102,8 @@ with c1:
         "Simulation Time Horizon (Months)",
         min_value=3,
         max_value=36,
-        value=12
+        value=12,
+        help="Duration to project future savings balances."
     )
 
 with c2:
@@ -107,36 +111,38 @@ with c2:
         "Monthly Income Adjustment (%)",
         min_value=-100.0,
         max_value=100.0,
-        value=def_inc_pct,
+        value=float(def_inc_pct),
         step=5.0,
-        help="-100% represents complete job loss; +20% represents a promotion or side income."
+        help="-100% represents complete job loss; +20% represents promotion or business revenue."
     )
     recovery_delay = st.slider(
         "Income Recovery Delay (Months)",
         min_value=0,
         max_value=12,
-        value=def_delay,
+        value=int(def_delay),
         help="Number of months of complete shock before partial (50%) income recovery occurs."
     )
 
 with c3:
     expense_change_pct = st.slider(
-        "Essential Living Cost Change (%)",
+        "Living Cost Change (%)",
         min_value=-50.0,
         max_value=50.0,
-        value=def_exp_pct,
-        step=5.0
+        value=float(def_exp_pct),
+        step=5.0,
+        help="Percentage change in living costs due to inflation or austerity."
     )
-    new_monthly_expense = st.number_input(
-        "New Recurring Monthly Outflow (₹)",
+    new_monthly_expense = st.slider(
+        "New Recurring Outflow (₹/mo)",
         min_value=0.0,
-        max_value=100000.0,
-        value=def_new_exp,
-        step=1000.0
+        max_value=50000.0,
+        value=float(def_new_exp),
+        step=1000.0,
+        help="Ongoing new expenditure (e.g. loan EMI, equipment lease)."
     )
 
 scenario_dict = {
-    "scenario_type": preset,
+    "scenario_type": selected_key,
     "duration_months": duration_months,
     "income_change_pct": income_change_pct,
     "lump_sum_loss_inr": lump_sum_loss,
@@ -162,7 +168,7 @@ with k1:
         title="Net Wealth Impact",
         value=format_inr(net_impact),
         subtext=f"At Month {duration_months}",
-        delta_text="Positive Accrual" if net_impact >= 0 else "Capital Loss",
+        delta_text="Capital Accrual" if net_impact >= 0 else "Net Financial Loss",
         badge_color=impact_color
     )
 with k2:
@@ -177,7 +183,7 @@ with k2:
         dep_color = "emerald"
         
     render_kpi_card(
-        title="Runway Depletion",
+        title="Months to Depletion",
         value=dep_val,
         subtext=dep_sub,
         delta_text="Zero Liquidity Event" if depletion else "Solvent Horizon",
@@ -186,12 +192,13 @@ with k2:
 with k3:
     res_shift = sim_results["resilience_shift"]
     shift_sign = "+" if res_shift > 0 else ""
+    shift_color = "emerald" if res_shift >= 0 else "rose"
     render_kpi_card(
         title="Resilience Shift",
         value=f"{shift_sign}{res_shift} pts",
         subtext=f"{sim_results['baseline_resilience_score']} → {sim_results['scenario_resilience_score']}",
-        delta_text="Score Shift",
-        badge_color="emerald" if res_shift >= 0 else "rose"
+        delta_text=f"{shift_sign}{res_shift} pts shift",
+        badge_color=shift_color
     )
 with k4:
     rec_month = sim_results["recovery_months"]
@@ -204,8 +211,17 @@ with k4:
         badge_color="emerald" if rec_month else "amber"
     )
 
+# Highlight alert for depletion
+if depletion:
+    render_alert_box(
+        title=f"Critical Liquidity Event: Capital Exhaustion at Month {depletion}",
+        message=f"Under this shock scenario, your liquid reserves will reach ₹0 by Month {depletion}. Immediate contingency planning, credit line access, or emergency budget cutbacks are required before this horizon.",
+        alert_type="danger"
+    )
+
 # 5. Side-by-side Trajectory Chart
 st.markdown("---")
+st.markdown("### 📈 Savings Balance Trajectory: Baseline vs. Scenario")
 st.plotly_chart(
     plot_scenario_trajectories(
         baseline_traj=sim_results["baseline_trajectory"],
