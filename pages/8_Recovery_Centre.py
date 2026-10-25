@@ -124,6 +124,43 @@ with c_col2:
     c_ack_1930 = st.checkbox("1930 Helpline registration reference SMS")
     c_cyber_fir = st.checkbox("National Cyber Crime Reporting Portal Acknowledgement (14 digits)")
 
+# Downloadable Incident Checklist (Member 2 Specification)
+checklist_text = f"""=====================================================
+AAYAM CYBER-FINANCIAL INCIDENT RESPONSE CHECKLIST
+Incident Type: {incident_choice}
+National Cyber Helpline: 1930 | Official Portal: https://cybercrime.gov.in
+=====================================================
+
+ACTION PROTOCOL:
+"""
+for s in steps:
+    checklist_text += f"\n[ ] Step {s['step_number']}: {s['action_title']} ({s['priority']})\n"
+    checklist_text += f"    Instructions: {s['instructions']}\n"
+    checklist_text += f"    Official Channel: {s['official_portal_or_contact']}\n"
+    checklist_text += f"    Evidence to Preserve: {s['evidence_to_preserve']}\n"
+
+checklist_text += f"""
+=====================================================
+VICTIM EVIDENCE CHECKLIST:
+[ {'X' if c_debit_sms else ' '} ] 12-digit UTR number and Debit SMS notification
+[ {'X' if c_fraud_upi else ' '} ] Beneficiary UPI ID or receiving bank account details
+[ {'X' if c_screenshots else ' '} ] Screenshots of chat / call logs with fraudster
+[ {'X' if c_bank_call else ' '} ] Bank customer care complaint ticket number and call timestamp
+[ {'X' if c_ack_1930 else ' '} ] 1930 Helpline registration reference SMS
+[ {'X' if c_cyber_fir else ' '} ] National Cyber Crime Reporting Portal Acknowledgement (14 digits)
+=====================================================
+Generated via AAYAM Cyber-Financial Recovery Centre
+Notice: Decision-support guidance for statutory escalation under RBI Zero Liability rules.
+"""
+
+st.download_button(
+    label="📥 Download Incident Response Checklist (.txt)",
+    data=checklist_text,
+    file_name=f"AAYAM_Recovery_Checklist_{canonical_key}.txt",
+    mime="text/plain",
+    use_container_width=True
+)
+
 # 4. RBI Circular Summary Box
 st.markdown("---")
 render_alert_box(

@@ -216,3 +216,43 @@ class TestAttackChainStage:
         result = assess_cyber_risk(LEGITIMATE_MSG)
         combined = result["attack_chain_stage"].lower()
         assert "none" in combined or "no malicious" in combined
+
+
+# ─── New Threat Rules Tests (Member 2 Expansion) ─────────────────────────────
+
+class TestExpandedThreatRules:
+    def test_kyc_expiry_rule_detected(self):
+        msg = "Dear customer, your bank KYC has expired. Update your Aadhaar and PAN immediately via link or account block."
+        res = assess_cyber_risk(msg)
+        assert res["is_suspicious"] is True
+        assert "KYC_DOCUMENT_EXPIRY_PHISHING" in res["reason_codes"]
+
+    def test_lottery_prize_rule_detected(self):
+        msg = "Congratulations! You won KBC Lottery 25 Crore lucky draw winner! Pay processing fee to claim your prize."
+        res = assess_cyber_risk(msg)
+        assert res["is_suspicious"] is True
+        assert "LOTTERY_PRIZE_IMPERSONATION" in res["reason_codes"]
+
+    def test_rbi_freeze_rule_detected(self):
+        msg = "URGENT: RBI freeze account notice under anti money laundering investigation. Transfer funds to court escrow."
+        res = assess_cyber_risk(msg)
+        assert res["is_suspicious"] is True
+        assert "FAKE_RBI_COURT_FREEZE_NOTICE" in res["reason_codes"]
+
+    def test_tax_refund_scam_detected(self):
+        msg = "Dear taxpayer, your Income Tax refund Rs 24,500 has been approved. Click to claim refund now."
+        res = assess_cyber_risk(msg)
+        assert res["is_suspicious"] is True
+        assert "INCOME_TAX_REFUND_SCAM" in res["reason_codes"]
+
+    def test_trai_disconnection_spoof_detected(self):
+        msg = "TRAI mobile disconnection notice: Department of Telecommunications will disconnect your SIM within 2 hours."
+        res = assess_cyber_risk(msg)
+        assert res["is_suspicious"] is True
+        assert "TRAI_SANCHAR_SAATHI_SPOOF" in res["reason_codes"]
+
+    def test_hindi_hinglish_detection(self):
+        msg = "Aapka khata freeze ho gaya hai, turant kyc karein nahi toh sim band ho jayegi"
+        res = assess_cyber_risk(msg)
+        assert res["is_suspicious"] is True
+        assert len(res["triggered_patterns"]) >= 2
