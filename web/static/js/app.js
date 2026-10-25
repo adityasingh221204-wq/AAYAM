@@ -3,7 +3,16 @@
  * Pure Vanilla JavaScript connecting UI to REST API engines
  */
 
-// ── Modal System ──
+// ── 0. Mouse Cursor Glow Follower ──
+document.addEventListener('mousemove', (e) => {
+    const glow = document.getElementById('cursorGlow');
+    if (glow) {
+        glow.style.left = `${e.clientX}px`;
+        glow.style.top = `${e.clientY}px`;
+    }
+});
+
+// ── 1. Modal System ──
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
@@ -44,7 +53,129 @@ function scrollToSection(sectionId) {
     }
 }
 
-// ── Tab Switching ──
+// ── 2. Process Accordion (01 A-01, 02 B-02, 03 C-03, 04 D-04) ──
+function toggleProcessDetail(stepNum) {
+    const detail = document.getElementById(`pdetail-${stepNum}`);
+    const btn = document.getElementById(`pbtn-${stepNum}`);
+    if (detail) {
+        const isActive = detail.classList.contains('active');
+        // Close all other details
+        document.querySelectorAll('.proc-detail').forEach(d => d.classList.remove('active'));
+        document.querySelectorAll('.proc-expand-btn').forEach(b => {
+            b.innerText = '+';
+            b.style.transform = 'rotate(0deg)';
+        });
+
+        if (!isActive) {
+            detail.classList.add('active');
+            if (btn) {
+                btn.innerText = '−';
+                btn.style.transform = 'rotate(90deg)';
+            }
+        }
+    }
+}
+
+// ── 3. Live Interactive Suite (Embedded on Landing Page) ──
+function switchSuiteTab(tabId) {
+    document.querySelectorAll('.suite-tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.suite-tab-body').forEach(b => b.classList.remove('active'));
+
+    const activeBtn = event.currentTarget;
+    if (activeBtn) activeBtn.classList.add('active');
+    const target = document.getElementById(tabId);
+    if (target) target.classList.add('active');
+}
+
+function suiteSetSample(key) {
+    if (SAMPLES[key]) {
+        document.getElementById('suite_input_text').value = SAMPLES[key];
+        suiteScanMessage();
+    }
+}
+
+async function suiteScanMessage() {
+    const text = document.getElementById('suite_input_text').value.trim();
+    if (!text) {
+        alert('Please enter or select a sample message to scan.');
+        return;
+    }
+
+    try {
+        const res = await fetch('/api/cyber/assess', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text })
+        });
+        const data = await res.json();
+        if (data.status === 'success') {
+            const r = data.result;
+            const output = document.getElementById('suite_scan_output');
+            output.style.display = 'block';
+
+            let flags = r.triggered_flags.map(f => `<li>⚠️ <strong>${f}</strong></li>`).join('');
+
+            output.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <div>
+                        <span style="font-size: 0.72rem; text-transform: uppercase; color: #94A3B8;">DETECTION RESULT</span>
+                        <h4 style="margin: 0; color: #FFFFFF; font-size: 1.1rem;">${r.primary_threat_vector}</h4>
+                    </div>
+                    <span class="score-category badge-${r.risk_badge}">${r.risk_level} (${r.risk_score}/100)</span>
+                </div>
+                <p style="font-size: 0.85rem; color: #CBD5E1; margin-bottom: 10px;">${r.summary_explanation}</p>
+                <ul style="padding-left: 18px; font-size: 0.82rem; color: #E2E8F0; margin-bottom: 10px;">${flags}</ul>
+                <div style="background: rgba(16, 185, 129, 0.12); border-left: 3px solid #10B981; padding: 8px 12px; font-size: 0.82rem; color: #34D399; border-radius: 4px;">
+                    <strong>Action:</strong> ${r.recommended_action}
+                </div>
+            `;
+        }
+    } catch (err) {
+        console.error('Suite scan error:', err);
+    }
+}
+
+async function suiteUpdateTwin() {
+    const inc = parseFloat(document.getElementById('slide_income').value) || 35000;
+    const exp = parseFloat(document.getElementById('slide_expenses').value) || 20000;
+    const sav = parseFloat(document.getElementById('slide_savings').value) || 50000;
+
+    document.getElementById('lbl_inc').innerText = `₹${inc.toLocaleString('en-IN')}`;
+    document.getElementById('lbl_exp').innerText = `₹${exp.toLocaleString('en-IN')}`;
+    document.getElementById('lbl_sav').innerText = `₹${sav.toLocaleString('en-IN')}`;
+
+    const payload = {
+        monthly_take_home_income: inc,
+        other_monthly_income: 0,
+        essential_monthly_expenses: exp,
+        discretionary_expenses: 5000,
+        current_savings: sav,
+        outstanding_debt: 20000,
+        monthly_debt_repayments: 2500,
+        emergency_expenses_obligations: 0
+    };
+
+    try {
+        const res = await fetch('/api/economy/calculate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.status === 'success') {
+            const ind = data.indicators;
+            document.getElementById('suite_score').innerText = `${ind.resilience_score} / 100`;
+            document.getElementById('suite_runway').innerText = `${ind.emergency_fund_months.toFixed(1)} Months`;
+            const surplus = ind.monthly_surplus_deficit;
+            document.getElementById('suite_buffer').innerText = `${surplus >= 0 ? '+' : ''}₹${Math.round(surplus).toLocaleString('en-IN')}`;
+            document.getElementById('suite_buffer').style.color = surplus >= 0 ? '#34D399' : '#FB7185';
+        }
+    } catch (err) {
+        console.error('Suite twin error:', err);
+    }
+}
+
+// ── 4. Tab Switching inside Modals ──
 function switchGuideTab(evt, tabId) {
     document.querySelectorAll('#guideModal .modal-tabs .tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('#guideModal .guide-tab-content').forEach(c => c.classList.remove('active'));
@@ -61,7 +192,7 @@ function switchIntelTab(evt, tabId) {
     if (target) target.classList.add('active');
 }
 
-// ── 1. Economic Digital Twin Calculator ──
+// ── 5. Economic Digital Twin Calculator Modal ──
 async function calculateTwin() {
     const income = parseFloat(document.getElementById('twin_income').value) || 0;
     const essential = parseFloat(document.getElementById('twin_essential').value) || 0;
@@ -104,7 +235,7 @@ async function calculateTwin() {
     }
 }
 
-// ── 2. CyberDrishti Message Scanner ──
+// ── 6. CyberDrishti Message Scanner Modal ──
 const SAMPLES = {
     electricity: "Dear consumer your electricity power will be disconnected tonight at 9:30 pm from bijli vibhag because previous month bill was not updated. Please immediately install update apk from link http://bit.ly/bijli-apk to avoid power cut.",
     upi: "Sir I am buying your sofa on OLX. I have sent QR code. Please scan QR code and enter your 6-digit UPI PIN to receive ₹15,000 in your bank account immediately.",
@@ -164,7 +295,7 @@ async function screenCyberMessage() {
     }
 }
 
-// ── 3. ArthSim Financial Simulator ──
+// ── 7. ArthSim Financial Simulator Modal ──
 async function runSimulation() {
     const scenario = document.getElementById('arth_scenario').value;
     const horizon = parseInt(document.getElementById('arth_horizon').value) || 12;
@@ -241,7 +372,7 @@ function renderSimulationChart(trajectory) {
     wrapper.innerHTML = svgHtml;
 }
 
-// ── 4. Opportunity Pathways Loader ──
+// ── 8. Opportunity Pathways Loader ──
 let cachedOpportunities = [];
 
 async function loadOpportunities() {
@@ -293,7 +424,7 @@ function renderOpportunitiesList(list) {
     `).join('');
 }
 
-// ── 5. India Intelligence Data Loader ──
+// ── 9. India Intelligence Data Loader ──
 async function loadIndiaIntelligence() {
     // 1. UPI Apps
     try {
@@ -392,4 +523,5 @@ document.addEventListener('DOMContentLoaded', () => {
     runSimulation();
     loadOpportunities();
     loadIndiaIntelligence();
+    suiteUpdateTwin();
 });

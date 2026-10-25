@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AAYAM — Multi-Dimensional Economic Mobility & Cyber-Financial Intelligence</title>
-    <meta name="description" content="AI-driven economic mobility, personal financial twin, career pathways, macro intelligence, and cyber threat screening for India.">
+    <title>AAYAM — AI-Driven Economic Mobility & Cyber-Financial Defense for India</title>
+    <meta name="description" content="AAYAM is an intelligent decision-support system that diagnoses personal financial health, matches higher-paying careers and Mudra loans, and screens cyber-scams in real-time.">
     
-    <!-- Google Fonts: Syne (Futuristic Headings) + Inter (Body) -->
+    <!-- Google Fonts: Syne (Futuristic Headings) + Inter (Body) + Space Grotesk (Tech) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
+
+    <!-- ── Interactive Cursor Glow Aura ── -->
+    <div class="cursor-glow" id="cursorGlow"></div>
 
     <!-- ── Ambient Cyber Glow Backgrounds ── -->
     <div class="ambient-glow glow-top-right"></div>
@@ -23,18 +26,18 @@
     <!-- ── Floating Glassmorphism Navigation Bar ── -->
     <header class="navbar-wrapper">
         <nav class="navbar" id="navbar">
-            <div class="nav-brand">
+            <div class="nav-brand" onclick="scrollToSection('hero')">
                 <span class="brand-shield">🛡️</span>
                 <span class="brand-title">AAYAM</span>
             </div>
             
             <ul class="nav-links">
                 <li><a href="#hero" class="active">Home</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#explain">What Is AAYAM?</a></li>
+                <li><a href="#process">How It Works</a></li>
                 <li><a href="#services">Modules</a></li>
-                <li><a href="#twin">Digital Twin</a></li>
-                <li><a href="#cyber">CyberDrishti</a></li>
-                <li><a href="#intelligence">Intelligence</a></li>
+                <li><a href="#interactive-suite">Live Demo</a></li>
+                <li><a href="#about">Team</a></li>
             </ul>
 
             <div class="nav-actions">
@@ -42,15 +45,15 @@
                     <span>How to Use</span>
                     <span class="pill-icon">📖</span>
                 </button>
-                <button class="pill-btn nav-start-btn" onclick="scrollToSection('services')">
-                    <span>Explore</span>
-                    <span class="pill-icon">→</span>
+                <button class="pill-btn nav-start-btn" onclick="scrollToSection('interactive-suite')">
+                    <span>Try System</span>
+                    <span class="pill-icon">⚡</span>
                 </button>
             </div>
         </nav>
     </header>
 
-    <!-- ── HERO SECTION ── -->
+    <!-- ── 1. HERO SECTION ── -->
     <section class="hero-section" id="hero">
         <!-- Left Side Floating Social & Telemetry Indicators -->
         <div class="hero-side-indicators">
@@ -58,44 +61,63 @@
             <span class="side-dot"></span>
             <span class="side-dot"></span>
             <div class="side-socials">
-                <span>🛡️</span>
-                <span>🇮🇳</span>
-                <span>⚡</span>
+                <span title="Decent Work">🇮🇳</span>
+                <span title="FinTech Defense">🛡️</span>
+                <span title="AI Decision Support">⚡</span>
             </div>
         </div>
 
         <div class="hero-container">
             <div class="hero-content">
-                <div class="hero-tagline-small">INTELLIGENT RESILIENCE</div>
+                <div class="hero-tagline-small">MULTI-DIMENSIONAL INTELLIGENCE SYSTEM</div>
                 <h1 class="hero-title">AAYAM</h1>
-                <p class="hero-description">
-                    In the dynamic landscape of economic mobility and digital finance, navigating complexities and mitigating cyber-financial risks requires intelligence, vision, and strategic resilience.
+                
+                <p class="hero-lead">
+                    Your AI Copilot for <strong>Economic Mobility</strong> & <strong>Citizen Cyber Defense</strong> in India.
                 </p>
 
+                <!-- Plain-English Plain-Spoken Explanation Box -->
+                <div class="hero-explainer-card">
+                    <div class="explainer-header">
+                        <span class="explainer-bulb">💡</span>
+                        <strong>What is AAYAM in simple terms?</strong>
+                    </div>
+                    <ul class="explainer-list">
+                        <li><strong>1. Financial Health Twin:</strong> Calculates your monthly cash flow surplus, emergency runway months, and resilience score (0–100).</li>
+                        <li><strong>2. Career Mobility:</strong> Matches your skills to higher-paying jobs &amp; micro-enterprises with government Mudra loan funding.</li>
+                        <li><strong>3. Scam &amp; Threat Shield:</strong> Instantly screens suspicious SMS, APKs, or calls to stop fraud before you lose money.</li>
+                        <li><strong>4. 1930 Emergency Response:</strong> Time-critical playbooks to freeze stolen funds during the Golden 2-Hour window.</li>
+                    </ul>
+                </div>
+
                 <div class="hero-cta-group">
-                    <button class="pill-btn primary-pill" onclick="openModal('twinModal')">
-                        <span>LAUNCH TWIN</span>
-                        <span class="pill-icon">→</span>
+                    <button class="pill-btn primary-pill glow-pulse" onclick="scrollToSection('interactive-suite')">
+                        <span>TRY INSTANT DEMO</span>
+                        <span class="pill-icon">⚡</span>
                     </button>
                     <button class="pill-btn secondary-pill" onclick="openModal('guideModal')">
-                        <span>HOW TO USE</span>
+                        <span>HOW TO USE GUIDE</span>
                         <span class="pill-icon">📖</span>
                     </button>
                 </div>
 
-                <!-- Live Telemetry Badges -->
+                <!-- Live National Telemetry Chips -->
                 <div class="hero-metrics-strip">
                     <div class="metric-chip">
                         <span class="chip-val">16,106 Cr</span>
-                        <span class="chip-lbl">UPI Monthly Vol (RBI)</span>
+                        <span class="chip-lbl">Monthly UPI Txns (RBI)</span>
                     </div>
                     <div class="metric-chip">
                         <span class="chip-val">10.01 Lakh</span>
                         <span class="chip-lbl">1930 Cyber Complaints</span>
                     </div>
                     <div class="metric-chip">
+                        <span class="chip-val">₹990 Cr</span>
+                        <span class="chip-lbl">Saved in Golden Hour</span>
+                    </div>
+                    <div class="metric-chip">
                         <span class="chip-val">130/130</span>
-                        <span class="chip-lbl">Validated Tests</span>
+                        <span class="chip-lbl">Unit Tests Passing</span>
                     </div>
                 </div>
             </div>
@@ -107,7 +129,7 @@
                 </div>
 
                 <!-- Circular 'Scroll to Explore' Rotating Badge -->
-                <div class="scroll-badge" onclick="scrollToSection('about')">
+                <div class="scroll-badge" onclick="scrollToSection('explain')">
                     <div class="badge-ring-text">
                         <span>SCROLL • TO • EXPLORE • </span>
                     </div>
@@ -117,9 +139,390 @@
         </div>
     </section>
 
-    <!-- ── ABOUT SECTION ── -->
+    <!-- ── 2. WHAT IS AAYAM & THE CORE PROBLEM SECTION ── -->
+    <section class="explain-section" id="explain">
+        <div class="watermark-text watermark-explain">MISSION</div>
+        
+        <div class="explain-container">
+            <div class="section-label">THE PROBLEM WE SOLVE</div>
+            <h2 class="section-headline">Why Indian Citizens Need AAYAM Today</h2>
+            
+            <div class="problem-solution-grid">
+                <div class="ps-card problem-card">
+                    <div class="ps-icon">⚠️</div>
+                    <h3>The Twin Vulnerabilities</h3>
+                    <p>
+                        Millions of working Indians face two simultaneous threats: <strong>economic stagnation</strong> (limited career mobility, no clear upskilling roadmap, no credit access) and <strong>predatory cyber-financial fraud</strong> (digital arrests, loan app extortion, fake task traps draining lifetime savings in minutes).
+                    </p>
+                </div>
+                <div class="ps-card solution-card">
+                    <div class="ps-icon">🛡️</div>
+                    <h3>The AAYAM Integrated Solution</h3>
+                    <p>
+                        AAYAM connects these two halves for the first time. We diagnose your financial strength, suggest higher-earning career transitions backed by government schemes (PMKVY 4.0 &amp; Mudra), and shield your assets with explainable AI fraud detection.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 3. HOW IT WORKS / 4-STEP CITIZEN JOURNEY (MATCHING REFERENCE PROCESS) ── -->
+    <section class="process-section" id="process">
+        <div class="watermark-text watermark-process">PROCESS</div>
+
+        <div class="process-header">
+            <div class="section-label">HOW IT WORKS</div>
+            <h2 class="section-headline">Our 4-Step Citizen Resilience Journey</h2>
+            <p class="section-subtext">
+                Follow this simple, step-by-step roadmap to assess your financial baseline, unlock new earnings, and protect your digital savings.
+            </p>
+        </div>
+
+        <div class="process-list">
+            <!-- Step 1: A-01 -->
+            <div class="process-row" onclick="toggleProcessDetail(1)">
+                <div class="proc-left">
+                    <span class="proc-number">01</span>
+                    <span class="proc-code">A-01</span>
+                </div>
+                <div class="proc-mid">
+                    <h3 class="proc-title">Personal Financial Twin &amp; Diagnosis</h3>
+                    <p class="proc-desc">Input your monthly income, living expenses, and debts to compute your Resilience Score (0–100) and Emergency Runway months.</p>
+                    <div class="proc-detail" id="pdetail-1">
+                        <div class="proc-detail-box">
+                            <strong>What happens:</strong> AAYAM calculates whether your monthly budget has a cash surplus or operating deficit. It reveals how many months your savings will survive if you suddenly lose your job or suffer an emergency.
+                            <div style="margin-top: 10px;">
+                                <button class="pill-btn primary-pill" onclick="event.stopPropagation(); openModal('twinModal');">Open Twin Calculator →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="proc-right">
+                    <div class="proc-expand-btn" id="pbtn-1">+</div>
+                </div>
+            </div>
+
+            <!-- Step 2: B-02 (Highlighted Glowing Banner with Fluid Graphic like in reference) -->
+            <div class="process-row process-row-featured" onclick="toggleProcessDetail(2)">
+                <div class="proc-featured-bg"></div>
+                <div class="proc-left">
+                    <span class="proc-number">02</span>
+                    <span class="proc-code">B-02</span>
+                </div>
+                <div class="proc-mid">
+                    <h3 class="proc-title">Opportunity Matching &amp; Mudra Linkages</h3>
+                    <p class="proc-desc">AI ranks verified wage jobs and micro-enterprises tailored to your skills, with government PMKVY 4.0 certifications and Mudra loan support.</p>
+                    <div class="proc-detail" id="pdetail-2">
+                        <div class="proc-detail-box">
+                            <strong>What happens:</strong> AAYAM evaluates 4 transparent factors: your skill overlap, qualification alignment, capital affordability, and potential income increase (e.g. +₹15,000 to ₹35,000/mo).
+                            <div style="margin-top: 10px;">
+                                <button class="pill-btn primary-pill" onclick="event.stopPropagation(); openModal('oppModal');">View Matched Opportunities →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="proc-right">
+                    <div class="proc-expand-btn" id="pbtn-2">+</div>
+                </div>
+            </div>
+
+            <!-- Step 3: C-03 -->
+            <div class="process-row" onclick="toggleProcessDetail(3)">
+                <div class="proc-left">
+                    <span class="proc-number">03</span>
+                    <span class="proc-code">C-03</span>
+                </div>
+                <div class="proc-mid">
+                    <h3 class="proc-title">Real-Time Cyber Scam &amp; Phishing Screening</h3>
+                    <p class="proc-desc">Received a suspicious message or call? Paste it into CyberDrishti to test against 13+ attack patterns before you click or transfer money.</p>
+                    <div class="proc-detail" id="pdetail-3">
+                        <div class="proc-detail-box">
+                            <strong>What happens:</strong> Checks for fake police/CBI digital arrests, deceptive reverse UPI QR codes, fraudulent APK downloads, electricity bill traps, and KYC expiry lures.
+                            <div style="margin-top: 10px;">
+                                <button class="pill-btn primary-pill" onclick="event.stopPropagation(); openModal('cyberModal');">Screen A Message Now →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="proc-right">
+                    <div class="proc-expand-btn" id="pbtn-3">+</div>
+                </div>
+            </div>
+
+            <!-- Step 4: D-04 -->
+            <div class="process-row" onclick="toggleProcessDetail(4)">
+                <div class="proc-left">
+                    <span class="proc-number">04</span>
+                    <span class="proc-code">D-04</span>
+                </div>
+                <div class="proc-mid">
+                    <h3 class="proc-title">1930 Golden Hour Emergency Recovery</h3>
+                    <p class="proc-desc">If unauthorized money was deducted, follow the time-critical 2-hour playbook to freeze stolen funds and file a formal zero-liability dispute.</p>
+                    <div class="proc-detail" id="pdetail-4">
+                        <div class="proc-detail-box">
+                            <strong>What happens:</strong> Step-by-step guidance on reporting to the 1930 National Helpline, blocking your debit card/UPI handle, and asserting your statutory rights under RBI's 72-Hour Zero Liability Circular.
+                            <div style="margin-top: 10px;">
+                                <button class="pill-btn primary-pill" onclick="event.stopPropagation(); openModal('recoveryModal');">View Recovery Playbook →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="proc-right">
+                    <div class="proc-expand-btn" id="pbtn-4">+</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="process-bottom-cta">
+            <button class="pill-btn secondary-pill" onclick="openModal('guideModal')">
+                <span>OPEN FULL USER MANUAL</span>
+                <span class="pill-icon">📖</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ── 4. PANORAMIC FLUID BANNER SECTION (MATCHING REFERENCE IMAGE) ── -->
+    <section class="panoramic-banner-section">
+        <div class="panoramic-image-wrapper">
+            <img src="/static/images/banner_fluid.jpg" alt="AAYAM Cosmic Fluid Ribbon Banner" class="panoramic-image">
+            <div class="panoramic-overlay">
+                <h2 class="panoramic-title">Where Economic Mobility Meets Cyber Resilience</h2>
+                <p class="panoramic-subtitle">Empowering 1.4 Billion Citizens with Explainable AI &amp; Official Statistical Intelligence</p>
+            </div>
+        </div>
+
+        <!-- Institutional Data Source & Partner Strip -->
+        <div class="institution-strip">
+            <div class="inst-item">
+                <span class="inst-logo">🏛️</span>
+                <span class="inst-name">Reserve Bank of India (RBI)</span>
+            </div>
+            <div class="inst-item">
+                <span class="inst-logo">📊</span>
+                <span class="inst-name">MoSPI (PLFS, HCES, ASUSE)</span>
+            </div>
+            <div class="inst-item">
+                <span class="inst-logo">🛡️</span>
+                <span class="inst-name">CERT-In &amp; I4C (MeitY/MHA)</span>
+            </div>
+            <div class="inst-item">
+                <span class="inst-logo">📱</span>
+                <span class="inst-name">NPCI UPI Ecosystem</span>
+            </div>
+            <div class="inst-item">
+                <span class="inst-logo">🎓</span>
+                <span class="inst-name">Skill India Digital / PMKVY</span>
+            </div>
+            <div class="inst-item">
+                <span class="inst-logo">🏪</span>
+                <span class="inst-name">PMMY Mudra Yojana</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 5. LIVE INTERACTIVE SUITE: TRY IT RIGHT ON THIS PAGE ── -->
+    <section class="interactive-suite-section" id="interactive-suite">
+        <div class="watermark-text watermark-interactive">LIVE DEMO</div>
+
+        <div class="interactive-header">
+            <div class="section-label">INTERACTIVE SUITE</div>
+            <h2 class="section-headline">Test Drive AAYAM Right Here</h2>
+            <p class="section-subtext">No login or signup required. Try our two core intelligence engines live in your browser:</p>
+        </div>
+
+        <div class="interactive-suite-container">
+            <div class="suite-visual-col">
+                <div class="suite-image-wrapper">
+                    <img src="/static/images/interactive_fluid.jpg" alt="AAYAM Interactive Cyber Ring" class="suite-fluid-img">
+                </div>
+            </div>
+
+            <div class="suite-widget-col">
+                <!-- Two-Tab Live Interactive Widget -->
+                <div class="suite-tab-headers">
+                    <button class="suite-tab-btn active" onclick="switchSuiteTab('suite-scam')">🔍 Live Scam Detector</button>
+                    <button class="suite-tab-btn" onclick="switchSuiteTab('suite-twin')">🧬 Quick Financial Gauge</button>
+                </div>
+
+                <!-- Live Tab 1: Scam Screener -->
+                <div class="suite-tab-body active" id="suite-scam">
+                    <p style="color: #94A3B8; font-size: 0.88rem; margin-bottom: 12px;">
+                        Click a common scam pattern or paste an SMS text to test AAYAM’s heuristic threat engine:
+                    </p>
+                    
+                    <div class="quick-chips">
+                        <button class="sample-chip" onclick="suiteSetSample('electricity')">⚡ Electricity Disconnect</button>
+                        <button class="sample-chip" onclick="suiteSetSample('digital_arrest')">👮 Digital Arrest Call</button>
+                        <button class="sample-chip" onclick="suiteSetSample('upi')">💳 Reverse QR / PIN</button>
+                        <button class="sample-chip" onclick="suiteSetSample('fastag')">🚗 FASTag KYC Expiry</button>
+                    </div>
+
+                    <textarea id="suite_input_text" rows="3" placeholder="Paste any suspicious message text here..."></textarea>
+
+                    <div style="margin-top: 10px;">
+                        <button class="pill-btn primary-pill" onclick="suiteScanMessage()">
+                            <span>SCAN MESSAGE NOW</span>
+                            <span class="pill-icon">🔍</span>
+                        </button>
+                    </div>
+
+                    <div id="suite_scan_output" class="suite-output-box" style="display: none;"></div>
+                </div>
+
+                <!-- Live Tab 2: Quick Financial Gauge -->
+                <div class="suite-tab-body" id="suite-twin">
+                    <p style="color: #94A3B8; font-size: 0.88rem; margin-bottom: 12px;">
+                        Adjust the sliders below to see your Resilience Score and Emergency Runway calculate live:
+                    </p>
+
+                    <div class="suite-slider-group">
+                        <div class="slider-row">
+                            <label>Monthly Take-Home Income: <strong id="lbl_inc">₹35,000</strong></label>
+                            <input type="range" id="slide_income" min="10000" max="150000" step="5000" value="35000" oninput="suiteUpdateTwin()">
+                        </div>
+                        <div class="slider-row">
+                            <label>Essential Monthly Expenses: <strong id="lbl_exp">₹20,000</strong></label>
+                            <input type="range" id="slide_expenses" min="5000" max="100000" step="2500" value="20000" oninput="suiteUpdateTwin()">
+                        </div>
+                        <div class="slider-row">
+                            <label>Liquid Savings in Bank: <strong id="lbl_sav">₹50,000</strong></label>
+                            <input type="range" id="slide_savings" min="0" max="300000" step="10000" value="50000" oninput="suiteUpdateTwin()">
+                        </div>
+                    </div>
+
+                    <div class="suite-twin-result-strip">
+                        <div class="twin-stat-box">
+                            <span class="stat-lbl">Resilience Score</span>
+                            <span class="stat-val" id="suite_score">58 / 100</span>
+                        </div>
+                        <div class="twin-stat-box">
+                            <span class="stat-lbl">Emergency Runway</span>
+                            <span class="stat-val" id="suite_runway">2.5 Months</span>
+                        </div>
+                        <div class="twin-stat-box">
+                            <span class="stat-lbl">Monthly Buffer</span>
+                            <span class="stat-val" id="suite_buffer">+₹15,000</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 14px;">
+                        <button class="pill-btn primary-pill" onclick="openModal('twinModal')">
+                            <span>OPEN FULL DETAILED TWIN</span>
+                            <span class="pill-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 6. ALL 8 MODULES / SERVICES SECTION (4 CARDS + 4 CARDS) ── -->
+    <section class="services-section" id="services">
+        <div class="watermark-text watermark-services">MODULES</div>
+
+        <div class="services-header">
+            <div class="section-label">FULL CAPABILITIES</div>
+            <h2 class="section-headline">The 8 Specialized Engines of AAYAM</h2>
+            <p class="section-subtext">Each engine is explainable, mathematically deterministic, and rooted in verified government data.</p>
+        </div>
+
+        <!-- 4-Card Primary Carousel -->
+        <div class="services-carousel">
+            <!-- Card 1: Economic Twin -->
+            <div class="service-card" onclick="openModal('twinModal')">
+                <div class="card-icon-circle">🧬</div>
+                <h3 class="card-title">Economic Digital Twin</h3>
+                <p class="card-desc">Personal financial twin modeling income, expenses, and debts. Computes your Composite Resilience Score (0–100) and Runway months.</p>
+                <div class="card-pill-btn">
+                    <span>DISCOVER</span>
+                    <span class="card-pill-icon">→</span>
+                </div>
+            </div>
+
+            <!-- Card 2: Opportunity Pathways -->
+            <div class="service-card" onclick="openModal('oppModal')">
+                <div class="card-icon-circle">🚀</div>
+                <h3 class="card-title">Opportunity Pathways</h3>
+                <p class="card-desc">AI decision support matching your profile to PMKVY 4.0 job roles and Mudra-funded micro-enterprises with clear earning uplift estimates.</p>
+                <div class="card-pill-btn">
+                    <span>DISCOVER</span>
+                    <span class="card-pill-icon">→</span>
+                </div>
+            </div>
+
+            <!-- Card 3: CyberDrishti -->
+            <div class="service-card" onclick="openModal('cyberModal')">
+                <div class="card-icon-circle">🔍</div>
+                <h3 class="card-title">CyberDrishti</h3>
+                <p class="card-desc">Text and message screening engine evaluating digital arrest calls, APK droppers, and fastag scams against 13+ heuristic threat rules.</p>
+                <div class="card-pill-btn">
+                    <span>DISCOVER</span>
+                    <span class="card-pill-icon">→</span>
+                </div>
+            </div>
+
+            <!-- Card 4: ArthSim Simulator -->
+            <div class="service-card" onclick="openModal('arthsimModal')">
+                <div class="card-icon-circle">⚡</div>
+                <h3 class="card-title">ArthSim Simulator</h3>
+                <p class="card-desc">Stress-test your finances. Simulate the multi-month trajectory of job loss, cyber losses, and medical shocks with SVG depletion curves.</p>
+                <div class="card-pill-btn">
+                    <span>DISCOVER</span>
+                    <span class="card-pill-icon">→</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Secondary 4-Card Grid -->
+        <div class="services-carousel services-carousel-secondary">
+            <!-- Card 5: India Intelligence -->
+            <div class="service-card" onclick="openModal('intelModal')">
+                <div class="card-icon-circle">📊</div>
+                <h3 class="card-title">India Intelligence</h3>
+                <p class="card-desc">Macro intelligence dashboard powered by RBI Payment Systems, CPFIR frauds, MoSPI PLFS, HCES, ASUSE, and MHA 1930 State statistics.</p>
+                <div class="card-pill-btn">
+                    <span>DISCOVER</span>
+                    <span class="card-pill-icon">→</span>
+                </div>
+            </div>
+
+            <!-- Card 6: Recovery Centre -->
+            <div class="service-card" onclick="openModal('recoveryModal')">
+                <div class="card-icon-circle">🆘</div>
+                <h3 class="card-title">Recovery Centre</h3>
+                <p class="card-desc">Incident response playbooks prioritizing the Golden 2-Hour 1930 reporting window and bank zero-liability dispute filings.</p>
+                <div class="card-pill-btn">
+                    <span>DISCOVER</span>
+                    <span class="card-pill-icon">→</span>
+                </div>
+            </div>
+
+            <!-- Card 7: Trust Graph -->
+            <div class="service-card" onclick="openModal('trustModal')">
+                <div class="card-icon-circle">🕸️</div>
+                <h3 class="card-title">Trust Graph</h3>
+                <p class="card-desc">Graph network visualizing how threat delivery channels connect to financial vulnerabilities and institutional defenses.</p>
+                <div class="card-pill-btn">
+                    <span>DISCOVER</span>
+                    <span class="card-pill-icon">→</span>
+                </div>
+            </div>
+
+            <!-- Card 8: Command Centre -->
+            <div class="service-card" onclick="openModal('commandModal')">
+                <div class="card-icon-circle">🧭</div>
+                <h3 class="card-title">Command Centre</h3>
+                <p class="card-desc">Executive situational overview combining personal twin resilience, national payment health, and active CERT-In threat advisories.</p>
+                <div class="card-pill-btn">
+                    <span>DISCOVER</span>
+                    <span class="card-pill-icon">→</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 7. ABOUT & TEAM SECTION ── -->
     <section class="about-section" id="about">
-        <!-- Giant Watermark Typography -->
         <div class="watermark-text watermark-about">ABOUT</div>
 
         <div class="about-container">
@@ -131,37 +534,37 @@
             </div>
 
             <div class="about-content">
-                <div class="section-label">WHO WE ARE</div>
+                <div class="section-label">TEAM &amp; ROLES</div>
                 <h2 class="section-headline">
-                    Providing multi-dimensional economic intelligence and cyber-financial defense tailored to citizen mobility.
+                    Built by Students. Engineered for Socio-Economic Impact.
                 </h2>
                 <p class="section-body">
-                    AAYAM unites personal financial modeling, transparent opportunity recommendation, scenario stress-testing, macro-level economic data from RBI and MoSPI, and explainable cyber-threat screening into a unified, privacy-first decision-support platform.
+                    AAYAM was created as an academic, open-source decision-support platform designed to solve India's twin challenges of livelihood security and cyber-financial vulnerability.
                 </p>
 
                 <!-- Team Domain Matrix -->
                 <div class="team-grid">
                     <div class="team-card">
-                        <div class="team-role">FinTech & Data Eng</div>
+                        <div class="team-role">FinTech &amp; Data Engineering</div>
                         <div class="team-name">Aditya Singh</div>
                     </div>
                     <div class="team-card">
-                        <div class="team-role">Cybersecurity</div>
+                        <div class="team-role">Cybersecurity &amp; Threats</div>
                         <div class="team-name">Abhishek Shrivastava</div>
                     </div>
                     <div class="team-card">
-                        <div class="team-role">AI / ML & Pathways</div>
+                        <div class="team-role">AI / ML &amp; Recommendations</div>
                         <div class="team-name">Aarushi S.</div>
                     </div>
                     <div class="team-card">
-                        <div class="team-role">UI / UX & Platform</div>
+                        <div class="team-role">UI / UX &amp; Platform</div>
                         <div class="team-name">Ansh Saini</div>
                     </div>
                 </div>
 
                 <div class="about-cta">
                     <button class="pill-btn secondary-pill" onclick="openModal('guideModal')">
-                        <span>SYSTEM ARCHITECTURE</span>
+                        <span>VIEW ARCHITECTURE GUIDE</span>
                         <span class="pill-icon">↗</span>
                     </button>
                     <div class="sdg-badges">
@@ -173,133 +576,7 @@
         </div>
     </section>
 
-    <!-- ── MODULES / SERVICES SECTION ── -->
-    <section class="services-section" id="services">
-        <!-- Giant Watermark Typography -->
-        <div class="watermark-text watermark-services">MODULES</div>
-
-        <div class="services-header">
-            <div class="section-label">WHAT WE DO</div>
-            <h2 class="section-headline">
-                Elevate Economic Mobility With AAYAM’s Tailored Solutions
-            </h2>
-            <p class="section-subtext">
-                8 specialized, explainable modules engineered to model, accelerate, and defend your financial journey.
-            </p>
-        </div>
-
-        <!-- 4-Card Primary Grid (matching reference image) -->
-        <div class="services-carousel">
-            <!-- Card 1: Economic Twin -->
-            <div class="service-card" onclick="openModal('twinModal')">
-                <div class="card-icon-circle">🧬</div>
-                <h3 class="card-title">Economic Digital Twin</h3>
-                <p class="card-desc">
-                    Model your income, living costs, and debt obligations. Computes your Composite Resilience Score, emergency runway months, and DTI ratio.
-                </p>
-                <div class="card-pill-btn">
-                    <span>DISCOVER</span>
-                    <span class="card-pill-icon">→</span>
-                </div>
-            </div>
-
-            <!-- Card 2: Opportunity Pathways -->
-            <div class="service-card" onclick="openModal('oppModal')">
-                <div class="card-icon-circle">🚀</div>
-                <h3 class="card-title">Opportunity Pathways</h3>
-                <p class="card-desc">
-                    AI-driven decision support matching your skills and capital against PMKVY 4.0 job roles and Mudra-funded micro-enterprises.
-                </p>
-                <div class="card-pill-btn">
-                    <span>DISCOVER</span>
-                    <span class="card-pill-icon">→</span>
-                </div>
-            </div>
-
-            <!-- Card 3: CyberDrishti -->
-            <div class="service-card" onclick="openModal('cyberModal')">
-                <div class="card-icon-circle">🔍</div>
-                <h3 class="card-title">CyberDrishti</h3>
-                <p class="card-desc">
-                    Screen suspicious SMS, WhatsApp messages, and APK prompts against 13+ heuristic threat rules and verified CERT-In advisories.
-                </p>
-                <div class="card-pill-btn">
-                    <span>DISCOVER</span>
-                    <span class="card-pill-icon">→</span>
-                </div>
-            </div>
-
-            <!-- Card 4: ArthSim Simulator -->
-            <div class="service-card" onclick="openModal('arthsimModal')">
-                <div class="card-icon-circle">⚡</div>
-                <h3 class="card-title">ArthSim Simulator</h3>
-                <p class="card-desc">
-                    Deterministic what-if modeling. Simulate the multi-month trajectory of job loss, cyber losses, and medical emergencies.
-                </p>
-                <div class="card-pill-btn">
-                    <span>DISCOVER</span>
-                    <span class="card-pill-icon">→</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Secondary 4-Card Grid for complete system parity -->
-        <div class="services-carousel services-carousel-secondary">
-            <!-- Card 5: India Intelligence -->
-            <div class="service-card" onclick="openModal('intelModal')">
-                <div class="card-icon-circle">📊</div>
-                <h3 class="card-title">India Intelligence</h3>
-                <p class="card-desc">
-                    Macro analytics powered by RBI Payment Systems, CPFIR frauds, MoSPI PLFS, HCES, ASUSE, and MHA 1930 State telemetry.
-                </p>
-                <div class="card-pill-btn">
-                    <span>DISCOVER</span>
-                    <span class="card-pill-icon">→</span>
-                </div>
-            </div>
-
-            <!-- Card 6: Recovery Centre -->
-            <div class="service-card" onclick="openModal('recoveryModal')">
-                <div class="card-icon-circle">🆘</div>
-                <h3 class="card-title">Recovery Centre</h3>
-                <p class="card-desc">
-                    Time-critical incident response playbooks for the golden 2-hour window, 1930 reporting, and bank fraud hotlines.
-                </p>
-                <div class="card-pill-btn">
-                    <span>DISCOVER</span>
-                    <span class="card-pill-icon">→</span>
-                </div>
-            </div>
-
-            <!-- Card 7: Trust Graph -->
-            <div class="service-card" onclick="openModal('trustModal')">
-                <div class="card-icon-circle">🕸️</div>
-                <h3 class="card-title">Trust Graph</h3>
-                <p class="card-desc">
-                    Knowledge graph mapping threat vectors, delivery channels, financial vulnerabilities, and official defense frameworks.
-                </p>
-                <div class="card-pill-btn">
-                    <span>DISCOVER</span>
-                    <span class="card-pill-icon">→</span>
-                </div>
-            </div>
-
-            <!-- Card 8: Command Centre -->
-            <div class="service-card" onclick="openModal('commandModal')">
-                <div class="card-icon-circle">🧭</div>
-                <h3 class="card-title">Command Centre</h3>
-                <p class="card-desc">
-                    Unified executive dashboard combining personal resilience, macro trends, and real-time threat posture in one screen.
-                </p>
-                <div class="card-pill-btn">
-                    <span>DISCOVER</span>
-                    <span class="card-pill-icon">→</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── FOOTER ── -->
+    <!-- ── 8. FOOTER ── -->
     <footer class="site-footer">
         <div class="footer-container">
             <div class="footer-top">
@@ -310,14 +587,15 @@
                 </div>
                 <div class="footer-links">
                     <a href="#hero">Home</a>
-                    <a href="#about">About</a>
+                    <a href="#explain">Mission</a>
+                    <a href="#process">How It Works</a>
                     <a href="#services">Modules</a>
                     <a href="javascript:void(0)" onclick="openModal('guideModal')">How to Use</a>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>
-                    AAYAM v2.0 &bull; Student Decision-Support Prototype for Academic & Research Evaluation &bull;
+                    AAYAM v2.0 &bull; Student Decision-Support Prototype for Academic &amp; Research Evaluation &bull;
                     Aligned with <strong>SDG 1 (No Poverty)</strong> and <strong>SDG 8 (Decent Work)</strong>.
                 </p>
                 <p class="disclaimer-text">
@@ -357,14 +635,14 @@
                     <div class="stepper-item">
                         <span class="step-num">2</span>
                         <div>
-                            <h4>Explore Opportunities & Stress-Test</h4>
+                            <h4>Explore Opportunities &amp; Stress-Test</h4>
                             <p>Go to <strong>Opportunity Pathways</strong> to view government-subsidized job and enterprise pathways. Test your emergency runway in <strong>ArthSim Simulator</strong>.</p>
                         </div>
                     </div>
                     <div class="stepper-item">
                         <span class="step-num">3</span>
                         <div>
-                            <h4>Screen Threats & Respond</h4>
+                            <h4>Screen Threats &amp; Respond</h4>
                             <p>Paste suspicious messages into <strong>CyberDrishti</strong>. If you encounter unauthorized debits, follow the <strong>Recovery Centre</strong> 1930 playbooks.</p>
                         </div>
                     </div>
@@ -401,7 +679,7 @@
                 </div>
 
                 <div class="guide-tab-content" id="gtab-privacy">
-                    <h3>🛡️ Privacy & Guardrails</h3>
+                    <h3>🛡️ Privacy &amp; Guardrails</h3>
                     <p>&bull; <strong>Zero Persistent Personal Data:</strong> All financial calculations run in-memory within your active browser session.</p>
                     <p>&bull; <strong>No Sensitive Credentials:</strong> Never enter OTPs, bank passwords, or debit card CVVs.</p>
                     <p>&bull; <strong>Official Data Anchoring:</strong> Sourced strictly from verified RBI, MoSPI, CERT-In, and MHA public bulletins.</p>
@@ -492,7 +770,7 @@
             </div>
             <div class="modal-body">
                 <p style="color: #94A3B8; font-size: 0.9rem;">
-                    Paste an unsolicited SMS, WhatsApp message, or job offer text to evaluate heuristic threat indicators.
+                    Paste an unsolicited SMS, WhatsApp notification, or job offer text to evaluate heuristic threat indicators.
                 </p>
 
                 <div class="sample-chips-row">
@@ -512,9 +790,7 @@
                     </button>
                 </div>
 
-                <div id="cyber_result_container" class="cyber-result-box" style="display: none;">
-                    <!-- Result dynamically populated by JS -->
-                </div>
+                <div id="cyber_result_container" class="cyber-result-box" style="display: none;"></div>
             </div>
         </div>
     </div>
@@ -543,13 +819,8 @@
                     </div>
                 </div>
 
-                <div class="simulation-chart-wrapper" id="sim_chart_wrapper">
-                    <!-- SVG Chart dynamically drawn by JS -->
-                </div>
-
-                <div class="sim-kpis" id="sim_kpis_container">
-                    <!-- Metrics populated by JS -->
-                </div>
+                <div class="simulation-chart-wrapper" id="sim_chart_wrapper"></div>
+                <div class="sim-kpis" id="sim_kpis_container"></div>
             </div>
         </div>
     </div>
@@ -558,7 +829,7 @@
     <div class="modal-overlay" id="oppModal">
         <div class="modal-card modal-large">
             <div class="modal-header">
-                <h2>🚀 Opportunity Pathways (PMKVY 4.0 & Mudra)</h2>
+                <h2>🚀 Opportunity Pathways (PMKVY 4.0 &amp; Mudra)</h2>
                 <button class="modal-close" onclick="closeModal('oppModal')">&times;</button>
             </div>
             <div class="modal-body">
@@ -567,9 +838,7 @@
                     <button class="tab-btn" onclick="filterOpps(event, 'Wage Employment')">💼 Wage Employment</button>
                     <button class="tab-btn" onclick="filterOpps(event, 'Micro-Enterprise')">🏪 Micro-Enterprise</button>
                 </div>
-                <div class="opp-grid" id="opp_grid_container">
-                    <!-- Dynamically populated from /api/data/opportunities -->
-                </div>
+                <div class="opp-grid" id="opp_grid_container"></div>
             </div>
         </div>
     </div>
@@ -578,7 +847,7 @@
     <div class="modal-overlay" id="intelModal">
         <div class="modal-card modal-large">
             <div class="modal-header">
-                <h2>📊 India Macro & Cybercrime Intelligence</h2>
+                <h2>📊 India Macro &amp; Cybercrime Intelligence</h2>
                 <button class="modal-close" onclick="closeModal('intelModal')">&times;</button>
             </div>
             <div class="modal-body">
@@ -660,16 +929,14 @@
                 <button class="modal-close" onclick="closeModal('trustModal')">&times;</button>
             </div>
             <div class="modal-body">
-                <p style="color: #94A3B8;">
-                    Graph-theoretic architecture connecting threat delivery vectors to vulnerabilities and institutional defenses:
-                </p>
+                <p style="color: #94A3B8;">Graph-theoretic architecture connecting threat delivery vectors to vulnerabilities and institutional defenses:</p>
                 <div class="graph-representation-box">
                     <div class="graph-node-col">
                         <div class="node-badge node-vector">SMS / RCS Smishing</div>
                         <div class="node-arrow">→</div>
                         <div class="node-badge node-attack">Reverse QR / UPI MPIN</div>
                         <div class="node-arrow">→</div>
-                        <div class="node-badge node-defense">NPCI Limit & 1930 Lien</div>
+                        <div class="node-badge node-defense">NPCI Limit &amp; 1930 Lien</div>
                     </div>
                     <div class="graph-node-col">
                         <div class="node-badge node-vector">VoIP Skype / WhatsApp</div>
