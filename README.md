@@ -175,12 +175,12 @@ All data used by AAYAM is **publicly available, non-personal, non-proprietary** 
 
 See individual handoff documents in `team_handoff/` for role-specific instructions.
 
-| Role | Domain |
-|---|---|
-| Member 1 | FinTech & Data Engineering |
-| Member 2 | Cybersecurity & Threat Intelligence |
-| Member 3 | AI/ML & Opportunity Intelligence |
-| Member 4 | Platform, UI/UX & DevOps |
+| Role | Domain | Member Name |
+|---|---|---|
+| Member 1 | FinTech & Data Engineering | **Aditya Singh** |
+| Member 2 | Cybersecurity & Threat Intelligence | **Abhishek Shrivastava** |
+| Member 3 | AI/ML & Opportunity Intelligence | **Aarushi S.** |
+| Member 4 | UI / UX & Platform | **Ansh Saini** |
 
 ### Branch Naming
 - `feat/member1-*`, `feat/member2-*`, `feat/member3-*`, `feat/member4-*`

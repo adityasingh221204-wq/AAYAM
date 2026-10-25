@@ -86,7 +86,7 @@ git push origin feat/member1-fintech
 
 ---
 
-## 👤 Member 1 — FinTech & Data Engineering
+## 👤 Member 1 (Aditya Singh) — FinTech & Data Engineering
 
 ### Your files
 - `src/engines/economy.py` — financial indicators engine
@@ -125,7 +125,7 @@ git push origin feat/member1-fintech
 
 ---
 
-## 🛡️ Member 2 — Cybersecurity & Threat Intelligence
+## 🛡️ Member 2 (Abhishek Shrivastava) — Cybersecurity & Threat Intelligence
 
 ### Your files
 - `src/engines/cyber.py` — CyberDrishti engine
@@ -172,7 +172,7 @@ git push origin feat/member1-fintech
 
 ---
 
-## 🤖 Member 3 (Aarushi) — AI/ML & Opportunity Intelligence
+## 🤖 Member 3 (Aarushi S.) — AI/ML & Opportunity Intelligence
 
 ### Your files
 - `src/engines/recommendations.py` — opportunity ranking engine
@@ -215,7 +215,7 @@ git push origin feat/member1-fintech
 
 ---
 
-## 🖥️ Member 4 — Platform, UI/UX & DevOps
+## 🖥️ Member 4 (Ansh Saini) — UI / UX & Platform
 
 ### Your files
 - `app.py` — main homepage
