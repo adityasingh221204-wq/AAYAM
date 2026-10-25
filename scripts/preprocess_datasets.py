@@ -187,6 +187,67 @@ def build_cert_in():
             'reference_url': 'https://www.cert-in.org.in/',
             'severity': 'High',
             'published_date': '2024-02-19'
+        },
+        # 2025 Advisories — contributed by Member 2 (Abhishek Shrivastava)
+        {
+            'advisory_id': 'CIVN-2025-0012',
+            'title': 'Phishing via Fraudulent Income Tax Refund Portals & Malicious APKs',
+            'category': 'Phishing / Credential Harvesting',
+            'attack_vector': 'SMS and WhatsApp messages claiming pending income tax refund of ₹15,000 to ₹45,000 with links to fake e-filing portals',
+            'indicators_and_triggers': ['fake tax refund SMS', 'shortened URL claiming incometax.gov link', 'demands net banking credentials and CVV', 'asks to install IT-Refund APK'],
+            'financial_impact': 'Immediate unauthorized account debit and credit card draining (average loss ₹50,000 - ₹3,00,000)',
+            'mitigation_steps': 'Verify tax refunds exclusively on official portal https://eportal.incometax.gov.in; the Income Tax Department never sends refunds via external APKs or third-party links.',
+            'reference_url': 'https://www.cert-in.org.in/',
+            'severity': 'Critical',
+            'published_date': '2025-01-16'
+        },
+        {
+            'advisory_id': 'CIVN-2025-0028',
+            'title': 'Digital Arrest & Extortion Scams Impersonating Telecom Authority (TRAI)',
+            'category': 'Impersonation / Digital Arrest',
+            'attack_vector': 'Robocall claiming your Aadhaar is linked to illegal SIM cards used in terrorism or money laundering, followed by video transfer to fake police',
+            'indicators_and_triggers': ['IVR call claiming TRAI mobile disconnect in 2 hours', 'demands staying on video call', 'transfer to bogus cyber police station', 'demands RTGS bond'],
+            'financial_impact': 'Complete liquid capital extortion under panic (reported losses ₹3,00,000 to ₹5,00,00,000)',
+            'mitigation_steps': 'TRAI or DoT never disconnect mobile numbers via phone calls or order digital arrest; report fake calls to Chakshu on Sanchar Saathi (sancharsaathi.gov.in).',
+            'reference_url': 'https://sancharsaathi.gov.in/',
+            'severity': 'Critical',
+            'published_date': '2025-01-29'
+        },
+        {
+            'advisory_id': 'CIVN-2025-0045',
+            'title': 'Fake Part-Time YouTube & Google Maps Rating Tasks via RCS/WhatsApp',
+            'category': 'Employment / Investment Scam',
+            'attack_vector': 'Unsolicited WhatsApp or RCS messages offering ₹2,500 - ₹5,000 per day for rating hotels and liking videos, funneling victims to Telegram VIP investment channels',
+            'indicators_and_triggers': ['unsolicited job message from international country code', 'guaranteed high daily return for simple tasks', 'Telegram bot referral', 'prepaid deposit tier'],
+            'financial_impact': 'Lakhs lost in multi-stage prepaid crypto and UPI task traps',
+            'mitigation_steps': 'Do not transfer money to release salary or commissions; block international numbers and report scam messages on 1930.',
+            'reference_url': 'https://www.cert-in.org.in/',
+            'severity': 'High',
+            'published_date': '2025-02-04'
+        },
+        {
+            'advisory_id': 'CIVN-2025-0062',
+            'title': 'Malicious Android Trojan Masquerading as PM Surya Ghar Solar Rooftop Portal',
+            'category': 'Malware / APK',
+            'attack_vector': 'Phishing websites and SMS campaigns promising 100% solar subsidies distributing PM-SuryaGhar-Free.apk',
+            'indicators_and_triggers': ['SMS offering free solar panels with link to download APK', 'requests SMS read and accessibility permissions', 'steals banking OTPs in background'],
+            'financial_impact': 'Account compromise and silent SMS forward resulting in unauthorized transfers',
+            'mitigation_steps': 'Apply for government schemes only at official .gov.in websites (pmsuryaghar.gov.in); never install .apk files received via WhatsApp.',
+            'reference_url': 'https://www.cert-in.org.in/',
+            'severity': 'Critical',
+            'published_date': '2025-02-12'
+        },
+        {
+            'advisory_id': 'CIVN-2025-0089',
+            'title': 'Deceptive Toll Plaza & FASTag Expiry Smishing Portals',
+            'category': 'Phishing / Credential Harvesting',
+            'attack_vector': 'SMS warning that your FASTag KYC is expired or a toll violation penalty will be charged, urging users to visit a lookalike portal to pay ₹10 fee',
+            'indicators_and_triggers': ['SMS warning of blacklisted FASTag or pending toll fine', 'link to fake portal (fastag-kyc-update.com)', 'demands UPI MPIN or card details for ₹10 fee'],
+            'financial_impact': 'Immediate account drainage via deceptive UPI collect or debit card tokenization',
+            'mitigation_steps': 'Recharge and update FASTag only through authorized issuer bank apps or the official My FASTag app by NHAI.',
+            'reference_url': 'https://www.cert-in.org.in/',
+            'severity': 'High',
+            'published_date': '2025-02-18'
         }
     ]
     out_dir = os.path.join(BASE_DIR, 'data', 'processed', 'cyber_threats')

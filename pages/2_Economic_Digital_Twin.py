@@ -178,7 +178,7 @@ with r_col3:
     render_kpi_card(
         title="Emergency Runway",
         value=f"{indicators['emergency_fund_months']:.1f} Months",
-        subtext=f"Monthly Base: {format_inr(active_profile['essential_monthly_expenses'] + active_profile['monthly_debt_repayments'])}",
+        subtext=f"Monthly Base: {format_inr(active_profile.get('essential_monthly_expenses', 20000) + active_profile.get('monthly_debt_repayments', 4500))}",
         delta_text="6 Mo Recommended",
         badge_color="emerald" if indicators["emergency_fund_months"] >= 6 else "amber"
     )

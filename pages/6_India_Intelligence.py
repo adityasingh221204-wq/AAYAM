@@ -95,11 +95,11 @@ with tab_rbi:
             df_chan = df_payments[df_payments["system_name"] == selected_sys]
             if not df_chan.empty:
                 st.dataframe(
-                    df_chan[["period", "volume_crore", "value_inr_lakh_crore"]].rename(
+                    df_chan[["period", "volume_crore", "value_inr_crore"]].rename(
                         columns={
                             "period": "Period",
                             "volume_crore": "Volume (Cr Txns)",
-                            "value_inr_lakh_crore": "Value (₹ Lakh Cr)"
+                            "value_inr_crore": "Value (₹ Crore)"
                         }
                     ),
                     hide_index=True,
