@@ -5,6 +5,7 @@ RBI Payment System Indicators, PLFS 2023-24, HCES 2023-24, and ASUSE 2023-24.
 """
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 from src.ui.theme import apply_theme
 from src.ui.components import (
     render_header, render_kpi_card, render_alert_box,
@@ -12,7 +13,8 @@ from src.ui.components import (
 )
 from src.ui.charts import (
     plot_rbi_payment_growth, plot_rbi_fraud_trends,
-    plot_plfs_wpr_by_state, plot_hces_fractiles
+    plot_plfs_wpr_by_state, plot_hces_fractiles,
+    plot_rbi_system_trend, DARK_LAYOUT
 )
 from src.data.loaders import load_public_dataset
 
@@ -32,21 +34,22 @@ render_alert_box(
     alert_type="info"
 )
 
-tab_rbi, tab_plfs, tab_hces, tab_asuse = st.tabs([
-    "💳 RBI Digital Payments & Fraud",
-    "💼 PLFS Employment & Wages",
-    "🛒 HCES Household Consumption",
-    "🏭 ASUSE Unincorporated Enterprises"
+# 5 Dedicated Tabs as per Member 3 Specification
+tab_rbi, tab_frauds, tab_plfs, tab_hces, tab_asuse = st.tabs([
+    "💳 RBI Payments",
+    "🚨 Fraud Trends",
+    "💼 Labour Force",
+    "🛒 Household Expenditure",
+    "🏭 Enterprises"
 ])
 
-# 1. TAB: RBI Payments & Frauds
+# 1. TAB: RBI Payments
 with tab_rbi:
     df_payments = load_public_dataset("rbi_payment_systems")
-    df_frauds = load_public_dataset("rbi_frauds")
     
-    st.markdown("### Digital Payment Adoption & Fraud Trends (RBI)")
+    st.markdown("### Digital Payment Volumes & Channel Adoption (RBI)")
     
-    k1, k2, k3, k4 = st.columns(4)
+    k1, k2, k3 = st.columns(3)
     with k1:
         render_kpi_card(
             title="Total Digital Vol (Feb 2025)",
@@ -65,37 +68,123 @@ with tab_rbi:
         )
     with k3:
         render_kpi_card(
+            title="NEFT Monthly Vol",
+            value="55.2 Cr",
+            subtext="High-value batch settlement",
+            delta_text="+14.8% YoY",
+            badge_color="indigo"
+        )
+        
+    st.markdown("---")
+    
+    if not df_payments.empty:
+        # Channel Filter & Trend Line (Member 3 Requirement)
+        col_ctrl, col_chart = st.columns([1, 2])
+        
+        with col_ctrl:
+            st.markdown("#### Channel Telemetry Selector")
+            available_channels = sorted(list(df_payments["system_name"].unique()))
+            selected_sys = st.selectbox(
+                "Filter by Payment System:",
+                options=available_channels,
+                index=available_channels.index("UPI") if "UPI" in available_channels else 0
+            )
+            st.caption(f"Inspecting transaction volume for **{selected_sys}** across reporting periods.")
+            
+            # Show summary stats for selected channel
+            df_chan = df_payments[df_payments["system_name"] == selected_sys]
+            if not df_chan.empty:
+                st.dataframe(
+                    df_chan[["period", "volume_crore", "value_inr_lakh_crore"]].rename(
+                        columns={
+                            "period": "Period",
+                            "volume_crore": "Volume (Cr Txns)",
+                            "value_inr_lakh_crore": "Value (₹ Lakh Cr)"
+                        }
+                    ),
+                    hide_index=True,
+                    use_container_width=True
+                )
+                
+        with col_chart:
+            st.plotly_chart(plot_rbi_system_trend(df_payments, selected_sys), use_container_width=True)
+            
+        st.markdown("#### Comprehensive YoY Growth Comparison (Feb 2024 vs Feb 2025)")
+        st.plotly_chart(plot_rbi_payment_growth(df_payments), use_container_width=True)
+        render_data_provenance("Payment System Indicators", "Reserve Bank of India", "February 2025 Bulletin", "https://www.rbi.org.in/Scripts/PSIUserView.aspx?Id=45")
+    else:
+        st.info("Payment indicators dataset unavailable.")
+
+# 2. TAB: Fraud Trends
+with tab_frauds:
+    df_frauds = load_public_dataset("rbi_frauds")
+    st.markdown("### Domestic Payment Frauds Registry (RBI CPFIR)")
+    
+    f1, f2, f3 = st.columns(3)
+    with f1:
+        render_kpi_card(
             title="Reported Fraud Incidents",
             value="1,83,172",
             subtext="February 2025 CPFIR registry",
             delta_text="1 in every 1,07,458 txns",
             badge_color="amber"
         )
-    with k4:
+    with f2:
+        render_kpi_card(
+            title="Monthly Fraud Value",
+            value="₹287.8 Cr",
+            subtext="Reported to Central Registry",
+            delta_text="-14.2% vs Nov 2024 peak",
+            badge_color="emerald"
+        )
+    with f3:
         render_kpi_card(
             title="Fraud to Sales (FTS)",
             value="0.121 bps",
             subtext="Down from 0.240 bps in May 2024",
-            delta_text="Decreasing Ratio",
+            delta_text="Systemic Hygiene Improving",
             badge_color="emerald"
         )
         
-    c1, c2 = st.columns(2)
-    with c1:
-        if not df_payments.empty:
-            st.plotly_chart(plot_rbi_payment_growth(df_payments), use_container_width=True)
-            render_data_provenance("Payment System Indicators", "Reserve Bank of India", "February 2025 Bulletin", "https://www.rbi.org.in/Scripts/PSIUserView.aspx?Id=45")
-    with c2:
-        if not df_frauds.empty:
-            st.plotly_chart(plot_rbi_fraud_trends(df_frauds), use_container_width=True)
-            render_data_provenance("Central Payments Fraud Information Registry (CPFIR)", "Reserve Bank of India", "Sept 2022 - Feb 2025", "https://www.rbi.org.in/")
+    if not df_frauds.empty:
+        st.plotly_chart(plot_rbi_fraud_trends(df_frauds), use_container_width=True)
+        render_data_provenance("Central Payments Fraud Information Registry (CPFIR)", "Reserve Bank of India", "Sept 2022 - Feb 2025", "https://www.rbi.org.in/")
+    else:
+        st.info("Fraud registry dataset unavailable.")
 
-# 2. TAB: PLFS Employment
+# 3. TAB: Labour Force (PLFS)
 with tab_plfs:
     df_plfs = load_public_dataset("plfs")
     st.markdown("### Labour Force & Workforce Distribution (PLFS 2023-24)")
     
     if not df_plfs.empty:
+        # Sector Comparison Bar Chart (Member 3 Requirement)
+        st.markdown("#### National Workforce Ratios Across Sectors (Rural vs. Urban vs. Combined)")
+        all_india_sectors = df_plfs[(df_plfs["state"] == "All India") & (df_plfs["gender"] == "Person")]
+        
+        fig_sec = px.bar(
+            all_india_sectors,
+            x="sector",
+            y=["lfpr_pct", "wpr_pct", "ur_pct"],
+            barmode="group",
+            color_discrete_map={
+                "lfpr_pct": "#818CF8",
+                "wpr_pct": "#10B981",
+                "ur_pct": "#FB7185"
+            },
+            labels={
+                "sector": "Sector",
+                "value": "Percentage (%)",
+                "variable": "Indicator"
+            }
+        )
+        fig_sec.update_layout(
+            **DARK_LAYOUT,
+            title="PLFS 2023-24: LFPR, WPR, and Unemployment Rate Across Sectors",
+            height=340
+        )
+        st.plotly_chart(fig_sec, use_container_width=True)
+        
         col_chart, col_table = st.columns([3, 2])
         with col_chart:
             st.plotly_chart(plot_plfs_wpr_by_state(df_plfs), use_container_width=True)
@@ -123,13 +212,13 @@ with tab_plfs:
                 use_container_width=True
             )
 
-# 3. TAB: HCES Household Consumption
+# 4. TAB: HCES Household Consumption
 with tab_hces:
     df_hces = load_public_dataset("hces")
-    st.markdown("### Household Consumption Expenditure (HCES 2023-24)")
+    st.markdown("### Household Consumption Expenditure Survey (HCES 2023-24)")
     
     if not df_hces.empty:
-        sector_choice = st.radio("Select Sector", options=["Urban", "Rural"], horizontal=True)
+        sector_choice = st.radio("Select Consumption Sector", options=["Urban", "Rural"], horizontal=True)
         st.plotly_chart(plot_hces_fractiles(df_hces, sector=sector_choice), use_container_width=True)
         
         st.markdown(
@@ -139,7 +228,7 @@ with tab_hces:
         )
         render_data_provenance("Household Consumption Expenditure Survey", "MoSPI NSSO", "August 2023 - July 2024", "https://microdata.gov.in/nada/index.php/catalog")
 
-# 4. TAB: ASUSE Unincorporated Enterprises
+# 5. TAB: ASUSE Unincorporated Enterprises
 with tab_asuse:
     df_asuse = load_public_dataset("asuse")
     st.markdown("### Unincorporated Enterprises & Informal Economy (ASUSE 2023-24)")

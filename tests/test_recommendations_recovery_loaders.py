@@ -278,3 +278,54 @@ class TestDataLoaders:
         df = load_public_dataset("opportunities")
         expected_cols = {"opportunity_id", "title", "track", "sector"}
         assert expected_cols.issubset(set(df.columns))
+
+    def test_opportunity_catalogue_expanded_count(self):
+        df = load_public_dataset("opportunities")
+        assert len(df) >= 12
+
+    def test_new_opportunities_present(self):
+        df = load_public_dataset("opportunities")
+        opp_ids = set(df["opportunity_id"])
+        assert {"OPP-EMP-009", "OPP-EMP-010", "OPP-ENT-011", "OPP-ENT-012"}.issubset(opp_ids)
+
+    def test_all_opportunities_have_valid_scheme_linkage(self):
+        df = load_public_dataset("opportunities")
+        for _, row in df.iterrows():
+            assert isinstance(row["scheme_linkage"], str)
+            assert len(row["scheme_linkage"].strip()) > 3
+
+    def test_rank_opportunities_with_new_catalogue(self):
+        df = load_public_dataset("opportunities")
+        opps = df.to_dict(orient="records")
+        profile = {
+            "education": "Higher Secondary (12th)",
+            "skills": ["Aadhaar ABHA Registration", "Basic Healthcare"],
+            "current_savings": 20000.0,
+            "monthly_take_home_income": 15000.0
+        }
+        ranked = rank_opportunities(profile, opps)
+        assert len(ranked) >= 12
+        top_opp = ranked[0]
+        assert "match_score_pct" in top_opp
+        assert top_opp["match_score_pct"] > 50.0
+
+    def test_mudra_margin_money_affordability(self):
+        profile = {
+            "education": "Secondary (10th)",
+            "skills": ["Food Hygiene", "Customer Service"],
+            "current_savings": 5000.0,
+            "monthly_take_home_income": 0.0
+        }
+        opps = [{
+            "opportunity_id": "TEST-01",
+            "title": "Micro Cart",
+            "capital_required_inr": 20000.0,
+            "training_cost_inr": 0.0,
+            "required_education": "Secondary (10th)",
+            "required_skills": ["Food Hygiene"],
+            "estimated_monthly_income_min_inr": 20000.0,
+            "estimated_monthly_income_max_inr": 30000.0
+        }]
+        ranked = rank_opportunities(profile, opps)
+        assert "Mudra" in ranked[0]["affordability_status"]
+
