@@ -112,6 +112,39 @@ with tab_rbi:
         st.markdown("#### Comprehensive YoY Growth Comparison (Feb 2024 vs Feb 2025)")
         st.plotly_chart(plot_rbi_payment_growth(df_payments), use_container_width=True)
         render_data_provenance("Payment System Indicators", "Reserve Bank of India", "February 2025 Bulletin", "https://www.rbi.org.in/Scripts/PSIUserView.aspx?Id=45")
+
+        # UPI App Ecosystem Telemetry
+        df_upi_apps = load_public_dataset("upi_apps")
+        if not df_upi_apps.empty:
+            st.markdown("---")
+            st.markdown("#### 📱 UPI App Ecosystem Market Share (NPCI Feb 2025)")
+            app_col1, app_col2 = st.columns([1.5, 1])
+            with app_col1:
+                st.dataframe(
+                    df_upi_apps[["app_name", "volume_crore_feb2025", "value_inr_lakh_crore_feb2025", "market_share_volume_pct"]].rename(
+                        columns={
+                            "app_name": "App / Provider",
+                            "volume_crore_feb2025": "Volume (Cr Txns)",
+                            "value_inr_lakh_crore_feb2025": "Value (₹ Lakh Cr)",
+                            "market_share_volume_pct": "Volume Share (%)"
+                        }
+                    ),
+                    hide_index=True,
+                    use_container_width=True
+                )
+            with app_col2:
+                top_apps = df_upi_apps[df_upi_apps["app_name"] != "Total UPI Ecosystem"].head(5)
+                fig_apps = px.pie(
+                    top_apps,
+                    names="app_name",
+                    values="market_share_volume_pct",
+                    title="UPI App Volume Market Share",
+                    hole=0.45,
+                    color_discrete_sequence=["#10B981", "#6366F1", "#F59E0B", "#F43F5E", "#38BDF8"]
+                )
+                fig_apps.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", font=dict(color="#F8FAFC"))
+                st.plotly_chart(fig_apps, use_container_width=True)
+            render_data_provenance("NPCI UPI Ecosystem & App Statistics", "NPCI", "February 2025", "https://www.npci.org.in/what-we-do/upi/upi-ecosystem-statistics")
     else:
         st.info("Payment indicators dataset unavailable.")
 
@@ -149,6 +182,47 @@ with tab_frauds:
     if not df_frauds.empty:
         st.plotly_chart(plot_rbi_fraud_trends(df_frauds), use_container_width=True)
         render_data_provenance("Central Payments Fraud Information Registry (CPFIR)", "Reserve Bank of India", "Sept 2022 - Feb 2025", "https://www.rbi.org.in/")
+
+        # State-wise Cyber Fraud Statistics (1930 / MHA NCRP)
+        df_state_frauds = load_public_dataset("state_cyber_frauds")
+        if not df_state_frauds.empty:
+            st.markdown("---")
+            st.markdown("#### 🛡️ State-wise Financial Cyber Crime & 1930 Recovery (MHA 2024)")
+            st.caption("Citizen Financial Cyber Fraud Reporting System (CFCFRMS / 1930 Helpline) annual telemetry:")
+            
+            sf_col1, sf_col2 = st.columns([1.6, 1])
+            with sf_col1:
+                st.dataframe(
+                    df_state_frauds[df_state_frauds["state_ut"] != "All India"][
+                        ["state_ut", "complaints_registered_2024", "amount_defrauded_inr_crore", "amount_put_on_hold_inr_crore", "recovery_rate_pct", "primary_fraud_vector"]
+                    ].rename(
+                        columns={
+                            "state_ut": "State / UT",
+                            "complaints_registered_2024": "Complaints (2024)",
+                            "amount_defrauded_inr_crore": "Defrauded (₹ Cr)",
+                            "amount_put_on_hold_inr_crore": "Saved on Hold (₹ Cr)",
+                            "recovery_rate_pct": "Recovery (%)",
+                            "primary_fraud_vector": "Top Attack Vector"
+                        }
+                    ),
+                    hide_index=True,
+                    use_container_width=True
+                )
+            with sf_col2:
+                top_states = df_state_frauds[df_state_frauds["state_ut"] != "All India"].sort_values("amount_defrauded_inr_crore", ascending=False).head(7)
+                fig_sf = px.bar(
+                    top_states,
+                    x="amount_defrauded_inr_crore",
+                    y="state_ut",
+                    orientation="h",
+                    title="Top States by Defrauded Amount (₹ Cr)",
+                    color="recovery_rate_pct",
+                    color_continuous_scale="Viridis",
+                    labels={"amount_defrauded_inr_crore": "Amount (₹ Cr)", "state_ut": "State", "recovery_rate_pct": "Recovery %"}
+                )
+                fig_sf.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", font=dict(color="#F8FAFC"), yaxis=dict(autorange="reversed"))
+                st.plotly_chart(fig_sf, use_container_width=True)
+            render_data_provenance("Citizen Financial Cyber Fraud Reporting System (1930 / CFCFRMS)", "Ministry of Home Affairs / I4C", "Calendar Year 2024", "https://cybercrime.gov.in/")
     else:
         st.info("Fraud registry dataset unavailable.")
 

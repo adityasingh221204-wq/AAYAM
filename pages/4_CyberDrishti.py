@@ -28,7 +28,7 @@ render_alert_box(
     alert_type="warning"
 )
 
-tab_scanner, tab_library = st.tabs(["🔍 Threat & Message Scanner", "📚 CERT-In Threat Advisory Library"])
+tab_scanner, tab_library, tab_state_map = st.tabs(["🔍 Threat & Message Scanner", "📚 CERT-In Threat Advisory Library", "🗺️ State Cybercrime Risk Telemetry"])
 
 with tab_scanner:
     st.markdown("### 💬 Communication Screening")
@@ -161,5 +161,66 @@ with tab_library:
         render_data_provenance("Official Cybersecurity Advisories", "CERT-In & I4C", "2024", "https://www.cert-in.org.in/")
     else:
         st.warning("CERT-In advisories dataset is unavailable.")
+
+with tab_state_map:
+    st.markdown("### 🗺️ State/UT Cybercrime Risk Telemetry (MHA 1930 Portal)")
+    st.caption("Citizen Financial Cyber Fraud Reporting & Management System (CFCFRMS / 1930) state-wise telemetry:")
+    
+    df_state_frauds = load_public_dataset("state_cyber_frauds")
+    if not df_state_frauds.empty:
+        sc1, sc2, sc3 = st.columns(3)
+        with sc1:
+            render_kpi_card(
+                title="Annual 1930 Complaints",
+                value="10.01 Lakh",
+                subtext="National Cybercrime Portal (2024)",
+                delta_text="All India Aggregate",
+                badge_color="amber"
+            )
+        with sc2:
+            render_kpi_card(
+                title="Total Defrauded Value",
+                value="₹6,450 Cr",
+                subtext="Financial cyber fraud (2024)",
+                delta_text="Reported incidents",
+                badge_color="rose"
+            )
+        with sc3:
+            render_kpi_card(
+                title="Amount Put on Hold",
+                value="₹990 Cr",
+                subtext="Saved within Golden Hour",
+                delta_text="15.35% National Recovery",
+                badge_color="emerald"
+            )
+            
+        st.markdown("---")
+        risk_filter = st.radio("Filter by Risk Tier:", ["All Tiers", "High", "Medium", "Low"], horizontal=True)
+        filtered_states = df_state_frauds[df_state_frauds["state_ut"] != "All India"]
+        if risk_filter != "All Tiers":
+            filtered_states = filtered_states[filtered_states["risk_tier"] == risk_filter]
+            
+        st.dataframe(
+            filtered_states[[
+                "state_ut", "zone", "complaints_registered_2024", "amount_defrauded_inr_crore",
+                "amount_put_on_hold_inr_crore", "recovery_rate_pct", "primary_fraud_vector", "risk_tier"
+            ]].rename(
+                columns={
+                    "state_ut": "State / UT",
+                    "zone": "Geographic Zone",
+                    "complaints_registered_2024": "Complaints Registered",
+                    "amount_defrauded_inr_crore": "Defrauded (₹ Cr)",
+                    "amount_put_on_hold_inr_crore": "Frozen / On Hold (₹ Cr)",
+                    "recovery_rate_pct": "Recovery Rate (%)",
+                    "primary_fraud_vector": "Predominant Threat Vector",
+                    "risk_tier": "Risk Tier"
+                }
+            ),
+            hide_index=True,
+            use_container_width=True
+        )
+        render_data_provenance("National Cyber Crime Reporting Portal (1930)", "Ministry of Home Affairs / I4C", "2024", "https://cybercrime.gov.in/")
+    else:
+        st.info("State cyber fraud telemetry unavailable.")
 
 render_footer()

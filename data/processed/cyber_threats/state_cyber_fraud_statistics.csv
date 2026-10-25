@@ -1,0 +1,31 @@
+state_ut,zone,complaints_registered_2024,amount_defrauded_inr_crore,amount_put_on_hold_inr_crore,recovery_rate_pct,primary_fraud_vector,risk_tier
+Maharashtra,West,128450,942.50,152.80,16.21,Digital Arrest / Task Scam,High
+Uttar Pradesh,North,112340,685.20,98.40,14.36,Part-Time Job / UPI Collect,High
+Gujarat,West,84210,518.70,86.20,16.62,Stock Market / Investment Scam,High
+Karnataka,South,79650,564.10,92.50,16.40,FedEx / Law Enforcement Impersonation,High
+Tamil Nadu,South,71200,432.80,68.90,15.92,Loan App Harassment / Phishing,High
+Delhi,North,68490,489.60,82.40,16.83,SIM Swap / Instant Credit Card Scam,High
+Telangana,South,58320,395.40,64.20,16.24,Deceptive APK / Investment Group,High
+Rajasthan,North,52180,312.60,45.80,14.65,Mewat Region Sextortion / Olx QR,High
+West Bengal,East,49870,298.50,41.20,13.80,Kolkata Call Centre / Remote Access,High
+Madhya Pradesh,Central,41200,245.30,34.80,14.19,Electricity Bill / Fastag Smishing,Medium
+Haryana,North,38900,278.40,42.10,15.12,Part-Time Review Scam,Medium
+Bihar,East,35400,210.80,27.60,13.09,Aadhaar AePS Cloning / Micro-ATM,Medium
+Punjab,North,28600,185.20,26.40,14.25,Canada Visa / Lottery Impersonation,Medium
+Kerala,South,27800,198.60,33.20,16.72,Crypto Trading / WhatsApp Forex,Medium
+Andhra Pradesh,South,26500,174.50,25.80,14.78,Instant Loan Apps / OTP Phishing,Medium
+Odisha,East,21400,132.80,18.40,13.86,Job Offer / KYC Update Smishing,Medium
+Assam,North-East,15600,94.20,12.10,12.85,Govt Scheme Subsidy Phishing,Low
+Jharkhand,East,14800,102.50,14.80,14.44,Jamtara Phishing / Bank Impersonation,Medium
+Chhattisgarh,Central,13900,88.40,11.90,13.46,Insurance Bonus Scam,Low
+Uttarakhand,North,11200,72.60,10.20,14.05,Char Dham Tour / Helicopter Ticket,Low
+Himachal Pradesh,North,7400,46.80,6.90,14.74,Work-from-Home Tasks,Low
+Goa,West,4200,32.40,5.10,15.74,Online Casino / Rental Scam,Low
+Jammu and Kashmir,North,5800,38.20,5.40,14.14,PM Scheme Fake Portals,Low
+Chandigarh,North,3600,28.50,4.80,16.84,Credit Card Reward Points,Low
+Tripura,North-East,2100,13.20,1.60,12.12,UPI Reverse QR,Low
+Meghalaya,North-East,1400,8.90,1.10,12.36,Phishing Links,Low
+Manipur,North-East,1100,6.80,0.80,11.76,Social Media Impersonation,Low
+Nagaland,North-East,850,5.20,0.60,11.54,Gift Card Lottery,Low
+Puducherry,South,1200,8.40,1.20,14.29,Job Scam,Low
+All India,National,1001700,6450.00,990.00,15.35,Digital Arrest / Task Scam / Phishing,National

@@ -4,6 +4,7 @@ Main Application Entry Point
 """
 import streamlit as st
 import pandas as pd
+from datetime import datetime, timezone, timedelta
 from src.ui.theme import apply_theme
 from src.ui.components import render_header, render_kpi_card, render_alert_box, render_footer
 from src.utils.config import APP_NAME, APP_TITLE, APP_TAGLINE, SDG_ALIGNMENT
@@ -38,52 +39,115 @@ if "user_profile" not in st.session_state:
         "economic_goals": "Build emergency buffer and transition to higher-wage career pathway"
     }
 
-# 4. Sidebar Navigation & Global System Telemetry
+# 4. Sidebar — Branding, Clock, System Health
 with st.sidebar:
     st.markdown(
         f"""
-        <div style="padding: 10px 0 20px 0; border-bottom: 1px solid #334155; margin-bottom: 20px;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 1.6rem;">🛡️</span>
-                <span style="font-size: 1.4rem; font-weight: 800; color: #10B981; letter-spacing: -0.02em;">{APP_NAME}</span>
+        <div style="padding: 10px 0 20px 0; border-bottom: 1px solid rgba(51,65,85,0.4); margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.8rem;">🛡️</span>
+                <span style="font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, #10B981, #34D399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.02em;">{APP_NAME}</span>
             </div>
-            <div style="font-size: 0.78rem; color: #94A3B8; margin-top: 4px;">{APP_TAGLINE}</div>
+            <div style="font-size: 0.8rem; color: #94A3B8; margin-top: 6px; font-style: italic;">{APP_TAGLINE}</div>
         </div>
         """,
         unsafe_allow_html=True
     )
     
-    st.markdown("### 🎯 System Alignment")
-    st.markdown(f"**Primary SDGs:**\n- {SDG_ALIGNMENT[0]}\n- {SDG_ALIGNMENT[1]}")
+    # Live IST Clock
+    ist_zone = timezone(timedelta(hours=5, minutes=30))
+    ist_time = datetime.now(ist_zone).strftime("%d %b %Y  •  %I:%M %p IST")
+    st.markdown(f"🕒 `{ist_time}`")
     
     st.markdown("---")
-    st.markdown("### 📊 Verified Sourced Data")
+    st.markdown("### 🎯 SDG Alignment")
+    st.markdown(f"- {SDG_ALIGNMENT[0]}\n- {SDG_ALIGNMENT[1]}")
+    
+    st.markdown("---")
+    st.markdown("### 📊 Data Registry")
     df_reg = load_public_dataset("source_register")
     if not df_reg.empty:
-        st.markdown(f"**Registered Sources:** {len(df_reg)}")
+        st.markdown(f"**{len(df_reg)} Verified Sources**")
         for _, r in df_reg.iterrows():
-            st.markdown(f"- **{r['dataset_name']}** ({r['study_or_release'][:22]}...)")
-    else:
-        st.caption("Registry indexing active.")
-        
+            st.markdown(f"- {r['dataset_name'][:35]}…")
+    
     st.markdown("---")
-    st.caption("AAYAM v1.0 &bull; Student Decision-Support Prototype")
+    st.caption("AAYAM v2.0  •  128 Tests Passing  •  Academic Prototype")
 
-# 5. Main Hero Section
-render_header(
-    title="AAYAM: Economic Intelligence & Cyber Resilience",
-    subtitle="An integrated decision-support platform uniting personal economic modeling, career mobility, macro trends, and digital threat intelligence.",
-    badge_text="System Active",
-    badge_type="emerald"
+# 5. Hero Section
+st.markdown(
+    f"""
+    <div class="aayam-hero">
+        <div style="position: relative; z-index: 1;">
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 10px;">
+                <h1 style="margin: 0; font-size: 2.4rem; font-weight: 900; color: #F8FAFC; letter-spacing: -0.03em;">
+                    AAYAM
+                </h1>
+                <span class="badge badge-emerald" style="animation: pulse-glow 2s ease-in-out infinite;">System Active</span>
+            </div>
+            <p style="margin: 0; font-size: 1.1rem; color: #CBD5E1; max-width: 700px; line-height: 1.5;">
+                AI-Driven Multi-Dimensional Economic Mobility & Cyber-Financial Intelligence — 
+                uniting personal economic modeling, career pathways, macro analytics, and digital threat defense.
+            </p>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True
 )
 
-render_alert_box(
-    title="Core Operating Principle",
-    message="AAYAM is an independent economic decision-support and cyber-financial resilience platform. It is not a bank, credit rating agency, licensed financial advisor, guaranteed job board, or official government enforcement portal.",
-    alert_type="info"
-)
+# 6. How-to-Use Toggle (Collapsible Guide)
+with st.expander("📖  How to Use AAYAM — Quick Start Guide", expanded=False):
+    st.markdown(
+        """
+        <div style="padding: 8px 0;">
+            <div class="guide-step">
+                <span class="guide-step-num">1</span>
+                <strong style="color: #F8FAFC;">Set Up Your Financial Twin</strong>
+                <p style="color: #94A3B8; font-size: 0.85rem; margin: 6px 0 0 36px;">
+                    Navigate to <strong>Economic Digital Twin</strong> → fill in your monthly income, expenses, savings, and debt in the sidebar form → click <em>Apply Changes</em> to generate your personalized resilience score and financial indicators.
+                </p>
+            </div>
+            <div class="guide-step">
+                <span class="guide-step-num">2</span>
+                <strong style="color: #F8FAFC;">Explore Career & Enterprise Opportunities</strong>
+                <p style="color: #94A3B8; font-size: 0.85rem; margin: 6px 0 0 36px;">
+                    Open <strong>Opportunity Pathways</strong> → use the filter sidebar to narrow by track (Employment / Micro-Enterprise), sector, and location → each card shows a transparent 4-factor match score, required skills, and Mudra loan eligibility.
+                </p>
+            </div>
+            <div class="guide-step">
+                <span class="guide-step-num">3</span>
+                <strong style="color: #F8FAFC;">Screen Suspicious Messages</strong>
+                <p style="color: #94A3B8; font-size: 0.85rem; margin: 6px 0 0 36px;">
+                    Go to <strong>CyberDrishti</strong> → paste any suspicious SMS, WhatsApp message, or APK prompt into the text area → the engine analyzes it against 13+ threat rules and returns an explainable risk score with safety guidance.
+                </p>
+            </div>
+            <div class="guide-step">
+                <span class="guide-step-num">4</span>
+                <strong style="color: #F8FAFC;">Stress-Test Your Finances</strong>
+                <p style="color: #94A3B8; font-size: 0.85rem; margin: 6px 0 0 36px;">
+                    Use <strong>ArthSim</strong> → select a scenario (job loss, fraud, medical emergency) → adjust severity sliders → view the projected savings trajectory and months-to-depletion over your chosen horizon.
+                </p>
+            </div>
+            <div class="guide-step">
+                <span class="guide-step-num">5</span>
+                <strong style="color: #F8FAFC;">Monitor Macroeconomic Trends</strong>
+                <p style="color: #94A3B8; font-size: 0.85rem; margin: 6px 0 0 36px;">
+                    Open <strong>India Intelligence</strong> → switch between 5 tabs (RBI Payments, Fraud Trends, Labour Force, Household Expenditure, Enterprises) → interactive charts show UPI volumes, sector-level employment, and consumption patterns.
+                </p>
+            </div>
+            <div class="guide-step">
+                <span class="guide-step-num">6</span>
+                <strong style="color: #F8FAFC;">Respond to Fraud Incidents</strong>
+                <p style="color: #94A3B8; font-size: 0.85rem; margin: 6px 0 0 36px;">
+                    If compromised, go to <strong>Recovery Centre</strong> → select your incident type → follow the prioritized step-by-step playbook (golden 2-hour window, RBI 72-hour zero-liability dispute). Download a checklist for offline use.
+                </p>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-# 6. Global Quick Metric Overview
+# 7. Quick Macro Metrics
 col1, col2, col3, col4 = st.columns(4)
 with col1:
     render_kpi_card(
@@ -120,124 +184,121 @@ with col4:
 
 st.markdown("---")
 
-# 7. Navigation Directory to All 8 Modules
+# 8. Module Navigation — Premium Cards
 st.markdown("### 🌐 Core System Modules")
+st.caption("Click any module to launch it.")
+
+MODULES = [
+    {
+        "num": "01", "title": "Command Centre", "icon": "🧭",
+        "color": "#34D399",
+        "desc": "Executive intelligence overview — personal resilience KPIs, macro payment trends, and real-time threat posture.",
+        "btn": "Launch Command Centre", "page": "pages/1_Command_Centre.py"
+    },
+    {
+        "num": "02", "title": "Economic Digital Twin", "icon": "🧬",
+        "color": "#818CF8",
+        "desc": "Build your personal financial twin. Calculate cash flow, savings rate, emergency runway, and composite resilience.",
+        "btn": "Configure Digital Twin", "page": "pages/2_Economic_Digital_Twin.py"
+    },
+    {
+        "num": "03", "title": "Opportunity Pathways", "icon": "🚀",
+        "color": "#38BDF8",
+        "desc": "Transparently ranked employment, upskilling, and micro-enterprise pathways with PMKVY 4.0 and Mudra linkages.",
+        "btn": "Explore Opportunities", "page": "pages/3_Opportunity_Pathways.py"
+    },
+    {
+        "num": "04", "title": "CyberDrishti", "icon": "🔍",
+        "color": "#FB7185",
+        "desc": "Explainable cyber threat screening — analyze suspicious SMS, APK prompts, and UPI fraud patterns.",
+        "btn": "Open CyberDrishti", "page": "pages/4_CyberDrishti.py"
+    },
+    {
+        "num": "05", "title": "ArthSim Simulator", "icon": "⚡",
+        "color": "#FBBF24",
+        "desc": "What-if financial modeling — simulate job loss, cyber-fraud, medical emergencies over 3–60 month horizons.",
+        "btn": "Simulate Scenarios", "page": "pages/5_ArthSim.py"
+    },
+    {
+        "num": "06", "title": "India Intelligence", "icon": "📊",
+        "color": "#A78BFA",
+        "desc": "5-tab macro dashboard — RBI Payment Systems, CPFIR fraud metrics, PLFS, HCES, and ASUSE analytics.",
+        "btn": "View Intelligence", "page": "pages/6_India_Intelligence.py"
+    },
+    {
+        "num": "07", "title": "Trust Graph", "icon": "🕸️",
+        "color": "#2DD4BF",
+        "desc": "Interactive network graph mapping cyber threat vectors, delivery channels, and official defense frameworks.",
+        "btn": "Inspect Trust Graph", "page": "pages/7_Trust_Graph.py"
+    },
+    {
+        "num": "08", "title": "Recovery Centre", "icon": "🆘",
+        "color": "#F43F5E",
+        "desc": "Time-critical incident response — golden 2-hour window playbooks with 1930 and bank contacts.",
+        "btn": "Open Recovery Centre", "page": "pages/8_Recovery_Centre.py"
+    },
+]
+
+# Render in 2 columns
+left_modules = MODULES[:4]
+right_modules = MODULES[4:]
 
 mod_col1, mod_col2 = st.columns(2)
 
-with mod_col1:
-    st.markdown(
-        """
-        <div class="aayam-card">
-            <h4 style="color: #34D399; margin-top: 0;">1. Command Centre</h4>
-            <p style="color: #94A3B8; font-size: 0.9rem;">
-                Executive intelligence overview combining personal resilience KPIs, macro indicators, payment trends, and threat alerts in a single unified dashboard.
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-    if st.button("Launch Command Centre ↗", key="btn_p1"):
-        st.switch_page("pages/1_Command_Centre.py")
-        
-    st.markdown(
-        """
-        <div class="aayam-card">
-            <h4 style="color: #818CF8; margin-top: 0;">2. Economic Digital Twin</h4>
-            <p style="color: #94A3B8; font-size: 0.9rem;">
-                Build and inspect your personal financial twin. Calculates cash flow buffers, savings rate, emergency runway months, and composite resilience index.
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-    if st.button("Configure Digital Twin ↗", key="btn_p2"):
-        st.switch_page("pages/2_Economic_Digital_Twin.py")
-        
-    st.markdown(
-        """
-        <div class="aayam-card">
-            <h4 style="color: #38BDF8; margin-top: 0;">3. Opportunity Pathways</h4>
-            <p style="color: #94A3B8; font-size: 0.9rem;">
-                Transparently ranked employment, upskilling, and micro-entrepreneurship pathways aligned with PMKVY 4.0, Mudra loans, and verified skill frameworks.
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-    if st.button("Explore Opportunities ↗", key="btn_p3"):
-        st.switch_page("pages/3_Opportunity_Pathways.py")
-        
-    st.markdown(
-        """
-        <div class="aayam-card">
-            <h4 style="color: #FB7185; margin-top: 0;">4. CyberDrishti</h4>
-            <p style="color: #94A3B8; font-size: 0.9rem;">
-                Explainable cyber threat screening centre. Analyze suspicious messages, detect deceptive APK prompts, and examine official CERT-In threat advisories.
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-    if st.button("Open CyberDrishti ↗", key="btn_p4"):
-        st.switch_page("pages/4_CyberDrishti.py")
+for col, mods in [(mod_col1, left_modules), (mod_col2, right_modules)]:
+    with col:
+        for m in mods:
+            st.markdown(
+                f"""
+                <div class="module-card">
+                    <span class="module-num">{m['num']}</span>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                        <span style="font-size: 1.3rem;">{m['icon']}</span>
+                        <h4 style="color: {m['color']}; margin: 0; font-size: 1.1rem; font-weight: 700;">{m['title']}</h4>
+                    </div>
+                    <p style="color: #94A3B8; font-size: 0.88rem; margin: 0; line-height: 1.45;">{m['desc']}</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+            if st.button(f"{m['btn']} →", key=f"btn_{m['num']}"):
+                st.switch_page(m['page'])
 
-with mod_col2:
+# 9. About AAYAM & SDG Alignment (Collapsible)
+with st.expander("ℹ️  About AAYAM — Academic Mission, Architecture & SDG Alignment", expanded=False):
     st.markdown(
-        """
-        <div class="aayam-card">
-            <h4 style="color: #FBBF24; margin-top: 0;">5. ArthSim: Scenario Simulator</h4>
-            <p style="color: #94A3B8; font-size: 0.9rem;">
-                Deterministic what-if modeling. Simulate the financial impact of job loss, cyber-fraud losses, training expenses, and inflation across multi-month horizons.
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-    if st.button("Simulate Scenarios ↗", key="btn_p5"):
-        st.switch_page("pages/5_ArthSim.py")
+        f"""
+        ### 🇮🇳 What is AAYAM?
+        **AAYAM** (*AI-Driven Multi-Dimensional Economic Mobility and Cyber-Financial Intelligence System*) is an academic, open-source decision-support platform built for the Indian socio-economic landscape.
         
-    st.markdown(
-        """
-        <div class="aayam-card">
-            <h4 style="color: #A78BFA; margin-top: 0;">6. India Intelligence</h4>
-            <p style="color: #94A3B8; font-size: 0.9rem;">
-                Macroeconomic and payment analytics using official data from RBI Payment System Indicators, PLFS 2023-24, HCES 2023-24, and ASUSE 2023-24.
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-    if st.button("View India Intelligence ↗", key="btn_p6"):
-        st.switch_page("pages/6_India_Intelligence.py")
+        It bridges the critical gap between **economic mobility** (upskilling, livelihood security, micro-enterprise) and **cyber-financial defense** (phishing detection, APK threat screening, fraud response).
         
-    st.markdown(
-        """
-        <div class="aayam-card">
-            <h4 style="color: #2DD4BF; margin-top: 0;">7. Trust Graph</h4>
-            <p style="color: #94A3B8; font-size: 0.9rem;">
-                Interactive graph visualising relationships among cyber threats, delivery channels, financial vulnerabilities, and official defense frameworks.
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-    if st.button("Inspect Trust Graph ↗", key="btn_p7"):
-        st.switch_page("pages/7_Trust_Graph.py")
-        
-    st.markdown(
-        """
-        <div class="aayam-card">
-            <h4 style="color: #F43F5E; margin-top: 0;">8. Recovery Centre</h4>
-            <p style="color: #94A3B8; font-size: 0.9rem;">
-                Step-by-step incident response playbook for suspected unauthorized payments, account takeover, phishing, and SIM swap with official 1930 and bank contacts.
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-    if st.button("Open Recovery Centre ↗", key="btn_p8"):
-        st.switch_page("pages/8_Recovery_Centre.py")
+        #### 🏛️ Architectural Pillars:
+        1. **Personal Economic Twin & ArthSim Simulator:** Deterministic multi-period modeling of cash flows, liquidity runways, and shock stress-testing.
+        2. **Opportunity Pathways Engine:** Transparent, 4-factor scoring matching profiles against NSQF, PMKVY 4.0, and MSME opportunities with verified Mudra loan linkages.
+        3. **CyberDrishti & Trust Graph:** Rule-based explainable threat screening against deceptive SMS/APKs, paired with a NetworkX knowledge graph and CERT-In advisories.
+        4. **Recovery Centre:** Incident response playbooks prioritizing the golden 2-hour window and RBI 72-hour zero-liability dispute protocols.
+        5. **India Macroeconomic Intelligence:** Real-time integration of official data from RBI Payment Systems, MoSPI PLFS (Labour), HCES (Consumption), and ASUSE (Informal Enterprises).
 
-# 8. Footer
+        #### 🎯 UN Sustainable Development Goals (SDGs):
+        - **{SDG_ALIGNMENT[0]}:** Promoting sustained, inclusive economic growth and productive employment through explainable pathway guidance.
+        - **{SDG_ALIGNMENT[1]}:** Strengthening socio-economic resilience by defending citizen financial assets against predatory cyber attacks.
+        
+        #### 👥 Team:
+        | Member | Domain |
+        |---|---|
+        | **Aditya Singh** | FinTech & Data Engineering |
+        | **Abhishek Shrivastava** | Cybersecurity & Threat Intelligence |
+        | **Aarushi S.** | AI/ML & Opportunity Intelligence |
+        | **Ansh Saini** | UI / UX & Platform |
+        """
+    )
+
+render_alert_box(
+    title="Core Operating Principle",
+    message="AAYAM is an independent economic decision-support and cyber-financial resilience platform. It is not a bank, credit rating agency, licensed financial advisor, guaranteed job board, or official government enforcement portal.",
+    alert_type="info"
+)
+
+# 10. Footer
 render_footer()

@@ -59,6 +59,16 @@ DATASET_REGISTRY = {
         "rel_path": "reference/geography_mapping.csv",
         "schema": "geography",
         "aliases": ["geography", "states"]
+    },
+    "state_cyber_frauds": {
+        "rel_path": "processed/cyber_threats/state_cyber_fraud_statistics.csv",
+        "schema": "state_cyber_frauds",
+        "aliases": ["ncrp_frauds", "1930_stats", "state_frauds", "cyber_crime_states"]
+    },
+    "upi_app_ecosystem": {
+        "rel_path": "processed/rbi/upi_app_ecosystem.csv",
+        "schema": "upi_app_ecosystem",
+        "aliases": ["upi_apps", "npci_apps", "upi_market_share"]
     }
 }
 

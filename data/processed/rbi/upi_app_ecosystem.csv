@@ -1,0 +1,11 @@
+app_name,parent_entity,volume_crore_feb2025,value_inr_lakh_crore_feb2025,market_share_volume_pct,market_share_value_pct,category,registered_psp_banks
+PhonePe,Walmart / PhonePe India,7812.4,10.65,48.51,48.96,Third Party App (TPAP),Yes (YES/ICICI/AXIS)
+Google Pay,Alphabet Inc.,5980.2,7.94,37.13,36.51,Third Party App (TPAP),Yes (SBI/HDFC/ICICI/AXIS)
+Paytm (OCL),One97 Communications,1184.6,1.48,7.35,6.80,Third Party App (TPAP),Yes (SBI/YES/AXIS/HDFC)
+CRED,Dreamplug Technologies,198.5,0.48,1.23,2.21,Third Party App (TPAP),Yes (AXIS)
+Navi,Navi Technologies,172.4,0.18,1.07,0.83,Third Party App (TPAP),Yes (Karnataka Bank)
+BHIM,NPCI,48.2,0.11,0.30,0.51,Official NPCI App,Direct NPCI Switch
+Amazon Pay,Amazon India,78.6,0.10,0.49,0.46,Third Party App (TPAP),Yes (AXIS/ICICI)
+WhatsApp Pay,Meta Platforms,28.4,0.03,0.18,0.14,Third Party App (TPAP),Yes (ICICI/SBI/HDFC/AXIS)
+Banking Apps (Combined),HDFC/SBI/ICICI/Kotak/Others,603.1,0.76,3.74,3.58,Bank Native Apps,Direct Core Banking
+Total UPI Ecosystem,NPCI Network,16106.4,21.75,100.00,100.00,National Retail Payment Switch,National

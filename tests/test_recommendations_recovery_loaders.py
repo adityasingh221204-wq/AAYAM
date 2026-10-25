@@ -329,3 +329,17 @@ class TestDataLoaders:
         ranked = rank_opportunities(profile, opps)
         assert "Mudra" in ranked[0]["affordability_status"]
 
+    def test_state_cyber_frauds_loads(self):
+        df = load_public_dataset("state_cyber_frauds")
+        assert isinstance(df, pd.DataFrame)
+        assert not df.empty
+        assert "complaints_registered_2024" in df.columns
+        assert "amount_defrauded_inr_crore" in df.columns
+
+    def test_upi_app_ecosystem_loads(self):
+        df = load_public_dataset("upi_apps")
+        assert isinstance(df, pd.DataFrame)
+        assert not df.empty
+        assert "market_share_volume_pct" in df.columns
+        assert "PhonePe" in df["app_name"].values
+
