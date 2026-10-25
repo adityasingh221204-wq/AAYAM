@@ -92,6 +92,60 @@ SUSPICIOUS_RULES = [
             r"http://(?!(www\.)?[a-zA-Z0-9-]+\.(gov\.in|nic\.in|rbi\.org\.in|npci\.org\.in))"
         ],
         "explanation": "Shortened or non-HTTPS hyperlink concealing destination domain, frequently used to disguise credential harvesting portals."
+    },
+    {
+        "code": "KYC_DOCUMENT_EXPIRY_PHISHING",
+        "category": "Credential Theft / KYC",
+        "weight": 25,
+        "keywords": [
+            r"kyc.*expired", r"update.*aadhaar.*pan", r"pan card block",
+            r"sim card block.*kyc", r"kyc update link", r"turant kyc karein",
+            r"kyc verify karein"
+        ],
+        "explanation": "Fake regulatory KYC update notice threatening immediate blockage of bank account or SIM card unless credentials or documents are submitted."
+    },
+    {
+        "code": "LOTTERY_PRIZE_IMPERSONATION",
+        "category": "Advance Fee Fraud",
+        "weight": 25,
+        "keywords": [
+            r"kbc lottery", r"winner.*crore", r"lucky draw winner",
+            r"claim your prize", r"pay processing fee.*lottery", r"paise jeete hain",
+            r"lottery number.*win"
+        ],
+        "explanation": "Advance-fee lottery or prize deception demanding an upfront tax or processing charge to release non-existent jackpot funds."
+    },
+    {
+        "code": "FAKE_RBI_COURT_FREEZE_NOTICE",
+        "category": "Legal Extortion",
+        "weight": 30,
+        "keywords": [
+            r"rbi.*freeze.*account", r"anti money laundering.*notice",
+            r"financial crime investigation", r"supreme court order.*freeze",
+            r"khata freeze ho gaya", r"rbi audit notice"
+        ],
+        "explanation": "Fraudulent regulatory or judicial freeze threat coercing victims into transferring funds into external verification accounts."
+    },
+    {
+        "code": "INCOME_TAX_REFUND_SCAM",
+        "category": "Tax Phishing",
+        "weight": 20,
+        "keywords": [
+            r"tax refund.*approved", r"income tax refund.*rs", r"click to claim refund",
+            r"itr.*refund.*pending", r"claim refund link", r"tax return credit"
+        ],
+        "explanation": "Deceptive tax refund notification urging users to click malicious hyperlinks or submit banking login details to receive phantom refunds."
+    },
+    {
+        "code": "TRAI_SANCHAR_SAATHI_SPOOF",
+        "category": "Authority Impersonation",
+        "weight": 25,
+        "keywords": [
+            r"trai.*mobile disconnection", r"dot.*deactivate.*mobile",
+            r"department of telecommunications.*disconnect", r"sanchar saathi.*violation",
+            r"sim band ho jayegi", r"telecom department notice"
+        ],
+        "explanation": "Impersonation of telecom regulator (TRAI/DoT) falsely claiming mobile numbers are linked to illegal activities and face instant disconnection."
     }
 ]
 

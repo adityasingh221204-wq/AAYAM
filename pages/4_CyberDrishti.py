@@ -66,7 +66,21 @@ with tab_scanner:
         score = res["risk_score"]
         level = res["risk_level"]
         badge_color = "rose" if score >= 60 else ("amber" if score >= 35 else ("indigo" if score >= 15 else "emerald"))
-        
+
+        # Threat Progress Bar & Risk Badge
+        st.markdown(
+            f"""
+            <div style="margin: 12px 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <span style="font-weight: 700; color: #F8FAFC; font-size: 1.05rem;">Suspicion Meter: {score:.0f} / 100</span>
+                    <span class="badge badge-{badge_color}">{level}</span>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+        st.progress(float(min(1.0, max(0.0, score / 100.0))))
+
         c1, c2, c3 = st.columns(3)
         with c1:
             render_kpi_card(
@@ -100,30 +114,28 @@ with tab_scanner:
                 alert_type="danger" if score >= 50 else "warning"
             )
             
-        # Breakdown of patterns
-        st.markdown("#### Matched Social Engineering Indicators")
+        # Breakdown of patterns as Expandable components (Member 2 Specification)
+        st.markdown("#### 🔍 Triggered Threat Pattern Details")
         if res["triggered_patterns"]:
-            for pat in res["triggered_patterns"]:
-                st.markdown(
-                    f"""
-                    <div class="aayam-card-secondary">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-weight: 700; color: #F8FAFC;">{pat['code']}</span>
-                            <span class="badge badge-amber">{pat['category']} (+{pat['severity_points']} pts)</span>
-                        </div>
-                        <div style="color: #94A3B8; font-size: 0.86rem; margin-top: 4px;">{pat['explanation']}</div>
-                        <div style="color: #818CF8; font-size: 0.78rem; margin-top: 4px;">Matched terms: <code>{', '.join(pat['matched_terms'])}</code></div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+            for idx, pat in enumerate(res["triggered_patterns"], start=1):
+                with st.expander(f"Pattern {idx}: {pat['code']} — {pat['category']} (+{pat['severity_points']} pts)", expanded=True):
+                    st.markdown(f"**Pattern Code:** `{pat['code']}` &bull; **Category:** `{pat['category']}` &bull; **Severity Contribution:** `+{pat['severity_points']} pts`")
+                    st.markdown(f"**Explanation:** {pat['explanation']}")
+                    st.markdown(f"**Matched Term Snippets:** `{'`, `'.join(pat['matched_terms'])}`")
         else:
             st.info("No overt high-risk phrasing recognized by baseline heuristics.")
             
-        # Actionable Safety Guidance
-        st.markdown("#### 🛡️ Prioritised Safety Guidance")
-        for g in res["safety_guidance"]:
-            st.markdown(f"&bull; **{g}**")
+        # Actionable Safety Guidance as Numbered Checklist with ⚠️ icons (Member 2 Specification)
+        st.markdown("#### 🛡️ Prioritised Safety Guidance Checklist")
+        for idx, g in enumerate(res["safety_guidance"], start=1):
+            st.markdown(
+                f"""
+                <div style="background-color: rgba(30, 41, 59, 0.7); border-left: 3px solid #FBBF24; padding: 10px 14px; border-radius: 6px; margin-bottom: 8px;">
+                    ⚠️ <strong>{idx}.</strong> <span style="color: #F8FAFC; margin-left: 4px;">{g}</span>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
             
         st.caption(f"_{res['disclaimer']}_")
 
