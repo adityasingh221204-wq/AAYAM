@@ -237,9 +237,42 @@ def assess_cyber_risk(text: str, context: dict | None = None) -> dict:
     if "CREDENTIAL_OTP_HARVESTING" in reason_codes:
         guidance.append("NEVER disclose 4 or 6-digit SMS OTPs, UPI PINs, or card CVVs to anyone under any pretext.")
         
-    if not guidance:
-        guidance.append("Verify unknown communications independently using contact numbers published on official provider portals.")
-        guidance.append("Never click unverified links received from unknown senders.")
+    # 4-Pillar Threat Matrix (0 - 100% per pillar)
+    urgency_score = min(100, int(sum(t["severity_points"] * 3.5 for t in triggered if t["code"] in ["URGENT_DISCONNECTION_THREAT"])))
+    financial_score = min(100, int(sum(t["severity_points"] * 2.8 for t in triggered if t["code"] in ["REVERSE_UPI_QR_SCAM", "TASK_BASED_WORK_FROM_HOME_SCAM", "INCOME_TAX_REFUND_SCAM"])))
+    authority_score = min(100, int(sum(t["severity_points"] * 2.8 for t in triggered if t["code"] in ["DIGITAL_ARREST_IMPERSONATION", "TRAI_SANCHAR_SAATHI_SPOOF", "KYC_DOCUMENT_EXPIRY_PHISHING"])))
+    payload_score = min(100, int(sum(t["severity_points"] * 2.8 for t in triggered if t["code"] in ["MALICIOUS_APK_DELIVERY", "REMOTE_ACCESS_TOOL_PROMPT", "CREDENTIAL_OTP_HARVESTING", "UNTRUSTED_SHORTENED_URL"])))
+
+    is_benign_banking = bool(re.search(r"(credited|debited|available balance|otp for logging|bank never calls|txn successful)", lowered))
+    
+    # Verdict determinations
+    if risk_score >= 60.0:
+        verdict = "CRITICAL_THREAT"
+        verdict_title = "CRITICAL THREAT / DANGEROUS SCAM"
+        verdict_badge = "rose"
+        primary_threat = triggered[0]["category"] if triggered else "Severe Extortion Scam"
+        summary_explanation = f"Critical threat detected: Communication exhibits {primary_threat} indicators. High risk of financial loss."
+    elif risk_score >= 35.0:
+        verdict = "HIGH_SUSPICION"
+        verdict_title = "HIGH SUSPICION / LIKELY SCAM"
+        verdict_badge = "amber"
+        primary_threat = triggered[0]["category"] if triggered else "Deceptive Phishing Attempt"
+        summary_explanation = f"Suspicious communication: Multiple red flags identified ({primary_threat}). Strong probability of fraud."
+    elif risk_score >= 15.0:
+        verdict = "MODERATE_CAUTION"
+        verdict_title = "MODERATE CAUTION / SUSPICIOUS"
+        verdict_badge = "amber"
+        primary_threat = triggered[0]["category"] if triggered else "Unverified Communication"
+        summary_explanation = "Moderate caution advised: Contains artificial urgency or unverified links. Verify sender independently."
+    else:
+        verdict = "SAFE_BENIGN"
+        verdict_title = "VERIFIED SAFE / BENIGN NOTIFICATION" if is_benign_banking else "NO THREAT DETECTED"
+        verdict_badge = "emerald"
+        primary_threat = "Legitimate Banking / Safe Message" if is_benign_banking else "Normal Communication"
+        summary_explanation = "No known attack patterns, extortion triggers, or malicious URLs were found in this text. Message appears safe."
+
+    triggered_flags = [f"{t['category']}: {t['explanation']}" for t in triggered]
+    recommended_action = guidance[0] if guidance else "Standard digital hygiene: Do not share OTPs or banking PINs with anyone."
 
     return {
         "risk_score": risk_score,
@@ -249,5 +282,19 @@ def assess_cyber_risk(text: str, context: dict | None = None) -> dict:
         "reason_codes": reason_codes,
         "attack_chain_stage": chain_stage,
         "safety_guidance": guidance,
-        "disclaimer": "CyberDrishti is an explainable heuristic security screening tool for educational resilience. It is not an antivirus or warranty of digital safety."
+        "disclaimer": "CyberDrishti is an explainable heuristic security screening tool for educational resilience. It is not an antivirus or warranty of digital safety.",
+        "threat_matrix": {
+            "urgency_coercion": urgency_score,
+            "financial_trigger": financial_score,
+            "authority_impersonation": authority_score,
+            "technical_payload": payload_score
+        },
+        "verdict": verdict,
+        "verdict_title": verdict_title,
+        "verdict_badge": verdict_badge,
+        "risk_badge": verdict_badge,
+        "primary_threat_vector": primary_threat,
+        "summary_explanation": summary_explanation,
+        "triggered_flags": triggered_flags,
+        "recommended_action": recommended_action
     }
