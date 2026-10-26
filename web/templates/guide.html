@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Guide &amp; Persona Handbook — How to Use AAYAM | AAYAM</title>
+    <meta name="description" content="Complete user manual, persona walkthroughs, architecture blueprints, and FAQs for using AAYAM effectively.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body data-theme="cyber-violet">
+
+    <!-- Interactive Cursor Glow Aura -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Ambient Glow Backgrounds -->
+    <div class="ambient-glow glow-top-right"></div>
+    <div class="ambient-glow glow-mid-left"></div>
+    <div class="ambient-glow glow-bottom-center"></div>
+
+    <!-- Floating Navigation Bar -->
+    <header class="navbar-wrapper">
+        <nav class="navbar" id="navbar">
+            <a href="/" class="nav-brand" style="text-decoration: none;">
+                <span class="brand-shield">🛡️</span>
+                <span class="brand-title">AAYAM</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/command">Command</a></li>
+                <li><a href="/twin">Digital Twin</a></li>
+                <li><a href="/cyberdrishti">CyberDrishti</a></li>
+                <li><a href="/arthsim">ArthSim</a></li>
+                <li><a href="/opportunities">Opportunities</a></li>
+                <li><a href="/intelligence">Intelligence</a></li>
+                <li><a href="/recovery">Recovery</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="pill-btn nav-guide-btn" onclick="toggleQuickJump()" title="Quick Jump (Ctrl+K)">
+                    <span>Jump</span>
+                    <span class="pill-icon">⚡</span>
+                </button>
+                <button class="pill-btn nav-start-btn" onclick="toggleSettings()" title="Settings & Theme">
+                    <span>Settings</span>
+                    <span class="pill-icon">⚙️</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Hero Banner -->
+    <main class="page-hero">
+        <div class="page-breadcrumbs">
+            <a href="/">Portal Hub</a>
+            <span class="separator">/</span>
+            <span>Documentation</span>
+            <span class="separator">/</span>
+            <span style="color: var(--accent-violet);">System Guide &amp; User Manual</span>
+        </div>
+
+        <div class="page-hero-badge-row">
+            <span class="page-code-badge">DOCUMENTATION // USER HANDBOOK</span>
+            <span class="benefit-chip"><span class="benefit-icon">📖</span> 4 Persona Journeys</span>
+            <span class="benefit-chip"><span class="benefit-icon">💡</span> Plain-Language Guides</span>
+            <span class="benefit-chip"><span class="benefit-icon">❓</span> Interactive FAQs</span>
+        </div>
+
+        <h1 class="page-hero-title">System Guide &amp; User Manual</h1>
+        <p class="page-hero-desc">
+            Everything you need to know about navigating AAYAM. Whether you are a college graduate seeking high-paying vocations, a salaried worker optimizing your emergency runway, or a senior citizen shielding your pension from extortion scams, this manual guides you step-by-step.
+        </p>
+
+        <!-- ── 4 PERSONA USER JOURNEYS ── -->
+        <section style="margin-top: 30px;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; color: #FFFFFF; margin-bottom: 8px;">
+                Tailored Citizen Walkthroughs
+            </h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">
+                Choose your life profile to see how to maximize AAYAM for your specific needs:
+            </p>
+
+            <div class="services-carousel" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+                <!-- Persona 1 -->
+                <div class="service-card">
+                    <span class="service-badge badge-indigo">PERSONA 01</span>
+                    <h4 style="color: #FFFFFF; font-size: 1.15rem; margin: 10px 0 6px 0;">🎓 College Student / Fresh Graduate</h4>
+                    <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px;">
+                        <strong>Challenge:</strong> Low starting wages and high susceptibility to fake Telegram task and internship scams.
+                    </p>
+                    <ul style="padding-left: 18px; font-size: 0.8rem; color: #E2E8F0; line-height: 1.5; margin-bottom: 14px;">
+                        <li>Use <strong>Opportunities</strong> to find high-wage vocations (Solar PV, EV Logistics) paying ₹28k–₹45k/mo.</li>
+                        <li>Screen suspicious WhatsApp job offers in <strong>CyberDrishti</strong> before paying any 'registration deposits'.</li>
+                    </ul>
+                    <a href="/opportunities" class="pill-btn secondary-pill" style="font-size: 0.76rem; text-decoration: none;">
+                        <span>Explore Career Pathways →</span>
+                    </a>
+                </div>
+
+                <!-- Persona 2 -->
+                <div class="service-card">
+                    <span class="service-badge badge-emerald">PERSONA 02</span>
+                    <h4 style="color: #FFFFFF; font-size: 1.15rem; margin: 10px 0 6px 0;">💼 Salaried Support Worker</h4>
+                    <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px;">
+                        <strong>Challenge:</strong> Discretionary spending drag and consumer debt EMIs eroding emergency savings.
+                    </p>
+                    <ul style="padding-left: 18px; font-size: 0.8rem; color: #E2E8F0; line-height: 1.5; margin-bottom: 14px;">
+                        <li>Model your monthly cash flow surplus and DTI in the <strong>Economic Digital Twin</strong>.</li>
+                        <li>Stress-test your runway in <strong>ArthSim</strong> to see if savings survive a 4-month layoff.</li>
+                    </ul>
+                    <a href="/twin" class="pill-btn secondary-pill" style="font-size: 0.76rem; text-decoration: none;">
+                        <span>Launch Digital Twin →</span>
+                    </a>
+                </div>
+
+                <!-- Persona 3 -->
+                <div class="service-card">
+                    <span class="service-badge badge-amber">PERSONA 03</span>
+                    <h4 style="color: #FFFFFF; font-size: 1.15rem; margin: 10px 0 6px 0;">🏪 Kirana Owner / Small Merchant</h4>
+                    <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px;">
+                        <strong>Challenge:</strong> Seeking formal business expansion capital and protecting daily UPI QR transactions.
+                    </p>
+                    <ul style="padding-left: 18px; font-size: 0.8rem; color: #E2E8F0; line-height: 1.5; margin-bottom: 14px;">
+                        <li>Discover Mudra loan tiers (Shishu ₹50k, Kishore ₹5L, Tarun ₹10L) in <strong>Opportunities</strong>.</li>
+                        <li>Understand reverse QR scam mechanics in <strong>CyberDrishti</strong> to protect daily receipts.</li>
+                    </ul>
+                    <a href="/opportunities" class="pill-btn secondary-pill" style="font-size: 0.76rem; text-decoration: none;">
+                        <span>Check Mudra Loans →</span>
+                    </a>
+                </div>
+
+                <!-- Persona 4 -->
+                <div class="service-card">
+                    <span class="service-badge badge-rose">PERSONA 04</span>
+                    <h4 style="color: #FFFFFF; font-size: 1.15rem; margin: 10px 0 6px 0;">👴 Senior Citizen / Pensioner</h4>
+                    <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px;">
+                        <strong>Challenge:</strong> Target of high-pressure Digital Arrest video extortion and electricity bill disconnection scams.
+                    </p>
+                    <ul style="padding-left: 18px; font-size: 0.8rem; color: #E2E8F0; line-height: 1.5; margin-bottom: 14px;">
+                        <li>Instantly verify suspicious SMS in <strong>CyberDrishti</strong> before calling numbers back.</li>
+                        <li>Bookmark the <strong>Recovery Centre</strong> to access 1930 and bank freezing hotlines within minutes.</li>
+                    </ul>
+                    <a href="/recovery" class="pill-btn secondary-pill" style="font-size: 0.76rem; text-decoration: none;">
+                        <span>View 1930 Hotline Guide →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── FREQUENTLY ASKED QUESTIONS (FAQ) ── -->
+        <section style="margin-top: 50px;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; color: #FFFFFF; margin-bottom: 16px;">
+                Frequently Asked Questions
+            </h3>
+
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+                <div class="twin-card" style="padding: 18px 24px;">
+                    <h4 style="color: #FFFFFF; font-size: 1.05rem; margin-bottom: 6px;">Q1: Does AAYAM store my bank account details, UPI PIN, or passwords?</h4>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0; line-height: 1.5;">
+                        <strong>Absolute Zero Retention:</strong> AAYAM never requests or stores bank account numbers, passwords, UPI PINs, Aadhaar numbers, or OTPs. All financial calculations run in-memory on your browser or ephemeral server without logging personal financial identifiers.
+                    </p>
+                </div>
+
+                <div class="twin-card" style="padding: 18px 24px;">
+                    <h4 style="color: #FFFFFF; font-size: 1.05rem; margin-bottom: 6px;">Q2: What is the Golden Hour in cyber fraud?</h4>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0; line-height: 1.5;">
+                        The Golden Hour refers to the first <strong>2 hours</strong> following an unauthorized financial transaction. During this window, dialing <strong>1930</strong> (National Cybercrime Helpline) allows the Indian Cyber Crime Coordination Centre (I4C) to trigger automated holds on beneficiary mule accounts across 250+ banks before funds can be withdrawn at ATMs.
+                    </p>
+                </div>
+
+                <div class="twin-card" style="padding: 18px 24px;">
+                    <h4 style="color: #FFFFFF; font-size: 1.05rem; margin-bottom: 6px;">Q3: How does CyberDrishti detect scams without an antivirus?</h4>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0; line-height: 1.5;">
+                        CyberDrishti is an explainable heuristic text and payload analyzer. It evaluates four deterministic pillars: (1) Urgency &amp; Fear, (2) Financial Trigger, (3) Authority Impersonation, and (4) Technical Payload signatures. It matches communications against verified CERT-In and MHA attack patterns.
+                    </p>
+                </div>
+
+                <div class="twin-card" style="padding: 18px 24px;">
+                    <h4 style="color: #FFFFFF; font-size: 1.05rem; margin-bottom: 6px;">Q4: What should AAYAM NOT be used for?</h4>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0; line-height: 1.5;">
+                        AAYAM is an educational decision-support copilot. It is <strong>NOT</strong> SEBI-registered stock advice, NOT an antivirus software, and NOT an official police station for filing FIRs. Read our full <a href="/warning" style="color: var(--accent-violet);">Ethical Guardrails &amp; Warning Page</a> for explicit boundaries.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── REDIRECTION & NEXT STEPS ── -->
+        <section class="redirections-section" style="padding: 0; margin-top: 40px;">
+            <h3 class="redirections-title">Ready to Begin?</h3>
+            <p class="redirections-sub">Jump straight into the active tools:</p>
+            <div class="redirection-grid">
+                <a href="/twin" class="redirect-card">
+                    <div class="redirect-card-top">
+                        <div class="redirect-icon">💰</div>
+                        <div>
+                            <span class="redirect-card-code">Module 02</span>
+                            <div class="redirect-card-title">Economic Digital Twin</div>
+                        </div>
+                    </div>
+                    <p class="redirect-card-desc">Start by calculating your baseline household resilience score.</p>
+                    <span class="redirect-card-link">Start Twin Diagnostic →</span>
+                </a>
+
+                <a href="/cyberdrishti" class="redirect-card">
+                    <div class="redirect-card-top">
+                        <div class="redirect-icon">🛡️</div>
+                        <div>
+                            <span class="redirect-card-code">Module 04</span>
+                            <div class="redirect-card-title">CyberDrishti Screener</div>
+                        </div>
+                    </div>
+                    <p class="redirect-card-desc">Screen any suspicious SMS, WhatsApp message, or dropped file.</p>
+                    <span class="redirect-card-link">Analyze Threat Signals →</span>
+                </a>
+
+                <a href="/warning" class="redirect-card">
+                    <div class="redirect-card-top">
+                        <div class="redirect-icon" style="background: rgba(244, 63, 94, 0.15); color: #FB7185;">⚠️</div>
+                        <div>
+                            <span class="redirect-card-code">Guardrails</span>
+                            <div class="redirect-card-title">What AAYAM Is Not For</div>
+                        </div>
+                    </div>
+                    <p class="redirect-card-desc">Review explicit ethical boundaries and legal disclaimers.</p>
+                    <span class="redirect-card-link">Review Warning Page →</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ── SETTINGS DRAWER ── -->
+    <div class="settings-drawer" id="settingsDrawer">
+        <div class="settings-header">
+            <h4 style="font-family: var(--font-heading); color: #FFFFFF; font-size: 1.2rem; margin: 0;">System Settings</h4>
+            <button onclick="toggleSettings()" style="background: transparent; border: none; color: #FFFFFF; font-size: 1.2rem; cursor: pointer;">✕</button>
+        </div>
+
+        <div class="settings-group">
+            <span class="settings-label">Color Accent Theme</span>
+            <div class="theme-options-grid">
+                <button class="theme-btn active" data-theme="cyber-violet" onclick="setTheme('cyber-violet')">
+                    <span class="theme-color-dot" style="background: #A855F7;"></span>
+                    <span>Cyber Violet</span>
+                </button>
+                <button class="theme-btn" data-theme="gold-obsidian" onclick="setTheme('gold-obsidian')">
+                    <span class="theme-color-dot" style="background: #F59E0B;"></span>
+                    <span>Gold Obsidian</span>
+                </button>
+                <button class="theme-btn" data-theme="emerald-shield" onclick="setTheme('emerald-shield')">
+                    <span class="theme-color-dot" style="background: #10B981;"></span>
+                    <span>Emerald Shield</span>
+                </button>
+                <button class="theme-btn" data-theme="matrix-cyan" onclick="setTheme('matrix-cyan')">
+                    <span class="theme-color-dot" style="background: #06B6D4;"></span>
+                    <span>Matrix Cyan</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-group">
+            <span class="settings-label">Currency Unit</span>
+            <div style="display: flex; gap: 8px;">
+                <button class="pill-btn secondary-pill" onclick="toggleCurrency('INR')" style="flex: 1; padding: 8px;">
+                    <span>₹ INR (Lakh/Cr)</span>
+                </button>
+                <button class="pill-btn secondary-pill" onclick="toggleCurrency('USD')" style="flex: 1; padding: 8px;">
+                    <span>$ USD</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-group" style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px;">
+            <a href="/warning" class="pill-btn danger-pill" style="width: 100%; justify-content: center; text-decoration: none;">
+                <span>⚠️ What AAYAM Is NOT For</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ── QUICK JUMP PALETTE ── -->
+    <div class="quick-jump-modal" id="quickJumpModal" onclick="if(event.target === this) toggleQuickJump()">
+        <div class="quick-jump-box">
+            <input type="text" id="quickJumpInput" class="quick-jump-search" placeholder="Type a module or jump target..." oninput="filterQuickJump(this.value)">
+            <div class="quick-jump-list">
+                <a href="/" class="quick-jump-item"><span>🏠 Home Portal Hub</span><span style="font-size: 0.75rem; color: #94A3B8;">Landing Overview</span></a>
+                <a href="/command" class="quick-jump-item"><span>🎛️ Command Centre</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 01</span></a>
+                <a href="/twin" class="quick-jump-item"><span>💰 Economic Digital Twin</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 02</span></a>
+                <a href="/opportunities" class="quick-jump-item"><span>🚀 Opportunity Pathways &amp; Mudra</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 03</span></a>
+                <a href="/cyberdrishti" class="quick-jump-item"><span>🛡️ CyberDrishti Threat Screener</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 04</span></a>
+                <a href="/arthsim" class="quick-jump-item"><span>📉 ArthSim Scenario Simulator</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 05</span></a>
+                <a href="/intelligence" class="quick-jump-item"><span>📊 India Macro &amp; Crime Telemetry</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 06</span></a>
+                <a href="/trustgraph" class="quick-jump-item"><span>🕸️ Trust Graph Threat Architecture</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 07</span></a>
+                <a href="/recovery" class="quick-jump-item"><span>🚨 Recovery Centre &amp; 1930 Playbooks</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 08</span></a>
+                <a href="/guide" class="quick-jump-item"><span>📖 System Guide &amp; Persona Manual</span><span style="font-size: 0.75rem; color: #94A3B8;">Documentation</span></a>
+                <a href="/warning" class="quick-jump-item"><span>⚠️ What AAYAM Is Not For</span><span style="font-size: 0.75rem; color: #FB7185;">Ethical Limits</span></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-col-main">
+                <div class="nav-brand" style="margin-bottom: 12px;">
+                    <span class="brand-shield">🛡️</span>
+                    <span class="brand-title">AAYAM</span>
+                </div>
+                <p class="footer-lead">
+                    Multi-Dimensional Intelligence System for Economic Mobility &amp; Cyber-Financial Defense for India.
+                </p>
+                <div style="margin-top: 14px; font-size: 0.8rem; color: var(--accent-violet);">
+                    <strong>System Documentation:</strong> Version 2.4 &bull; Maintained by Team AAYAM
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Core Modules</span>
+                <ul class="footer-links">
+                    <li><a href="/command">Command Centre</a></li>
+                    <li><a href="/twin">Economic Digital Twin</a></li>
+                    <li><a href="/opportunities">Opportunity Pathways</a></li>
+                    <li><a href="/cyberdrishti">CyberDrishti Screener</a></li>
+                    <li><a href="/arthsim">ArthSim Simulator</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Intelligence &amp; Safety</span>
+                <ul class="footer-links">
+                    <li><a href="/intelligence">India Telemetry</a></li>
+                    <li><a href="/trustgraph">Trust Graph</a></li>
+                    <li><a href="/recovery">1930 Recovery Centre</a></li>
+                    <li><a href="/guide">How To Use Guide</a></li>
+                    <li><a href="/warning">What AAYAM Is Not For</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Project Leadership</span>
+                <div class="team-compact-list">
+                    <div class="team-compact-item">
+                        <strong>Aditya Singh</strong>
+                        <span>FinTech &amp; Economic Models</span>
+                    </div>
+                    <div class="team-compact-item">
+                        <strong>Abhishek Shrivastava</strong>
+                        <span>Cyber Security &amp; Threat Engines</span>
+                    </div>
+                    <div class="team-compact-item">
+                        <strong>Aarushi S.</strong>
+                        <span>AI/ML &amp; Decision Support</span>
+                    </div>
+                    <div class="team-compact-item">
+                        <strong>Ansh Saini</strong>
+                        <span>UI/UX &amp; Exquisite Design</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>&copy; 2026 AAYAM Research Initiative. Built for high-trust digital India.</span>
+            <div class="footer-bottom-links">
+                <a href="/warning">Ethical Guardrails</a>
+                <a href="https://cybercrime.gov.in" target="_blank">National Helpline: 1930</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

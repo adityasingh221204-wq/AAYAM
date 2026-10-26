@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArthSim — Macroeconomic Shock &amp; Stress-Testing Simulator | AAYAM</title>
+    <meta name="description" content="Simulate household financial trajectories under real-world economic shocks: job loss, cyber fraud drains, medical emergencies, and inflation spikes.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body data-theme="cyber-violet">
+
+    <!-- Interactive Cursor Glow Aura -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Ambient Glow Backgrounds -->
+    <div class="ambient-glow glow-top-right"></div>
+    <div class="ambient-glow glow-mid-left"></div>
+    <div class="ambient-glow glow-bottom-center"></div>
+
+    <!-- Floating Navigation Bar -->
+    <header class="navbar-wrapper">
+        <nav class="navbar" id="navbar">
+            <a href="/" class="nav-brand" style="text-decoration: none;">
+                <span class="brand-shield">🛡️</span>
+                <span class="brand-title">AAYAM</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/command">Command</a></li>
+                <li><a href="/twin">Digital Twin</a></li>
+                <li><a href="/cyberdrishti">CyberDrishti</a></li>
+                <li><a href="/arthsim" class="active">ArthSim</a></li>
+                <li><a href="/opportunities">Opportunities</a></li>
+                <li><a href="/intelligence">Intelligence</a></li>
+                <li><a href="/recovery">Recovery</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="pill-btn nav-guide-btn" onclick="toggleQuickJump()" title="Quick Jump (Ctrl+K)">
+                    <span>Jump</span>
+                    <span class="pill-icon">⚡</span>
+                </button>
+                <button class="pill-btn nav-start-btn" onclick="toggleSettings()" title="Settings & Theme">
+                    <span>Settings</span>
+                    <span class="pill-icon">⚙️</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Hero Banner -->
+    <main class="page-hero">
+        <div class="page-breadcrumbs">
+            <a href="/">Portal Hub</a>
+            <span class="separator">/</span>
+            <span>Module 05</span>
+            <span class="separator">/</span>
+            <span style="color: var(--accent-violet);">ArthSim Scenario Simulator</span>
+        </div>
+
+        <div class="page-hero-badge-row">
+            <span class="page-code-badge">MODULE 05 // STRESS TESTING</span>
+            <span class="benefit-chip"><span class="benefit-icon">📉</span> Dynamic Shock Curves</span>
+            <span class="benefit-chip"><span class="benefit-icon">⏱️</span> Depletion Month Detection</span>
+            <span class="benefit-chip"><span class="benefit-icon">🛡️</span> Actionable Contingency Protocols</span>
+        </div>
+
+        <h1 class="page-hero-title">ArthSim Scenario Simulator</h1>
+        <p class="page-hero-desc">
+            Stress-test your household or micro-enterprise finances against abrupt economic shocks before they happen in reality. Measure the exact month your liquid savings would deplete during sudden job loss, cyber theft, medical crises, or inflation spikes.
+        </p>
+
+        <!-- How To Use Box -->
+        <section class="how-to-use-box">
+            <div class="htu-header">
+                <div class="htu-header-title">
+                    <span>📖</span>
+                    <span>How To Run A Shock Stress-Test</span>
+                </div>
+                <span style="font-size: 0.78rem; color: var(--accent-violet); font-weight: 700;">4 SIMPLE STEPS</span>
+            </div>
+            <div class="htu-steps-grid">
+                <div class="htu-step-card">
+                    <span class="htu-step-num">1</span>
+                    <div class="htu-step-content">
+                        <h5>Select Shock Scenario</h5>
+                        <p>Choose from Job Loss, Cyber Fraud Loss, Critical Medical Emergency, Inflation Surge, or Dual Shock.</p>
+                    </div>
+                </div>
+                <div class="htu-step-card">
+                    <span class="htu-step-num">2</span>
+                    <div class="htu-step-content">
+                        <h5>Set Projection Horizon</h5>
+                        <p>Pick a forward observation window of 6, 12, 18, or 24 months to model the multi-stage recovery arc.</p>
+                    </div>
+                </div>
+                <div class="htu-step-card">
+                    <span class="htu-step-num">3</span>
+                    <div class="htu-step-content">
+                        <h5>Simulate Trajectory</h5>
+                        <p>Click "Run Shock Simulation" to compute monthly savings balance points and visualize the depletion curve.</p>
+                    </div>
+                </div>
+                <div class="htu-step-card">
+                    <span class="htu-step-num">4</span>
+                    <div class="htu-step-content">
+                        <h5>Read Contingency Guidance</h5>
+                        <p>Review the calculated depletion month and adopt recommended discretionary cuts and liquidity safeguards.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategic Benefits Strip -->
+        <div class="benefits-strip">
+            <div class="benefit-chip">
+                <span class="benefit-icon">⏱️</span>
+                <strong>Depletion Foresight:</strong> Pinpoint the exact month savings hit ₹0 before emergencies occur
+            </div>
+            <div class="benefit-chip">
+                <span class="benefit-icon">🛡️</span>
+                <strong>Cyber-Financial Link:</strong> Quantify how a ₹50k scam affects long-term family survival
+            </div>
+            <div class="benefit-chip">
+                <span class="benefit-icon">📑</span>
+                <strong>Contingency Playbook:</strong> Receive automated emergency budget recommendations
+            </div>
+        </div>
+
+        <!-- ── INTERACTIVE ARTHSIM WORKSPACE ── -->
+        <section class="twin-layout" style="margin-top: 20px;">
+            <!-- Left Column: Scenario Controls -->
+            <div class="twin-card">
+                <div class="twin-card-header">
+                    <div>
+                        <span class="twin-card-tag">SIMULATION PARAMETERS</span>
+                        <h3 class="twin-card-title">Configure Stress Event</h3>
+                    </div>
+                    <span class="card-icon-badge">⚡</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="arth_scenario">Select Economic Shock Scenario</label>
+                    <select id="arth_scenario" class="form-input" onchange="runSimulation()">
+                        <option value="job_loss">1. Sudden Job Loss / Unemployment (100% Income Drop for 4 Months)</option>
+                        <option value="cyber_fraud_loss">2. Cyber Fraud Drain (Sudden Lump-Sum Loss of ₹50,000)</option>
+                        <option value="medical_emergency">3. Critical Medical Emergency (Unplanned Hospital Bill of ₹75,000)</option>
+                        <option value="inflation_spike">4. Inflation Spike (+20% Sustained Rise in Food &amp; Utilities)</option>
+                        <option value="dual_shock">5. Dual Crisis (Medical Shock + Cyber Fraud Hit Simultaneously)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="arth_horizon">Forward Observation Horizon</label>
+                    <select id="arth_horizon" class="form-input" onchange="runSimulation()">
+                        <option value="6">6 Months (Short-Term Shock Window)</option>
+                        <option value="12" selected>12 Months (Full Financial Year Trajectory)</option>
+                        <option value="18">18 Months (Medium-Term Structural Recovery)</option>
+                        <option value="24">24 Months (Two-Year Macro Stress Arc)</option>
+                    </select>
+                </div>
+
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 16px; margin: 20px 0;">
+                    <div style="font-size: 0.8rem; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Active Simulation Baseline:</div>
+                    <ul style="padding-left: 18px; font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+                        <li>Monthly Take-Home: <strong>₹35,000</strong> &bull; Essential Spend: <strong>₹20,000</strong></li>
+                        <li>Discretionary Spend: <strong>₹6,000</strong> &bull; Starting Savings: <strong>₹50,000</strong></li>
+                    </ul>
+                    <div style="margin-top: 10px; font-size: 0.76rem; color: var(--accent-violet);">
+                        <a href="/twin" style="color: inherit; text-decoration: underline;">Want to change these baseline numbers? Update your Digital Twin ↗</a>
+                    </div>
+                </div>
+
+                <button class="pill-btn primary-pill glow-pulse" onclick="runSimulation()" style="width: 100%; justify-content: center;">
+                    <span>RUN SHOCK SIMULATION</span>
+                    <span class="pill-icon">🚀</span>
+                </button>
+            </div>
+
+            <!-- Right Column: Trajectory Chart & KPIs -->
+            <div class="twin-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <div class="twin-card-header">
+                        <div>
+                            <span class="twin-card-tag">FORWARD RUNWAY TRAJECTORY</span>
+                            <h3 class="twin-card-title">Savings Balance Depletion Curve</h3>
+                        </div>
+                        <span class="card-icon-badge">📉</span>
+                    </div>
+
+                    <!-- Dynamic SVG Curve Wrapper -->
+                    <div id="sim_chart_wrapper" style="min-height: 230px;">
+                        <!-- Rendered dynamically by app.js -->
+                    </div>
+
+                    <!-- KPIs Container -->
+                    <div id="sim_kpis_container">
+                        <!-- Populated by app.js -->
+                    </div>
+                </div>
+
+                <!-- Guidance Disclaimer -->
+                <div style="margin-top: 16px; font-size: 0.76rem; color: var(--text-dim); text-align: center;">
+                    Deterministic forward simulation based on constant-rupee cash flows. Not an insurance guarantee.
+                </div>
+            </div>
+        </section>
+
+        <!-- ── REDIRECTION & NEXT STEPS ── -->
+        <section class="redirections-section" style="padding: 0;">
+            <h3 class="redirections-title">Ecosystem Next Steps</h3>
+            <p class="redirections-sub">Reinforce your defenses and expand your income to withstand economic shocks:</p>
+            <div class="redirection-grid">
+                <a href="/cyberdrishti" class="redirect-card">
+                    <div class="redirect-card-top">
+                        <div class="redirect-icon">🛡️</div>
+                        <div>
+                            <span class="redirect-card-code">Module 04</span>
+                            <div class="redirect-card-title">CyberDrishti Screener</div>
+                        </div>
+                    </div>
+                    <p class="redirect-card-desc">Notice how a ₹50,000 cyber theft depletes your savings? Screen every suspicious communication to prevent it.</p>
+                    <span class="redirect-card-link">Screen Suspicious Message →</span>
+                </a>
+
+                <a href="/recovery" class="redirect-card">
+                    <div class="redirect-card-top">
+                        <div class="redirect-icon" style="background: rgba(244, 63, 94, 0.15); color: #FB7185;">🚨</div>
+                        <div>
+                            <span class="redirect-card-code">Module 08</span>
+                            <div class="redirect-card-title">1930 Recovery Centre</div>
+                        </div>
+                    </div>
+                    <p class="redirect-card-desc">If financial cyber theft occurs, access emergency bank hotlines and 1930 freezing protocols within 2 hours.</p>
+                    <span class="redirect-card-link">View Recovery Playbook →</span>
+                </a>
+
+                <a href="/opportunities" class="redirect-card">
+                    <div class="redirect-card-top">
+                        <div class="redirect-icon">🚀</div>
+                        <div>
+                            <span class="redirect-card-code">Module 03</span>
+                            <div class="redirect-card-title">Opportunity Pathways</div>
+                        </div>
+                    </div>
+                    <p class="redirect-card-desc">Boost your monthly cash surplus by upgrading to high-wage green and digital career pathways.</p>
+                    <span class="redirect-card-link">Explore Career Pathways →</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ── SETTINGS DRAWER ── -->
+    <div class="settings-drawer" id="settingsDrawer">
+        <div class="settings-header">
+            <h4 style="font-family: var(--font-heading); color: #FFFFFF; font-size: 1.2rem; margin: 0;">System Settings</h4>
+            <button onclick="toggleSettings()" style="background: transparent; border: none; color: #FFFFFF; font-size: 1.2rem; cursor: pointer;">✕</button>
+        </div>
+
+        <div class="settings-group">
+            <span class="settings-label">Color Accent Theme</span>
+            <div class="theme-options-grid">
+                <button class="theme-btn active" data-theme="cyber-violet" onclick="setTheme('cyber-violet')">
+                    <span class="theme-color-dot" style="background: #A855F7;"></span>
+                    <span>Cyber Violet</span>
+                </button>
+                <button class="theme-btn" data-theme="gold-obsidian" onclick="setTheme('gold-obsidian')">
+                    <span class="theme-color-dot" style="background: #F59E0B;"></span>
+                    <span>Gold Obsidian</span>
+                </button>
+                <button class="theme-btn" data-theme="emerald-shield" onclick="setTheme('emerald-shield')">
+                    <span class="theme-color-dot" style="background: #10B981;"></span>
+                    <span>Emerald Shield</span>
+                </button>
+                <button class="theme-btn" data-theme="matrix-cyan" onclick="setTheme('matrix-cyan')">
+                    <span class="theme-color-dot" style="background: #06B6D4;"></span>
+                    <span>Matrix Cyan</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-group">
+            <span class="settings-label">Currency Unit</span>
+            <div style="display: flex; gap: 8px;">
+                <button class="pill-btn secondary-pill" onclick="toggleCurrency('INR')" style="flex: 1; padding: 8px;">
+                    <span>₹ INR (Lakh/Cr)</span>
+                </button>
+                <button class="pill-btn secondary-pill" onclick="toggleCurrency('USD')" style="flex: 1; padding: 8px;">
+                    <span>$ USD</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-group" style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px;">
+            <a href="/warning" class="pill-btn danger-pill" style="width: 100%; justify-content: center; text-decoration: none;">
+                <span>⚠️ What AAYAM Is NOT For</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ── QUICK JUMP PALETTE ── -->
+    <div class="quick-jump-modal" id="quickJumpModal" onclick="if(event.target === this) toggleQuickJump()">
+        <div class="quick-jump-box">
+            <input type="text" id="quickJumpInput" class="quick-jump-search" placeholder="Type a module or jump target..." oninput="filterQuickJump(this.value)">
+            <div class="quick-jump-list">
+                <a href="/" class="quick-jump-item"><span>🏠 Home Portal Hub</span><span style="font-size: 0.75rem; color: #94A3B8;">Landing Overview</span></a>
+                <a href="/command" class="quick-jump-item"><span>🎛️ Command Centre</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 01</span></a>
+                <a href="/twin" class="quick-jump-item"><span>💰 Economic Digital Twin</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 02</span></a>
+                <a href="/opportunities" class="quick-jump-item"><span>🚀 Opportunity Pathways &amp; Mudra</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 03</span></a>
+                <a href="/cyberdrishti" class="quick-jump-item"><span>🛡️ CyberDrishti Threat Screener</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 04</span></a>
+                <a href="/arthsim" class="quick-jump-item"><span>📉 ArthSim Scenario Simulator</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 05</span></a>
+                <a href="/intelligence" class="quick-jump-item"><span>📊 India Macro &amp; Crime Telemetry</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 06</span></a>
+                <a href="/trustgraph" class="quick-jump-item"><span>🕸️ Trust Graph Threat Architecture</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 07</span></a>
+                <a href="/recovery" class="quick-jump-item"><span>🚨 Recovery Centre &amp; 1930 Playbooks</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 08</span></a>
+                <a href="/guide" class="quick-jump-item"><span>📖 System Guide &amp; Persona Manual</span><span style="font-size: 0.75rem; color: #94A3B8;">Documentation</span></a>
+                <a href="/warning" class="quick-jump-item"><span>⚠️ What AAYAM Is Not For</span><span style="font-size: 0.75rem; color: #FB7185;">Ethical Limits</span></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-col-main">
+                <div class="nav-brand" style="margin-bottom: 12px;">
+                    <span class="brand-shield">🛡️</span>
+                    <span class="brand-title">AAYAM</span>
+                </div>
+                <p class="footer-lead">
+                    Multi-Dimensional Intelligence System for Economic Mobility &amp; Cyber-Financial Defense for India.
+                </p>
+                <div style="margin-top: 14px; font-size: 0.8rem; color: var(--accent-violet);">
+                    <strong>Engine Note:</strong> ArthSim uses deterministic stress shock modeling calibrated to Indian household expenditure deciles.
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Core Modules</span>
+                <ul class="footer-links">
+                    <li><a href="/command">Command Centre</a></li>
+                    <li><a href="/twin">Economic Digital Twin</a></li>
+                    <li><a href="/opportunities">Opportunity Pathways</a></li>
+                    <li><a href="/cyberdrishti">CyberDrishti Screener</a></li>
+                    <li><a href="/arthsim">ArthSim Simulator</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Intelligence &amp; Safety</span>
+                <ul class="footer-links">
+                    <li><a href="/intelligence">India Telemetry</a></li>
+                    <li><a href="/trustgraph">Trust Graph</a></li>
+                    <li><a href="/recovery">1930 Recovery Centre</a></li>
+                    <li><a href="/guide">How To Use Guide</a></li>
+                    <li><a href="/warning">What AAYAM Is Not For</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Project Leadership</span>
+                <div class="team-compact-list">
+                    <div class="team-compact-item">
+                        <strong>Aditya Singh</strong>
+                        <span>FinTech &amp; Economic Models</span>
+                    </div>
+                    <div class="team-compact-item">
+                        <strong>Abhishek Shrivastava</strong>
+                        <span>Cyber Security &amp; Threat Engines</span>
+                    </div>
+                    <div class="team-compact-item">
+                        <strong>Aarushi S.</strong>
+                        <span>AI/ML &amp; Decision Support</span>
+                    </div>
+                    <div class="team-compact-item">
+                        <strong>Ansh Saini</strong>
+                        <span>UI/UX &amp; Exquisite Design</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>&copy; 2026 AAYAM Research Initiative. Built for high-trust digital India.</span>
+            <div class="footer-bottom-links">
+                <a href="/warning">Ethical Guardrails</a>
+                <a href="https://cybercrime.gov.in" target="_blank">National Helpline: 1930</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

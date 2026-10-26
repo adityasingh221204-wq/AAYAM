@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Economic Digital Twin — Household Financial Health &amp; Resilience | AAYAM</title>
+    <meta name="description" content="Simulate household cash flow surplus, emergency survival runway, debt-to-income ratio, and composite financial resilience score.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body data-theme="cyber-violet">
+
+    <!-- Interactive Cursor Glow Aura -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Ambient Glow Backgrounds -->
+    <div class="ambient-glow glow-top-right"></div>
+    <div class="ambient-glow glow-mid-left"></div>
+    <div class="ambient-glow glow-bottom-center"></div>
+
+    <!-- Floating Navigation Bar -->
+    <header class="navbar-wrapper">
+        <nav class="navbar" id="navbar">
+            <a href="/" class="nav-brand" style="text-decoration: none;">
+                <span class="brand-shield">🛡️</span>
+                <span class="brand-title">AAYAM</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/command">Command</a></li>
+                <li><a href="/twin" class="active">Digital Twin</a></li>
+                <li><a href="/cyberdrishti">CyberDrishti</a></li>
+                <li><a href="/arthsim">ArthSim</a></li>
+                <li><a href="/opportunities">Opportunities</a></li>
+                <li><a href="/intelligence">Intelligence</a></li>
+                <li><a href="/recovery">Recovery</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="pill-btn nav-guide-btn" onclick="toggleQuickJump()" title="Quick Jump (Ctrl+K)">
+                    <span>Jump</span>
+                    <span class="pill-icon">⚡</span>
+                </button>
+                <button class="pill-btn nav-start-btn" onclick="toggleSettings()" title="Settings & Theme">
+                    <span>Settings</span>
+                    <span class="pill-icon">⚙️</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Hero Banner -->
+    <main class="page-hero">
+        <div class="page-breadcrumbs">
+            <a href="/">Portal Hub</a>
+            <span class="separator">/</span>
+            <span>Module 02</span>
+            <span class="separator">/</span>
+            <span style="color: var(--accent-violet);">Economic Digital Twin</span>
+        </div>
+
+        <div class="page-hero-badge-row">
+            <span class="page-code-badge">MODULE 02 // FINANCIAL TELEMETRY</span>
+            <span class="benefit-chip"><span class="benefit-icon">📊</span> Multi-Indicator Synthesis</span>
+            <span class="benefit-chip"><span class="benefit-icon">🎯</span> Emergency Runway Gauge</span>
+            <span class="benefit-chip"><span class="benefit-icon">🔒</span> 100% In-Memory Privacy</span>
+        </div>
+
+        <h1 class="page-hero-title">Economic Digital Twin</h1>
+        <p class="page-hero-desc">
+            Your personal household financial diagnostic engine. Model cash flows, isolate discretionary expenditure leaks, measure your debt-to-income burden, and compute your composite Economic Resilience Score (0–100) with deterministic precision.
+        </p>
+
+        <!-- How To Use Box -->
+        <section class="how-to-use-box">
+            <div class="htu-header">
+                <div class="htu-header-title">
+                    <span>📖</span>
+                    <span>How To Use The Digital Twin</span>
+                </div>
+                <span style="font-size: 0.78rem; color: var(--accent-violet); font-weight: 700;">4 SIMPLE STEPS</span>
+            </div>
+            <div class="htu-steps-grid">
+                <div class="htu-step-card">
+                    <span class="htu-step-num">1</span>
+                    <div class="htu-step-content">
+                        <h5>Select a Persona or Input</h5>
+                        <p>Pick a preset benchmark (Salaried, Gig Worker, Merchant) or enter your actual monthly income &amp; savings.</p>
+                    </div>
+                </div>
+                <div class="htu-step-card">
+                    <span class="htu-step-num">2</span>
+                    <div class="htu-step-content">
+                        <h5>Separate Expenses</h5>
+                        <p>Distinguish between essential survival expenses (rent, food, utilities) and discretionary lifestyle drag.</p>
+                    </div>
+                </div>
+                <div class="htu-step-card">
+                    <span class="htu-step-num">3</span>
+                    <div class="htu-step-content">
+                        <h5>Observe Resilience</h5>
+                        <p>Watch your Emergency Runway (months) and Resilience Score update dynamically in real time.</p>
+                    </div>
+                </div>
+                <div class="htu-step-card">
+                    <span class="htu-step-num">4</span>
+                    <div class="htu-step-content">
+                        <h5>Stress-Test in ArthSim</h5>
+                        <p>Export your twin profile or proceed to ArthSim to stress-test your balance against economic shocks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategic Benefits Strip -->
+        <div class="benefits-strip">
+            <div class="benefit-chip">
+                <span class="benefit-icon">💡</span>
+                <strong>Runway Visibility:</strong> Know exactly how many months you can survive with zero income
+            </div>
+            <div class="benefit-chip">
+                <span class="benefit-icon">⚖️</span>
+                <strong>DTI Shield:</strong> Ensure debt repayments remain safely below the dangerous 40% threshold
+            </div>
+            <div class="benefit-chip">
+                <span class="benefit-icon">🚀</span>
+                <strong>Mudra Readiness:</strong> Identifies available liquidity required for enterprise co-investment
+            </div>
+        </div>
+
+        <!-- ── INTERACTIVE DIGITAL TWIN WORKSPACE ── -->
+        <section class="twin-layout" style="margin-top: 20px;">
+            <!-- Left Column: Inputs & Sliders -->
+            <div class="twin-card">
+                <div class="twin-card-header">
+                    <div>
+                        <span class="twin-card-tag">HOUSEHOLD INPUTS</span>
+                        <h3 class="twin-card-title">Income &amp; Expenditure Parameters</h3>
+                    </div>
+                    <span class="card-icon-badge">📝</span>
+                </div>
+
+                <!-- Persona Presets -->
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 0.76rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px;">
+                        LOAD BENCHMARK PERSONA:
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button class="pill-btn secondary-pill" onclick="setTwinPreset('salaried')" style="font-size: 0.74rem; padding: 5px 12px;">
+                            <span>🏢 Salaried Support (₹45k)</span>
+                        </button>
+                        <button class="pill-btn secondary-pill" onclick="setTwinPreset('gig')" style="font-size: 0.74rem; padding: 5px 12px;">
+                            <span>🛵 Gig Delivery (₹22k)</span>
+                        </button>
+                        <button class="pill-btn secondary-pill" onclick="setTwinPreset('merchant')" style="font-size: 0.74rem; padding: 5px 12px;">
+                            <span>🏪 Kirana Merchant (₹65k)</span>
+                        </button>
+                        <button class="pill-btn secondary-pill" onclick="setTwinPreset('fresh_grad')" style="font-size: 0.74rem; padding: 5px 12px;">
+                            <span>🎓 Fresh Graduate (₹18k)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Input Controls -->
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="twin_income">Monthly Take-Home Income (<span class="currency-sym">₹</span>)</label>
+                        <input type="number" id="twin_income" class="form-input" value="35000" oninput="calculateTwin()">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="twin_other_income">Other / Freelance Income (<span class="currency-sym">₹</span>)</label>
+                        <input type="number" id="twin_other_income" class="form-input" value="5000" oninput="calculateTwin()">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="twin_expenses">Essential Expenses (Rent, Food, Utilities) (<span class="currency-sym">₹</span>)</label>
+                        <input type="number" id="twin_expenses" class="form-input" value="20000" oninput="calculateTwin()">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="twin_discretionary">Discretionary / Lifestyle Spend (<span class="currency-sym">₹</span>)</label>
+                        <input type="number" id="twin_discretionary" class="form-input" value="6000" oninput="calculateTwin()">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="twin_savings">Current Liquid Savings Buffer (<span class="currency-sym">₹</span>)</label>
+                        <input type="number" id="twin_savings" class="form-input" value="50000" oninput="calculateTwin()">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="twin_debt">Total Outstanding Debt (<span class="currency-sym">₹</span>)</label>
+                        <input type="number" id="twin_debt" class="form-input" value="75000" oninput="calculateTwin()">
+                    </div>
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label class="form-label" for="twin_repayments">Monthly Debt EMIs / Loan Repayments (<span class="currency-sym">₹</span>)</label>
+                        <input type="number" id="twin_repayments" class="form-input" value="4500" oninput="calculateTwin()">
+                    </div>
+                </div>
+
+                <!-- Action Button Group -->
+                <div style="display: flex; gap: 12px; margin-top: 10px;">
+                    <button class="pill-btn primary-pill glow-pulse" onclick="calculateTwin()" style="flex: 2;">
+                        <span>RECALCULATE TWIN</span>
+                        <span class="pill-icon">⚡</span>
+                    </button>
+                    <button class="pill-btn secondary-pill" onclick="exportTwinProfile()" style="flex: 1;">
+                        <span>EXPORT JSON</span>
+                        <span class="pill-icon">📥</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Column: Real-Time Telemetry Gauges -->
+            <div class="twin-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <div class="twin-card-header">
+                        <div>
+                            <span class="twin-card-tag">SYNTHESIZED DIAGNOSTICS</span>
+                            <h3 class="twin-card-title">Resilience &amp; Runway Telemetry</h3>
+                        </div>
+                        <span class="card-icon-badge">📈</span>
+                    </div>
+
+                    <!-- Composite Resilience Scorecard -->
+                    <div class="score-card-hero">
+                        <span class="score-label">COMPOSITE RESILIENCE SCORE</span>
+                        <div class="score-value" id="kpi_score">65</div>
+                        <div id="kpi_score_badge" class="score-category badge-emerald">Moderate Stability</div>
+                        <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 10px;">
+                            Calculated using RBI-aligned liquidity runway, debt service thresholds, and monthly savings elasticity.
+                        </p>
+                    </div>
+
+                    <!-- Key Diagnostic Gauges -->
+                    <div class="kpi-grid-mini" style="margin-top: 20px;">
+                        <div class="mini-kpi">
+                            <span class="kpi-lbl">Net Monthly Cash Surplus</span>
+                            <span class="kpi-num" id="kpi_surplus" style="color: #34D399;">₹9,500</span>
+                        </div>
+                        <div class="mini-kpi">
+                            <span class="kpi-lbl">Emergency Survival Runway</span>
+                            <span class="kpi-num" id="kpi_runway" style="color: #A855F7;">2.5 Mo</span>
+                        </div>
+                        <div class="mini-kpi">
+                            <span class="kpi-lbl">Debt-to-Income (DTI) Ratio</span>
+                            <span class="kpi-num" id="kpi_dti" style="color: #F59E0B;">11.3%</span>
+                        </div>
+                        <div class="mini-kpi">
+                            <span class="kpi-lbl">Household Savings Rate</span>
+                            <span class="kpi-num" id="kpi_savings_rate" style="color: #60A5FA;">23.8%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategic Summary Callout -->
+                <div style="background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 12px; padding: 14px 18px; margin-top: 20px;">
+                    <div style="font-size: 0.82rem; font-weight: 700; color: #FFFFFF; margin-bottom: 4px;">
+                        💡 Household Optimization Advice:
+                    </div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin: 0;">
+                        Target building emergency reserves to <strong>6.0 months</strong> of essential expenses before taking on additional consumer credit. Explore Mudra loan opportunities if planning micro-enterprise expansion.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── REDIRECTION & NEXT STEPS ── -->
+        <section class="redirections-section" style="padding: 0;">
+            <h3 class="redirections-title">Ecosystem Next Steps</h3>
+            <p class="redirections-sub">Now that your financial baseline is established, explore how to grow and protect it:</p>
+            <div class="redirection-grid">
+                <a href="/arthsim" class="redirect-card">
+                    <div class="redirect-card-top">
+                        <div class="redirect-icon">📉</div>
+                        <div>
+                            <span class="redirect-card-code">Module 05</span>
+                            <div class="redirect-card-title">ArthSim Shock Simulator</div>
+                        </div>
+                    </div>
+                    <p class="redirect-card-desc">Stress-test your new twin parameters against sudden job loss, unexpected medical bills, or cyber fraud drains.</p>
+                    <span class="redirect-card-link">Run Shock Simulation →</span>
+                </a>
+
+                <a href="/opportunities" class="redirect-card">
+                    <div class="redirect-card-top">
+                        <div class="redirect-icon">🚀</div>
+                        <div>
+                            <span class="redirect-card-code">Module 03</span>
+                            <div class="redirect-card-title">Opportunity Pathways</div>
+                        </div>
+                    </div>
+                    <p class="redirect-card-desc">Discover high-multiplier vocational careers and Mudra enterprise capital matching your skills.</p>
+                    <span class="redirect-card-link">Explore High-Wage Pathways →</span>
+                </a>
+
+                <a href="/cyberdrishti" class="redirect-card">
+                    <div class="redirect-card-top">
+                        <div class="redirect-icon">🛡️</div>
+                        <div>
+                            <span class="redirect-card-code">Module 04</span>
+                            <div class="redirect-card-title">CyberDrishti Screener</div>
+                        </div>
+                    </div>
+                    <p class="redirect-card-desc">Protect your hard-earned liquid savings buffer from extortion scams, fake APKs, and reverse UPI QR traps.</p>
+                    <span class="redirect-card-link">Screen Suspicious Links →</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ── SETTINGS DRAWER ── -->
+    <div class="settings-drawer" id="settingsDrawer">
+        <div class="settings-header">
+            <h4 style="font-family: var(--font-heading); color: #FFFFFF; font-size: 1.2rem; margin: 0;">System Settings</h4>
+            <button onclick="toggleSettings()" style="background: transparent; border: none; color: #FFFFFF; font-size: 1.2rem; cursor: pointer;">✕</button>
+        </div>
+
+        <div class="settings-group">
+            <span class="settings-label">Color Accent Theme</span>
+            <div class="theme-options-grid">
+                <button class="theme-btn active" data-theme="cyber-violet" onclick="setTheme('cyber-violet')">
+                    <span class="theme-color-dot" style="background: #A855F7;"></span>
+                    <span>Cyber Violet</span>
+                </button>
+                <button class="theme-btn" data-theme="gold-obsidian" onclick="setTheme('gold-obsidian')">
+                    <span class="theme-color-dot" style="background: #F59E0B;"></span>
+                    <span>Gold Obsidian</span>
+                </button>
+                <button class="theme-btn" data-theme="emerald-shield" onclick="setTheme('emerald-shield')">
+                    <span class="theme-color-dot" style="background: #10B981;"></span>
+                    <span>Emerald Shield</span>
+                </button>
+                <button class="theme-btn" data-theme="matrix-cyan" onclick="setTheme('matrix-cyan')">
+                    <span class="theme-color-dot" style="background: #06B6D4;"></span>
+                    <span>Matrix Cyan</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-group">
+            <span class="settings-label">Currency Unit</span>
+            <div style="display: flex; gap: 8px;">
+                <button class="pill-btn secondary-pill" onclick="toggleCurrency('INR')" style="flex: 1; padding: 8px;">
+                    <span>₹ INR (Lakh/Cr)</span>
+                </button>
+                <button class="pill-btn secondary-pill" onclick="toggleCurrency('USD')" style="flex: 1; padding: 8px;">
+                    <span>$ USD</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-group" style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px;">
+            <a href="/warning" class="pill-btn danger-pill" style="width: 100%; justify-content: center; text-decoration: none;">
+                <span>⚠️ What AAYAM Is NOT For</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ── QUICK JUMP PALETTE ── -->
+    <div class="quick-jump-modal" id="quickJumpModal" onclick="if(event.target === this) toggleQuickJump()">
+        <div class="quick-jump-box">
+            <input type="text" id="quickJumpInput" class="quick-jump-search" placeholder="Type a module or jump target..." oninput="filterQuickJump(this.value)">
+            <div class="quick-jump-list">
+                <a href="/" class="quick-jump-item"><span>🏠 Home Portal Hub</span><span style="font-size: 0.75rem; color: #94A3B8;">Landing Overview</span></a>
+                <a href="/command" class="quick-jump-item"><span>🎛️ Command Centre</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 01</span></a>
+                <a href="/twin" class="quick-jump-item"><span>💰 Economic Digital Twin</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 02</span></a>
+                <a href="/opportunities" class="quick-jump-item"><span>🚀 Opportunity Pathways &amp; Mudra</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 03</span></a>
+                <a href="/cyberdrishti" class="quick-jump-item"><span>🛡️ CyberDrishti Threat Screener</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 04</span></a>
+                <a href="/arthsim" class="quick-jump-item"><span>📉 ArthSim Scenario Simulator</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 05</span></a>
+                <a href="/intelligence" class="quick-jump-item"><span>📊 India Macro &amp; Crime Telemetry</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 06</span></a>
+                <a href="/trustgraph" class="quick-jump-item"><span>🕸️ Trust Graph Threat Architecture</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 07</span></a>
+                <a href="/recovery" class="quick-jump-item"><span>🚨 Recovery Centre &amp; 1930 Playbooks</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 08</span></a>
+                <a href="/guide" class="quick-jump-item"><span>📖 System Guide &amp; Persona Manual</span><span style="font-size: 0.75rem; color: #94A3B8;">Documentation</span></a>
+                <a href="/warning" class="quick-jump-item"><span>⚠️ What AAYAM Is Not For</span><span style="font-size: 0.75rem; color: #FB7185;">Ethical Limits</span></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-col-main">
+                <div class="nav-brand" style="margin-bottom: 12px;">
+                    <span class="brand-shield">🛡️</span>
+                    <span class="brand-title">AAYAM</span>
+                </div>
+                <p class="footer-lead">
+                    Multi-Dimensional Intelligence System for Economic Mobility &amp; Cyber-Financial Defense for India.
+                </p>
+                <div style="margin-top: 14px; font-size: 0.8rem; color: var(--accent-violet);">
+                    <strong>Engine Note:</strong> Economic Digital Twin is deterministic, zero-storage, and privacy-preserving.
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Core Modules</span>
+                <ul class="footer-links">
+                    <li><a href="/command">Command Centre</a></li>
+                    <li><a href="/twin">Economic Digital Twin</a></li>
+                    <li><a href="/opportunities">Opportunity Pathways</a></li>
+                    <li><a href="/cyberdrishti">CyberDrishti Screener</a></li>
+                    <li><a href="/arthsim">ArthSim Simulator</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Intelligence &amp; Safety</span>
+                <ul class="footer-links">
+                    <li><a href="/intelligence">India Telemetry</a></li>
+                    <li><a href="/trustgraph">Trust Graph</a></li>
+                    <li><a href="/recovery">1930 Recovery Centre</a></li>
+                    <li><a href="/guide">How To Use Guide</a></li>
+                    <li><a href="/warning">What AAYAM Is Not For</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Project Leadership</span>
+                <div class="team-compact-list">
+                    <div class="team-compact-item">
+                        <strong>Aditya Singh</strong>
+                        <span>FinTech &amp; Economic Models</span>
+                    </div>
+                    <div class="team-compact-item">
+                        <strong>Abhishek Shrivastava</strong>
+                        <span>Cyber Security &amp; Threat Engines</span>
+                    </div>
+                    <div class="team-compact-item">
+                        <strong>Aarushi S.</strong>
+                        <span>AI/ML &amp; Decision Support</span>
+                    </div>
+                    <div class="team-compact-item">
+                        <strong>Ansh Saini</strong>
+                        <span>UI/UX &amp; Exquisite Design</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>&copy; 2026 AAYAM Research Initiative. Built for high-trust digital India.</span>
+            <div class="footer-bottom-links">
+                <a href="/warning">Ethical Guardrails</a>
+                <a href="https://cybercrime.gov.in" target="_blank">National Helpline: 1930</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

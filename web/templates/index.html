@@ -26,28 +26,30 @@
     <!-- ── Floating Glassmorphism Navigation Bar ── -->
     <header class="navbar-wrapper">
         <nav class="navbar" id="navbar">
-            <div class="nav-brand" onclick="scrollToSection('hero')">
+            <a href="/" class="nav-brand" style="text-decoration: none;">
                 <span class="brand-shield">🛡️</span>
                 <span class="brand-title">AAYAM</span>
-            </div>
+            </a>
             
             <ul class="nav-links">
-                <li><a href="#hero" class="active">Home</a></li>
-                <li><a href="#explain">What Is AAYAM?</a></li>
-                <li><a href="#process">How It Works</a></li>
-                <li><a href="#services">Modules</a></li>
-                <li><a href="#interactive-suite">Live Demo</a></li>
-                <li><a href="#about">Team</a></li>
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/command">Command</a></li>
+                <li><a href="/twin">Digital Twin</a></li>
+                <li><a href="/cyberdrishti">CyberDrishti</a></li>
+                <li><a href="/arthsim">ArthSim</a></li>
+                <li><a href="/opportunities">Opportunities</a></li>
+                <li><a href="/intelligence">Intelligence</a></li>
+                <li><a href="/recovery">Recovery</a></li>
             </ul>
 
             <div class="nav-actions">
-                <button class="pill-btn nav-guide-btn" onclick="openModal('guideModal')">
-                    <span>How to Use</span>
-                    <span class="pill-icon">📖</span>
-                </button>
-                <button class="pill-btn nav-start-btn" onclick="scrollToSection('interactive-suite')">
-                    <span>Try System</span>
+                <button class="pill-btn nav-guide-btn" onclick="toggleQuickJump()" title="Quick Jump (Ctrl+K)">
+                    <span>Jump</span>
                     <span class="pill-icon">⚡</span>
+                </button>
+                <button class="pill-btn nav-start-btn" onclick="toggleSettings()" title="Settings & Theme">
+                    <span>Settings</span>
+                    <span class="pill-icon">⚙️</span>
                 </button>
             </div>
         </nav>
@@ -191,8 +193,9 @@
                     <div class="proc-detail" id="pdetail-1">
                         <div class="proc-detail-box">
                             <strong>What happens:</strong> AAYAM calculates whether your monthly budget has a cash surplus or operating deficit. It reveals how many months your savings will survive if you suddenly lose your job or suffer an emergency.
-                            <div style="margin-top: 10px;">
-                                <button class="pill-btn primary-pill" onclick="event.stopPropagation(); openModal('twinModal');">Open Twin Calculator →</button>
+                            <div style="margin-top: 10px; display: flex; gap: 8px;">
+                                <a href="/twin" class="pill-btn primary-pill" style="text-decoration: none;">Launch Dedicated Twin Page →</a>
+                                <button class="pill-btn secondary-pill" onclick="event.stopPropagation(); openModal('twinModal');">Quick Modal View</button>
                             </div>
                         </div>
                     </div>
@@ -215,8 +218,9 @@
                     <div class="proc-detail" id="pdetail-2">
                         <div class="proc-detail-box">
                             <strong>What happens:</strong> AAYAM evaluates 4 transparent factors: your skill overlap, qualification alignment, capital affordability, and potential income increase (e.g. +₹15,000 to ₹35,000/mo).
-                            <div style="margin-top: 10px;">
-                                <button class="pill-btn primary-pill" onclick="event.stopPropagation(); openModal('oppModal');">View Matched Opportunities →</button>
+                            <div style="margin-top: 10px; display: flex; gap: 8px;">
+                                <a href="/opportunities" class="pill-btn primary-pill" style="text-decoration: none;">Launch Dedicated Opportunities Page →</a>
+                                <button class="pill-btn secondary-pill" onclick="event.stopPropagation(); openModal('oppModal');">Quick Modal View</button>
                             </div>
                         </div>
                     </div>
@@ -238,8 +242,9 @@
                     <div class="proc-detail" id="pdetail-3">
                         <div class="proc-detail-box">
                             <strong>What happens:</strong> Checks for fake police/CBI digital arrests, deceptive reverse UPI QR codes, fraudulent APK downloads, electricity bill traps, and KYC expiry lures.
-                            <div style="margin-top: 10px;">
-                                <button class="pill-btn primary-pill" onclick="event.stopPropagation(); openModal('cyberModal');">Screen A Message Now →</button>
+                            <div style="margin-top: 10px; display: flex; gap: 8px;">
+                                <a href="/cyberdrishti" class="pill-btn primary-pill" style="text-decoration: none;">Launch CyberDrishti Screener →</a>
+                                <button class="pill-btn secondary-pill" onclick="event.stopPropagation(); openModal('cyberModal');">Quick Modal View</button>
                             </div>
                         </div>
                     </div>
@@ -261,8 +266,9 @@
                     <div class="proc-detail" id="pdetail-4">
                         <div class="proc-detail-box">
                             <strong>What happens:</strong> Step-by-step guidance on reporting to the 1930 National Helpline, blocking your debit card/UPI handle, and asserting your statutory rights under RBI's 72-Hour Zero Liability Circular.
-                            <div style="margin-top: 10px;">
-                                <button class="pill-btn primary-pill" onclick="event.stopPropagation(); openModal('recoveryModal');">View Recovery Playbook →</button>
+                            <div style="margin-top: 10px; display: flex; gap: 8px;">
+                                <a href="/recovery" class="pill-btn primary-pill" style="text-decoration: none;">Launch 1930 Recovery Centre →</a>
+                                <button class="pill-btn secondary-pill" onclick="event.stopPropagation(); openModal('recoveryModal');">Quick Modal View</button>
                             </div>
                         </div>
                     </div>
@@ -429,45 +435,45 @@
         <!-- 4-Card Primary Carousel -->
         <div class="services-carousel">
             <!-- Card 1: Economic Twin -->
-            <div class="service-card" onclick="openModal('twinModal')">
+            <div class="service-card" onclick="location.href='/twin'">
                 <div class="card-icon-circle">🧬</div>
                 <h3 class="card-title">Economic Digital Twin</h3>
                 <p class="card-desc">Personal financial twin modeling income, expenses, and debts. Computes your Composite Resilience Score (0–100) and Runway months.</p>
                 <div class="card-pill-btn">
-                    <span>DISCOVER</span>
+                    <span>LAUNCH DEDICATED STATION</span>
                     <span class="card-pill-icon">→</span>
                 </div>
             </div>
 
             <!-- Card 2: Opportunity Pathways -->
-            <div class="service-card" onclick="openModal('oppModal')">
+            <div class="service-card" onclick="location.href='/opportunities'">
                 <div class="card-icon-circle">🚀</div>
                 <h3 class="card-title">Opportunity Pathways</h3>
                 <p class="card-desc">AI decision support matching your profile to PMKVY 4.0 job roles and Mudra-funded micro-enterprises with clear earning uplift estimates.</p>
                 <div class="card-pill-btn">
-                    <span>DISCOVER</span>
+                    <span>LAUNCH DEDICATED STATION</span>
                     <span class="card-pill-icon">→</span>
                 </div>
             </div>
 
             <!-- Card 3: CyberDrishti -->
-            <div class="service-card" onclick="openModal('cyberModal')">
+            <div class="service-card" onclick="location.href='/cyberdrishti'">
                 <div class="card-icon-circle">🔍</div>
                 <h3 class="card-title">CyberDrishti</h3>
-                <p class="card-desc">Text and message screening engine evaluating digital arrest calls, APK droppers, and fastag scams against 13+ heuristic threat rules.</p>
+                <p class="card-desc">Text and message screening engine evaluating digital arrest calls, APK droppers, and reverse QR traps with 4-Pillar Threat Matrix.</p>
                 <div class="card-pill-btn">
-                    <span>DISCOVER</span>
+                    <span>LAUNCH DEDICATED STATION</span>
                     <span class="card-pill-icon">→</span>
                 </div>
             </div>
 
             <!-- Card 4: ArthSim Simulator -->
-            <div class="service-card" onclick="openModal('arthsimModal')">
+            <div class="service-card" onclick="location.href='/arthsim'">
                 <div class="card-icon-circle">⚡</div>
                 <h3 class="card-title">ArthSim Simulator</h3>
                 <p class="card-desc">Stress-test your finances. Simulate the multi-month trajectory of job loss, cyber losses, and medical shocks with SVG depletion curves.</p>
                 <div class="card-pill-btn">
-                    <span>DISCOVER</span>
+                    <span>LAUNCH DEDICATED STATION</span>
                     <span class="card-pill-icon">→</span>
                 </div>
             </div>
@@ -476,45 +482,45 @@
         <!-- Secondary 4-Card Grid -->
         <div class="services-carousel services-carousel-secondary">
             <!-- Card 5: India Intelligence -->
-            <div class="service-card" onclick="openModal('intelModal')">
+            <div class="service-card" onclick="location.href='/intelligence'">
                 <div class="card-icon-circle">📊</div>
                 <h3 class="card-title">India Intelligence</h3>
                 <p class="card-desc">Macro intelligence dashboard powered by RBI Payment Systems, CPFIR frauds, MoSPI PLFS, HCES, ASUSE, and MHA 1930 State statistics.</p>
                 <div class="card-pill-btn">
-                    <span>DISCOVER</span>
+                    <span>LAUNCH DEDICATED STATION</span>
                     <span class="card-pill-icon">→</span>
                 </div>
             </div>
 
             <!-- Card 6: Recovery Centre -->
-            <div class="service-card" onclick="openModal('recoveryModal')">
+            <div class="service-card" onclick="location.href='/recovery'">
                 <div class="card-icon-circle">🆘</div>
                 <h3 class="card-title">Recovery Centre</h3>
                 <p class="card-desc">Incident response playbooks prioritizing the Golden 2-Hour 1930 reporting window and bank zero-liability dispute filings.</p>
                 <div class="card-pill-btn">
-                    <span>DISCOVER</span>
+                    <span>LAUNCH DEDICATED STATION</span>
                     <span class="card-pill-icon">→</span>
                 </div>
             </div>
 
             <!-- Card 7: Trust Graph -->
-            <div class="service-card" onclick="openModal('trustModal')">
+            <div class="service-card" onclick="location.href='/trustgraph'">
                 <div class="card-icon-circle">🕸️</div>
                 <h3 class="card-title">Trust Graph</h3>
                 <p class="card-desc">Graph network visualizing how threat delivery channels connect to financial vulnerabilities and institutional defenses.</p>
                 <div class="card-pill-btn">
-                    <span>DISCOVER</span>
+                    <span>LAUNCH DEDICATED STATION</span>
                     <span class="card-pill-icon">→</span>
                 </div>
             </div>
 
             <!-- Card 8: Command Centre -->
-            <div class="service-card" onclick="openModal('commandModal')">
+            <div class="service-card" onclick="location.href='/command'">
                 <div class="card-icon-circle">🧭</div>
                 <h3 class="card-title">Command Centre</h3>
                 <p class="card-desc">Executive situational overview combining personal twin resilience, national payment health, and active CERT-In threat advisories.</p>
                 <div class="card-pill-btn">
-                    <span>DISCOVER</span>
+                    <span>LAUNCH DEDICATED STATION</span>
                     <span class="card-pill-icon">→</span>
                 </div>
             </div>
@@ -993,6 +999,74 @@
                         <span class="pill-icon">→</span>
                     </button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── SETTINGS DRAWER ── -->
+    <div class="settings-drawer" id="settingsDrawer">
+        <div class="settings-header">
+            <h4 style="font-family: var(--font-heading); color: #FFFFFF; font-size: 1.2rem; margin: 0;">System Settings</h4>
+            <button onclick="toggleSettings()" style="background: transparent; border: none; color: #FFFFFF; font-size: 1.2rem; cursor: pointer;">✕</button>
+        </div>
+
+        <div class="settings-group">
+            <span class="settings-label">Color Accent Theme</span>
+            <div class="theme-options-grid">
+                <button class="theme-btn active" data-theme="cyber-violet" onclick="setTheme('cyber-violet')">
+                    <span class="theme-color-dot" style="background: #A855F7;"></span>
+                    <span>Cyber Violet</span>
+                </button>
+                <button class="theme-btn" data-theme="gold-obsidian" onclick="setTheme('gold-obsidian')">
+                    <span class="theme-color-dot" style="background: #F59E0B;"></span>
+                    <span>Gold Obsidian</span>
+                </button>
+                <button class="theme-btn" data-theme="emerald-shield" onclick="setTheme('emerald-shield')">
+                    <span class="theme-color-dot" style="background: #10B981;"></span>
+                    <span>Emerald Shield</span>
+                </button>
+                <button class="theme-btn" data-theme="matrix-cyan" onclick="setTheme('matrix-cyan')">
+                    <span class="theme-color-dot" style="background: #06B6D4;"></span>
+                    <span>Matrix Cyan</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-group">
+            <span class="settings-label">Currency Unit</span>
+            <div style="display: flex; gap: 8px;">
+                <button class="pill-btn secondary-pill" onclick="toggleCurrency('INR')" style="flex: 1; padding: 8px;">
+                    <span>₹ INR (Lakh/Cr)</span>
+                </button>
+                <button class="pill-btn secondary-pill" onclick="toggleCurrency('USD')" style="flex: 1; padding: 8px;">
+                    <span>$ USD</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-group" style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px;">
+            <a href="/warning" class="pill-btn danger-pill" style="width: 100%; justify-content: center; text-decoration: none;">
+                <span>⚠️ What AAYAM Is NOT For</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ── QUICK JUMP PALETTE ── -->
+    <div class="quick-jump-modal" id="quickJumpModal" onclick="if(event.target === this) toggleQuickJump()">
+        <div class="quick-jump-box">
+            <input type="text" id="quickJumpInput" class="quick-jump-search" placeholder="Type a module or jump target..." oninput="filterQuickJump(this.value)">
+            <div class="quick-jump-list">
+                <a href="/" class="quick-jump-item"><span>🏠 Home Portal Hub</span><span style="font-size: 0.75rem; color: #94A3B8;">Landing Overview</span></a>
+                <a href="/command" class="quick-jump-item"><span>🎛️ Command Centre</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 01</span></a>
+                <a href="/twin" class="quick-jump-item"><span>💰 Economic Digital Twin</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 02</span></a>
+                <a href="/opportunities" class="quick-jump-item"><span>🚀 Opportunity Pathways &amp; Mudra</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 03</span></a>
+                <a href="/cyberdrishti" class="quick-jump-item"><span>🛡️ CyberDrishti Threat Screener</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 04</span></a>
+                <a href="/arthsim" class="quick-jump-item"><span>📉 ArthSim Scenario Simulator</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 05</span></a>
+                <a href="/intelligence" class="quick-jump-item"><span>📊 India Macro &amp; Crime Telemetry</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 06</span></a>
+                <a href="/trustgraph" class="quick-jump-item"><span>🕸️ Trust Graph Threat Architecture</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 07</span></a>
+                <a href="/recovery" class="quick-jump-item"><span>🚨 Recovery Centre &amp; 1930 Playbooks</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 08</span></a>
+                <a href="/guide" class="quick-jump-item"><span>📖 System Guide &amp; Persona Manual</span><span style="font-size: 0.75rem; color: #94A3B8;">Documentation</span></a>
+                <a href="/warning" class="quick-jump-item"><span>⚠️ What AAYAM Is Not For</span><span style="font-size: 0.75rem; color: #FB7185;">Ethical Limits</span></a>
             </div>
         </div>
     </div>

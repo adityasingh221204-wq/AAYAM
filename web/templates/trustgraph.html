@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trust Graph — Attack Architecture &amp; Defensive Network | AAYAM</title>
+    <meta name="description" content="Interactive network graph visualizing cyber threat actors, deception vectors, financial siphon chains, and 1930 Golden Hour interception nodes.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body data-theme="cyber-violet">
+
+    <!-- Interactive Cursor Glow Aura -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Ambient Glow Backgrounds -->
+    <div class="ambient-glow glow-top-right"></div>
+    <div class="ambient-glow glow-mid-left"></div>
+    <div class="ambient-glow glow-bottom-center"></div>
+
+    <!-- Floating Navigation Bar -->
+    <header class="navbar-wrapper">
+        <nav class="navbar" id="navbar">
+            <a href="/" class="nav-brand" style="text-decoration: none;">
+                <span class="brand-shield">🛡️</span>
+                <span class="brand-title">AAYAM</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/command">Command</a></li>
+                <li><a href="/twin">Digital Twin</a></li>
+                <li><a href="/cyberdrishti">CyberDrishti</a></li>
+                <li><a href="/arthsim">ArthSim</a></li>
+                <li><a href="/opportunities">Opportunities</a></li>
+                <li><a href="/intelligence">Intelligence</a></li>
+                <li><a href="/recovery">Recovery</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="pill-btn nav-guide-btn" onclick="toggleQuickJump()" title="Quick Jump (Ctrl+K)">
+                    <span>Jump</span>
+                    <span class="pill-icon">⚡</span>
+                </button>
+                <button class="pill-btn nav-start-btn" onclick="toggleSettings()" title="Settings & Theme">
+                    <span>Settings</span>
+                    <span class="pill-icon">⚙️</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Hero Banner -->
+    <main class="page-hero">
+        <div class="page-breadcrumbs">
+            <a href="/">Portal Hub</a>
+            <span class="separator">/</span>
+            <span>Module 07</span>
+            <span class="separator">/</span>
+            <span style="color: var(--accent-violet);">Trust Graph Threat Architecture</span>
+        </div>
+
+        <div class="page-hero-badge-row">
+            <span class="page-code-badge">MODULE 07 // ATTACK TOPOLOGY</span>
+            <span class="benefit-chip"><span class="benefit-icon">🕸️</span> Multi-Hop Exploitation Map</span>
+            <span class="benefit-chip"><span class="benefit-icon">🎯</span> Interactive Node Inspector</span>
+            <span class="benefit-chip"><span class="benefit-icon">🛡️</span> Interception Point Modeling</span>
+        </div>
+
+        <h1 class="page-hero-title">Trust Graph Architecture</h1>
+        <p class="page-hero-desc">
+            An interactive topological visualization of cyber fraud delivery chains across India. Trace how transnational syndicates weaponize psychological coercion, sideloaded APKs, and layered mule bank accounts—and discover where AAYAM and 1930 sever the kill chain.
+        </p>
+
+        <!-- How To Use Box -->
+        <section class="how-to-use-box">
+            <div class="htu-header">
+                <div class="htu-header-title">
+                    <span>📖</span>
+                    <span>How To Explore The Threat Graph</span>
+                </div>
+                <span style="font-size: 0.78rem; color: var(--accent-violet); font-weight: 700;">3 VISUAL STEPS</span>
+            </div>
+            <div class="htu-steps-grid">
+                <div class="htu-step-card">
+                    <span class="htu-step-num">1</span>
+                    <div class="htu-step-content">
+                        <h5>Select Any Stage Node</h5>
+                        <p>Click on any node in the interactive topology (Threat Actor, Deception, Payload, Mule, or Defense).</p>
+                    </div>
+                </div>
+                <div class="htu-step-card">
+                    <span class="htu-step-num">2</span>
+                    <div class="htu-step-content">
+                        <h5>Inspect Attack Anatomy</h5>
+                        <p>Read the tactical breakdown in the Node Inspector detailing modus operandi, risk rating, and indicators.</p>
+                    </div>
+                </div>
+                <div class="htu-step-card">
+                    <span class="htu-step-num">3</span>
+                    <div class="htu-step-content">
+                        <h5>Identify Defense Interventions</h5>
+                        <p>Notice how CyberDrishti screening and 1930 Golden Hour reporting halt the financial siphon in its tracks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── INTERACTIVE GRAPH DISPLAY ── -->
+        <section class="twin-layout" style="margin-top: 30px;">
+            <!-- Left Column: Graph Network Canvas -->
+            <div class="twin-card" style="min-height: 480px; display: flex; flex-direction: column;">
+                <div class="twin-card-header">
+                    <div>
+                        <span class="twin-card-tag">TOPOLOGICAL NETWORK</span>
+                        <h3 class="twin-card-title">Interactive Attack &amp; Defense Chain</h3>
+                    </div>
+                    <span class="card-icon-badge">🕸️</span>
+                </div>
+
+                <!-- SVG Graph Canvas -->
+                <div style="flex: 1; background: rgba(0,0,0,0.4); border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">
+                        <span>Stage 1: Origin</span>
+                        <span>Stage 2: Deception</span>
+                        <span>Stage 3: Vector</span>
+                        <span>Stage 4: Siphon</span>
+                        <span>Countermeasure</span>
+                    </div>
+
+                    <!-- Flow Diagram Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 30px 0;">
+                        <!-- Column 1: Actor -->
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <div class="matrix-pillar-card" style="cursor: pointer; padding: 12px; border-color: rgba(244, 63, 94, 0.4);" onclick="inspectNode('syndicate')">
+                                <span style="font-size: 0.7rem; color: #FB7185; font-weight: 700;">ACTOR</span>
+                                <div style="font-size: 0.84rem; font-weight: 700; color: #FFFFFF;">Offshore Syndicate</div>
+                            </div>
+                            <div class="matrix-pillar-card" style="cursor: pointer; padding: 12px; border-color: rgba(244, 63, 94, 0.4);" onclick="inspectNode('spoof_ivr')">
+                                <span style="font-size: 0.7rem; color: #FB7185; font-weight: 700;">ACTOR</span>
+                                <div style="font-size: 0.84rem; font-weight: 700; color: #FFFFFF;">Spoofed IVR Gateway</div>
+                            </div>
+                        </div>
+
+                        <!-- Column 2: Deception -->
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <div class="matrix-pillar-card" style="cursor: pointer; padding: 12px; border-color: rgba(245, 158, 11, 0.4);" onclick="inspectNode('digital_arrest')">
+                                <span style="font-size: 0.7rem; color: #FBBF24; font-weight: 700;">DECEPTION</span>
+                                <div style="font-size: 0.84rem; font-weight: 700; color: #FFFFFF;">Digital Arrest Fear</div>
+                            </div>
+                            <div class="matrix-pillar-card" style="cursor: pointer; padding: 12px; border-color: rgba(245, 158, 11, 0.4);" onclick="inspectNode('power_cut')">
+                                <span style="font-size: 0.7rem; color: #FBBF24; font-weight: 700;">DECEPTION</span>
+                                <div style="font-size: 0.84rem; font-weight: 700; color: #FFFFFF;">Electricity Cut SMS</div>
+                            </div>
+                        </div>
+
+                        <!-- Column 3: Vector -->
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <div class="matrix-pillar-card" style="cursor: pointer; padding: 12px; border-color: rgba(168, 85, 247, 0.4);" onclick="inspectNode('rogue_apk')">
+                                <span style="font-size: 0.7rem; color: #C084FC; font-weight: 700;">VECTOR</span>
+                                <div style="font-size: 0.84rem; font-weight: 700; color: #FFFFFF;">Malicious APK RAT</div>
+                            </div>
+                            <div class="matrix-pillar-card" style="cursor: pointer; padding: 12px; border-color: rgba(168, 85, 247, 0.4);" onclick="inspectNode('reverse_qr')">
+                                <span style="font-size: 0.7rem; color: #C084FC; font-weight: 700;">VECTOR</span>
+                                <div style="font-size: 0.84rem; font-weight: 700; color: #FFFFFF;">Reverse UPI QR Trap</div>
+                            </div>
+                        </div>
+
+                        <!-- Column 4: Siphon -->
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <div class="matrix-pillar-card" style="cursor: pointer; padding: 12px; border-color: rgba(244, 63, 94, 0.4);" onclick="inspectNode('mule_account')">
+                                <span style="font-size: 0.7rem; color: #FB7185; font-weight: 700;">SIPHON</span>
+                                <div style="font-size: 0.84rem; font-weight: 700; color: #FFFFFF;">Tier 1 Mule Account</div>
+                            </div>
+                            <div class="matrix-pillar-card" style="cursor: pointer; padding: 12px; border-color: rgba(244, 63, 94, 0.4);" onclick="inspectNode('crypto_p2p')">
+                                <span style="font-size: 0.7rem; color: #FB7185; font-weight: 700;">SIPHON</span>
+                                <div style="font-size: 0.84rem; font-weight: 700; color: #FFFFFF;">P2P Crypto Cashout</div>
+                            </div>
+                        </div>
+
+                        <!-- Column 5: Defense -->
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <div class="matrix-pillar-card" style="cursor: pointer; padding: 12px; border-color: rgba(16, 185, 129, 0.6); background: rgba(16, 185, 129, 0.1);" onclick="inspectNode('cyberdrishti_shield')">
+                                <span style="font-size: 0.7rem; color: #34D399; font-weight: 700;">DEFENSE</span>
+                                <div style="font-size: 0.84rem; font-weight: 700; color: #FFFFFF;">CyberDrishti Heuristic</div>
+                            </div>
+                            <div class="matrix-pillar-card" style="cursor: pointer; padding: 12px; border-color: rgba(16, 185, 129, 0.6); background: rgba(16, 185, 129, 0.1);" onclick="inspectNode('i4c_freeze')">
+                                <span style="font-size: 0.7rem; color: #34D399; font-weight: 700;">DEFENSE</span>
+                                <div style="font-size: 0.84rem; font-weight: 700; color: #FFFFFF;">1930 / I4C Mule Freeze</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="font-size: 0.78rem; color: var(--text-muted); text-align: center;">
+                        ⚡ Click any card in the topology above to view tactical node analysis on the right.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Node Inspector -->
+            <div class="twin-card" style="display: flex; flex-direction: column;">
+                <div class="twin-card-header">
+                    <div>
+                        <span class="twin-card-tag">NODE INSPECTOR</span>
+                        <h3 class="twin-card-title" id="node_inspector_title">Node: Malicious APK RAT</h3>
+                    </div>
+                    <span class="card-icon-badge" id="node_inspector_icon">📱</span>
+                </div>
+
+                <div id="node_inspector_body" style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                            <span class="score-category badge-rose" id="node_badge">HIGH SEVERITY</span>
+                            <span class="score-category badge-indigo" id="node_layer">Layer: Technical Delivery</span>
+                        </div>
+
+                        <p id="node_desc" style="font-size: 0.88rem; color: #E2E8F0; line-height: 1.6; margin-bottom: 16px;">
+                            Attackers distribute Trojanized APKs disguised as official electricity bill updates or PM-Kisan verification tools. Once installed, the APK requests accessibility permissions, intercepts 2FA SMS OTPs, and relays them to remote servers.
+                        </p>
+
+                        <div style="background: rgba(0, 0, 0, 0.25); border-radius: 10px; padding: 14px; margin-bottom: 16px;">
+                            <div style="font-size: 0.78rem; font-weight: 700; color: #F59E0B; text-transform: uppercase; margin-bottom: 6px;">
+                                COMMON TRIGGER SIGNATURES:
+                            </div>
+                            <ul id="node_indicators" style="padding-left: 20px; font-size: 0.82rem; color: #CBD5E1; line-height: 1.5; margin: 0;">
+                                <li>Direct link to .apk file via WhatsApp or SMS</li>
+                                <li>Prompts user to enable "Install from Unknown Sources"</li>
+                                <li>Requests accessibility service and SMS read permissions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="node_countermeasure" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 14px; font-size: 0.85rem; color: #34D399;">
+                        <strong>🛡️ Tactical Interception:</strong> Screen the APK or text with CyberDrishti. Turn on Airplane mode immediately if already installed.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── REDIRECTION & NEXT STEPS ── -->
+        <section class="redirections-section" style="padding: 0;">
+            <h3 class="redirections-title">Ecosystem Next Steps</h3>
+            <p class="redirections-sub">Now that you understand the attack architecture, access defensive tools:</p>
+            <div class="redirection-grid">
+                <a href="/cyberdrishti" class="redirect-card">
+                    <div class="redirect-card-top">
+                        <div class="redirect-icon">🛡️</div>
+                        <div>
+                            <span class="redirect-card-code">Module 04</span>
+                            <div class="redirect-card-title">CyberDrishti Screener</div>
+                        </div>
+                    </div>
+                    <p class="redirect-card-desc">Evaluate custom suspicious messages against the 4-Pillar Matrix to sever Stage 2 &amp; 3 deception chains.</p>
+                    <span class="redirect-card-link">Launch Threat Screener →</span>
+                </a>
+
+                <a href="/recovery" class="redirect-card">
+                    <div class="redirect-card-top">
+                        <div class="redirect-icon" style="background: rgba(244, 63, 94, 0.15); color: #FB7185;">🚨</div>
+                        <div>
+                            <span class="redirect-card-code">Module 08</span>
+                            <div class="redirect-card-title">1930 Recovery Centre</div>
+                        </div>
+                    </div>
+                    <p class="redirect-card-desc">Execute the Golden Hour protocol to freeze Stage 4 mule bank accounts before funds are laundered via crypto P2P.</p>
+                    <span class="redirect-card-link">Execute Freeze Protocol →</span>
+                </a>
+
+                <a href="/intelligence" class="redirect-card">
+                    <div class="redirect-card-top">
+                        <div class="redirect-icon">📊</div>
+                        <div>
+                            <span class="redirect-card-code">Module 06</span>
+                            <div class="redirect-card-title">India Macro Intelligence</div>
+                        </div>
+                    </div>
+                    <p class="redirect-card-desc">Inspect state-by-state data detailing where syndicates operate and state recovery performance rates.</p>
+                    <span class="redirect-card-link">Inspect Crime Statistics →</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ── SETTINGS DRAWER ── -->
+    <div class="settings-drawer" id="settingsDrawer">
+        <div class="settings-header">
+            <h4 style="font-family: var(--font-heading); color: #FFFFFF; font-size: 1.2rem; margin: 0;">System Settings</h4>
+            <button onclick="toggleSettings()" style="background: transparent; border: none; color: #FFFFFF; font-size: 1.2rem; cursor: pointer;">✕</button>
+        </div>
+
+        <div class="settings-group">
+            <span class="settings-label">Color Accent Theme</span>
+            <div class="theme-options-grid">
+                <button class="theme-btn active" data-theme="cyber-violet" onclick="setTheme('cyber-violet')">
+                    <span class="theme-color-dot" style="background: #A855F7;"></span>
+                    <span>Cyber Violet</span>
+                </button>
+                <button class="theme-btn" data-theme="gold-obsidian" onclick="setTheme('gold-obsidian')">
+                    <span class="theme-color-dot" style="background: #F59E0B;"></span>
+                    <span>Gold Obsidian</span>
+                </button>
+                <button class="theme-btn" data-theme="emerald-shield" onclick="setTheme('emerald-shield')">
+                    <span class="theme-color-dot" style="background: #10B981;"></span>
+                    <span>Emerald Shield</span>
+                </button>
+                <button class="theme-btn" data-theme="matrix-cyan" onclick="setTheme('matrix-cyan')">
+                    <span class="theme-color-dot" style="background: #06B6D4;"></span>
+                    <span>Matrix Cyan</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-group">
+            <span class="settings-label">Currency Unit</span>
+            <div style="display: flex; gap: 8px;">
+                <button class="pill-btn secondary-pill" onclick="toggleCurrency('INR')" style="flex: 1; padding: 8px;">
+                    <span>₹ INR (Lakh/Cr)</span>
+                </button>
+                <button class="pill-btn secondary-pill" onclick="toggleCurrency('USD')" style="flex: 1; padding: 8px;">
+                    <span>$ USD</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-group" style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px;">
+            <a href="/warning" class="pill-btn danger-pill" style="width: 100%; justify-content: center; text-decoration: none;">
+                <span>⚠️ What AAYAM Is NOT For</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ── QUICK JUMP PALETTE ── -->
+    <div class="quick-jump-modal" id="quickJumpModal" onclick="if(event.target === this) toggleQuickJump()">
+        <div class="quick-jump-box">
+            <input type="text" id="quickJumpInput" class="quick-jump-search" placeholder="Type a module or jump target..." oninput="filterQuickJump(this.value)">
+            <div class="quick-jump-list">
+                <a href="/" class="quick-jump-item"><span>🏠 Home Portal Hub</span><span style="font-size: 0.75rem; color: #94A3B8;">Landing Overview</span></a>
+                <a href="/command" class="quick-jump-item"><span>🎛️ Command Centre</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 01</span></a>
+                <a href="/twin" class="quick-jump-item"><span>💰 Economic Digital Twin</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 02</span></a>
+                <a href="/opportunities" class="quick-jump-item"><span>🚀 Opportunity Pathways &amp; Mudra</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 03</span></a>
+                <a href="/cyberdrishti" class="quick-jump-item"><span>🛡️ CyberDrishti Threat Screener</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 04</span></a>
+                <a href="/arthsim" class="quick-jump-item"><span>📉 ArthSim Scenario Simulator</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 05</span></a>
+                <a href="/intelligence" class="quick-jump-item"><span>📊 India Macro &amp; Crime Telemetry</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 06</span></a>
+                <a href="/trustgraph" class="quick-jump-item"><span>🕸️ Trust Graph Threat Architecture</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 07</span></a>
+                <a href="/recovery" class="quick-jump-item"><span>🚨 Recovery Centre &amp; 1930 Playbooks</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 08</span></a>
+                <a href="/guide" class="quick-jump-item"><span>📖 System Guide &amp; Persona Manual</span><span style="font-size: 0.75rem; color: #94A3B8;">Documentation</span></a>
+                <a href="/warning" class="quick-jump-item"><span>⚠️ What AAYAM Is Not For</span><span style="font-size: 0.75rem; color: #FB7185;">Ethical Limits</span></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-col-main">
+                <div class="nav-brand" style="margin-bottom: 12px;">
+                    <span class="brand-shield">🛡️</span>
+                    <span class="brand-title">AAYAM</span>
+                </div>
+                <p class="footer-lead">
+                    Multi-Dimensional Intelligence System for Economic Mobility &amp; Cyber-Financial Defense for India.
+                </p>
+                <div style="margin-top: 14px; font-size: 0.8rem; color: var(--accent-violet);">
+                    <strong>Engine Note:</strong> Trust Graph visualizes kill chain stages aligned with MITRE ATT&amp;CK and CERT-In.
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Core Modules</span>
+                <ul class="footer-links">
+                    <li><a href="/command">Command Centre</a></li>
+                    <li><a href="/twin">Economic Digital Twin</a></li>
+                    <li><a href="/opportunities">Opportunity Pathways</a></li>
+                    <li><a href="/cyberdrishti">CyberDrishti Screener</a></li>
+                    <li><a href="/arthsim">ArthSim Simulator</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Intelligence &amp; Safety</span>
+                <ul class="footer-links">
+                    <li><a href="/intelligence">India Telemetry</a></li>
+                    <li><a href="/trustgraph">Trust Graph</a></li>
+                    <li><a href="/recovery">1930 Recovery Centre</a></li>
+                    <li><a href="/guide">How To Use Guide</a></li>
+                    <li><a href="/warning">What AAYAM Is Not For</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Project Leadership</span>
+                <div class="team-compact-list">
+                    <div class="team-compact-item">
+                        <strong>Aditya Singh</strong>
+                        <span>FinTech &amp; Economic Models</span>
+                    </div>
+                    <div class="team-compact-item">
+                        <strong>Abhishek Shrivastava</strong>
+                        <span>Cyber Security &amp; Threat Engines</span>
+                    </div>
+                    <div class="team-compact-item">
+                        <strong>Aarushi S.</strong>
+                        <span>AI/ML &amp; Decision Support</span>
+                    </div>
+                    <div class="team-compact-item">
+                        <strong>Ansh Saini</strong>
+                        <span>UI/UX &amp; Exquisite Design</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>&copy; 2026 AAYAM Research Initiative. Built for high-trust digital India.</span>
+            <div class="footer-bottom-links">
+                <a href="/warning">Ethical Guardrails</a>
+                <a href="https://cybercrime.gov.in" target="_blank">National Helpline: 1930</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/app.js"></script>
+    <script>
+        // Interactive Node Inspector Logic
+        const NODES = {
+            syndicate: {
+                title: "Node: Offshore Crime Syndicate",
+                icon: "🕵️",
+                badge: "CRITICAL THREAT",
+                layer: "Layer 1: Origin & Organization",
+                desc: "Transnational syndicates operating out of Southeast Asia and regional hubs orchestrate bulk SMS spoofing, IVR redirection, and social engineering scripts.",
+                indicators: ["Unregistered VoIP international call routing", "Use of compromised WhatsApp business accounts", "Scripted psychological coercion templates"],
+                counter: "National telecom firewalls block spoofed incoming calls. Report spoofed numbers on Sanchar Saathi (Chakshu)."
+            },
+            digital_arrest: {
+                title: "Node: Digital Arrest Fear Extortion",
+                icon: "🚨",
+                badge: "HIGH SEVERITY",
+                layer: "Layer 2: Psychological Deception",
+                desc: "Attackers pose as police or customs officials on video calls, displaying fake arrest warrants and claiming the victim's identity was used for narcotic trafficking.",
+                indicators: ["Demands victim stay on video continuously", "Background with fake police emblems", "Insists on transferring money into 'Court Verification Accounts'"],
+                counter: "Hang up immediately. Indian police and courts never issue arrest warrants or conduct bail hearings via Skype or video."
+            },
+            rogue_apk: {
+                title: "Node: Malicious APK RAT",
+                icon: "📱",
+                badge: "HIGH SEVERITY",
+                layer: "Layer 3: Technical Delivery",
+                desc: "Attackers distribute Trojanized APKs disguised as official electricity bill updates or PM-Kisan verification tools to read SMS OTPs and control the device.",
+                indicators: ["Direct link to .apk file via WhatsApp or SMS", "Prompts to enable 'Install Unknown Apps'", "Requests Accessibility and SMS read permissions"],
+                counter: "Screen with CyberDrishti. Never install APK files from SMS. Turn on Airplane mode immediately if installed."
+            },
+            reverse_qr: {
+                title: "Node: Reverse UPI QR Trap",
+                icon: "💸",
+                badge: "HIGH SEVERITY",
+                layer: "Layer 3: Financial Trap",
+                desc: "Victims are sent a QR code under the pretext of receiving a cashback or marketplace sale payment. Entering the UPI PIN debits funds instead of crediting.",
+                indicators: ["QR code with text claiming 'Pay to Receive'", "Caller instructs victim to enter UPI PIN to receive money", "Fake PhonePe/GPay reward vouchers"],
+                counter: "Remember: You NEVER enter UPI PIN to receive money. PIN is solely for debiting funds from your bank."
+            },
+            mule_account: {
+                title: "Node: Tier-1 Mule Bank Account",
+                icon: "🏦",
+                badge: "HIGH RISK",
+                layer: "Layer 4: Financial Siphon",
+                desc: "Compromised or rented bank accounts of vulnerable citizens used by syndicates to receive stolen funds before immediate multi-hop dispersal.",
+                indicators: ["Sudden high-velocity UPI inflow and immediate cash withdrawals", "Account opened using forged or purchased KYC credentials", "Zero normal retail transaction history"],
+                counter: "Reporting to 1930 within the Golden Hour freezes this node before funds can be withdrawn at ATMs."
+            },
+            cyberdrishti_shield: {
+                title: "Node: CyberDrishti Heuristic Shield",
+                icon: "🛡️",
+                badge: "DEFENSIVE COUNTERMEASURE",
+                layer: "Defense: Pre-Transaction Interception",
+                desc: "Citizen-facing explainable security station. Scans incoming communications for urgency triggers, financial traps, and authority impersonation before any interaction.",
+                indicators: ["Sub-second heuristic classification", "4-Pillar threat matrix scoring", "Actionable CERT-In aligned guidance"],
+                counter: "Active citizen shield. Test messages at /cyberdrishti anytime."
+            },
+            i4c_freeze: {
+                title: "Node: 1930 / I4C Inter-Bank Freeze",
+                icon: "🚨",
+                badge: "DEFENSIVE COUNTERMEASURE",
+                layer: "Defense: Post-Transaction Intervention",
+                desc: "The Citizen Financial Cyber Fraud Reporting System operates automated API linkages across 250+ banks, wallets, and gateways to freeze recipient accounts in real time.",
+                indicators: ["24x7 toll-free helpline: 1930", "Automated bank hold on transaction UTR reference", "Halts money transfer before cash-out"],
+                counter: "Dial 1930 immediately within 120 minutes of any unauthorized debit."
+            }
+        };
+
+        function inspectNode(key) {
+            const n = NODES[key] || NODES.rogue_apk;
+            document.getElementById('node_inspector_title').innerText = n.title;
+            document.getElementById('node_inspector_icon').innerText = n.icon;
+            document.getElementById('node_badge').innerText = n.badge;
+            document.getElementById('node_layer').innerText = n.layer;
+            document.getElementById('node_desc').innerText = n.desc;
+            document.getElementById('node_indicators').innerHTML = n.indicators.map(i => `<li>${i}</li>`).join('');
+            document.getElementById('node_countermeasure').innerHTML = `<strong>🛡️ Tactical Interception:</strong> ${n.counter}`;
+        }
+    </script>
+</body>
+</html>

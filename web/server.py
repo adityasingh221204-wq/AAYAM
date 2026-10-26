@@ -50,6 +50,67 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/command")
+def page_command():
+    """Render Module 1: Systemic Command Centre."""
+    return render_template("command.html")
+
+
+@app.route("/twin")
+def page_twin():
+    """Render Module 2: Economic Digital Twin."""
+    return render_template("twin.html")
+
+
+@app.route("/opportunities")
+def page_opportunities():
+    """Render Module 3: Opportunity Pathways & Mudra."""
+    return render_template("opportunities.html")
+
+
+@app.route("/cyberdrishti")
+def page_cyberdrishti():
+    """Render Module 4: CyberDrishti Threat Screener & Matrix."""
+    return render_template("cyberdrishti.html")
+
+
+@app.route("/arthsim")
+def page_arthsim():
+    """Render Module 5: ArthSim Scenario Simulator."""
+    return render_template("arthsim.html")
+
+
+@app.route("/intelligence")
+def page_intelligence():
+    """Render Module 6: India Macro & Cybercrime Intelligence."""
+    return render_template("intelligence.html")
+
+
+@app.route("/trustgraph")
+def page_trustgraph():
+    """Render Module 7: Trust Graph Threat Architecture."""
+    return render_template("trustgraph.html")
+
+
+@app.route("/recovery")
+def page_recovery():
+    """Render Module 8: Recovery Centre & 1930 Playbooks."""
+    return render_template("recovery.html")
+
+
+@app.route("/guide")
+def page_guide():
+    """Render System Guide & Persona Handbook."""
+    return render_template("guide.html")
+
+
+@app.route("/warning")
+@app.route("/disclaimer")
+def page_disclaimer():
+    """Render Ethical Guardrails & Warning Page (What AAYAM Is Not For)."""
+    return render_template("disclaimer.html")
+
+
 # ── REST API ENDPOINTS ──
 
 @app.route("/api/economy/calculate", methods=["POST"])
@@ -96,6 +157,33 @@ def api_simulate():
         "expense_change_pct": 20.0 if scenario_name == "inflation_spike" else 0.0
     }
     sim_result = simulate_economic_scenario(profile, scenario_cfg)
+    
+    # Map standardized trajectory points for UI chart
+    trajectory = []
+    for pt in sim_result.get("scenario_trajectory", []):
+        trajectory.append({
+            "month": pt["month"],
+            "savings_end": pt["savings_balance"],
+            "inflows": pt.get("inflows", 0),
+            "outflows": pt.get("outflows", 0)
+        })
+        
+    depleted = sim_result.get("months_to_depletion") is not None
+    depletion_month = sim_result.get("months_to_depletion")
+    initial_savings = profile.get("current_savings", 50000.0)
+    
+    actionable_guidance = (
+        f"Critical: Liquid buffer depletes at Month {depletion_month}. Immediate discretionary cost reduction required."
+        if depleted else
+        f"Resilient: Household maintains emergency solvency across the full {horizon}-month stress horizon."
+    )
+    
+    sim_result["trajectory"] = trajectory
+    sim_result["depleted"] = depleted
+    sim_result["depletion_month"] = depletion_month
+    sim_result["initial_savings"] = initial_savings
+    sim_result["actionable_guidance"] = actionable_guidance
+
     return jsonify({"status": "success", "result": sim_result})
 
 

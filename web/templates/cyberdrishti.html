@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberDrishti — 4-Pillar Heuristic Cyber Threat Screener | AAYAM</title>
+    <meta name="description" content="Screen custom messages, SMS, APKs, and communications against India's top cyber fraud vectors using the 4-Pillar Threat Matrix.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body data-theme="cyber-violet">
+
+    <!-- Interactive Cursor Glow Aura -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Ambient Glow Backgrounds -->
+    <div class="ambient-glow glow-top-right"></div>
+    <div class="ambient-glow glow-mid-left"></div>
+    <div class="ambient-glow glow-bottom-center"></div>
+
+    <!-- Floating Navigation Bar -->
+    <header class="navbar-wrapper">
+        <nav class="navbar" id="navbar">
+            <a href="/" class="nav-brand" style="text-decoration: none;">
+                <span class="brand-shield">🛡️</span>
+                <span class="brand-title">AAYAM</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/command">Command</a></li>
+                <li><a href="/twin">Digital Twin</a></li>
+                <li><a href="/cyberdrishti" class="active">CyberDrishti</a></li>
+                <li><a href="/arthsim">ArthSim</a></li>
+                <li><a href="/opportunities">Opportunities</a></li>
+                <li><a href="/intelligence">Intelligence</a></li>
+                <li><a href="/recovery">Recovery</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="pill-btn nav-guide-btn" onclick="toggleQuickJump()" title="Quick Jump (Ctrl+K)">
+                    <span>Jump</span>
+                    <span class="pill-icon">⚡</span>
+                </button>
+                <button class="pill-btn nav-start-btn" onclick="toggleSettings()" title="Settings & Theme">
+                    <span>Settings</span>
+                    <span class="pill-icon">⚙️</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Hero Banner -->
+    <main class="page-hero">
+        <div class="page-breadcrumbs">
+            <a href="/">Portal Hub</a>
+            <span class="separator">/</span>
+            <span>Module 04</span>
+            <span class="separator">/</span>
+            <span style="color: var(--accent-violet);">CyberDrishti Threat Screener</span>
+        </div>
+
+        <div class="page-hero-badge-row">
+            <span class="page-code-badge">MODULE 04 // DEFENSE SHIELD</span>
+            <span class="benefit-chip"><span class="benefit-icon">🧠</span> 4-Pillar Heuristic Matrix</span>
+            <span class="benefit-chip"><span class="benefit-icon">⚡</span> Sub-second Latency</span>
+            <span class="benefit-chip"><span class="benefit-icon">🔒</span> Zero Data Stored</span>
+        </div>
+
+        <h1 class="page-hero-title">CyberDrishti Threat Screener</h1>
+        <p class="page-hero-desc">
+            An explainable, heuristic security screening station for citizens and micro-enterprises. Screen any suspicious SMS, WhatsApp message, email, or dropped APK file against India's most aggressive cyber fraud patterns before taking any action.
+        </p>
+
+        <!-- How To Use Box -->
+        <section class="how-to-use-box">
+            <div class="htu-header">
+                <div class="htu-header-title">
+                    <span>📖</span>
+                    <span>How To Use This Threat Screener</span>
+                </div>
+                <span style="font-size: 0.78rem; color: var(--accent-violet); font-weight: 700;">4 SIMPLE STEPS</span>
+            </div>
+            <div class="htu-steps-grid">
+                <div class="htu-step-card">
+                    <span class="htu-step-num">1</span>
+                    <div class="htu-step-content">
+                        <h5>Input or Drop</h5>
+                        <p>Paste any suspicious message into the box, or drag and drop a screenshot, email text, or suspicious APK file.</p>
+                    </div>
+                </div>
+                <div class="htu-step-card">
+                    <span class="htu-step-num">2</span>
+                    <div class="htu-step-content">
+                        <h5>Analyze Threat</h5>
+                        <p>Click "Analyze Threat Signals" to evaluate against the 4-Pillar heuristic matrix in real-time.</p>
+                    </div>
+                </div>
+                <div class="htu-step-card">
+                    <span class="htu-step-num">3</span>
+                    <div class="htu-step-content">
+                        <h5>Review Matrix</h5>
+                        <p>Examine Urgency, Financial Trap, Authority Impersonation, and Technical Payload percentages.</p>
+                    </div>
+                </div>
+                <div class="htu-step-card">
+                    <span class="htu-step-num">4</span>
+                    <div class="htu-step-content">
+                        <h5>Take Action</h5>
+                        <p>Follow the defensive guidance. If money was already sent, jump directly to the 1930 Recovery Centre.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategic Benefits Strip -->
+        <div class="benefits-strip">
+            <div class="benefit-chip">
+                <span class="benefit-icon">🛡️</span>
+                <strong>Financial Protection:</strong> Prevents average citizen loss of ₹45,000+
+            </div>
+            <div class="benefit-chip">
+                <span class="benefit-icon">🔎</span>
+                <strong>Zero False Sense:</strong> Detects legitimate banking SMS with zero false flags
+            </div>
+            <div class="benefit-chip">
+                <span class="benefit-icon">🇮🇳</span>
+                <strong>CERT-In Aligned:</strong> Synchronized with 2025 MHA &amp; I4C fraud taxonomies
+            </div>
+        </div>
+
+        <!-- ── INTERACTIVE THREAT SCREENING STATION ── -->
+        <section class="twin-layout" style="margin-top: 20px;">
+            <!-- Left Column: Input Form & File Dropzone -->
+            <div class="twin-card">
+                <div class="twin-card-header">
+                    <div>
+                        <span class="twin-card-tag">INPUT COMMUNICATION</span>
+                        <h3 class="twin-card-title">Paste or Drop Suspicious Content</h3>
+                    </div>
+                    <span class="card-icon-badge">📩</span>
+                </div>
+
+                <!-- Drag & Drop Zone -->
+                <div class="screener-dropzone" id="cyberDropzone">
+                    <span class="dropzone-icon">📁</span>
+                    <div class="dropzone-title">Drop Suspicious File or Document Here</div>
+                    <div class="dropzone-sub">Supports .txt, .eml, .apk, .pdf, or screenshot text (Click to Browse)</div>
+                    <input type="file" id="cyberFileInput" style="display: none;" accept=".txt,.eml,.apk,.pdf,.png,.jpg,.jpeg">
+                </div>
+
+                <!-- Textarea -->
+                <div class="form-group">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <label class="form-label" for="cyber_input_text" style="margin: 0;">Message / Call Transcript / Link Content</label>
+                        <span id="charCount" style="font-size: 0.75rem; color: var(--text-dim);">0 characters</span>
+                    </div>
+                    <textarea id="cyber_input_text" class="form-input" rows="7" placeholder="Paste suspicious SMS, WhatsApp message, email, or URL text here..." oninput="updateCharCount()"></textarea>
+                </div>
+
+                <!-- Preset Sample Buttons -->
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 0.76rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px;">
+                        TEST WITH COMMON SCAM PRESETS:
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button class="pill-btn secondary-pill" onclick="setCyberSample('digital_arrest')" style="font-size: 0.74rem; padding: 5px 12px;">
+                            <span>🚨 Digital Arrest</span>
+                        </button>
+                        <button class="pill-btn secondary-pill" onclick="setCyberSample('electricity')" style="font-size: 0.74rem; padding: 5px 12px;">
+                            <span>⚡ Electricity Cut</span>
+                        </button>
+                        <button class="pill-btn secondary-pill" onclick="setCyberSample('upi_reverse')" style="font-size: 0.74rem; padding: 5px 12px;">
+                            <span>💸 Reverse UPI QR</span>
+                        </button>
+                        <button class="pill-btn secondary-pill" onclick="setCyberSample('wfh_task')" style="font-size: 0.74rem; padding: 5px 12px;">
+                            <span>💼 Work-from-Home</span>
+                        </button>
+                        <button class="pill-btn secondary-pill" onclick="setCyberSample('safe_banking')" style="font-size: 0.74rem; padding: 5px 12px;">
+                            <span>✅ Safe Bank SMS</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Action Button Group -->
+                <div style="display: flex; gap: 12px;">
+                    <button class="pill-btn primary-pill glow-pulse" onclick="screenCyberMessage()" style="flex: 2;">
+                        <span>ANALYZE THREAT SIGNALS</span>
+                        <span class="pill-icon">⚡</span>
+                    </button>
+                    <button class="pill-btn secondary-pill" onclick="clearCyberInput()" style="flex: 1;">
+                        <span>CLEAR</span>
+                        <span class="pill-icon">🔄</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Column: Real-Time Results & Threat Matrix -->
+            <div class="twin-card" style="display: flex; flex-direction: column;">
+                <div class="twin-card-header">
+                    <div>
+                        <span class="twin-card-tag">MATRIX TELEMETRY</span>
+                        <h3 class="twin-card-title">Heuristic Assessment &amp; Guidance</h3>
+                    </div>
+                    <span class="card-icon-badge">📊</span>
+                </div>
+
+                <!-- Output Container -->
+                <div id="cyber_result_container">
+                    <div style="text-align: center; padding: 60px 20px; color: var(--text-dim);">
+                        <span style="font-size: 3rem; display: block; margin-bottom: 12px; opacity: 0.5;">🛡️</span>
+                        <h4 style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 6px;">Ready for Evaluation</h4>
+                        <p style="font-size: 0.85rem; max-width: 360px; margin: 0 auto;">
+                            Enter a suspicious message or choose a preset sample on the left, then click <strong>"Analyze Threat Signals"</strong> to see the 4-Pillar breakdown.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── ACTIVE THREAT VECTORS IN INDIA ── -->
+        <section style="margin-top: 40px;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.5rem; color: #FFFFFF; margin-bottom: 16px;">
+                Top 5 Active Fraud Vectors Detected in India (2025)
+            </h3>
+            <div class="services-carousel" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+                <div class="service-card">
+                    <span class="service-badge badge-rose">CRITICAL</span>
+                    <h4 style="color: #FFFFFF; font-size: 1rem; margin: 10px 0 6px 0;">Digital Arrest &amp; Video Extortion</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Impersonating CBI or Mumbai Customs on Skype video with fake arrest warrants. Demands asset liquidation into 'security accounts'.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-badge badge-rose">CRITICAL</span>
+                    <h4 style="color: #FFFFFF; font-size: 1rem; margin: 10px 0 6px 0;">Reverse UPI QR Trap</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Fraudster sends a QR code claiming it will 'credit' funds or marketplace sale. Entering UPI PIN debits the victim's account instantly.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-badge badge-amber">HIGH</span>
+                    <h4 style="color: #FFFFFF; font-size: 1rem; margin: 10px 0 6px 0;">Utility Disconnection Notice</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Urgent SMS threatening same-night power or gas cut. Prompts victim to call a personal phone number or sideload a rogue APK.</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-badge badge-amber">HIGH</span>
+                    <h4 style="color: #FFFFFF; font-size: 1rem; margin: 10px 0 6px 0;">Remote Access Tool (RAT) Prompts</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Tricking users into installing AnyDesk, RustDesk, or TeamViewer under the guise of customer support to read bank OTPs.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── REDIRECTION & NEXT STEPS ── -->
+        <section class="redirections-section" style="padding: 0;">
+            <h3 class="redirections-title">Ecosystem Next Steps</h3>
+            <p class="redirections-sub">Explore related intelligence tools to reinforce your household resilience</p>
+            <div class="redirection-grid">
+                <a href="/recovery" class="redirect-card">
+                    <div class="redirect-card-top">
+                        <div class="redirect-icon" style="background: rgba(244, 63, 94, 0.15); color: #FB7185;">🚨</div>
+                        <div>
+                            <span class="redirect-card-code">Module 08</span>
+                            <div class="redirect-card-title">1930 Recovery Centre</div>
+                        </div>
+                    </div>
+                    <p class="redirect-card-desc">Already lost money or clicked a malicious link? Access time-critical Golden Hour emergency freeze checklists.</p>
+                    <span class="redirect-card-link">Launch Incident Response →</span>
+                </a>
+
+                <a href="/arthsim" class="redirect-card">
+                    <div class="redirect-card-top">
+                        <div class="redirect-icon">📉</div>
+                        <div>
+                            <span class="redirect-card-code">Module 05</span>
+                            <div class="redirect-card-title">ArthSim Shock Simulator</div>
+                        </div>
+                    </div>
+                    <p class="redirect-card-desc">Simulate the financial shock of a ₹50,000 cyber theft on your household savings and emergency runway.</p>
+                    <span class="redirect-card-link">Run Cyber Shock Test →</span>
+                </a>
+
+                <a href="/trustgraph" class="redirect-card">
+                    <div class="redirect-card-top">
+                        <div class="redirect-icon">🕸️</div>
+                        <div>
+                            <span class="redirect-card-code">Module 07</span>
+                            <div class="redirect-card-title">Trust Graph Architecture</div>
+                        </div>
+                    </div>
+                    <p class="redirect-card-desc">Inspect visual node-link pathways connecting threat syndicates to mule accounts and 1930 freezing points.</p>
+                    <span class="redirect-card-link">Explore Threat Network →</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ── SETTINGS DRAWER ── -->
+    <div class="settings-drawer" id="settingsDrawer">
+        <div class="settings-header">
+            <h4 style="font-family: var(--font-heading); color: #FFFFFF; font-size: 1.2rem; margin: 0;">System Settings</h4>
+            <button onclick="toggleSettings()" style="background: transparent; border: none; color: #FFFFFF; font-size: 1.2rem; cursor: pointer;">✕</button>
+        </div>
+
+        <div class="settings-group">
+            <span class="settings-label">Color Accent Theme</span>
+            <div class="theme-options-grid">
+                <button class="theme-btn active" data-theme="cyber-violet" onclick="setTheme('cyber-violet')">
+                    <span class="theme-color-dot" style="background: #A855F7;"></span>
+                    <span>Cyber Violet</span>
+                </button>
+                <button class="theme-btn" data-theme="gold-obsidian" onclick="setTheme('gold-obsidian')">
+                    <span class="theme-color-dot" style="background: #F59E0B;"></span>
+                    <span>Gold Obsidian</span>
+                </button>
+                <button class="theme-btn" data-theme="emerald-shield" onclick="setTheme('emerald-shield')">
+                    <span class="theme-color-dot" style="background: #10B981;"></span>
+                    <span>Emerald Shield</span>
+                </button>
+                <button class="theme-btn" data-theme="matrix-cyan" onclick="setTheme('matrix-cyan')">
+                    <span class="theme-color-dot" style="background: #06B6D4;"></span>
+                    <span>Matrix Cyan</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-group">
+            <span class="settings-label">Currency Unit</span>
+            <div style="display: flex; gap: 8px;">
+                <button class="pill-btn secondary-pill" onclick="toggleCurrency('INR')" style="flex: 1; padding: 8px;">
+                    <span>₹ INR (Lakh/Cr)</span>
+                </button>
+                <button class="pill-btn secondary-pill" onclick="toggleCurrency('USD')" style="flex: 1; padding: 8px;">
+                    <span>$ USD</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-group" style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px;">
+            <a href="/warning" class="pill-btn danger-pill" style="width: 100%; justify-content: center; text-decoration: none;">
+                <span>⚠️ What AAYAM Is NOT For</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ── QUICK JUMP PALETTE (Ctrl+K) ── -->
+    <div class="quick-jump-modal" id="quickJumpModal" onclick="if(event.target === this) toggleQuickJump()">
+        <div class="quick-jump-box">
+            <input type="text" id="quickJumpInput" class="quick-jump-search" placeholder="Type a module or jump target... (e.g. Twin, Recovery, 1930)" oninput="filterQuickJump(this.value)">
+            <div class="quick-jump-list">
+                <a href="/" class="quick-jump-item"><span>🏠 Home Portal Hub</span><span style="font-size: 0.75rem; color: #94A3B8;">Landing Overview</span></a>
+                <a href="/command" class="quick-jump-item"><span>🎛️ Command Centre</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 01</span></a>
+                <a href="/twin" class="quick-jump-item"><span>💰 Economic Digital Twin</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 02</span></a>
+                <a href="/opportunities" class="quick-jump-item"><span>🚀 Opportunity Pathways &amp; Mudra</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 03</span></a>
+                <a href="/cyberdrishti" class="quick-jump-item"><span>🛡️ CyberDrishti Threat Screener</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 04</span></a>
+                <a href="/arthsim" class="quick-jump-item"><span>📉 ArthSim Scenario Simulator</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 05</span></a>
+                <a href="/intelligence" class="quick-jump-item"><span>📊 India Macro &amp; Crime Telemetry</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 06</span></a>
+                <a href="/trustgraph" class="quick-jump-item"><span>🕸️ Trust Graph Threat Architecture</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 07</span></a>
+                <a href="/recovery" class="quick-jump-item"><span>🚨 Recovery Centre &amp; 1930 Playbooks</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 08</span></a>
+                <a href="/guide" class="quick-jump-item"><span>📖 System Guide &amp; Persona Manual</span><span style="font-size: 0.75rem; color: #94A3B8;">Documentation</span></a>
+                <a href="/warning" class="quick-jump-item"><span>⚠️ What AAYAM Is Not For</span><span style="font-size: 0.75rem; color: #FB7185;">Ethical Limits</span></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-col-main">
+                <div class="nav-brand" style="margin-bottom: 12px;">
+                    <span class="brand-shield">🛡️</span>
+                    <span class="brand-title">AAYAM</span>
+                </div>
+                <p class="footer-lead">
+                    Multi-Dimensional Intelligence System for Economic Mobility &amp; Cyber-Financial Defense for India.
+                </p>
+                <div style="margin-top: 14px; font-size: 0.8rem; color: var(--accent-violet);">
+                    <strong>System Status:</strong> Operational &bull; 130/130 Unit Tests Passing &bull; Vercel Ready
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Core Modules</span>
+                <ul class="footer-links">
+                    <li><a href="/command">Command Centre</a></li>
+                    <li><a href="/twin">Economic Digital Twin</a></li>
+                    <li><a href="/opportunities">Opportunity Pathways</a></li>
+                    <li><a href="/cyberdrishti">CyberDrishti Screener</a></li>
+                    <li><a href="/arthsim">ArthSim Simulator</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Intelligence &amp; Safety</span>
+                <ul class="footer-links">
+                    <li><a href="/intelligence">India Telemetry</a></li>
+                    <li><a href="/trustgraph">Trust Graph</a></li>
+                    <li><a href="/recovery">1930 Recovery Centre</a></li>
+                    <li><a href="/guide">How To Use Guide</a></li>
+                    <li><a href="/warning">What AAYAM Is Not For</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Project Leadership</span>
+                <div class="team-compact-list">
+                    <div class="team-compact-item">
+                        <strong>Aditya Singh</strong>
+                        <span>FinTech &amp; Economic Models</span>
+                    </div>
+                    <div class="team-compact-item">
+                        <strong>Abhishek Shrivastava</strong>
+                        <span>Cyber Security &amp; Threat Engines</span>
+                    </div>
+                    <div class="team-compact-item">
+                        <strong>Aarushi S.</strong>
+                        <span>AI/ML &amp; Decision Support</span>
+                    </div>
+                    <div class="team-compact-item">
+                        <strong>Ansh Saini</strong>
+                        <span>UI/UX &amp; Exquisite Design</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>&copy; 2026 AAYAM Research Initiative. Built for high-trust digital India.</span>
+            <div class="footer-bottom-links">
+                <a href="/warning">Ethical Guardrails</a>
+                <a href="https://cybercrime.gov.in" target="_blank">National Helpline: 1930</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

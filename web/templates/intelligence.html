@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Macro &amp; Cybercrime Intelligence — Official Datasets | AAYAM</title>
+    <meta name="description" content="Verified macroeconomic indicators, digital payments volume, state-by-state cyber fraud complaints, and official provenance registers.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body data-theme="cyber-violet">
+
+    <!-- Interactive Cursor Glow Aura -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Ambient Glow Backgrounds -->
+    <div class="ambient-glow glow-top-right"></div>
+    <div class="ambient-glow glow-mid-left"></div>
+    <div class="ambient-glow glow-bottom-center"></div>
+
+    <!-- Floating Navigation Bar -->
+    <header class="navbar-wrapper">
+        <nav class="navbar" id="navbar">
+            <a href="/" class="nav-brand" style="text-decoration: none;">
+                <span class="brand-shield">🛡️</span>
+                <span class="brand-title">AAYAM</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/command">Command</a></li>
+                <li><a href="/twin">Digital Twin</a></li>
+                <li><a href="/cyberdrishti">CyberDrishti</a></li>
+                <li><a href="/arthsim">ArthSim</a></li>
+                <li><a href="/opportunities">Opportunities</a></li>
+                <li><a href="/intelligence" class="active">Intelligence</a></li>
+                <li><a href="/recovery">Recovery</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="pill-btn nav-guide-btn" onclick="toggleQuickJump()" title="Quick Jump (Ctrl+K)">
+                    <span>Jump</span>
+                    <span class="pill-icon">⚡</span>
+                </button>
+                <button class="pill-btn nav-start-btn" onclick="toggleSettings()" title="Settings & Theme">
+                    <span>Settings</span>
+                    <span class="pill-icon">⚙️</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Hero Banner -->
+    <main class="page-hero">
+        <div class="page-breadcrumbs">
+            <a href="/">Portal Hub</a>
+            <span class="separator">/</span>
+            <span>Module 06</span>
+            <span class="separator">/</span>
+            <span style="color: var(--accent-violet);">India Macro &amp; Cyber Intelligence</span>
+        </div>
+
+        <div class="page-hero-badge-row">
+            <span class="page-code-badge">MODULE 06 // PUBLIC DATA PROVENANCE</span>
+            <span class="benefit-chip"><span class="benefit-icon">🏛️</span> RBI &amp; MoSPI Registers</span>
+            <span class="benefit-chip"><span class="benefit-icon">🗺️</span> State-by-State Telemetry</span>
+            <span class="benefit-chip"><span class="benefit-icon">🔗</span> Verified Citations</span>
+        </div>
+
+        <h1 class="page-hero-title">India Macro &amp; Cyber Intelligence</h1>
+        <p class="page-hero-desc">
+            Explore authoritative, public datasets powering AAYAM's models. Access live telemetry on UPI transaction values, state-level cybercrime complaint statistics from MHA 1930, and verified source provenance citations.
+        </p>
+
+        <!-- How To Use Box -->
+        <section class="how-to-use-box">
+            <div class="htu-header">
+                <div class="htu-header-title">
+                    <span>📖</span>
+                    <span>How To Explore Intelligence Registers</span>
+                </div>
+                <span style="font-size: 0.78rem; color: var(--accent-violet); font-weight: 700;">3 REGISTER STEPS</span>
+            </div>
+            <div class="htu-steps-grid">
+                <div class="htu-step-card">
+                    <span class="htu-step-num">1</span>
+                    <div class="htu-step-content">
+                        <h5>Select Data Register</h5>
+                        <p>Switch between UPI App Volumes, State-Wise Cyber Complaints, and Source Provenance tables.</p>
+                    </div>
+                </div>
+                <div class="htu-step-card">
+                    <span class="htu-step-num">2</span>
+                    <div class="htu-step-content">
+                        <h5>Analyze State Distribution</h5>
+                        <p>Observe which states experience the highest cyber fraud volumes and compare recovery rates.</p>
+                    </div>
+                </div>
+                <div class="htu-step-card">
+                    <span class="htu-step-num">3</span>
+                    <div class="htu-step-content">
+                        <h5>Inspect Official Citations</h5>
+                        <p>Click official government portal links (RBI, NPCI, MHA, MoSPI) for primary research provenance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategic Benefits Strip -->
+        <div class="benefits-strip">
+            <div class="benefit-chip">
+                <span class="benefit-icon">✅</span>
+                <strong>Zero Synthetic Hallucinations:</strong> 100% grounded in official published bulletins
+            </div>
+            <div class="benefit-chip">
+                <span class="benefit-icon">📊</span>
+                <strong>Benchmarking Accuracy:</strong> Calibrates personal savings runways against national CPI inflation
+            </div>
+            <div class="benefit-chip">
+                <span class="benefit-icon">🔍</span>
+                <strong>Auditable Research:</strong> Fully transparent references and data schemas
+            </div>
+        </div>
+
+        <!-- ── TABBED DATA TABLES ── -->
+        <section style="margin-top: 30px;">
+            <!-- Register 1: UPI Telemetry -->
+            <div class="twin-card" style="margin-bottom: 24px;">
+                <div class="twin-card-header">
+                    <div>
+                        <span class="twin-card-tag">DIGITAL PAYMENTS TELEMETRY</span>
+                        <h3 class="twin-card-title">Top UPI Ecosystem Providers (NPCI Data)</h3>
+                    </div>
+                    <span class="card-icon-badge">📱</span>
+                </div>
+                <div id="upi_table_container" style="overflow-x: auto;">
+                    <p style="color: var(--text-dim);">Loading NPCI telemetry...</p>
+                </div>
+            </div>
+
+            <!-- Register 2: State Cyber Frauds -->
+            <div class="twin-card" style="margin-bottom: 24px;">
+                <div class="twin-card-header">
+                    <div>
+                        <span class="twin-card-tag">MHA 1930 TELEMETRY</span>
+                        <h3 class="twin-card-title">State-Level Financial Cyber Fraud Distribution (2024)</h3>
+                    </div>
+                    <span class="card-icon-badge">🗺️</span>
+                </div>
+                <div id="state_frauds_container" style="overflow-x: auto;">
+                    <p style="color: var(--text-dim);">Loading state cybercrime registers...</p>
+                </div>
+            </div>
+
+            <!-- Register 3: Provenance Citations -->
+            <div class="twin-card">
+                <div class="twin-card-header">
+                    <div>
+                        <span class="twin-card-tag">PROVENANCE CITATIONS</span>
+                        <h3 class="twin-card-title">Official Government Registry Sources</h3>
+                    </div>
+                    <span class="card-icon-badge">📜</span>
+                </div>
+                <div id="sources_table_container">
+                    <p style="color: var(--text-dim);">Loading source registers...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── REDIRECTION & NEXT STEPS ── -->
+        <section class="redirections-section" style="padding: 0;">
+            <h3 class="redirections-title">Ecosystem Next Steps</h3>
+            <p class="redirections-sub">Apply macroeconomic data to your individual household security:</p>
+            <div class="redirection-grid">
+                <a href="/command" class="redirect-card">
+                    <div class="redirect-card-top">
+                        <div class="redirect-icon">🎛️</div>
+                        <div>
+                            <span class="redirect-card-code">Module 01</span>
+                            <div class="redirect-card-title">Systemic Command Centre</div>
+                        </div>
+                    </div>
+                    <p class="redirect-card-desc">Review synthesized situational telemetry uniting national payment velocity with household resilience.</p>
+                    <span class="redirect-card-link">View Command Centre →</span>
+                </a>
+
+                <a href="/cyberdrishti" class="redirect-card">
+                    <div class="redirect-card-top">
+                        <div class="redirect-icon">🛡️</div>
+                        <div>
+                            <span class="redirect-card-code">Module 04</span>
+                            <div class="redirect-card-title">CyberDrishti Screener</div>
+                        </div>
+                    </div>
+                    <p class="redirect-card-desc">Notice how over ₹1,200 Cr is defrauded annually? Screen your suspicious SMS and calls now.</p>
+                    <span class="redirect-card-link">Screen Threat Signals →</span>
+                </a>
+
+                <a href="/arthsim" class="redirect-card">
+                    <div class="redirect-card-top">
+                        <div class="redirect-icon">📉</div>
+                        <div>
+                            <span class="redirect-card-code">Module 05</span>
+                            <div class="redirect-card-title">ArthSim Shock Simulator</div>
+                        </div>
+                    </div>
+                    <p class="redirect-card-desc">Simulate how national inflation surges and fuel hikes impact your family's savings balance.</p>
+                    <span class="redirect-card-link">Test Inflation Shock →</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ── SETTINGS DRAWER ── -->
+    <div class="settings-drawer" id="settingsDrawer">
+        <div class="settings-header">
+            <h4 style="font-family: var(--font-heading); color: #FFFFFF; font-size: 1.2rem; margin: 0;">System Settings</h4>
+            <button onclick="toggleSettings()" style="background: transparent; border: none; color: #FFFFFF; font-size: 1.2rem; cursor: pointer;">✕</button>
+        </div>
+
+        <div class="settings-group">
+            <span class="settings-label">Color Accent Theme</span>
+            <div class="theme-options-grid">
+                <button class="theme-btn active" data-theme="cyber-violet" onclick="setTheme('cyber-violet')">
+                    <span class="theme-color-dot" style="background: #A855F7;"></span>
+                    <span>Cyber Violet</span>
+                </button>
+                <button class="theme-btn" data-theme="gold-obsidian" onclick="setTheme('gold-obsidian')">
+                    <span class="theme-color-dot" style="background: #F59E0B;"></span>
+                    <span>Gold Obsidian</span>
+                </button>
+                <button class="theme-btn" data-theme="emerald-shield" onclick="setTheme('emerald-shield')">
+                    <span class="theme-color-dot" style="background: #10B981;"></span>
+                    <span>Emerald Shield</span>
+                </button>
+                <button class="theme-btn" data-theme="matrix-cyan" onclick="setTheme('matrix-cyan')">
+                    <span class="theme-color-dot" style="background: #06B6D4;"></span>
+                    <span>Matrix Cyan</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-group">
+            <span class="settings-label">Currency Unit</span>
+            <div style="display: flex; gap: 8px;">
+                <button class="pill-btn secondary-pill" onclick="toggleCurrency('INR')" style="flex: 1; padding: 8px;">
+                    <span>₹ INR (Lakh/Cr)</span>
+                </button>
+                <button class="pill-btn secondary-pill" onclick="toggleCurrency('USD')" style="flex: 1; padding: 8px;">
+                    <span>$ USD</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-group" style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px;">
+            <a href="/warning" class="pill-btn danger-pill" style="width: 100%; justify-content: center; text-decoration: none;">
+                <span>⚠️ What AAYAM Is NOT For</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ── QUICK JUMP PALETTE ── -->
+    <div class="quick-jump-modal" id="quickJumpModal" onclick="if(event.target === this) toggleQuickJump()">
+        <div class="quick-jump-box">
+            <input type="text" id="quickJumpInput" class="quick-jump-search" placeholder="Type a module or jump target..." oninput="filterQuickJump(this.value)">
+            <div class="quick-jump-list">
+                <a href="/" class="quick-jump-item"><span>🏠 Home Portal Hub</span><span style="font-size: 0.75rem; color: #94A3B8;">Landing Overview</span></a>
+                <a href="/command" class="quick-jump-item"><span>🎛️ Command Centre</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 01</span></a>
+                <a href="/twin" class="quick-jump-item"><span>💰 Economic Digital Twin</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 02</span></a>
+                <a href="/opportunities" class="quick-jump-item"><span>🚀 Opportunity Pathways &amp; Mudra</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 03</span></a>
+                <a href="/cyberdrishti" class="quick-jump-item"><span>🛡️ CyberDrishti Threat Screener</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 04</span></a>
+                <a href="/arthsim" class="quick-jump-item"><span>📉 ArthSim Scenario Simulator</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 05</span></a>
+                <a href="/intelligence" class="quick-jump-item"><span>📊 India Macro &amp; Crime Telemetry</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 06</span></a>
+                <a href="/trustgraph" class="quick-jump-item"><span>🕸️ Trust Graph Threat Architecture</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 07</span></a>
+                <a href="/recovery" class="quick-jump-item"><span>🚨 Recovery Centre &amp; 1930 Playbooks</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 08</span></a>
+                <a href="/guide" class="quick-jump-item"><span>📖 System Guide &amp; Persona Manual</span><span style="font-size: 0.75rem; color: #94A3B8;">Documentation</span></a>
+                <a href="/warning" class="quick-jump-item"><span>⚠️ What AAYAM Is Not For</span><span style="font-size: 0.75rem; color: #FB7185;">Ethical Limits</span></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-col-main">
+                <div class="nav-brand" style="margin-bottom: 12px;">
+                    <span class="brand-shield">🛡️</span>
+                    <span class="brand-title">AAYAM</span>
+                </div>
+                <p class="footer-lead">
+                    Multi-Dimensional Intelligence System for Economic Mobility &amp; Cyber-Financial Defense for India.
+                </p>
+                <div style="margin-top: 14px; font-size: 0.8rem; color: var(--accent-violet);">
+                    <strong>Data Provenance:</strong> Datasets fetched from public disclosures of RBI, NPCI, MoSPI, and MHA.
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Core Modules</span>
+                <ul class="footer-links">
+                    <li><a href="/command">Command Centre</a></li>
+                    <li><a href="/twin">Economic Digital Twin</a></li>
+                    <li><a href="/opportunities">Opportunity Pathways</a></li>
+                    <li><a href="/cyberdrishti">CyberDrishti Screener</a></li>
+                    <li><a href="/arthsim">ArthSim Simulator</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Intelligence &amp; Safety</span>
+                <ul class="footer-links">
+                    <li><a href="/intelligence">India Telemetry</a></li>
+                    <li><a href="/trustgraph">Trust Graph</a></li>
+                    <li><a href="/recovery">1930 Recovery Centre</a></li>
+                    <li><a href="/guide">How To Use Guide</a></li>
+                    <li><a href="/warning">What AAYAM Is Not For</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Project Leadership</span>
+                <div class="team-compact-list">
+                    <div class="team-compact-item">
+                        <strong>Aditya Singh</strong>
+                        <span>FinTech &amp; Economic Models</span>
+                    </div>
+                    <div class="team-compact-item">
+                        <strong>Abhishek Shrivastava</strong>
+                        <span>Cyber Security &amp; Threat Engines</span>
+                    </div>
+                    <div class="team-compact-item">
+                        <strong>Aarushi S.</strong>
+                        <span>AI/ML &amp; Decision Support</span>
+                    </div>
+                    <div class="team-compact-item">
+                        <strong>Ansh Saini</strong>
+                        <span>UI/UX &amp; Exquisite Design</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>&copy; 2026 AAYAM Research Initiative. Built for high-trust digital India.</span>
+            <div class="footer-bottom-links">
+                <a href="/warning">Ethical Guardrails</a>
+                <a href="https://cybercrime.gov.in" target="_blank">National Helpline: 1930</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
