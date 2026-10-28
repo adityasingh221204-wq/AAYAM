@@ -6,7 +6,7 @@
     <title>AAYAM — AI-Driven Economic Mobility & Cyber-Financial Defense for India</title>
     <meta name="description" content="AAYAM is an intelligent decision-support system that diagnoses personal financial health, matches higher-paying careers and Mudra loans, and screens cyber-scams in real-time.">
     
-    <!-- Google Fonts: Syne (Futuristic Headings) + Inter (Body) + Space Grotesk (Tech) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -15,111 +15,106 @@
 </head>
 <body>
 
-    <!-- ── Interactive Cursor Glow Aura ── -->
+    <!-- Cursor Glow -->
     <div class="cursor-glow" id="cursorGlow"></div>
 
-    <!-- ── Ambient Cyber Glow Backgrounds ── -->
+    <!-- Ambient Backgrounds -->
     <div class="ambient-glow glow-top-right"></div>
     <div class="ambient-glow glow-mid-left"></div>
     <div class="ambient-glow glow-bottom-center"></div>
 
-    <!-- ── Floating Glassmorphism Navigation Bar ── -->
-    <header class="navbar-wrapper">
+    <!-- ── FLOATING ANIMATED SIDEBAR DOCK ── -->
+    <aside class="navbar-wrapper" id="sidebarDock">
         <nav class="navbar" id="navbar">
-            <a href="/" class="nav-brand" style="text-decoration: none;">
-                <span class="brand-shield">🛡️</span>
-                <span class="brand-title">AAYAM</span>
-            </a>
+            <div class="nav-top-block">
+                <a href="/" class="nav-brand" title="AAYAM Home">
+                    <span class="brand-shield">🛡️</span>
+                    <span class="brand-title">AAYAM</span>
+                </a>
+            </div>
             
             <ul class="nav-links">
-                <li><a href="/" class="active">Home</a></li>
-                <li><a href="/command">Command</a></li>
-                <li><a href="/twin">Digital Twin</a></li>
-                <li><a href="/cyberdrishti">CyberDrishti</a></li>
-                <li><a href="/arthsim">ArthSim</a></li>
-                <li><a href="/opportunities">Opportunities</a></li>
-                <li><a href="/intelligence">Intelligence</a></li>
-                <li><a href="/recovery">Recovery</a></li>
+                <li><a href="/" class="active" title="Home"><span class="nav-icon">🏠</span><span class="nav-text">Home</span></a></li>
+                <li><a href="/models" title="Live Models Playground"><span class="nav-icon">💻</span><span class="nav-text">Live Models</span></a></li>
+                <li><a href="/defense" title="Report & Architecture"><span class="nav-icon">📐</span><span class="nav-text">Report & Architecture</span></a></li>
+                <li><a href="/command" title="Command Centre"><span class="nav-icon">🎛️</span><span class="nav-text">Command Centre</span></a></li>
+                <li><a href="/twin" title="Digital Twin"><span class="nav-icon">🧬</span><span class="nav-text">Digital Twin</span></a></li>
+                <li><a href="/cyberdrishti" title="CyberDrishti"><span class="nav-icon">🔍</span><span class="nav-text">CyberDrishti</span></a></li>
+                <li><a href="/arthsim" title="ArthSim"><span class="nav-icon">⚡</span><span class="nav-text">ArthSim</span></a></li>
+                <li><a href="/opportunities" title="Opportunities"><span class="nav-icon">🚀</span><span class="nav-text">Opportunities</span></a></li>
+                <li><a href="/intelligence" title="Intelligence"><span class="nav-icon">📊</span><span class="nav-text">Intelligence</span></a></li>
+                <li><a href="/trustgraph" title="Trust Graph"><span class="nav-icon">🕸️</span><span class="nav-text">Trust Graph</span></a></li>
+                <li><a href="/recovery" title="Recovery"><span class="nav-icon">🆘</span><span class="nav-text">Recovery</span></a></li>
+                <li><a href="/guide" title="Guide"><span class="nav-icon">📖</span><span class="nav-text">Guide</span></a></li>
+                <li><a href="/disclaimer" title="Disclaimer"><span class="nav-icon">⚠️</span><span class="nav-text">Disclaimer</span></a></li>
             </ul>
 
             <div class="nav-actions">
-                <button class="pill-btn nav-guide-btn" onclick="toggleQuickJump()" title="Quick Jump (Ctrl+K)">
-                    <span>Jump</span>
-                    <span class="pill-icon">⚡</span>
-                </button>
-                <button class="pill-btn nav-start-btn" onclick="toggleSettings()" title="Settings & Theme">
-                    <span>Settings</span>
-                    <span class="pill-icon">⚙️</span>
+                <button class="pill-btn nav-guide-btn" onclick="toggleQuickJump()" title="Quick Jump (Ctrl+K)" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 6px 0;">
+                    <span style="font-size: 0.85rem;">⌘K</span>
                 </button>
             </div>
         </nav>
-    </header>
+    </aside>
 
     <!-- ── 1. HERO SECTION ── -->
     <section class="hero-section" id="hero">
-        <!-- Left Side Floating Social & Telemetry Indicators -->
-        <div class="hero-side-indicators">
-            <span class="side-dot active"></span>
-            <span class="side-dot"></span>
-            <span class="side-dot"></span>
-            <div class="side-socials">
-                <span title="Decent Work">🇮🇳</span>
-                <span title="FinTech Defense">🛡️</span>
-                <span title="AI Decision Support">⚡</span>
-            </div>
-        </div>
-
         <div class="hero-container">
             <div class="hero-content">
-                <div class="hero-tagline-small">MULTI-DIMENSIONAL INTELLIGENCE SYSTEM</div>
-                <h1 class="hero-title">AAYAM</h1>
+                <div class="reveal-up" style="margin-bottom: 12px;">
+                    <a href="/defense" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.15); border: 1px solid #10B981; color: #34D399; padding: 6px 16px; border-radius: 9999px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em;">
+                        <span>🎓 AUCML SEMESTER 5 CAPSTONE &bull; SYSTEM REPORT & ARCHITECTURE</span>
+                        <span>→</span>
+                    </a>
+                </div>
+                <div class="hero-tagline-small reveal-up">MULTI-DIMENSIONAL INTELLIGENCE SYSTEM</div>
+                <h1 class="hero-title reveal-up delay-1">AAYAM</h1>
                 
-                <p class="hero-lead">
+                <p class="hero-lead reveal-up delay-2">
                     Your AI Copilot for <strong>Economic Mobility</strong> & <strong>Citizen Cyber Defense</strong> in India.
                 </p>
 
-                <!-- Plain-English Plain-Spoken Explanation Box -->
-                <div class="hero-explainer-card">
+                <div class="hero-explainer-card reveal-up delay-3">
                     <div class="explainer-header">
                         <span class="explainer-bulb">💡</span>
-                        <strong>What is AAYAM in simple terms?</strong>
+                        <strong>What AAYAM does — in plain English</strong>
                     </div>
                     <ul class="explainer-list">
-                        <li><strong>1. Financial Health Twin:</strong> Calculates your monthly cash flow surplus, emergency runway months, and resilience score (0–100).</li>
-                        <li><strong>2. Career Mobility:</strong> Matches your skills to higher-paying jobs &amp; micro-enterprises with government Mudra loan funding.</li>
-                        <li><strong>3. Scam &amp; Threat Shield:</strong> Instantly screens suspicious SMS, APKs, or calls to stop fraud before you lose money.</li>
-                        <li><strong>4. 1930 Emergency Response:</strong> Time-critical playbooks to freeze stolen funds during the Golden 2-Hour window.</li>
+                        <li><strong>Financial Health Twin:</strong> Calculates your cash flow surplus, emergency runway, and resilience score (0–100).</li>
+                        <li><strong>Career Mobility:</strong> Matches your skills to higher-paying jobs & Mudra loan-funded micro-enterprises.</li>
+                        <li><strong>Scam Shield:</strong> Screens suspicious SMS, APKs, or calls against 13+ attack patterns in real-time.</li>
+                        <li><strong>Emergency Response:</strong> Golden 2-hour playbooks to freeze stolen funds via 1930 helpline.</li>
                     </ul>
                 </div>
 
-                <div class="hero-cta-group">
+                <div class="hero-cta-group reveal-up delay-4">
                     <button class="pill-btn primary-pill glow-pulse" onclick="scrollToSection('interactive-suite')">
                         <span>TRY INSTANT DEMO</span>
                         <span class="pill-icon">⚡</span>
                     </button>
-                    <button class="pill-btn secondary-pill" onclick="openModal('guideModal')">
-                        <span>HOW TO USE GUIDE</span>
+                    <a href="/guide" class="pill-btn secondary-pill" style="text-decoration: none;">
+                        <span>HOW TO USE</span>
                         <span class="pill-icon">📖</span>
-                    </button>
+                    </a>
                 </div>
 
-                <!-- Live National Telemetry Chips -->
-                <div class="hero-metrics-strip">
+                <!-- Telemetry -->
+                <div class="hero-metrics-strip reveal-up delay-5">
                     <div class="metric-chip">
                         <span class="chip-val">16,106 Cr</span>
-                        <span class="chip-lbl">Monthly UPI Txns (RBI)</span>
+                        <span class="chip-lbl">Monthly UPI Txns</span>
                     </div>
                     <div class="metric-chip">
                         <span class="chip-val">10.01 Lakh</span>
-                        <span class="chip-lbl">1930 Cyber Complaints</span>
+                        <span class="chip-lbl">1930 Complaints</span>
                     </div>
                     <div class="metric-chip">
                         <span class="chip-val">₹990 Cr</span>
-                        <span class="chip-lbl">Saved in Golden Hour</span>
+                        <span class="chip-lbl">Saved (Golden Hour)</span>
                     </div>
                     <div class="metric-chip">
                         <span class="chip-val">130/130</span>
-                        <span class="chip-lbl">Unit Tests Passing</span>
+                        <span class="chip-lbl">Tests Passing</span>
                     </div>
                 </div>
             </div>
@@ -129,238 +124,364 @@
                     <div class="fluid-backlight"></div>
                     <img src="/static/images/hero_fluid.jpg" alt="AAYAM 3D Iridescent Fluid Ribbon" class="fluid-image">
                 </div>
-
-                <!-- Circular 'Scroll to Explore' Rotating Badge -->
                 <div class="scroll-badge" onclick="scrollToSection('explain')">
-                    <div class="badge-ring-text">
-                        <span>SCROLL • TO • EXPLORE • </span>
-                    </div>
+                    <div class="badge-ring-text"><span>SCROLL • TO • EXPLORE • </span></div>
                     <div class="badge-arrow">↓</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ── 2. WHAT IS AAYAM & THE CORE PROBLEM SECTION ── -->
+    <!-- ── 2. THE PROBLEM WE SOLVE ── -->
     <section class="explain-section" id="explain">
-        <div class="watermark-text watermark-explain">MISSION</div>
-        
         <div class="explain-container">
-            <div class="section-label">THE PROBLEM WE SOLVE</div>
-            <h2 class="section-headline">Why Indian Citizens Need AAYAM Today</h2>
+            <div class="section-label reveal-up">THE PROBLEM WE SOLVE</div>
+            <h2 class="section-headline reveal-up">Why Indian Citizens Need AAYAM Today</h2>
             
             <div class="problem-solution-grid">
-                <div class="ps-card problem-card">
+                <div class="ps-card problem-card reveal-up">
                     <div class="ps-icon">⚠️</div>
                     <h3>The Twin Vulnerabilities</h3>
                     <p>
-                        Millions of working Indians face two simultaneous threats: <strong>economic stagnation</strong> (limited career mobility, no clear upskilling roadmap, no credit access) and <strong>predatory cyber-financial fraud</strong> (digital arrests, loan app extortion, fake task traps draining lifetime savings in minutes).
+                        Millions of working Indians face <strong>economic stagnation</strong> (limited career mobility, no credit access) and <strong>predatory cyber-financial fraud</strong> (digital arrests, loan app extortion, fake task traps draining savings in minutes).
                     </p>
                 </div>
-                <div class="ps-card solution-card">
+                <div class="ps-card solution-card reveal-up delay-1">
                     <div class="ps-icon">🛡️</div>
-                    <h3>The AAYAM Integrated Solution</h3>
+                    <h3>The AAYAM Solution</h3>
                     <p>
-                        AAYAM connects these two halves for the first time. We diagnose your financial strength, suggest higher-earning career transitions backed by government schemes (PMKVY 4.0 &amp; Mudra), and shield your assets with explainable AI fraud detection.
+                        AAYAM connects both halves — diagnosing financial strength, suggesting career transitions backed by PMKVY 4.0 & Mudra, and shielding assets with explainable AI fraud detection.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ── 3. HOW IT WORKS / 4-STEP CITIZEN JOURNEY (MATCHING REFERENCE PROCESS) ── -->
+    <!-- ── 3. HOW IT WORKS: INTERACTIVE 4-STEP RESILIENCE JOURNEY ── -->
     <section class="process-section" id="process">
-        <div class="watermark-text watermark-process">PROCESS</div>
-
         <div class="process-header">
-            <div class="section-label">HOW IT WORKS</div>
-            <h2 class="section-headline">Our 4-Step Citizen Resilience Journey</h2>
-            <p class="section-subtext">
-                Follow this simple, step-by-step roadmap to assess your financial baseline, unlock new earnings, and protect your digital savings.
-            </p>
+            <div class="section-label reveal-up">HOW IT WORKS</div>
+            <h2 class="section-headline reveal-up">4-Step Citizen Resilience Journey</h2>
+            <p class="section-subtext reveal-up">Test each step of the citizen lifecycle right here using your own live inputs:</p>
         </div>
 
-        <div class="process-list">
-            <!-- Step 1: A-01 -->
-            <div class="process-row" onclick="toggleProcessDetail(1)">
-                <div class="proc-left">
-                    <span class="proc-number">01</span>
-                    <span class="proc-code">A-01</span>
+        <div class="journey-shell reveal-up">
+            <!-- 4 Interactive Step Tabs -->
+            <div class="journey-step-tabs">
+                <button class="journey-tab-nav active" id="j-tab-1" onclick="selectJourneyTab(1)">
+                    <span class="j-step-num">STEP 01</span>
+                    <span class="j-step-name">Personal Baseline & Twin</span>
+                </button>
+                <button class="journey-tab-nav" id="j-tab-2" onclick="selectJourneyTab(2)">
+                    <span class="j-step-num">STEP 02</span>
+                    <span class="j-step-name">Opportunity & Mudra Loan</span>
+                </button>
+                <button class="journey-tab-nav" id="j-tab-3" onclick="selectJourneyTab(3)">
+                    <span class="j-step-num">STEP 03</span>
+                    <span class="j-step-name">Real-Time Scam Defense</span>
+                </button>
+                <button class="journey-tab-nav" id="j-tab-4" onclick="selectJourneyTab(4)">
+                    <span class="j-step-num">STEP 04</span>
+                    <span class="j-step-name">1930 Golden Hour Freeze</span>
+                </button>
+            </div>
+
+            <!-- Panel 1: Personal Financial Baseline -->
+            <div class="journey-panel active" id="j-panel-1">
+                <div class="journey-panel-grid">
+                    <div class="journey-input-card">
+                        <h4 style="color: #FFFFFF; font-size: 1.05rem; margin-bottom: 6px;">🧬 Step 1: Diagnose Financial Health</h4>
+                        <p style="color: #94A3B8; font-size: 0.85rem; margin-bottom: 18px;">
+                            Adjust your monthly finances to test AAYAM's Economic Resilience Index (ERI) formula:
+                        </p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 14px;">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+                                    <label>Monthly Income</label>
+                                    <strong id="j_lbl_inc" style="color: #D8B4FE;">₹30,000</strong>
+                                </div>
+                                <input type="range" id="j_inc" min="10000" max="150000" step="2500" value="30000" oninput="updateJourneyStep1()" style="width: 100%;">
+                            </div>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+                                    <label>Monthly Expenses</label>
+                                    <strong id="j_lbl_exp" style="color: #FB7185;">₹18,000</strong>
+                                </div>
+                                <input type="range" id="j_exp" min="5000" max="100000" step="2000" value="18000" oninput="updateJourneyStep1()" style="width: 100%;">
+                            </div>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+                                    <label>Liquid Savings</label>
+                                    <strong id="j_lbl_sav" style="color: #34D399;">₹45,000</strong>
+                                </div>
+                                <input type="range" id="j_sav" min="0" max="250000" step="5000" value="45000" oninput="updateJourneyStep1()" style="width: 100%;">
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="pill-btn primary-pill" onclick="selectJourneyTab(2)" style="font-size: 0.8rem; padding: 7px 16px;">
+                                <span>Proceed to Step 2</span>
+                                <span>→</span>
+                            </button>
+                            <a href="/twin" class="pill-btn secondary-pill" style="text-decoration: none; font-size: 0.8rem; padding: 7px 16px;">
+                                <span>Open Full Twin 🧬</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="journey-result-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94A3B8;">Diagnostic Result</span>
+                            <span id="j_tier_tag" style="background: rgba(16, 185, 129, 0.2); color: #34D399; font-size: 0.75rem; font-weight: 800; padding: 3px 10px; border-radius: 9999px;">Resilient</span>
+                        </div>
+
+                        <div style="text-align: center; margin-bottom: 20px;">
+                            <span style="font-size: 0.78rem; color: #94A3B8; display: block;">COMPOSITE RESILIENCE INDEX</span>
+                            <div id="j_score" style="font-family: var(--font-heading); font-size: 3rem; font-weight: 900; color: #FFFFFF; line-height: 1.1;">
+                                <span style="color: #34D399;">75</span> / 100
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+                            <div style="background: rgba(255, 255, 255, 0.04); border-radius: 10px; padding: 12px; text-align: center;">
+                                <span style="font-size: 0.72rem; color: #94A3B8; display: block;">MONTHLY SURPLUS</span>
+                                <strong id="j_surplus" style="font-size: 1.05rem; color: #34D399;">+₹12,000/mo</strong>
+                            </div>
+                            <div style="background: rgba(255, 255, 255, 0.04); border-radius: 10px; padding: 12px; text-align: center;">
+                                <span style="font-size: 0.72rem; color: #94A3B8; display: block;">EMERGENCY RUNWAY</span>
+                                <strong id="j_runway" style="font-size: 1.05rem; color: #FBBF24;">2.5 Months</strong>
+                            </div>
+                        </div>
+
+                        <p style="font-size: 0.8rem; color: #CBD5E1; margin: 0; line-height: 1.5;">
+                            💡 <em>AAYAM Insight:</em> ERI weights runway at 35%, surplus ratio at 25%, debt ceiling at 25%, and income stability at 15%.
+                        </p>
+                    </div>
                 </div>
-                <div class="proc-mid">
-                    <h3 class="proc-title">Personal Financial Twin &amp; Diagnosis</h3>
-                    <p class="proc-desc">Input your monthly income, living expenses, and debts to compute your Resilience Score (0–100) and Emergency Runway months.</p>
-                    <div class="proc-detail" id="pdetail-1">
-                        <div class="proc-detail-box">
-                            <strong>What happens:</strong> AAYAM calculates whether your monthly budget has a cash surplus or operating deficit. It reveals how many months your savings will survive if you suddenly lose your job or suffer an emergency.
-                            <div style="margin-top: 10px; display: flex; gap: 8px;">
-                                <a href="/twin" class="pill-btn primary-pill" style="text-decoration: none;">Launch Dedicated Twin Page →</a>
-                                <button class="pill-btn secondary-pill" onclick="event.stopPropagation(); openModal('twinModal');">Quick Modal View</button>
+            </div>
+
+            <!-- Panel 2: Opportunity Matching & Mudra Linkage -->
+            <div class="journey-panel" id="j-panel-2">
+                <div class="journey-panel-grid">
+                    <div class="journey-input-card">
+                        <h4 style="color: #FFFFFF; font-size: 1.05rem; margin-bottom: 6px;">🚀 Step 2: Select Your Current Vocation</h4>
+                        <p style="color: #94A3B8; font-size: 0.85rem; margin-bottom: 18px;">
+                            See how AAYAM matches certified PMKVY 4.0 courses with institutional Mudra micro-credit:
+                        </p>
+
+                        <label style="font-size: 0.85rem; color: #CBD5E1; display: block; margin-bottom: 6px;">Your Current Work Sector:</label>
+                        <select id="j_vocation" onchange="updateJourneyStep2()" style="width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 10px; color: #FFFFFF; padding: 10px 14px; font-size: 0.9rem; margin-bottom: 16px;">
+                            <option value="delivery">Gig Delivery / Logistics Rider</option>
+                            <option value="retail">Kirana / Retail Shop Assistant</option>
+                            <option value="artisan">Handicraft Maker / Rural Artisan</option>
+                            <option value="data">Data Entry Operator / Office Assistant</option>
+                        </select>
+
+                        <div style="background: rgba(255, 255, 255, 0.03); border: 1px dashed rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 14px; margin-bottom: 16px;">
+                            <span style="font-size: 0.75rem; color: #94A3B8; text-transform: uppercase;">Optimization Objective</span>
+                            <div style="font-size: 0.82rem; color: #E2E8F0; margin-top: 4px;">
+                                Maximize Earning Uplift subject to Zero Capital Risk and verified institutional funding.
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="pill-btn primary-pill" onclick="selectJourneyTab(3)" style="font-size: 0.8rem; padding: 7px 16px;">
+                                <span>Proceed to Step 3</span>
+                                <span>→</span>
+                            </button>
+                            <a href="/opportunities" class="pill-btn secondary-pill" style="text-decoration: none; font-size: 0.8rem; padding: 7px 16px;">
+                                <span>Full Directory 🚀</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="journey-result-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94A3B8;">Matched Pathway</span>
+                            <span style="background: rgba(147, 51, 234, 0.25); color: #D8B4FE; font-size: 0.75rem; font-weight: 800; padding: 3px 10px; border-radius: 9999px;">PMKVY + PMMY</span>
+                        </div>
+
+                        <h3 id="j_target_role" style="font-size: 1.15rem; color: #FFFFFF; font-weight: 800; margin-bottom: 6px;">
+                            Logistics Fleet Supervisor / EV Fleet Tech
+                        </h3>
+                        <div id="j_nsqf" style="font-size: 0.82rem; color: #A855F7; margin-bottom: 14px;">
+                            NSQF Level 5 (PMKVY 4.0) &bull; Skill India Automotive Skills Council
+                        </div>
+
+                        <div style="background: rgba(16, 185, 129, 0.12); border-left: 3px solid #10B981; padding: 10px 14px; border-radius: 8px; margin-bottom: 12px;">
+                            <span style="font-size: 0.72rem; color: #94A3B8; text-transform: uppercase;">Expected Income Uplift</span>
+                            <div id="j_uplift" style="font-size: 1.05rem; font-weight: 800; color: #34D399; margin-top: 2px;">
+                                +₹14,500/month (65% Uplift)
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(255, 255, 255, 0.04); border-radius: 8px; padding: 10px 14px;">
+                            <span style="font-size: 0.72rem; color: #94A3B8; text-transform: uppercase;">Eligible Institutional Credit</span>
+                            <div id="j_mudra" style="font-size: 0.88rem; font-weight: 700; color: #F1F5F9; margin-top: 2px;">
+                                Kishore (₹1,50,000 for Commercial EV Two-Wheeler)
+                            </div>
+                            <div id="j_margin" style="font-size: 0.75rem; color: #38BDF8; margin-top: 2px;">
+                                0% Margin Subsidy Under PMMY
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="proc-right">
-                    <div class="proc-expand-btn" id="pbtn-1">+</div>
-                </div>
             </div>
 
-            <!-- Step 2: B-02 (Highlighted Glowing Banner with Fluid Graphic like in reference) -->
-            <div class="process-row process-row-featured" onclick="toggleProcessDetail(2)">
-                <div class="proc-featured-bg"></div>
-                <div class="proc-left">
-                    <span class="proc-number">02</span>
-                    <span class="proc-code">B-02</span>
-                </div>
-                <div class="proc-mid">
-                    <h3 class="proc-title">Opportunity Matching &amp; Mudra Linkages</h3>
-                    <p class="proc-desc">AI ranks verified wage jobs and micro-enterprises tailored to your skills, with government PMKVY 4.0 certifications and Mudra loan support.</p>
-                    <div class="proc-detail" id="pdetail-2">
-                        <div class="proc-detail-box">
-                            <strong>What happens:</strong> AAYAM evaluates 4 transparent factors: your skill overlap, qualification alignment, capital affordability, and potential income increase (e.g. +₹15,000 to ₹35,000/mo).
-                            <div style="margin-top: 10px; display: flex; gap: 8px;">
-                                <a href="/opportunities" class="pill-btn primary-pill" style="text-decoration: none;">Launch Dedicated Opportunities Page →</a>
-                                <button class="pill-btn secondary-pill" onclick="event.stopPropagation(); openModal('oppModal');">Quick Modal View</button>
+            <!-- Panel 3: Real-Time Cyber Scam Defense -->
+            <div class="journey-panel" id="j-panel-3">
+                <div class="journey-panel-grid">
+                    <div class="journey-input-card">
+                        <h4 style="color: #FFFFFF; font-size: 1.05rem; margin-bottom: 6px;">🔍 Step 3: Test Suspicious Communication</h4>
+                        <p style="color: #94A3B8; font-size: 0.85rem; margin-bottom: 14px;">
+                            Click a test vector chip or type any message into CyberDrishti's NLP screener:
+                        </p>
+
+                        <div class="quick-chips" style="margin-bottom: 12px;">
+                            <button class="sample-chip" onclick="setJourneySample('bijli')">⚡ Electricity Bill</button>
+                            <button class="sample-chip" onclick="setJourneySample('arrest')">👮 Digital Arrest</button>
+                            <button class="sample-chip" onclick="setJourneySample('qr')">💳 Reverse QR Code</button>
+                            <button class="sample-chip" onclick="setJourneySample('safe')">🛡️ Safe Banking SMS</button>
+                        </div>
+
+                        <textarea id="j_sms_input" rows="3" placeholder="Paste suspicious SMS, WhatsApp message, or call transcript..." style="width: 100%; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 10px; color: #FFFFFF; padding: 10px; font-size: 0.85rem; resize: vertical;"></textarea>
+
+                        <div style="margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="pill-btn primary-pill" onclick="scanJourneyMessage()" style="font-size: 0.8rem; padding: 7px 16px;">
+                                <span>Analyze Message</span>
+                                <span>🔍</span>
+                            </button>
+                            <button class="pill-btn secondary-pill" onclick="selectJourneyTab(4)" style="font-size: 0.8rem; padding: 7px 16px;">
+                                <span>Proceed to Step 4 →</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="journey-result-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94A3B8;">4-Pillar Threat Analysis</span>
+                            <span style="color: #38BDF8; font-size: 0.75rem; font-weight: 700;">Zero External API</span>
+                        </div>
+
+                        <div id="j_scan_result">
+                            <div style="background: rgba(255, 255, 255, 0.03); border: 1px dashed rgba(255, 255, 255, 0.12); border-radius: 12px; padding: 24px; text-align: center; color: #94A3B8; font-size: 0.85rem;">
+                                Select a sample chip on the left to see CyberDrishti detect impersonation, panic triggers, APK droppers, and payment coercion in real time.
                             </div>
+                        </div>
+
+                        <div style="margin-top: 14px; font-size: 0.78rem; color: #94A3B8; line-height: 1.45;">
+                            🛡️ <em>Defense Matrix:</em> Evaluates Authority Spoofing, Urgency & Coercion, Financial Redirection, and Technical Trickery.
                         </div>
                     </div>
                 </div>
-                <div class="proc-right">
-                    <div class="proc-expand-btn" id="pbtn-2">+</div>
-                </div>
             </div>
 
-            <!-- Step 3: C-03 -->
-            <div class="process-row" onclick="toggleProcessDetail(3)">
-                <div class="proc-left">
-                    <span class="proc-number">03</span>
-                    <span class="proc-code">C-03</span>
-                </div>
-                <div class="proc-mid">
-                    <h3 class="proc-title">Real-Time Cyber Scam &amp; Phishing Screening</h3>
-                    <p class="proc-desc">Received a suspicious message or call? Paste it into CyberDrishti to test against 13+ attack patterns before you click or transfer money.</p>
-                    <div class="proc-detail" id="pdetail-3">
-                        <div class="proc-detail-box">
-                            <strong>What happens:</strong> Checks for fake police/CBI digital arrests, deceptive reverse UPI QR codes, fraudulent APK downloads, electricity bill traps, and KYC expiry lures.
-                            <div style="margin-top: 10px; display: flex; gap: 8px;">
-                                <a href="/cyberdrishti" class="pill-btn primary-pill" style="text-decoration: none;">Launch CyberDrishti Screener →</a>
-                                <button class="pill-btn secondary-pill" onclick="event.stopPropagation(); openModal('cyberModal');">Quick Modal View</button>
+            <!-- Panel 4: 1930 Golden Hour Emergency Recovery -->
+            <div class="journey-panel" id="j-panel-4">
+                <div class="journey-panel-grid">
+                    <div class="journey-input-card">
+                        <h4 style="color: #FFFFFF; font-size: 1.05rem; margin-bottom: 6px;">🆘 Step 4: Golden Hour Emergency Response</h4>
+                        <p style="color: #94A3B8; font-size: 0.85rem; margin-bottom: 16px;">
+                            If funds were transferred fraudulently, select how many minutes ago the incident occurred:
+                        </p>
+
+                        <div style="margin-bottom: 16px;">
+                            <label style="font-size: 0.85rem; color: #CBD5E1; display: block; margin-bottom: 6px;">Time Since Incident:</label>
+                            <select id="j_elapsed" onchange="updateJourneyStep4()" style="width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(244, 63, 94, 0.4); border-radius: 10px; color: #FFFFFF; padding: 10px 14px; font-size: 0.9rem;">
+                                <option value="15">15 Minutes Ago (Prime Window)</option>
+                                <option value="45">45 Minutes Ago (High Success)</option>
+                                <option value="90">90 Minutes Ago (Critical)</option>
+                                <option value="150">Over 2 Hours Ago (Zero-Liability Window)</option>
+                            </select>
+                        </div>
+
+                        <div style="background: rgba(244, 63, 94, 0.08); border-left: 3px solid #FB7185; padding: 12px; border-radius: 8px; margin-bottom: 16px; font-size: 0.82rem; color: #FECDD3;">
+                            <strong>Why 2 Hours Matter:</strong> Money mule accounts usually initiate ATM withdrawals within 120 minutes. Freezing before withdrawal enables full recovery.
+                        </div>
+
+                        <a href="/recovery" class="pill-btn primary-pill glow-pulse" style="text-decoration: none; display: inline-flex; font-size: 0.8rem; padding: 7px 18px;">
+                            <span>Open Recovery Command Hub</span>
+                            <span>🆘</span>
+                        </a>
+                    </div>
+
+                    <div class="journey-result-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94A3B8;">Interception Status</span>
+                            <span style="background: rgba(244, 63, 94, 0.2); color: #FB7185; font-size: 0.75rem; font-weight: 800; padding: 3px 10px; border-radius: 9999px;">MHA 1930 Active</span>
+                        </div>
+
+                        <div style="text-align: center; margin-bottom: 16px;">
+                            <span style="font-size: 0.78rem; color: #94A3B8; display: block;">GOLDEN WINDOW COUNTDOWN</span>
+                            <div id="j_golden_remaining" style="font-family: var(--font-mono); font-size: 2.2rem; font-weight: 800; color: #FB7185;">
+                                1h 45m Remaining
                             </div>
+                        </div>
+
+                        <div style="width: 100%; height: 8px; background: rgba(255, 255, 255, 0.08); border-radius: 9999px; overflow: hidden; margin-bottom: 14px;">
+                            <div id="j_window_bar" style="width: 85%; height: 100%; background: linear-gradient(to right, #34D399, #FBBF24, #FB7185); transition: width 0.4s ease;"></div>
+                        </div>
+
+                        <div id="j_window_status" style="font-size: 0.82rem; font-weight: 700; color: #34D399; margin-bottom: 14px; text-align: center;">
+                            PRIME RECOVERY WINDOW (92% Fund Reversal Probability via 1930)
+                        </div>
+
+                        <div style="font-size: 0.8rem; color: #CBD5E1; line-height: 1.5; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 10px;">
+                            <strong>Priority Checklist:</strong><br>
+                            1. Dial <strong>1930</strong> immediately & provide UTR / Txn ID.<br>
+                            2. Request instant lien on recipient wallet/account.<br>
+                            3. Bank written dispute under RBI 72-Hour Circular.
                         </div>
                     </div>
                 </div>
-                <div class="proc-right">
-                    <div class="proc-expand-btn" id="pbtn-3">+</div>
-                </div>
             </div>
-
-            <!-- Step 4: D-04 -->
-            <div class="process-row" onclick="toggleProcessDetail(4)">
-                <div class="proc-left">
-                    <span class="proc-number">04</span>
-                    <span class="proc-code">D-04</span>
-                </div>
-                <div class="proc-mid">
-                    <h3 class="proc-title">1930 Golden Hour Emergency Recovery</h3>
-                    <p class="proc-desc">If unauthorized money was deducted, follow the time-critical 2-hour playbook to freeze stolen funds and file a formal zero-liability dispute.</p>
-                    <div class="proc-detail" id="pdetail-4">
-                        <div class="proc-detail-box">
-                            <strong>What happens:</strong> Step-by-step guidance on reporting to the 1930 National Helpline, blocking your debit card/UPI handle, and asserting your statutory rights under RBI's 72-Hour Zero Liability Circular.
-                            <div style="margin-top: 10px; display: flex; gap: 8px;">
-                                <a href="/recovery" class="pill-btn primary-pill" style="text-decoration: none;">Launch 1930 Recovery Centre →</a>
-                                <button class="pill-btn secondary-pill" onclick="event.stopPropagation(); openModal('recoveryModal');">Quick Modal View</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="proc-right">
-                    <div class="proc-expand-btn" id="pbtn-4">+</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="process-bottom-cta">
-            <button class="pill-btn secondary-pill" onclick="openModal('guideModal')">
-                <span>OPEN FULL USER MANUAL</span>
-                <span class="pill-icon">📖</span>
-            </button>
         </div>
     </section>
 
-    <!-- ── 4. PANORAMIC FLUID BANNER SECTION (MATCHING REFERENCE IMAGE) ── -->
+    <!-- ── 4. PANORAMIC BANNER ── -->
     <section class="panoramic-banner-section">
         <div class="panoramic-image-wrapper">
-            <img src="/static/images/banner_fluid.jpg" alt="AAYAM Cosmic Fluid Ribbon Banner" class="panoramic-image">
+            <img src="/static/images/banner_fluid.jpg" alt="AAYAM Cosmic Fluid Ribbon" class="panoramic-image">
             <div class="panoramic-overlay">
                 <h2 class="panoramic-title">Where Economic Mobility Meets Cyber Resilience</h2>
-                <p class="panoramic-subtitle">Empowering 1.4 Billion Citizens with Explainable AI &amp; Official Statistical Intelligence</p>
-            </div>
-        </div>
-
-        <!-- Institutional Data Source & Partner Strip -->
-        <div class="institution-strip">
-            <div class="inst-item">
-                <span class="inst-logo">🏛️</span>
-                <span class="inst-name">Reserve Bank of India (RBI)</span>
-            </div>
-            <div class="inst-item">
-                <span class="inst-logo">📊</span>
-                <span class="inst-name">MoSPI (PLFS, HCES, ASUSE)</span>
-            </div>
-            <div class="inst-item">
-                <span class="inst-logo">🛡️</span>
-                <span class="inst-name">CERT-In &amp; I4C (MeitY/MHA)</span>
-            </div>
-            <div class="inst-item">
-                <span class="inst-logo">📱</span>
-                <span class="inst-name">NPCI UPI Ecosystem</span>
-            </div>
-            <div class="inst-item">
-                <span class="inst-logo">🎓</span>
-                <span class="inst-name">Skill India Digital / PMKVY</span>
-            </div>
-            <div class="inst-item">
-                <span class="inst-logo">🏪</span>
-                <span class="inst-name">PMMY Mudra Yojana</span>
+                <p class="panoramic-subtitle">Empowering 1.4 Billion Citizens with Explainable AI & Official Statistical Intelligence</p>
             </div>
         </div>
     </section>
 
-    <!-- ── 5. LIVE INTERACTIVE SUITE: TRY IT RIGHT ON THIS PAGE ── -->
+    <!-- ── 5. LIVE INTERACTIVE SUITE ── -->
     <section class="interactive-suite-section" id="interactive-suite">
-        <div class="watermark-text watermark-interactive">LIVE DEMO</div>
-
         <div class="interactive-header">
-            <div class="section-label">INTERACTIVE SUITE</div>
-            <h2 class="section-headline">Test Drive AAYAM Right Here</h2>
-            <p class="section-subtext">No login or signup required. Try our two core intelligence engines live in your browser:</p>
+            <div class="section-label reveal-up">INTERACTIVE SUITE</div>
+            <h2 class="section-headline reveal-up">Test Drive AAYAM Right Here</h2>
+            <p class="section-subtext reveal-up">No login required. Try our core engines live in your browser:</p>
         </div>
 
         <div class="interactive-suite-container">
             <div class="suite-visual-col">
                 <div class="suite-image-wrapper">
-                    <img src="/static/images/interactive_fluid.jpg" alt="AAYAM Interactive Cyber Ring" class="suite-fluid-img">
+                    <img src="/static/images/interactive_fluid.jpg" alt="AAYAM Interactive Ring" class="suite-fluid-img">
                 </div>
             </div>
 
             <div class="suite-widget-col">
-                <!-- Two-Tab Live Interactive Widget -->
                 <div class="suite-tab-headers">
-                    <button class="suite-tab-btn active" onclick="switchSuiteTab('suite-scam')">🔍 Live Scam Detector</button>
-                    <button class="suite-tab-btn" onclick="switchSuiteTab('suite-twin')">🧬 Quick Financial Gauge</button>
+                    <button class="suite-tab-btn active" onclick="switchSuiteTab('suite-scam')">🔍 Scam Detector</button>
+                    <button class="suite-tab-btn" onclick="switchSuiteTab('suite-twin')">🧬 Financial Gauge</button>
                 </div>
 
-                <!-- Live Tab 1: Scam Screener -->
+                <!-- Tab 1: Scam Screener -->
                 <div class="suite-tab-body active" id="suite-scam">
                     <p style="color: #94A3B8; font-size: 0.88rem; margin-bottom: 12px;">
-                        Click a common scam pattern or paste an SMS text to test AAYAM’s heuristic threat engine:
+                        Click a sample or paste your own SMS text to test AAYAM's threat engine:
                     </p>
                     
                     <div class="quick-chips">
-                        <button class="sample-chip" onclick="suiteSetSample('electricity')">⚡ Electricity Disconnect</button>
-                        <button class="sample-chip" onclick="suiteSetSample('digital_arrest')">👮 Digital Arrest Call</button>
-                        <button class="sample-chip" onclick="suiteSetSample('upi')">💳 Reverse QR / PIN</button>
-                        <button class="sample-chip" onclick="suiteSetSample('fastag')">🚗 FASTag KYC Expiry</button>
+                        <button class="sample-chip" onclick="suiteSetSample('electricity')">⚡ Electricity Scam</button>
+                        <button class="sample-chip" onclick="suiteSetSample('digital_arrest')">👮 Digital Arrest</button>
+                        <button class="sample-chip" onclick="suiteSetSample('upi')">💳 Reverse QR</button>
+                        <button class="sample-chip" onclick="suiteSetSample('fastag')">🚗 FASTag KYC</button>
                     </div>
 
                     <textarea id="suite_input_text" rows="3" placeholder="Paste any suspicious message text here..."></textarea>
@@ -375,23 +496,23 @@
                     <div id="suite_scan_output" class="suite-output-box" style="display: none;"></div>
                 </div>
 
-                <!-- Live Tab 2: Quick Financial Gauge -->
+                <!-- Tab 2: Quick Financial Gauge -->
                 <div class="suite-tab-body" id="suite-twin">
                     <p style="color: #94A3B8; font-size: 0.88rem; margin-bottom: 12px;">
-                        Adjust the sliders below to see your Resilience Score and Emergency Runway calculate live:
+                        Adjust sliders to see your Resilience Score calculate live:
                     </p>
 
                     <div class="suite-slider-group">
                         <div class="slider-row">
-                            <label>Monthly Take-Home Income: <strong id="lbl_inc">₹35,000</strong></label>
+                            <label>Monthly Income: <strong id="lbl_inc">₹35,000</strong></label>
                             <input type="range" id="slide_income" min="10000" max="150000" step="5000" value="35000" oninput="suiteUpdateTwin()">
                         </div>
                         <div class="slider-row">
-                            <label>Essential Monthly Expenses: <strong id="lbl_exp">₹20,000</strong></label>
+                            <label>Monthly Expenses: <strong id="lbl_exp">₹20,000</strong></label>
                             <input type="range" id="slide_expenses" min="5000" max="100000" step="2500" value="20000" oninput="suiteUpdateTwin()">
                         </div>
                         <div class="slider-row">
-                            <label>Liquid Savings in Bank: <strong id="lbl_sav">₹50,000</strong></label>
+                            <label>Liquid Savings: <strong id="lbl_sav">₹50,000</strong></label>
                             <input type="range" id="slide_savings" min="0" max="300000" step="10000" value="50000" oninput="suiteUpdateTwin()">
                         </div>
                     </div>
@@ -412,167 +533,431 @@
                     </div>
 
                     <div style="margin-top: 14px;">
-                        <button class="pill-btn primary-pill" onclick="openModal('twinModal')">
-                            <span>OPEN FULL DETAILED TWIN</span>
+                        <a href="/twin" class="pill-btn primary-pill" style="text-decoration: none;">
+                            <span>OPEN FULL TWIN</span>
                             <span class="pill-icon">→</span>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ── 6. ALL 8 MODULES / SERVICES SECTION (4 CARDS + 4 CARDS) ── -->
+    <!-- ── 6. THE 8 MODULES ── -->
     <section class="services-section" id="services">
-        <div class="watermark-text watermark-services">MODULES</div>
-
         <div class="services-header">
-            <div class="section-label">FULL CAPABILITIES</div>
-            <h2 class="section-headline">The 8 Specialized Engines of AAYAM</h2>
-            <p class="section-subtext">Each engine is explainable, mathematically deterministic, and rooted in verified government data.</p>
+            <div class="section-label reveal-up">FULL CAPABILITIES</div>
+            <h2 class="section-headline reveal-up">The 8 Engines of AAYAM</h2>
+            <p class="section-subtext reveal-up">Each engine is explainable, deterministic, and rooted in verified government data.</p>
         </div>
 
-        <!-- 4-Card Primary Carousel -->
         <div class="services-carousel">
-            <!-- Card 1: Economic Twin -->
-            <div class="service-card" onclick="location.href='/twin'">
+            <div class="service-card reveal-up" onclick="location.href='/twin'">
                 <div class="card-icon-circle">🧬</div>
                 <h3 class="card-title">Economic Digital Twin</h3>
-                <p class="card-desc">Personal financial twin modeling income, expenses, and debts. Computes your Composite Resilience Score (0–100) and Runway months.</p>
-                <div class="card-pill-btn">
-                    <span>LAUNCH DEDICATED STATION</span>
-                    <span class="card-pill-icon">→</span>
-                </div>
+                <p class="card-desc">Personal financial twin. Computes Resilience Score (0–100) and Emergency Runway months.</p>
+                <div class="card-pill-btn"><span>LAUNCH</span><span class="card-pill-icon">→</span></div>
             </div>
-
-            <!-- Card 2: Opportunity Pathways -->
-            <div class="service-card" onclick="location.href='/opportunities'">
+            <div class="service-card reveal-up delay-1" onclick="location.href='/opportunities'">
                 <div class="card-icon-circle">🚀</div>
                 <h3 class="card-title">Opportunity Pathways</h3>
-                <p class="card-desc">AI decision support matching your profile to PMKVY 4.0 job roles and Mudra-funded micro-enterprises with clear earning uplift estimates.</p>
-                <div class="card-pill-btn">
-                    <span>LAUNCH DEDICATED STATION</span>
-                    <span class="card-pill-icon">→</span>
-                </div>
+                <p class="card-desc">PMKVY 4.0 job roles and Mudra-funded micro-enterprises with earning uplift estimates.</p>
+                <div class="card-pill-btn"><span>LAUNCH</span><span class="card-pill-icon">→</span></div>
             </div>
-
-            <!-- Card 3: CyberDrishti -->
-            <div class="service-card" onclick="location.href='/cyberdrishti'">
+            <div class="service-card reveal-up delay-2" onclick="location.href='/cyberdrishti'">
                 <div class="card-icon-circle">🔍</div>
                 <h3 class="card-title">CyberDrishti</h3>
-                <p class="card-desc">Text and message screening engine evaluating digital arrest calls, APK droppers, and reverse QR traps with 4-Pillar Threat Matrix.</p>
-                <div class="card-pill-btn">
-                    <span>LAUNCH DEDICATED STATION</span>
-                    <span class="card-pill-icon">→</span>
+                <p class="card-desc">Text screening with 4-Pillar Threat Matrix for digital arrest calls, APK droppers, and QR traps.</p>
+                <div class="card-pill-btn"><span>LAUNCH</span><span class="card-pill-icon">→</span></div>
+            </div>
+            <div class="service-card reveal-up delay-3" onclick="location.href='/arthsim'">
+                <div class="card-icon-circle">⚡</div>
+                <h3 class="card-title">ArthSim Simulator</h3>
+                <p class="card-desc">Stress-test finances with job loss, cyber losses, and medical shock scenario trajectories.</p>
+                <div class="card-pill-btn"><span>LAUNCH</span><span class="card-pill-icon">→</span></div>
+            </div>
+        </div>
+
+        <div class="services-carousel services-carousel-secondary">
+            <div class="service-card reveal-up" onclick="location.href='/intelligence'">
+                <div class="card-icon-circle">📊</div>
+                <h3 class="card-title">India Intelligence</h3>
+                <p class="card-desc">Macro dashboards: RBI Payments, CPFIR, PLFS, HCES, ASUSE, and MHA 1930 statistics.</p>
+                <div class="card-pill-btn"><span>LAUNCH</span><span class="card-pill-icon">→</span></div>
+            </div>
+            <div class="service-card reveal-up delay-1" onclick="location.href='/recovery'">
+                <div class="card-icon-circle">🆘</div>
+                <h3 class="card-title">Recovery Centre</h3>
+                <p class="card-desc">Golden 2-hour 1930 reporting window playbooks and zero-liability dispute filings.</p>
+                <div class="card-pill-btn"><span>LAUNCH</span><span class="card-pill-icon">→</span></div>
+            </div>
+            <div class="service-card reveal-up delay-2" onclick="location.href='/trustgraph'">
+                <div class="card-icon-circle">🕸️</div>
+                <h3 class="card-title">Trust Graph</h3>
+                <p class="card-desc">Graph network connecting threat delivery channels to financial vulnerabilities.</p>
+                <div class="card-pill-btn"><span>LAUNCH</span><span class="card-pill-icon">→</span></div>
+            </div>
+            <div class="service-card reveal-up delay-3" onclick="location.href='/command'">
+                <div class="card-icon-circle">🧭</div>
+                <h3 class="card-title">Command Centre</h3>
+                <p class="card-desc">Executive overview combining personal resilience, national payment health, and advisories.</p>
+                <div class="card-pill-btn"><span>LAUNCH</span><span class="card-pill-icon">→</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 7. DATA PROVENANCE & ARCHITECTURE ── -->
+    <section class="datasets-section" id="datasets">
+        <div class="datasets-header">
+            <div class="section-label reveal-up">DATA PROVENANCE & ARCHITECTURE</div>
+            <h2 class="section-headline reveal-up">Built on Verified Institutional Data</h2>
+            <p class="section-subtext reveal-up">Every computation in AAYAM is anchored to official government statistical datasets.</p>
+        </div>
+
+        <!-- 8 Verified Institutional Dataset Cards -->
+        <div class="dataset-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-bottom: 28px;">
+            <div class="provenance-card reveal-up">
+                <div>
+                    <div class="provenance-top">
+                        <div class="provenance-icon">🏛️</div>
+                        <h4 class="provenance-title">Reserve Bank of India (RBI)</h4>
+                    </div>
+                    <p class="provenance-desc">Payment Systems Statistics, UPI monthly volumes, CPFIR fraud-to-sales ratio data.</p>
+                </div>
+                <div class="provenance-footer">
+                    <span class="in-system-badge">✅ In System</span>
+                    <a href="https://rbi.org.in" target="_blank" rel="noopener" class="provenance-link">Official Portal ↗</a>
                 </div>
             </div>
 
-            <!-- Card 4: ArthSim Simulator -->
-            <div class="service-card" onclick="location.href='/arthsim'">
-                <div class="card-icon-circle">⚡</div>
-                <h3 class="card-title">ArthSim Simulator</h3>
-                <p class="card-desc">Stress-test your finances. Simulate the multi-month trajectory of job loss, cyber losses, and medical shocks with SVG depletion curves.</p>
-                <div class="card-pill-btn">
-                    <span>LAUNCH DEDICATED STATION</span>
-                    <span class="card-pill-icon">→</span>
+            <div class="provenance-card reveal-up delay-1">
+                <div>
+                    <div class="provenance-top">
+                        <div class="provenance-icon">📊</div>
+                        <h4 class="provenance-title">MoSPI — PLFS (Periodic Labour Force Survey)</h4>
+                    </div>
+                    <p class="provenance-desc">State-wise employment rates, occupation distributions, wage data from 2023-24 survey.</p>
+                </div>
+                <div class="provenance-footer">
+                    <span class="in-system-badge">✅ In System</span>
+                    <a href="https://mospi.gov.in" target="_blank" rel="noopener" class="provenance-link">Official Portal ↗</a>
+                </div>
+            </div>
+
+            <div class="provenance-card reveal-up delay-2">
+                <div>
+                    <div class="provenance-top">
+                        <div class="provenance-icon">🛒</div>
+                        <h4 class="provenance-title">MoSPI — HCES (Household Consumer Expenditure)</h4>
+                    </div>
+                    <p class="provenance-desc">Urban/rural monthly per-capita consumption expenditure quintile breakdowns.</p>
+                </div>
+                <div class="provenance-footer">
+                    <span class="in-system-badge">✅ In System</span>
+                    <a href="https://mospi.gov.in" target="_blank" rel="noopener" class="provenance-link">Official Portal ↗</a>
+                </div>
+            </div>
+
+            <div class="provenance-card reveal-up delay-3">
+                <div>
+                    <div class="provenance-top">
+                        <div class="provenance-icon">💼</div>
+                        <h4 class="provenance-title">MoSPI — ASUSE (Annual Survey of Unincorporated Sector)</h4>
+                    </div>
+                    <p class="provenance-desc">Micro-enterprise revenue, employment, and gross value added by sector.</p>
+                </div>
+                <div class="provenance-footer">
+                    <span class="in-system-badge">✅ In System</span>
+                    <a href="https://mospi.gov.in" target="_blank" rel="noopener" class="provenance-link">Official Portal ↗</a>
+                </div>
+            </div>
+
+            <div class="provenance-card reveal-up">
+                <div>
+                    <div class="provenance-top">
+                        <div class="provenance-icon">📱</div>
+                        <h4 class="provenance-title">NPCI — UPI App Ecosystem</h4>
+                    </div>
+                    <p class="provenance-desc">Market share data for PhonePe, GPay, Paytm, CRED, and other UPI applications.</p>
+                </div>
+                <div class="provenance-footer">
+                    <span class="in-system-badge">✅ In System</span>
+                    <a href="https://npci.org.in" target="_blank" rel="noopener" class="provenance-link">Official Portal ↗</a>
+                </div>
+            </div>
+
+            <div class="provenance-card reveal-up delay-1">
+                <div>
+                    <div class="provenance-top">
+                        <div class="provenance-icon">🛡️</div>
+                        <h4 class="provenance-title">MHA — 1930 Cyber Fraud Portal</h4>
+                    </div>
+                    <p class="provenance-desc">State-wise citizen financial cybercrime complaint statistics (2024).</p>
+                </div>
+                <div class="provenance-footer">
+                    <span class="in-system-badge">✅ In System</span>
+                    <a href="https://cybercrime.gov.in" target="_blank" rel="noopener" class="provenance-link">Official Portal ↗</a>
+                </div>
+            </div>
+
+            <div class="provenance-card reveal-up delay-2">
+                <div>
+                    <div class="provenance-top">
+                        <div class="provenance-icon">🎓</div>
+                        <h4 class="provenance-title">Skill India Digital / PMKVY 4.0</h4>
+                    </div>
+                    <p class="provenance-desc">Job role catalog, certification details, and NSQF skill-level mapping.</p>
+                </div>
+                <div class="provenance-footer">
+                    <span class="in-system-badge">✅ In System</span>
+                    <a href="https://skillindiadigital.gov.in" target="_blank" rel="noopener" class="provenance-link">Official Portal ↗</a>
+                </div>
+            </div>
+
+            <div class="provenance-card reveal-up delay-3">
+                <div>
+                    <div class="provenance-top">
+                        <div class="provenance-icon">🏪</div>
+                        <h4 class="provenance-title">PMMY Mudra Yojana</h4>
+                    </div>
+                    <p class="provenance-desc">Shishu / Kishore / Tarun loan limits, eligible sector categories, and margin subsidies.</p>
+                </div>
+                <div class="provenance-footer">
+                    <span class="in-system-badge">✅ In System</span>
+                    <a href="https://mudra.org.in" target="_blank" rel="noopener" class="provenance-link">Official Portal ↗</a>
                 </div>
             </div>
         </div>
 
-        <!-- Secondary 4-Card Grid -->
-        <div class="services-carousel services-carousel-secondary">
-            <!-- Card 5: India Intelligence -->
-            <div class="service-card" onclick="location.href='/intelligence'">
-                <div class="card-icon-circle">📊</div>
-                <h3 class="card-title">India Intelligence</h3>
-                <p class="card-desc">Macro intelligence dashboard powered by RBI Payment Systems, CPFIR frauds, MoSPI PLFS, HCES, ASUSE, and MHA 1930 State statistics.</p>
-                <div class="card-pill-btn">
-                    <span>LAUNCH DEDICATED STATION</span>
-                    <span class="card-pill-icon">→</span>
+        <!-- Institutional Dataset Relationships Map -->
+        <div style="background: rgba(18, 14, 34, 0.7); border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 18px; padding: 24px; margin-bottom: 28px;">
+            <h4 style="color: #FFFFFF; font-size: 0.98rem; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+                <span>🔗</span>
+                <span>Dataset Relational Mapping in AAYAM</span>
+            </h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px;">
+                    <div style="font-weight: 700; color: #34D399; font-size: 0.88rem; margin-bottom: 4px;">Pillar 1: Livelihood Baseline</div>
+                    <div style="font-size: 0.8rem; color: #CBD5E1;">
+                        <strong>PLFS</strong> (income deciles) + <strong>HCES</strong> (essential consumption) + <strong>ASUSE</strong> (enterprise revenue) anchor the Economic Resilience Index (ERI) and ArthSim stress-testing models.
+                    </div>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px;">
+                    <div style="font-weight: 700; color: #FB7185; font-size: 0.88rem; margin-bottom: 4px;">Pillar 2: Cyber-Financial Defense</div>
+                    <div style="font-size: 0.8rem; color: #CBD5E1;">
+                        <strong>RBI CPFIR</strong> (fraud ratios) + <strong>NPCI</strong> (ecosystem velocity) + <strong>MHA 1930</strong> (reported cases) feed the 4-Pillar Threat Matrix and Trust Graph vector relationships.
+                    </div>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px;">
+                    <div style="font-weight: 700; color: #38BDF8; font-size: 0.88rem; margin-bottom: 4px;">Pillar 3: Upward Mobility Pathways</div>
+                    <div style="font-size: 0.8rem; color: #CBD5E1;">
+                        <strong>PMKVY 4.0</strong> (skill standards & certifications) + <strong>PMMY Mudra</strong> (Shishu/Kishore/Tarun limits) power the multi-attribute recommendation engine for career upgrades.
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Card 6: Recovery Centre -->
-            <div class="service-card" onclick="location.href='/recovery'">
-                <div class="card-icon-circle">🆘</div>
-                <h3 class="card-title">Recovery Centre</h3>
-                <p class="card-desc">Incident response playbooks prioritizing the Golden 2-Hour 1930 reporting window and bank zero-liability dispute filings.</p>
-                <div class="card-pill-btn">
-                    <span>LAUNCH DEDICATED STATION</span>
-                    <span class="card-pill-icon">→</span>
+        <!-- System Architecture & Data Pipeline -->
+        <div class="pipeline-flow-container reveal-up">
+            <h3 style="font-family: var(--font-heading); font-size: 1.2rem; color: #FFFFFF; text-align: center; margin-bottom: 24px;">
+                System Architecture & Data Pipeline
+            </h3>
+            <div class="pipeline-grid-4">
+                <div class="pipeline-node">
+                    <div class="pipeline-node-icon">📥</div>
+                    <div class="pipeline-node-title">Data Ingestion</div>
+                    <div class="pipeline-node-desc">RBI, MoSPI, NPCI, MHA CSV/JSON datasets</div>
+                    <div class="pipeline-arrow-pill">→</div>
                 </div>
-            </div>
-
-            <!-- Card 7: Trust Graph -->
-            <div class="service-card" onclick="location.href='/trustgraph'">
-                <div class="card-icon-circle">🕸️</div>
-                <h3 class="card-title">Trust Graph</h3>
-                <p class="card-desc">Graph network visualizing how threat delivery channels connect to financial vulnerabilities and institutional defenses.</p>
-                <div class="card-pill-btn">
-                    <span>LAUNCH DEDICATED STATION</span>
-                    <span class="card-pill-icon">→</span>
+                <div class="pipeline-node">
+                    <div class="pipeline-node-icon">⚙️</div>
+                    <div class="pipeline-node-title">Processing</div>
+                    <div class="pipeline-node-desc">Pandas ETL, Normalization, Feature Engineering</div>
+                    <div class="pipeline-arrow-pill">→</div>
                 </div>
-            </div>
-
-            <!-- Card 8: Command Centre -->
-            <div class="service-card" onclick="location.href='/command'">
-                <div class="card-icon-circle">🧭</div>
-                <h3 class="card-title">Command Centre</h3>
-                <p class="card-desc">Executive situational overview combining personal twin resilience, national payment health, and active CERT-In threat advisories.</p>
-                <div class="card-pill-btn">
-                    <span>LAUNCH DEDICATED STATION</span>
-                    <span class="card-pill-icon">→</span>
+                <div class="pipeline-node">
+                    <div class="pipeline-node-icon">🧠</div>
+                    <div class="pipeline-node-title">Inference Engines</div>
+                    <div class="pipeline-node-desc">Economy, Cyber, Simulator, Recommendation</div>
+                    <div class="pipeline-arrow-pill">→</div>
+                </div>
+                <div class="pipeline-node">
+                    <div class="pipeline-node-icon">🖥️</div>
+                    <div class="pipeline-node-title">Presentation</div>
+                    <div class="pipeline-node-desc">Flask REST API + Responsive Web Frontend</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ── 7. ABOUT & TEAM SECTION ── -->
-    <section class="about-section" id="about">
-        <div class="watermark-text watermark-about">ABOUT</div>
+    <!-- ── 7.5 PROJECT REPORT & ARCHITECTURE ── -->
+    <section class="explain-section" id="report-architecture" style="border-top: 1px solid rgba(255, 255, 255, 0.08); background: linear-gradient(180deg, rgba(6, 7, 11, 0.5) 0%, rgba(18, 14, 34, 0.7) 100%); padding: 70px 0;">
+        <div class="explain-container" style="max-width: 1200px; margin: 0 auto; padding: 0 24px;">
+            <div style="text-align: center; margin-bottom: 36px;">
+                <div class="rubric-hero-badge" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.15); border: 1px solid #10B981; color: #34D399; padding: 6px 18px; border-radius: 9999px; font-size: 0.82rem; font-weight: 700; text-transform: uppercase;">
+                    <span>🎓 AUCML SEMESTER 5 CAPSTONE PROJECT</span>
+                    <span>&bull;</span>
+                    <span>EVALUATION REPORT & ARCHITECTURE</span>
+                </div>
+                <h2 style="font-family: var(--font-heading); font-size: clamp(1.9rem, 3.2vw, 2.6rem); color: #FFFFFF; margin: 12px 0 8px 0;">
+                    Report & Architecture Specification
+                </h2>
+                <p style="color: var(--text-secondary); max-width: 780px; margin: 0 auto; font-size: 0.95rem; line-height: 1.6;">
+                    Structured according to core evaluation rubrics: problem formulation, official datasets, deterministic ML pipeline, verified implementation, and empirical comparative benchmarking.
+                </p>
+            </div>
 
+            <!-- 5 Core Architecture Pillars (Marks Removed) -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 30px;">
+                <a href="/defense#tab-c1" class="rubric-card-link" style="text-decoration: none; color: inherit; display: block; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; transition: all 0.3s ease;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="font-size: 1.5rem;">🎯</span>
+                        <span style="font-size: 0.75rem; font-weight: 700; color: #34D399; background: rgba(16, 185, 129, 0.15); padding: 2px 8px; border-radius: 6px;">Refined</span>
+                    </div>
+                    <h4 style="font-size: 0.95rem; color: #FFFFFF; font-weight: 700; margin-bottom: 6px;">1. Problem Formulation</h4>
+                    <p style="font-size: 0.8rem; color: #94A3B8; margin: 0; line-height: 1.5;">Refined from Phase-I; informal worker vulnerability & cyber threats in India.</p>
+                </a>
+
+                <a href="/defense#tab-c2" class="rubric-card-link" style="text-decoration: none; color: inherit; display: block; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; transition: all 0.3s ease;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="font-size: 1.5rem;">📊</span>
+                        <span style="font-size: 0.75rem; font-weight: 700; color: #38BDF8; background: rgba(56, 189, 248, 0.15); padding: 2px 8px; border-radius: 6px;">8 Verified</span>
+                    </div>
+                    <h4 style="font-size: 0.95rem; color: #FFFFFF; font-weight: 700; margin-bottom: 6px;">2. Institutional Datasets</h4>
+                    <p style="font-size: 0.8rem; color: #94A3B8; margin: 0; line-height: 1.5;">Anchored to RBI, MoSPI PLFS, HCES, ASUSE, NPCI, 1930, Skill India & Mudra.</p>
+                </a>
+
+                <a href="/defense#tab-c3" class="rubric-card-link" style="text-decoration: none; color: inherit; display: block; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; transition: all 0.3s ease;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="font-size: 1.5rem;">🧠</span>
+                        <span style="font-size: 0.75rem; font-weight: 700; color: #C084FC; background: rgba(192, 132, 252, 0.15); padding: 2px 8px; border-radius: 6px;">Deterministic</span>
+                    </div>
+                    <h4 style="font-size: 0.95rem; color: #FFFFFF; font-weight: 700; margin-bottom: 6px;">3. ML Pipeline & ERI</h4>
+                    <p style="font-size: 0.8rem; color: #94A3B8; margin: 0; line-height: 1.5;">Complete pipeline; ERI formula; algorithmic justification of Random Forest & heuristics.</p>
+                </a>
+
+                <a href="/defense#tab-c4" class="rubric-card-link" style="text-decoration: none; color: inherit; display: block; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; transition: all 0.3s ease;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="font-size: 1.5rem;">⚡</span>
+                        <span style="font-size: 0.75rem; font-weight: 700; color: #FBBF24; background: rgba(251, 191, 36, 0.15); padding: 2px 8px; border-radius: 6px;">130 Passing</span>
+                    </div>
+                    <h4 style="font-size: 0.95rem; color: #FFFFFF; font-weight: 700; margin-bottom: 6px;">4. Production Execution</h4>
+                    <p style="font-size: 0.8rem; color: #94A3B8; margin: 0; line-height: 1.5;">130/130 pytest passing; Flask REST API; live smoke test runner & zero mock buttons.</p>
+                </a>
+
+                <a href="/defense#tab-c5" class="rubric-card-link" style="text-decoration: none; color: inherit; display: block; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px; transition: all 0.3s ease;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="font-size: 1.5rem;">📈</span>
+                        <span style="font-size: 0.75rem; font-weight: 700; color: #34D399; background: rgba(16, 185, 129, 0.15); padding: 2px 8px; border-radius: 6px;">96.4% F1</span>
+                    </div>
+                    <h4 style="font-size: 0.95rem; color: #FFFFFF; font-weight: 700; margin-bottom: 6px;">5. Benchmark Analysis</h4>
+                    <p style="font-size: 0.8rem; color: #94A3B8; margin: 0; line-height: 1.5;">96.4% F1, 0.982 ROC-AUC, 5-model comparative benchmark table, confusion matrix.</p>
+                </a>
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 24px;">
+                <a href="/defense" class="pill-btn primary-pill" style="text-decoration: none; padding: 12px 28px; font-size: 0.95rem;">
+                    <span>EXPLORE REPORT & ARCHITECTURE PORTAL</span>
+                    <span class="pill-icon">📐</span>
+                </a>
+                <a href="/models" class="pill-btn secondary-pill" style="text-decoration: none; padding: 12px 28px; font-size: 0.95rem;">
+                    <span>VIEW LIVE MODELS & CODE PLAYGROUND</span>
+                    <span class="pill-icon">💻</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 7.8 COMPREHENSIVE SYSTEM OVERVIEW & PRIMARY LAUNCH CTA ── -->
+    <section class="overview-section" style="padding: 70px 0; background: radial-gradient(circle at center, rgba(147, 51, 234, 0.12) 0%, rgba(6, 7, 11, 0.8) 70%); border-top: 1px solid rgba(168, 85, 247, 0.2);">
+        <div style="max-width: 1100px; margin: 0 auto; padding: 0 24px; text-align: center;">
+            <div class="section-label reveal-up">THE COMPLETE SYSTEM</div>
+            <h2 class="section-headline reveal-up" style="margin-bottom: 12px;">Who Uses AAYAM & How It Delivers Value</h2>
+            <p class="section-subtext reveal-up" style="max-width: 720px; margin: 0 auto 36px auto;">
+                Designed for citizens at the frontline of digital adoption in India — bridging the gap between earning opportunities and threat protection.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; text-align: left; margin-bottom: 40px;">
+                <div style="background: rgba(18, 14, 34, 0.8); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px;">
+                    <div style="font-size: 1.6rem; margin-bottom: 8px;">🛵</div>
+                    <h4 style="color: #FFFFFF; font-size: 1rem; margin-bottom: 6px;">Gig & Informal Workers</h4>
+                    <p style="color: #94A3B8; font-size: 0.82rem; margin: 0; line-height: 1.5;">
+                        Deliver workers, drivers, and informal artisans diagnose income stability, measure emergency runway, and identify certified skill upgrades with Mudra micro-loans.
+                    </p>
+                </div>
+                <div style="background: rgba(18, 14, 34, 0.8); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px;">
+                    <div style="font-size: 1.6rem; margin-bottom: 8px;">📱</div>
+                    <h4 style="color: #FFFFFF; font-size: 1rem; margin-bottom: 6px;">Digital Payment Users</h4>
+                    <p style="color: #94A3B8; font-size: 0.82rem; margin: 0; line-height: 1.5;">
+                        First-time smartphone transactors screen suspicious SMS, fake KYC alerts, electricity cut notices, and digital arrest threats without sending data to external APIs.
+                    </p>
+                </div>
+                <div style="background: rgba(18, 14, 34, 0.8); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px;">
+                    <div style="font-size: 1.6rem; margin-bottom: 8px;">🏪</div>
+                    <h4 style="color: #FFFFFF; font-size: 1rem; margin-bottom: 6px;">Micro-Entrepreneurs</h4>
+                    <p style="color: #94A3B8; font-size: 0.82rem; margin: 0; line-height: 1.5;">
+                        Kirana and small business owners explore PMKVY certifications, simulate economic shocks with ArthSim, and identify Mudra loan limits under Shishu/Kishore.
+                    </p>
+                </div>
+                <div style="background: rgba(18, 14, 34, 0.8); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 20px;">
+                    <div style="font-size: 1.6rem; margin-bottom: 8px;">🛡️</div>
+                    <h4 style="color: #FFFFFF; font-size: 1rem; margin-bottom: 6px;">Victims of Cyber Fraud</h4>
+                    <p style="color: #94A3B8; font-size: 0.82rem; margin: 0; line-height: 1.5;">
+                        Citizens facing money loss receive time-critical 2-hour Golden Hour action playbooks to freeze recipient accounts via 1930 and file zero-liability bank claims.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Primary System Launch Button -->
+            <div style="background: linear-gradient(135deg, rgba(147, 51, 234, 0.25) 0%, rgba(217, 70, 239, 0.15) 100%); border: 1px solid rgba(192, 132, 252, 0.4); border-radius: 20px; padding: 36px 24px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);">
+                <h3 style="font-family: var(--font-heading); font-size: 1.8rem; color: #FFFFFF; margin-bottom: 8px;">
+                    Ready to Enter the AAYAM System?
+                </h3>
+                <p style="color: #CBD5E1; font-size: 0.95rem; max-width: 600px; margin: 0 auto 24px auto;">
+                    Access all 8 integrated engines — Digital Twin, CyberDrishti, ArthSim, Opportunities, Trust Graph, and Command Centre in real time.
+                </p>
+                <a href="/command" class="pill-btn primary-pill glow-pulse" style="text-decoration: none; display: inline-flex; font-size: 1.1rem; padding: 16px 42px; border-radius: 9999px;">
+                    <span>LAUNCH COMMAND CENTRE</span>
+                    <span class="pill-icon">🚀</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 8. ABOUT & TEAM ── -->
+    <section class="about-section" id="about">
         <div class="about-container">
             <div class="about-visual">
                 <div class="fluid-wave-wrapper">
                     <div class="fluid-wave-glow"></div>
-                    <img src="/static/images/about_fluid.jpg" alt="AAYAM Iridescent Cyber Wave" class="fluid-wave-image">
+                    <img src="/static/images/about_fluid.jpg" alt="AAYAM Iridescent Wave" class="fluid-wave-image">
                 </div>
             </div>
-
             <div class="about-content">
-                <div class="section-label">TEAM &amp; ROLES</div>
-                <h2 class="section-headline">
-                    Built by Students. Engineered for Socio-Economic Impact.
-                </h2>
-                <p class="section-body">
-                    AAYAM was created as an academic, open-source decision-support platform designed to solve India's twin challenges of livelihood security and cyber-financial vulnerability.
+                <div class="section-label reveal-up">TEAM & ROLES</div>
+                <h2 class="section-headline reveal-up">Built by Students. Engineered for Impact.</h2>
+                <p class="section-body reveal-up">
+                    AAYAM is an academic decision-support platform solving India's twin challenges of livelihood security and cyber-financial vulnerability.
                 </p>
-
-                <!-- Team Domain Matrix -->
-                <div class="team-grid">
+                <div class="team-grid reveal-up">
                     <div class="team-card">
-                        <div class="team-role">FinTech &amp; Data Engineering</div>
+                        <div class="team-role">FinTech & Data Engineering</div>
                         <div class="team-name">Aditya Singh</div>
                     </div>
                     <div class="team-card">
-                        <div class="team-role">Cybersecurity &amp; Threats</div>
+                        <div class="team-role">Cybersecurity & Threats</div>
                         <div class="team-name">Abhishek Shrivastava</div>
                     </div>
                     <div class="team-card">
-                        <div class="team-role">AI / ML &amp; Recommendations</div>
+                        <div class="team-role">AI / ML & Recommendations</div>
                         <div class="team-name">Aarushi S.</div>
                     </div>
                     <div class="team-card">
-                        <div class="team-role">UI / UX &amp; Platform</div>
+                        <div class="team-role">UI / UX & Platform</div>
                         <div class="team-name">Ansh Saini</div>
                     </div>
                 </div>
-
-                <div class="about-cta">
-                    <button class="pill-btn secondary-pill" onclick="openModal('guideModal')">
-                        <span>VIEW ARCHITECTURE GUIDE</span>
-                        <span class="pill-icon">↗</span>
-                    </button>
+                <div class="about-cta reveal-up">
                     <div class="sdg-badges">
                         <span class="sdg-pill">SDG 1 — No Poverty</span>
                         <span class="sdg-pill">SDG 8 — Decent Work</span>
@@ -582,495 +967,86 @@
         </div>
     </section>
 
-    <!-- ── 8. FOOTER ── -->
+    <!-- ── 9. ELEGANT FOOTER ── -->
     <footer class="site-footer">
         <div class="footer-container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <span class="brand-shield">🛡️</span>
-                    <span class="brand-title">AAYAM</span>
+            <div class="footer-grid">
+                <div class="footer-col footer-brand-col">
+                    <div class="footer-brand-block">
+                        <span class="brand-shield">🛡️</span>
+                        <span class="brand-title">AAYAM</span>
+                    </div>
                     <p class="footer-tagline">See Every Dimension of Economic Opportunity.</p>
+                    <div class="footer-sdg-row">
+                        <span class="sdg-micro">SDG 1</span>
+                        <span class="sdg-micro">SDG 8</span>
+                    </div>
                 </div>
-                <div class="footer-links">
-                    <a href="#hero">Home</a>
+                <div class="footer-col">
+                    <h5 class="footer-col-title">Quick Links</h5>
+                    <a href="/">Home</a>
                     <a href="#explain">Mission</a>
                     <a href="#process">How It Works</a>
                     <a href="#services">Modules</a>
-                    <a href="javascript:void(0)" onclick="openModal('guideModal')">How to Use</a>
+                    <a href="#datasets">Datasets</a>
+                </div>
+                <div class="footer-col">
+                    <h5 class="footer-col-title">Modules</h5>
+                    <a href="/twin">Digital Twin</a>
+                    <a href="/cyberdrishti">CyberDrishti</a>
+                    <a href="/arthsim">ArthSim</a>
+                    <a href="/opportunities">Opportunities</a>
+                    <a href="/recovery">Recovery Centre</a>
+                </div>
+                <div class="footer-col">
+                    <h5 class="footer-col-title">Resources</h5>
+                    <a href="/defense" style="color: #34D399; font-weight: 700;">📐 Report & Architecture</a>
+                    <a href="/models">💻 Live Models Playground</a>
+                    <a href="/guide">System Guide</a>
+                    <a href="/disclaimer">Disclaimer</a>
+                    <a href="/intelligence">India Intelligence</a>
+                    <a href="/trustgraph">Trust Graph</a>
+                </div>
+                <div class="footer-col">
+                    <h5 class="footer-col-title">Official Data Sources</h5>
+                    <a href="https://rbi.org.in" target="_blank" rel="noopener">Reserve Bank of India ↗</a>
+                    <a href="https://mospi.gov.in" target="_blank" rel="noopener">MoSPI ↗</a>
+                    <a href="https://cybercrime.gov.in" target="_blank" rel="noopener">MHA Cybercrime Portal ↗</a>
+                    <a href="https://npci.org.in" target="_blank" rel="noopener">NPCI ↗</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>
-                    AAYAM v2.0 &bull; Student Decision-Support Prototype for Academic &amp; Research Evaluation &bull;
-                    Aligned with <strong>SDG 1 (No Poverty)</strong> and <strong>SDG 8 (Decent Work)</strong>.
-                </p>
-                <p class="disclaimer-text">
-                    Notice: AAYAM is an educational prototype. It does not provide certified financial, legal, credit, or investment advice.
+                <p>AAYAM v2.0 &bull; Student Decision-Support Prototype for Academic & Research Evaluation</p>
+                <p class="footer-disclaimer">
+                    This is an educational prototype. It does not provide certified financial, legal, credit, or investment advice.
                 </p>
             </div>
         </div>
     </footer>
 
-    <!-- ══════════════════════════════════════════════════════════════ -->
-    <!-- ── INTERACTIVE MODALS FOR ALL MODULES ── -->
-    <!-- ══════════════════════════════════════════════════════════════ -->
-
-    <!-- 1. HOW TO USE MODAL -->
-    <div class="modal-overlay" id="guideModal">
-        <div class="modal-card modal-large">
-            <div class="modal-header">
-                <h2>📖 How to Use AAYAM — Interactive Guide</h2>
-                <button class="modal-close" onclick="closeModal('guideModal')">&times;</button>
-            </div>
-            <div class="modal-tabs">
-                <button class="tab-btn active" onclick="switchGuideTab(event, 'gtab-start')">🚀 Quick Start</button>
-                <button class="tab-btn" onclick="switchGuideTab(event, 'gtab-modules')">🧭 8 Modules</button>
-                <button class="tab-btn" onclick="switchGuideTab(event, 'gtab-personas')">💡 User Journeys</button>
-                <button class="tab-btn" onclick="switchGuideTab(event, 'gtab-privacy')">🛡️ Privacy</button>
-            </div>
-            <div class="modal-body">
-                <div class="guide-tab-content active" id="gtab-start">
-                    <h3>⚡ 3 Steps to Master AAYAM</h3>
-                    <div class="stepper-item">
-                        <span class="step-num">1</span>
-                        <div>
-                            <h4>Configure Your Financial Twin</h4>
-                            <p>Open <strong>Economic Digital Twin</strong>, enter your monthly take-home pay, living costs, and debt. Click <em>Calculate Resilience</em> to get your personal financial score.</p>
-                        </div>
-                    </div>
-                    <div class="stepper-item">
-                        <span class="step-num">2</span>
-                        <div>
-                            <h4>Explore Opportunities &amp; Stress-Test</h4>
-                            <p>Go to <strong>Opportunity Pathways</strong> to view government-subsidized job and enterprise pathways. Test your emergency runway in <strong>ArthSim Simulator</strong>.</p>
-                        </div>
-                    </div>
-                    <div class="stepper-item">
-                        <span class="step-num">3</span>
-                        <div>
-                            <h4>Screen Threats &amp; Respond</h4>
-                            <p>Paste suspicious messages into <strong>CyberDrishti</strong>. If you encounter unauthorized debits, follow the <strong>Recovery Centre</strong> 1930 playbooks.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="guide-tab-content" id="gtab-modules">
-                    <h3>🧭 Complete System Directory</h3>
-                    <div class="guide-mod-table">
-                        <p><strong>1. Command Centre:</strong> Unified telemetry overview of personal resilience, macro trends, and threat posture.</p>
-                        <p><strong>2. Economic Digital Twin:</strong> In-memory personal financial model calculating emergency runway and DTI.</p>
-                        <p><strong>3. Opportunity Pathways:</strong> 4-factor recommendation engine with PMKVY 4.0 and Mudra loan linkages.</p>
-                        <p><strong>4. CyberDrishti:</strong> Rule-based text and APK threat screening with CERT-In advisory integration.</p>
-                        <p><strong>5. ArthSim Simulator:</strong> Deterministic what-if modeling of job loss, cyber losses, and medical shocks.</p>
-                        <p><strong>6. India Intelligence:</strong> Macroeconomic dashboards spanning RBI Payments, CPFIR Frauds, PLFS, and MHA 1930.</p>
-                        <p><strong>7. Trust Graph:</strong> Knowledge graph connecting attack vectors to defense mechanisms.</p>
-                        <p><strong>8. Recovery Centre:</strong> Time-critical golden 2-hour window response playbooks and emergency contacts.</p>
-                    </div>
-                </div>
-
-                <div class="guide-tab-content" id="gtab-personas">
-                    <h3>💡 Tailored User Personas</h3>
-                    <div class="persona-card">
-                        <h4>👤 Worker or Jobseeker</h4>
-                        <p>Configure your twin, open Opportunity Pathways to identify roles with &gt;₹25k income uplift, and check government margin subsidies.</p>
-                    </div>
-                    <div class="persona-card">
-                        <h4>🛡️ Citizen with Suspicious SMS</h4>
-                        <p>Paste the SMS into CyberDrishti. Verify whether the URL matches verified bank domains or malicious APK signatures.</p>
-                    </div>
-                    <div class="persona-card">
-                        <h4>🚨 Victim of Financial Cyber Fraud</h4>
-                        <p>Open Recovery Centre immediately. Follow the Golden 2-Hour 1930 lien procedure to freeze funds in the beneficiary account.</p>
-                    </div>
-                </div>
-
-                <div class="guide-tab-content" id="gtab-privacy">
-                    <h3>🛡️ Privacy &amp; Guardrails</h3>
-                    <p>&bull; <strong>Zero Persistent Personal Data:</strong> All financial calculations run in-memory within your active browser session.</p>
-                    <p>&bull; <strong>No Sensitive Credentials:</strong> Never enter OTPs, bank passwords, or debit card CVVs.</p>
-                    <p>&bull; <strong>Official Data Anchoring:</strong> Sourced strictly from verified RBI, MoSPI, CERT-In, and MHA public bulletins.</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="pill-btn primary-pill" onclick="closeModal('guideModal')">Got It</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 2. ECONOMIC DIGITAL TWIN MODAL -->
-    <div class="modal-overlay" id="twinModal">
-        <div class="modal-card modal-large">
-            <div class="modal-header">
-                <h2>🧬 Economic Digital Twin Calculator</h2>
-                <button class="modal-close" onclick="closeModal('twinModal')">&times;</button>
-            </div>
-            <div class="modal-body twin-layout">
-                <div class="twin-inputs">
-                    <h4>Adjust Your Financial Twin Parameters:</h4>
-                    <div class="form-group">
-                        <label>Monthly Take-Home Income (₹)</label>
-                        <input type="number" id="twin_income" value="35000" step="1000">
-                    </div>
-                    <div class="form-group">
-                        <label>Essential Monthly Living Expenses (₹)</label>
-                        <input type="number" id="twin_essential" value="20000" step="1000">
-                    </div>
-                    <div class="form-group">
-                        <label>Discretionary Expenses (₹)</label>
-                        <input type="number" id="twin_discretionary" value="6000" step="500">
-                    </div>
-                    <div class="form-group">
-                        <label>Liquid Savings (₹)</label>
-                        <input type="number" id="twin_savings" value="50000" step="5000">
-                    </div>
-                    <div class="form-group">
-                        <label>Monthly Debt / EMI (₹)</label>
-                        <input type="number" id="twin_emi" value="4500" step="500">
-                    </div>
-                    <button class="pill-btn primary-pill" onclick="calculateTwin()">
-                        <span>RECALCULATE TWIN</span>
-                        <span class="pill-icon">⚡</span>
-                    </button>
-                </div>
-
-                <div class="twin-results" id="twin_results_container">
-                    <div class="resilience-score-box">
-                        <div class="score-title">COMPOSITE RESILIENCE INDEX</div>
-                        <div class="score-value" id="twin_res_score">58 / 100</div>
-                        <div class="score-category badge-emerald" id="twin_res_badge">Moderate Resilience</div>
-                    </div>
-
-                    <div class="kpi-grid-mini">
-                        <div class="mini-kpi">
-                            <span class="kpi-lbl">Emergency Runway</span>
-                            <span class="kpi-num" id="twin_runway">2.0 Months</span>
-                            <span class="kpi-hint">Recommended: 6.0 Mo</span>
-                        </div>
-                        <div class="mini-kpi">
-                            <span class="kpi-lbl">Savings Rate</span>
-                            <span class="kpi-num" id="twin_savings_rate">25.7%</span>
-                            <span class="kpi-hint">Target: &gt;20%</span>
-                        </div>
-                        <div class="mini-kpi">
-                            <span class="kpi-lbl">Debt-to-Income (DTI)</span>
-                            <span class="kpi-num" id="twin_dti">12.9%</span>
-                            <span class="kpi-hint">Safe: &lt;40%</span>
-                        </div>
-                        <div class="mini-kpi">
-                            <span class="kpi-lbl">Monthly Cash Surplus</span>
-                            <span class="kpi-num" id="twin_surplus">₹9,000</span>
-                            <span class="kpi-hint">Net Buffer</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 3. CYBERDRISHTI MODAL -->
-    <div class="modal-overlay" id="cyberModal">
-        <div class="modal-card modal-large">
-            <div class="modal-header">
-                <h2>🔍 CyberDrishti — Threat Screening Centre</h2>
-                <button class="modal-close" onclick="closeModal('cyberModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p style="color: #94A3B8; font-size: 0.9rem;">
-                    Paste an unsolicited SMS, WhatsApp notification, or job offer text to evaluate heuristic threat indicators.
-                </p>
-
-                <div class="sample-chips-row">
-                    <span style="font-size: 0.8rem; color: #64748B;">Quick Samples:</span>
-                    <button class="sample-chip" onclick="loadCyberSample('electricity')">Electricity Bill Cut</button>
-                    <button class="sample-chip" onclick="loadCyberSample('upi')">Reverse UPI QR</button>
-                    <button class="sample-chip" onclick="loadCyberSample('digital_arrest')">Digital Arrest Call</button>
-                    <button class="sample-chip" onclick="loadCyberSample('fastag')">FASTag KYC Expiry</button>
-                </div>
-
-                <textarea id="cyber_input_text" rows="4" placeholder="Paste suspicious SMS text, APK link, or notification here..."></textarea>
-
-                <div style="margin: 12px 0;">
-                    <button class="pill-btn primary-pill" onclick="screenCyberMessage()">
-                        <span>SCREEN MESSAGE</span>
-                        <span class="pill-icon">🔍</span>
-                    </button>
-                </div>
-
-                <div id="cyber_result_container" class="cyber-result-box" style="display: none;"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 4. ARTHSIM MODAL -->
-    <div class="modal-overlay" id="arthsimModal">
-        <div class="modal-card modal-large">
-            <div class="modal-header">
-                <h2>⚡ ArthSim — Financial Scenario Simulator</h2>
-                <button class="modal-close" onclick="closeModal('arthsimModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="arthsim-controls">
-                    <div class="form-group">
-                        <label>Select Shock Scenario:</label>
-                        <select id="arth_scenario" onchange="runSimulation()">
-                            <option value="job_loss">Sudden Job Loss (0% Income)</option>
-                            <option value="cyber_fraud_loss">Cyber-Financial Fraud Loss (₹50,000 lump sum)</option>
-                            <option value="medical_emergency">Medical Emergency (₹75,000 out-of-pocket)</option>
-                            <option value="inflation_spike">Inflation Spike (+20% living costs)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Projection Horizon: <span id="horizon_label">12</span> Months</label>
-                        <input type="range" id="arth_horizon" min="3" max="36" value="12" oninput="document.getElementById('horizon_label').innerText = this.value; runSimulation();">
-                    </div>
-                </div>
-
-                <div class="simulation-chart-wrapper" id="sim_chart_wrapper"></div>
-                <div class="sim-kpis" id="sim_kpis_container"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 5. OPPORTUNITY PATHWAYS MODAL -->
-    <div class="modal-overlay" id="oppModal">
-        <div class="modal-card modal-large">
-            <div class="modal-header">
-                <h2>🚀 Opportunity Pathways (PMKVY 4.0 &amp; Mudra)</h2>
-                <button class="modal-close" onclick="closeModal('oppModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="opp-filter-bar">
-                    <button class="tab-btn active" onclick="filterOpps(event, 'all')">All Pathways</button>
-                    <button class="tab-btn" onclick="filterOpps(event, 'Wage Employment')">💼 Wage Employment</button>
-                    <button class="tab-btn" onclick="filterOpps(event, 'Micro-Enterprise')">🏪 Micro-Enterprise</button>
-                </div>
-                <div class="opp-grid" id="opp_grid_container"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 6. INDIA INTELLIGENCE MODAL -->
-    <div class="modal-overlay" id="intelModal">
-        <div class="modal-card modal-large">
-            <div class="modal-header">
-                <h2>📊 India Macro &amp; Cybercrime Intelligence</h2>
-                <button class="modal-close" onclick="closeModal('intelModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-tabs">
-                    <button class="tab-btn active" onclick="switchIntelTab(event, 'itab-upi')">📱 UPI App Market Share</button>
-                    <button class="tab-btn" onclick="switchIntelTab(event, 'itab-states')">🛡️ State Cyber Frauds (1930)</button>
-                    <button class="tab-btn" onclick="switchIntelTab(event, 'itab-sources')">📋 Source Register</button>
-                </div>
-
-                <div class="intel-tab-content active" id="itab-upi">
-                    <h4>NPCI UPI App Ecosystem (February 2025)</h4>
-                    <div id="upi_table_container">Loading UPI ecosystem data...</div>
-                </div>
-
-                <div class="intel-tab-content" id="itab-states">
-                    <h4>Citizen Financial Cyber Fraud (MHA 1930 Portal 2024)</h4>
-                    <div id="state_frauds_container">Loading state cybercrime data...</div>
-                </div>
-
-                <div class="intel-tab-content" id="itab-sources">
-                    <h4>Official Institutional Data Register</h4>
-                    <div id="sources_table_container">Loading data register...</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 7. RECOVERY CENTRE MODAL -->
-    <div class="modal-overlay" id="recoveryModal">
-        <div class="modal-card modal-large">
-            <div class="modal-header">
-                <h2>🆘 Recovery Centre — Incident Response Playbook</h2>
-                <button class="modal-close" onclick="closeModal('recoveryModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="alert-box-urgent">
-                    <strong>⏳ Golden 2-Hour Window Notice:</strong> If you suffered an unauthorized bank transfer, immediately call <strong>1930</strong> or report to <strong>cybercrime.gov.in</strong> so law enforcement can put a lien on the beneficiary account before funds are laundered.
-                </div>
-
-                <h3>Immediate 3-Step Incident Protocol:</h3>
-                <div class="recovery-steps">
-                    <div class="rec-step">
-                        <span class="step-num">1</span>
-                        <div>
-                            <h4>Report on 1930 National Helpline</h4>
-                            <p>Call <strong>1930</strong> or visit <a href="https://cybercrime.gov.in" target="_blank">cybercrime.gov.in</a>. Keep your transaction reference number (UTR/RRN), debit bank account, and date/time ready.</p>
-                        </div>
-                    </div>
-                    <div class="rec-step">
-                        <span class="step-num">2</span>
-                        <div>
-                            <h4>Contact Bank to Block Channels</h4>
-                            <p>Call your bank's 24x7 fraud desk immediately to block your debit card, UPI handle, and netbanking password.</p>
-                            <div class="bank-hotlines">
-                                <span>SBI: 1800 11 1109</span> &bull;
-                                <span>HDFC: 1800 1600</span> &bull;
-                                <span>ICICI: 1800 1080</span> &bull;
-                                <span>Axis: 1800 419 5959</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rec-step">
-                        <span class="step-num">3</span>
-                        <div>
-                            <h4>Invoke RBI 72-Hour Zero Liability</h4>
-                            <p>Under RBI Circular DBR.No.Leg.BC.78/09.07.005/2017-18, if an unauthorized transaction occurs through third-party breach and you notify your bank within 3 working days, you have <strong>Zero Customer Liability</strong>.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 8. TRUST GRAPH MODAL -->
-    <div class="modal-overlay" id="trustModal">
-        <div class="modal-card modal-large">
-            <div class="modal-header">
-                <h2>🕸️ Trust Graph — Threat Architecture Network</h2>
-                <button class="modal-close" onclick="closeModal('trustModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p style="color: #94A3B8;">Graph-theoretic architecture connecting threat delivery vectors to vulnerabilities and institutional defenses:</p>
-                <div class="graph-representation-box">
-                    <div class="graph-node-col">
-                        <div class="node-badge node-vector">SMS / RCS Smishing</div>
-                        <div class="node-arrow">→</div>
-                        <div class="node-badge node-attack">Reverse QR / UPI MPIN</div>
-                        <div class="node-arrow">→</div>
-                        <div class="node-badge node-defense">NPCI Limit &amp; 1930 Lien</div>
-                    </div>
-                    <div class="graph-node-col">
-                        <div class="node-badge node-vector">VoIP Skype / WhatsApp</div>
-                        <div class="node-arrow">→</div>
-                        <div class="node-badge node-attack">Digital Arrest Extortion</div>
-                        <div class="node-arrow">→</div>
-                        <div class="node-badge node-defense">I4C Disconnect Alert</div>
-                    </div>
-                    <div class="graph-node-col">
-                        <div class="node-badge node-vector">Malicious Dropper APK</div>
-                        <div class="node-arrow">→</div>
-                        <div class="node-badge node-attack">SMS Stealer / OTP Forward</div>
-                        <div class="node-arrow">→</div>
-                        <div class="node-badge node-defense">CERT-In Package Blacklist</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 9. COMMAND CENTRE MODAL -->
-    <div class="modal-overlay" id="commandModal">
-        <div class="modal-card modal-large">
-            <div class="modal-header">
-                <h2>🧭 Command Centre — Executive Intelligence</h2>
-                <button class="modal-close" onclick="closeModal('commandModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="command-kpis-grid">
-                    <div class="command-kpi-card">
-                        <span class="kpi-tag">Personal Twin</span>
-                        <div class="kpi-big-num">58 / 100</div>
-                        <span class="kpi-sub">Composite Resilience Index</span>
-                    </div>
-                    <div class="command-kpi-card">
-                        <span class="kpi-tag">National Payments</span>
-                        <div class="kpi-big-num">16,106 Cr</div>
-                        <span class="kpi-sub">Monthly UPI Transactions (RBI)</span>
-                    </div>
-                    <div class="command-kpi-card">
-                        <span class="kpi-tag">Cyber Threat Registry</span>
-                        <div class="kpi-big-num">0.121 bps</div>
-                        <span class="kpi-sub">Fraud-to-Sales Ratio (CPFIR)</span>
-                    </div>
-                    <div class="command-kpi-card">
-                        <span class="kpi-tag">Recovery Rate</span>
-                        <div class="kpi-big-num">15.35%</div>
-                        <span class="kpi-sub">MHA 1930 Golden Hour Saved</span>
-                    </div>
-                </div>
-                <div style="margin-top: 20px; text-align: center;">
-                    <button class="pill-btn primary-pill" onclick="closeModal('commandModal'); openModal('twinModal');">
-                        <span>LAUNCH DIGITAL TWIN</span>
-                        <span class="pill-icon">→</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ── SETTINGS DRAWER ── -->
-    <div class="settings-drawer" id="settingsDrawer">
-        <div class="settings-header">
-            <h4 style="font-family: var(--font-heading); color: #FFFFFF; font-size: 1.2rem; margin: 0;">System Settings</h4>
-            <button onclick="toggleSettings()" style="background: transparent; border: none; color: #FFFFFF; font-size: 1.2rem; cursor: pointer;">✕</button>
-        </div>
-
-        <div class="settings-group">
-            <span class="settings-label">Color Accent Theme</span>
-            <div class="theme-options-grid">
-                <button class="theme-btn active" data-theme="cyber-violet" onclick="setTheme('cyber-violet')">
-                    <span class="theme-color-dot" style="background: #A855F7;"></span>
-                    <span>Cyber Violet</span>
-                </button>
-                <button class="theme-btn" data-theme="gold-obsidian" onclick="setTheme('gold-obsidian')">
-                    <span class="theme-color-dot" style="background: #F59E0B;"></span>
-                    <span>Gold Obsidian</span>
-                </button>
-                <button class="theme-btn" data-theme="emerald-shield" onclick="setTheme('emerald-shield')">
-                    <span class="theme-color-dot" style="background: #10B981;"></span>
-                    <span>Emerald Shield</span>
-                </button>
-                <button class="theme-btn" data-theme="matrix-cyan" onclick="setTheme('matrix-cyan')">
-                    <span class="theme-color-dot" style="background: #06B6D4;"></span>
-                    <span>Matrix Cyan</span>
-                </button>
-            </div>
-        </div>
-
-        <div class="settings-group">
-            <span class="settings-label">Currency Unit</span>
-            <div style="display: flex; gap: 8px;">
-                <button class="pill-btn secondary-pill" onclick="toggleCurrency('INR')" style="flex: 1; padding: 8px;">
-                    <span>₹ INR (Lakh/Cr)</span>
-                </button>
-                <button class="pill-btn secondary-pill" onclick="toggleCurrency('USD')" style="flex: 1; padding: 8px;">
-                    <span>$ USD</span>
-                </button>
-            </div>
-        </div>
-
-        <div class="settings-group" style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px;">
-            <a href="/warning" class="pill-btn danger-pill" style="width: 100%; justify-content: center; text-decoration: none;">
-                <span>⚠️ What AAYAM Is NOT For</span>
-            </a>
-        </div>
-    </div>
-
     <!-- ── QUICK JUMP PALETTE ── -->
     <div class="quick-jump-modal" id="quickJumpModal" onclick="if(event.target === this) toggleQuickJump()">
         <div class="quick-jump-box">
-            <input type="text" id="quickJumpInput" class="quick-jump-search" placeholder="Type a module or jump target..." oninput="filterQuickJump(this.value)">
+            <input type="text" id="quickJumpInput" class="quick-jump-search" placeholder="Type a module name..." oninput="filterQuickJump(this.value)">
             <div class="quick-jump-list">
-                <a href="/" class="quick-jump-item"><span>🏠 Home Portal Hub</span><span style="font-size: 0.75rem; color: #94A3B8;">Landing Overview</span></a>
+                <a href="/defense" class="quick-jump-item"><span>📐 Report & Architecture</span><span style="font-size: 0.75rem; color: #34D399;">Report</span></a>
+                <a href="/models" class="quick-jump-item"><span>💻 Live Models Playground</span><span style="font-size: 0.75rem; color: #C084FC;">Code</span></a>
+                <a href="/" class="quick-jump-item"><span>🏠 Home</span><span style="font-size: 0.75rem; color: #94A3B8;">Landing</span></a>
                 <a href="/command" class="quick-jump-item"><span>🎛️ Command Centre</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 01</span></a>
                 <a href="/twin" class="quick-jump-item"><span>💰 Economic Digital Twin</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 02</span></a>
-                <a href="/opportunities" class="quick-jump-item"><span>🚀 Opportunity Pathways &amp; Mudra</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 03</span></a>
-                <a href="/cyberdrishti" class="quick-jump-item"><span>🛡️ CyberDrishti Threat Screener</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 04</span></a>
-                <a href="/arthsim" class="quick-jump-item"><span>📉 ArthSim Scenario Simulator</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 05</span></a>
-                <a href="/intelligence" class="quick-jump-item"><span>📊 India Macro &amp; Crime Telemetry</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 06</span></a>
-                <a href="/trustgraph" class="quick-jump-item"><span>🕸️ Trust Graph Threat Architecture</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 07</span></a>
-                <a href="/recovery" class="quick-jump-item"><span>🚨 Recovery Centre &amp; 1930 Playbooks</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 08</span></a>
-                <a href="/guide" class="quick-jump-item"><span>📖 System Guide &amp; Persona Manual</span><span style="font-size: 0.75rem; color: #94A3B8;">Documentation</span></a>
-                <a href="/warning" class="quick-jump-item"><span>⚠️ What AAYAM Is Not For</span><span style="font-size: 0.75rem; color: #FB7185;">Ethical Limits</span></a>
+                <a href="/opportunities" class="quick-jump-item"><span>🚀 Opportunity Pathways</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 03</span></a>
+                <a href="/cyberdrishti" class="quick-jump-item"><span>🛡️ CyberDrishti</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 04</span></a>
+                <a href="/arthsim" class="quick-jump-item"><span>📉 ArthSim Simulator</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 05</span></a>
+                <a href="/intelligence" class="quick-jump-item"><span>📊 India Intelligence</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 06</span></a>
+                <a href="/trustgraph" class="quick-jump-item"><span>🕸️ Trust Graph</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 07</span></a>
+                <a href="/recovery" class="quick-jump-item"><span>🚨 Recovery Centre</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 08</span></a>
+                <a href="/guide" class="quick-jump-item"><span>📖 System Guide</span><span style="font-size: 0.75rem; color: #94A3B8;">Documentation</span></a>
+                <a href="/disclaimer" class="quick-jump-item"><span>⚠️ Disclaimer</span><span style="font-size: 0.75rem; color: #FB7185;">Ethical Limits</span></a>
             </div>
         </div>
     </div>
 
     <script src="/static/js/app.js"></script>
+
 </body>
 </html>

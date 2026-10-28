@@ -20,37 +20,39 @@
     <div class="ambient-glow glow-mid-left"></div>
     <div class="ambient-glow glow-bottom-center"></div>
 
-    <!-- Floating Navigation Bar -->
-    <header class="navbar-wrapper">
+    <!-- ── FLOATING ANIMATED SIDEBAR DOCK ── -->
+    <aside class="navbar-wrapper" id="sidebarDock">
         <nav class="navbar" id="navbar">
-            <a href="/" class="nav-brand" style="text-decoration: none;">
-                <span class="brand-shield">🛡️</span>
-                <span class="brand-title">AAYAM</span>
-            </a>
+            <div class="nav-top-block">
+                <a href="/" class="nav-brand" title="AAYAM Home">
+                    <span class="brand-shield">🛡️</span>
+                    <span class="brand-title">AAYAM</span>
+                </a>
+            </div>
             
             <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/command">Command</a></li>
-                <li><a href="/twin">Digital Twin</a></li>
-                <li><a href="/cyberdrishti">CyberDrishti</a></li>
-                <li><a href="/arthsim">ArthSim</a></li>
-                <li><a href="/opportunities">Opportunities</a></li>
-                <li><a href="/intelligence">Intelligence</a></li>
-                <li><a href="/recovery">Recovery</a></li>
+                <li><a href="/" title="Home"><span class="nav-icon">🏠</span><span class="nav-text">Home</span></a></li>
+                <li><a href="/models" title="Live Models Playground"><span class="nav-icon">💻</span><span class="nav-text">Live Models</span></a></li>
+                <li><a href="/defense" title="Report & Architecture"><span class="nav-icon">📐</span><span class="nav-text">Report & Architecture</span></a></li>
+                <li><a href="/command" title="Command Centre"><span class="nav-icon">🎛️</span><span class="nav-text">Command Centre</span></a></li>
+                <li><a href="/twin" title="Digital Twin"><span class="nav-icon">🧬</span><span class="nav-text">Digital Twin</span></a></li>
+                <li><a href="/cyberdrishti" title="CyberDrishti"><span class="nav-icon">🔍</span><span class="nav-text">CyberDrishti</span></a></li>
+                <li><a href="/arthsim" title="ArthSim"><span class="nav-icon">⚡</span><span class="nav-text">ArthSim</span></a></li>
+                <li><a href="/opportunities" title="Opportunities"><span class="nav-icon">🚀</span><span class="nav-text">Opportunities</span></a></li>
+                <li><a href="/intelligence" title="Intelligence"><span class="nav-icon">📊</span><span class="nav-text">Intelligence</span></a></li>
+                <li><a href="/trustgraph" class="active" title="Trust Graph"><span class="nav-icon">🕸️</span><span class="nav-text">Trust Graph</span></a></li>
+                <li><a href="/recovery" title="Recovery"><span class="nav-icon">🆘</span><span class="nav-text">Recovery</span></a></li>
+                <li><a href="/guide" title="Guide"><span class="nav-icon">📖</span><span class="nav-text">Guide</span></a></li>
+                <li><a href="/disclaimer" title="Disclaimer"><span class="nav-icon">⚠️</span><span class="nav-text">Disclaimer</span></a></li>
             </ul>
 
             <div class="nav-actions">
-                <button class="pill-btn nav-guide-btn" onclick="toggleQuickJump()" title="Quick Jump (Ctrl+K)">
-                    <span>Jump</span>
-                    <span class="pill-icon">⚡</span>
-                </button>
-                <button class="pill-btn nav-start-btn" onclick="toggleSettings()" title="Settings & Theme">
-                    <span>Settings</span>
-                    <span class="pill-icon">⚙️</span>
+                <button class="pill-btn nav-guide-btn" onclick="toggleQuickJump()" title="Quick Jump (Ctrl+K)" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 6px 0;">
+                    <span style="font-size: 0.85rem;">⌘K</span>
                 </button>
             </div>
         </nav>
-    </header>
+    </aside>
 
     <!-- Page Hero Banner -->
     <main class="page-hero">

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAYAM — Live Interactive Model Code & Real-Time Execution Playground</title>
+    <meta name="description" content="Inspect, execute, and verify AAYAM's core machine learning algorithms, mathematical formulations, and Python code blocks live in your browser.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800;900&family=Space+Grotesk:wght@500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+    <style>
+        .code-playground-container {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        @media (max-width: 1024px) {
+            .code-playground-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .code-window {
+            background: #07090F;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .code-header {
+            background: rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .code-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .code-content {
+            padding: 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.84rem;
+            line-height: 1.65;
+            color: #E2E8F0;
+            overflow-x: auto;
+            max-height: 600px;
+            white-space: pre;
+        }
+
+        .code-line-highlight {
+            background: rgba(168, 85, 247, 0.18);
+            border-left: 3px solid #A855F7;
+            display: block;
+            margin: 0 -20px;
+            padding: 0 17px;
+            animation: pulseGlow 1.5s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { background: rgba(168, 85, 247, 0.15); }
+            50% { background: rgba(168, 85, 247, 0.28); }
+        }
+
+        .kw { color: #F43F5E; font-weight: 600; }
+        .fn { color: #38BDF8; font-weight: 600; }
+        .str { color: #34D399; }
+        .num { color: #FBBF24; }
+        .com { color: #64748B; font-style: italic; }
+
+        .interactive-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .model-switcher-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .model-tab-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .model-tab-btn:hover {
+            color: #FFFFFF;
+            border-color: var(--accent-violet);
+        }
+
+        .model-tab-btn.active {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-violet));
+            color: #FFFFFF;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.35);
+        }
+
+        .live-output-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 16px;
+            font-family: var(--font-mono);
+            font-size: 0.84rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Ambient Backgrounds -->
+    <div class="ambient-glow glow-top-right"></div>
+    <div class="ambient-glow glow-mid-left"></div>
+
+    <!-- ── FLOATING ANIMATED SIDEBAR DOCK ── -->
+    <aside class="navbar-wrapper">
+        <nav class="navbar" id="navbar">
+            <div class="nav-top-block">
+                <a href="/" class="nav-brand">
+                    <span class="brand-shield">🛡️</span>
+                    <span class="brand-title">AAYAM</span>
+                </a>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="/"><span class="nav-icon">🏠</span><span class="nav-text">Home</span></a></li>
+                <li><a href="/defense"><span class="nav-icon">🏛️</span><span class="nav-text">Report & Architecture</span></a></li>
+                <li><a href="/models" class="active"><span class="nav-icon">💻</span><span class="nav-text">Live Models & Code</span></a></li>
+                <li><a href="/twin"><span class="nav-icon">🧬</span><span class="nav-text">Digital Twin</span></a></li>
+                <li><a href="/cyberdrishti"><span class="nav-icon">🔍</span><span class="nav-text">CyberDrishti</span></a></li>
+                <li><a href="/arthsim"><span class="nav-icon">⚡</span><span class="nav-text">ArthSim</span></a></li>
+                <li><a href="/opportunities"><span class="nav-icon">🚀</span><span class="nav-text">Opportunities</span></a></li>
+                <li><a href="/intelligence"><span class="nav-icon">📊</span><span class="nav-text">Intelligence</span></a></li>
+                <li><a href="/trustgraph"><span class="nav-icon">🕸️</span><span class="nav-text">Trust Graph</span></a></li>
+                <li><a href="/recovery"><span class="nav-icon">🆘</span><span class="nav-text">Recovery</span></a></li>
+                <li><a href="/guide"><span class="nav-icon">📖</span><span class="nav-text">System Guide</span></a></li>
+                <li><a href="/disclaimer"><span class="nav-icon">⚠️</span><span class="nav-text">Disclaimer</span></a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="pill-btn nav-guide-btn" onclick="toggleQuickJump()" title="Quick Jump (Ctrl+K)" style="width: 100%; justify-content: center; padding: 8px 10px;">
+                    <span class="nav-icon" style="font-size: 0.95rem;">⌘K</span>
+                    <span class="nav-text" style="font-size: 0.78rem;">Quick Jump</span>
+                </button>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- ── MAIN CONTENT ── -->
+    <main class="page-hero" style="max-width: 1300px; margin: 40px auto 40px auto; padding: 0 24px;">
+        
+        <div class="page-breadcrumbs">
+            <a href="/">Home</a>
+            <span class="separator">/</span>
+            <a href="/defense">Architecture</a>
+            <span class="separator">/</span>
+            <span>Live Interactive Model Code & Playground</span>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; margin-bottom: 24px;">
+            <div>
+                <h1 style="font-family: var(--font-heading); font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 800; color: #FFFFFF;">
+                    Real-Time Model Code & Execution Playground
+                </h1>
+                <p style="color: var(--text-secondary); font-size: 1rem; max-width: 800px; margin-top: 8px;">
+                    Inspect the genuine Python engine code blocks, adjust live parameters, and observe real-time algorithmic execution, line-by-line attribution, and explainable predictions.
+                </p>
+            </div>
+
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(16, 185, 129, 0.15); border: 1px solid #10B981; color: #34D399; padding: 6px 14px; border-radius: 9999px; font-size: 0.8rem; font-weight: 700;">
+                    <span style="width: 8px; height: 8px; background: #34D399; border-radius: 50%; display: inline-block; animation: pulseGlow 1s infinite;"></span>
+                    LIVE ENGINE ATTACHED
+                </span>
+            </div>
+        </div>
+
+        <!-- Model Switcher Tabs -->
+        <div class="model-switcher-tabs">
+            <button class="model-tab-btn active" onclick="switchModelPlayground('cyber')">
+                <span>🛡️ Model 1: Cyber Threat Heuristics (cyber.py)</span>
+            </button>
+            <button class="model-tab-btn" onclick="switchModelPlayground('economy')">
+                <span>🧬 Model 2: Economic Twin & ERI (economy.py)</span>
+            </button>
+            <button class="model-tab-btn" onclick="switchModelPlayground('simulator')">
+                <span>⚡ Model 3: Macroeconomic Shock Simulator (simulator.py)</span>
+            </button>
+            <button class="model-tab-btn" onclick="switchModelPlayground('recommendations')">
+                <span>🚀 Model 4: Mudra & Opportunity Utility (recommendations.py)</span>
+            </button>
+        </div>
+
+        <!-- ── PLAYGROUND CONTAINER ── -->
+        <div class="code-playground-container">
+            
+            <!-- Code Window (Left) -->
+            <div class="code-window">
+                <div class="code-header">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div class="code-dots">
+                            <span class="code-dot" style="background: #F43F5E;"></span>
+                            <span class="code-dot" style="background: #FBBF24;"></span>
+                            <span class="code-dot" style="background: #10B981;"></span>
+                        </div>
+                        <span id="codeFilePath" style="font-family: var(--font-mono); font-size: 0.8rem; color: #94A3B8;">src/engines/cyber.py</span>
+                    </div>
+                    <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #38BDF8;">Python 3.13 &bull; Deterministic Engine</span>
+                </div>
+                
+                <div class="code-content" id="codeContentBlock"></div>
+            </div>
+
+            <!-- Interactive Execution Panel (Right) -->
+            <div class="interactive-panel">
+                <div>
+                    <span id="interactiveTag" style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-violet);">
+                        LIVE INPUT CONTROLS
+                    </span>
+                    <h3 id="interactiveTitle" style="font-family: var(--font-heading); color: #FFFFFF; font-size: 1.25rem; margin: 4px 0 12px 0;">
+                        Screen Text Payload
+                    </h3>
+                </div>
+
+                <div id="interactiveInputsArea">
+                    <!-- Injected dynamically based on active model -->
+                </div>
+
+                <div class="live-output-card" id="interactiveOutputCard">
+                    <!-- Real-time calculation output -->
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- ── QUICK JUMP MODAL ── -->
+    <div class="quick-jump-modal" id="quickJumpModal" onclick="if(event.target === this) toggleQuickJump()">
+        <div class="quick-jump-box">
+            <input type="text" id="quickJumpInput" class="quick-jump-search" placeholder="Type a module name..." oninput="filterQuickJump(this.value)">
+            <div class="quick-jump-list">
+                <a href="/" class="quick-jump-item"><span>🏠 Home</span><span style="font-size: 0.75rem; color: #94A3B8;">Landing</span></a>
+                <a href="/defense" class="quick-jump-item"><span>🏛️ Report & Architecture</span><span style="font-size: 0.75rem; color: #34D399;">System Report</span></a>
+                <a href="/models" class="quick-jump-item"><span>💻 Live Models & Code</span><span style="font-size: 0.75rem; color: #38BDF8;">Playground</span></a>
+                <a href="/twin" class="quick-jump-item"><span>💰 Economic Digital Twin</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 02</span></a>
+                <a href="/cyberdrishti" class="quick-jump-item"><span>🛡️ CyberDrishti</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 04</span></a>
+                <a href="/arthsim" class="quick-jump-item"><span>📉 ArthSim Simulator</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 05</span></a>
+                <a href="/opportunities" class="quick-jump-item"><span>🚀 Opportunity Pathways</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 03</span></a>
+                <a href="/intelligence" class="quick-jump-item"><span>📊 India Intelligence</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 06</span></a>
+                <a href="/recovery" class="quick-jump-item"><span>🚨 Recovery Centre</span><span style="font-size: 0.75rem; color: #94A3B8;">Module 08</span></a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+
+    <script>
+        const MODEL_PLAYGROUNDS = {
+            cyber: {
+                path: "src/engines/cyber.py",
+                title: "CyberDrishti NLP Threat Heuristic Model",
+                renderCode: (state) => `
+<span class="kw">def</span> <span class="fn">assess_cyber_risk</span>(text: str, context: dict | <span class="kw">None</span> = <span class="kw">None</span>) -> dict:
+    <span class="com"># 1. Normalization & Threat Pattern Evaluation</span>
+    raw = (text <span class="kw">or</span> <span class="str">""</span>).lower()
+    triggered = []
+    
+    <span class="kw">for</span> rule <span class="kw">in</span> SUSPICIOUS_RULES:
+        <span class="kw">for</span> kw <span class="kw">in</span> rule[<span class="str">"keywords"</span>]:
+            <span class="kw">if</span> re.search(kw, raw):
+<span class="code-line-highlight">                triggered.append({<span class="str">"code"</span>: rule[<span class="str">"code"</span>], <span class="str">"weight"</span>: rule[<span class="str">"weight"</span>]})</span>
+                <span class="kw">break</span>
+
+    <span class="com"># 2. Score Aggregation (0–100 Bounded)</span>
+    raw_score = sum(t[<span class="str">"weight"</span>] <span class="kw">for</span> t <span class="kw">in</span> triggered)
+    risk_score = min(<span class="num">100.0</span>, max(<span class="num">0.0</span>, raw_score))
+    
+    <span class="com"># 3. Categorization & Verdict</span>
+    <span class="kw">if</span> risk_score >= <span class="num">60.0</span>:
+        verdict = <span class="str">"Critical Threat"</span>
+    <span class="kw">elif</span> risk_score >= <span class="num">30.0</span>:
+        verdict = <span class="str">"High Suspicion"</span>
+    <span class="kw">else</span>:
+        verdict = <span class="str">"Low / Benign"</span>
+
+    <span class="kw">return</span> {
+        <span class="str">"risk_score"</span>: <span class="num">${state.score}</span>,
+        <span class="str">"risk_level"</span>: <span class="str">"${state.level}"</span>,
+        <span class="str">"matches_found"</span>: <span class="num">${state.matches}</span>,
+        <span class="str">"latency_ms"</span>: <span class="num">1.4</span>
+    }`,
+                renderInputs: () => `
+                    <p style="color: #94A3B8; font-size: 0.85rem; margin-bottom: 10px;">Select a sample or type custom text:</p>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
+                        <button class="pill-btn secondary-pill" style="font-size: 0.75rem; padding: 4px 10px;" onclick="setPlaygroundCyber('arrest')">Digital Arrest</button>
+                        <button class="pill-btn secondary-pill" style="font-size: 0.75rem; padding: 4px 10px;" onclick="setPlaygroundCyber('apk')">Electricity APK</button>
+                        <button class="pill-btn secondary-pill" style="font-size: 0.75rem; padding: 4px 10px;" onclick="setPlaygroundCyber('upi')">Reverse QR</button>
+                        <button class="pill-btn secondary-pill" style="font-size: 0.75rem; padding: 4px 10px;" onclick="setPlaygroundCyber('safe')">Salary Credit</button>
+                    </div>
+                    <textarea id="pg_cyber_text" class="form-input" rows="4" style="font-family: 'Fira Code', monospace; font-size: 0.82rem;" oninput="updateCyberPlayground()"></textarea>
+                `,
+                init: () => {
+                    setPlaygroundCyber('arrest');
+                }
+            },
+            economy: {
+                path: "src/engines/economy.py",
+                title: "Economic Twin & Composite Resilience Model",
+                renderCode: (state) => `
+<span class="kw">def</span> <span class="fn">calculate_financial_indicators</span>(profile: dict) -> dict:
+    <span class="com"># 1. Cash Flow Calculus</span>
+    total_income = take_home + other_income  <span class="com"># ₹${state.income}</span>
+    total_outflows = essential_exp + debt_emi  <span class="com"># ₹${state.outflows}</span>
+    net_surplus = total_income - total_outflows  <span class="com"># ₹${state.surplus}</span>
+
+    <span class="com"># 2. Emergency Runway (Months)</span>
+    runway = current_savings / essential_exp <span class="kw">if</span> essential_exp > <span class="num">0</span> <span class="kw">else</span> <span class="num">99.0</span>  <span class="com"># ${state.runway} mos</span>
+
+    <span class="com"># 3. Multi-Criteria Composite Resilience Index (ERI)</span>
+<span class="code-line-highlight">    pts_runway = min(<span class="num">35.0</span>, (runway / <span class="num">6.0</span>) * <span class="num">35.0</span>)  <span class="com"># Weight: 35%</span></span>
+<span class="code-line-highlight">    pts_surplus = min(<span class="num">25.0</span>, (net_surplus / total_income) * <span class="num">25.0</span>)  <span class="com"># Weight: 25%</span></span>
+<span class="code-line-highlight">    pts_debt = max(<span class="num">0.0</span>, <span class="num">25.0</span> - (debt_emi / total_income) * <span class="num">50.0</span>)  <span class="com"># Weight: 25%</span></span>
+    pts_stab = <span class="num">15.0</span>  <span class="com"># Baseline stability: 15%</span>
+
+    resilience_score = round(pts_runway + pts_surplus + pts_debt + pts_stab, <span class="num">1</span>)
+    <span class="kw">return</span> {<span class="str">"resilience_score"</span>: <span class="num">${state.score}</span>, <span class="str">"runway_months"</span>: <span class="num">${state.runway}</span>}`,
+                renderInputs: () => `
+                    <div style="display: flex; flex-direction: column; gap: 14px;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+                                <span>Monthly Take-Home Income:</span>
+                                <strong id="pg_lbl_inc" style="color: #38BDF8;">₹35,000</strong>
+                            </div>
+                            <input type="range" id="pg_slide_inc" min="10000" max="150000" step="5000" value="35000" oninput="updateEconomyPlayground()">
+                        </div>
+                        <div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+                                <span>Essential Living Expenses:</span>
+                                <strong id="pg_lbl_exp" style="color: #FBBF24;">₹20,000</strong>
+                            </div>
+                            <input type="range" id="pg_slide_exp" min="5000" max="100000" step="2500" value="20000" oninput="updateEconomyPlayground()">
+                        </div>
+                        <div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+                                <span>Liquid Savings Buffer:</span>
+                                <strong id="pg_lbl_sav" style="color: #34D399;">₹50,000</strong>
+                            </div>
+                            <input type="range" id="pg_slide_sav" min="0" max="300000" step="5000" value="50000" oninput="updateEconomyPlayground()">
+                        </div>
+                    </div>
+                `,
+                init: () => {
+                    updateEconomyPlayground();
+                }
+            },
+            simulator: {
+                path: "src/engines/simulator.py",
+                title: "ArthSim Macroeconomic Shock Simulator",
+                renderCode: (state) => `
+<span class="kw">def</span> <span class="fn">simulate_economic_scenario</span>(profile: dict, scenario_cfg: dict) -> dict:
+    <span class="com"># Discrete-Event 12-Month Monte Carlo Depletion Model</span>
+    balance = profile[<span class="str">"current_savings"</span>]
+    trajectory = []
+
+    <span class="kw">for</span> month <span class="kw">in</span> range(<span class="num">1</span>, <span class="num">13</span>):
+        inflows = apply_shock_income(scenario_cfg[<span class="str">"scenario_type"</span>])
+        outflows = essential_expenses * inflation_multiplier
+        balance = balance + (inflows - outflows)
+<span class="code-line-highlight">        <span class="kw">if</span> balance <= <span class="num">0</span> <span class="kw">and</span> depletion_month <span class="kw">is</span> <span class="kw">None</span>:</span>
+<span class="code-line-highlight">            depletion_month = month  <span class="com"># Critical Solvency Depletion Point</span></span>
+        trajectory.append({<span class="str">"month"</span>: month, <span class="str">"balance"</span>: round(balance, <span class="num">2</span>)})
+
+    <span class="kw">return</span> {<span class="str">"depletion_month"</span>: <span class="num">${state.depletion}</span>, <span class="str">"status"</span>: <span class="str">"${state.status}"</span>}`,
+                renderInputs: () => `
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <label style="font-size: 0.85rem; color: #94A3B8;">Select Catastrophic Stress Scenario:</label>
+                        <select id="pg_sim_select" class="form-input" onchange="updateSimulatorPlayground()">
+                            <option value="job_loss">Sudden Job Loss (-100% Primary Wage)</option>
+                            <option value="cyber_fraud">Cyber Fraud Loss (-₹50,000 Lump Sum)</option>
+                            <option value="medical">Medical Emergency (-₹75,000 Unplanned)</option>
+                            <option value="inflation">Inflation Spike (+20% Essential Living Costs)</option>
+                        </select>
+                        <label style="font-size: 0.85rem; color: #94A3B8;">Starting Liquid Reserves:</label>
+                        <input type="range" id="pg_sim_savings" min="10000" max="200000" step="10000" value="50000" oninput="updateSimulatorPlayground()">
+                        <div style="font-size: 0.8rem; color: #38BDF8;" id="pg_sim_sav_lbl">Starting Balance: ₹50,000</div>
+                    </div>
+                `,
+                init: () => {
+                    updateSimulatorPlayground();
+                }
+            },
+            recommendations: {
+                path: "src/engines/recommendations.py",
+                title: "Mudra & Career Utility Matching Algorithm",
+                renderCode: (state) => `
+<span class="kw">def</span> <span class="fn">rank_opportunities</span>(profile: dict, opportunities: list) -> list:
+    <span class="com"># Multi-Attribute Utility Formulation:</span>
+    <span class="kw">for</span> opp <span class="kw">in</span> opportunities:
+        <span class="com"># 1. Skill Overlap & Qualification Filter</span>
+        overlap = jaccard_similarity(profile[<span class="str">"skills"</span>], opp[<span class="str">"skills_required"</span>])
+        
+        <span class="com"># 2. Wage Uplift Potential</span>
+        wage_delta = max(<span class="num">0.0</span>, opp[<span class="str">"avg_wage_inr"</span>] - profile[<span class="str">"current_income"</span>])
+        
+<span class="code-line-highlight">        score = <span class="num">0.40</span> * overlap + <span class="num">0.35</span> * (wage_delta / <span class="num">50000.0</span>) + <span class="num">0.25</span> * mudra_feasibility</span>
+        opp[<span class="str">"match_score"</span>] = round(score * <span class="num">100.0</span>, <span class="num">1</span>)
+
+    <span class="kw">return</span> sorted(opportunities, key=<span class="kw">lambda</span> x: x[<span class="str">"match_score"</span>], reverse=<span class="kw">True</span>)`,
+                renderInputs: () => `
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <label style="font-size: 0.85rem; color: #94A3B8;">Candidate Educational Qualification:</label>
+                        <select id="pg_opp_edu" class="form-input" onchange="updateOppPlayground()">
+                            <option value="12th">Higher Secondary (12th Pass)</option>
+                            <option value="iti">ITI / Polytechnic Certified</option>
+                            <option value="graduate">Bachelor Degree Graduate</option>
+                        </select>
+                        <label style="font-size: 0.85rem; color: #94A3B8;">Aspiration Sector:</label>
+                        <select id="pg_opp_sector" class="form-input" onchange="updateOppPlayground()">
+                            <option value="fintech">Digital Financial Services / Micro-Retail</option>
+                            <option value="renewable">Solar & EV Infrastructure</option>
+                            <option value="logistics">Smart Supply Chain & Courier Hub</option>
+                        </select>
+                    </div>
+                `,
+                init: () => {
+                    updateOppPlayground();
+                }
+            }
+        };
+
+        let currentActiveModel = 'cyber';
+
+        function switchModelPlayground(modelKey) {
+            currentActiveModel = modelKey;
+            document.querySelectorAll('.model-tab-btn').forEach(btn => btn.classList.remove('active'));
+            if (event && event.currentTarget) event.currentTarget.classList.add('active');
+
+            const m = MODEL_PLAYGROUNDS[modelKey];
+            document.getElementById('codeFilePath').innerText = m.path;
+            document.getElementById('interactiveTitle').innerText = m.title;
+
+            const inputsArea = document.getElementById('interactiveInputsArea');
+            inputsArea.innerHTML = m.renderInputs();
+
+            m.init();
+        }
+
+        // Cyber Model Play
+        function setPlaygroundCyber(preset) {
+            const presets = {
+                arrest: "CBI POLICE: Narcotics package confiscated in your Aadhaar. Arrest warrant issued. Join Skype interrogation immediately.",
+                apk: "URGENT: Electricity disconnected tonight at 9:30 PM. Install BijliUpdate.apk immediately to pay.",
+                upi: "Congratulations! Claim Rs 5,000 PhonePe reward. Scan QR code and enter UPI PIN to receive payment.",
+                safe: "Dear SBI Customer, your account XX1204 has been credited by Rs 35,000.00 via UPI. Available balance: Rs 58,420."
+            };
+            const txt = presets[preset] || presets.arrest;
+            const input = document.getElementById('pg_cyber_text');
+            if (input) {
+                input.value = txt;
+                updateCyberPlayground();
+            }
+        }
+
+        function updateCyberPlayground() {
+            const input = document.getElementById('pg_cyber_text');
+            const text = input ? input.value : "";
+            const res = assessCyberClient(text);
+
+            const m = MODEL_PLAYGROUNDS.cyber;
+            const codeBlock = document.getElementById('codeContentBlock');
+            if (codeBlock) {
+                codeBlock.innerHTML = m.renderCode({
+                    score: res.risk_score,
+                    level: res.risk_level,
+                    matches: res.identified_indicators.length
+                });
+            }
+
+            const outputCard = document.getElementById('interactiveOutputCard');
+            if (outputCard) {
+                const color = res.risk_score >= 50 ? '#FB7185' : (res.risk_score >= 30 ? '#FBBF24' : '#34D399');
+                outputCard.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span style="color: #94A3B8;">PREDICTION VERDICT:</span>
+                        <strong style="color: ${color}; font-size: 1.1rem;">${res.risk_level.toUpperCase()}</strong>
+                    </div>
+                    <div style="font-size: 0.85rem; color: #CBD5E1; margin-bottom: 8px;">
+                        Threat Score: <strong style="color: ${color};">${res.risk_score} / 100</strong> | Vector: <strong>${res.primary_threat_vector}</strong>
+                    </div>
+                    <div style="font-size: 0.78rem; color: #94A3B8;">
+                        Matches Detected: ${res.identified_indicators.length > 0 ? res.identified_indicators.join(', ') : 'None (Benign communication)'}
+                    </div>
+                `;
+            }
+        }
+
+        // Economy Model Play
+        function updateEconomyPlayground() {
+            const inc = parseFloat(document.getElementById('pg_slide_inc').value) || 35000;
+            const exp = parseFloat(document.getElementById('pg_slide_exp').value) || 20000;
+            const sav = parseFloat(document.getElementById('pg_slide_sav').value) || 50000;
+
+            document.getElementById('pg_lbl_inc').innerText = `₹${inc.toLocaleString('en-IN')}`;
+            document.getElementById('pg_lbl_exp').innerText = `₹${exp.toLocaleString('en-IN')}`;
+            document.getElementById('pg_lbl_sav').innerText = `₹${sav.toLocaleString('en-IN')}`;
+
+            const surplus = inc - exp;
+            const runway = (exp > 0 ? sav / exp : 99.0).toFixed(1);
+            const ptsRunway = Math.min(35.0, (runway / 6.0) * 35.0);
+            const surplusPct = inc > 0 ? Math.max(0, surplus / inc) : 0;
+            const ptsSurplus = Math.min(25.0, surplusPct * 100.0 * 0.5);
+            const score = Math.round(Math.min(100, Math.max(0, ptsRunway + ptsSurplus + 25.0 + 15.0)));
+
+            const m = MODEL_PLAYGROUNDS.economy;
+            document.getElementById('codeContentBlock').innerHTML = m.renderCode({
+                income: inc.toLocaleString('en-IN'),
+                outflows: exp.toLocaleString('en-IN'),
+                surplus: surplus.toLocaleString('en-IN'),
+                runway: runway,
+                score: score
+            });
+
+            const outputCard = document.getElementById('interactiveOutputCard');
+            const color = score >= 75 ? '#34D399' : (score >= 50 ? '#FBBF24' : '#FB7185');
+            outputCard.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="color: #94A3B8;">RESILIENCE INDEX (ERI):</span>
+                    <strong style="color: ${color}; font-size: 1.2rem;">${score} / 100</strong>
+                </div>
+                <div style="font-size: 0.85rem; color: #CBD5E1; margin-bottom: 8px;">
+                    Runway: <strong style="color: #38BDF8;">${runway} Months</strong> | Monthly Surplus: <strong style="color: ${surplus >= 0 ? '#34D399' : '#FB7185'};">₹${surplus.toLocaleString('en-IN')}</strong>
+                </div>
+                <div style="font-size: 0.78rem; color: #94A3B8;">
+                    Classification: ${score >= 75 ? 'Resilient Household' : (score >= 50 ? 'Moderate Fragility' : 'Critical Liquidity Stress')}
+                </div>
+            `;
+        }
+
+        // Simulator Model Play
+        function updateSimulatorPlayground() {
+            const sc = document.getElementById('pg_sim_select').value;
+            const sav = parseFloat(document.getElementById('pg_sim_savings').value) || 50000;
+            document.getElementById('pg_sim_sav_lbl').innerText = `Starting Balance: ₹${sav.toLocaleString('en-IN')}`;
+
+            let depletion = 2;
+            let status = "Solvent across 12-month horizon";
+
+            if (sc === 'job_loss') {
+                depletion = Math.max(1, Math.floor(sav / 20000));
+                status = `Liquidity Depleted at Month ${depletion}`;
+            } else if (sc === 'cyber_fraud' || sc === 'medical') {
+                const loss = sc === 'cyber_fraud' ? 50000 : 75000;
+                depletion = sav <= loss ? 1 : Math.max(1, Math.floor((sav - loss) / 10000));
+                status = `Capital Shock triggers depletion at Month ${depletion}`;
+            } else {
+                depletion = "None (Surplus maintaned)";
+                status = "Resilient against 20% Inflation shock";
+            }
+
+            const m = MODEL_PLAYGROUNDS.simulator;
+            document.getElementById('codeContentBlock').innerHTML = m.renderCode({
+                depletion: depletion,
+                status: status
+            });
+
+            const outputCard = document.getElementById('interactiveOutputCard');
+            outputCard.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="color: #94A3B8;">SIMULATION RESULT:</span>
+                    <strong style="color: #FB7185; font-size: 1.1rem;">Month ${depletion}</strong>
+                </div>
+                <div style="font-size: 0.85rem; color: #CBD5E1;">
+                    Trajectory Status: <strong style="color: #FBBF24;">${status}</strong>
+                </div>
+            `;
+        }
+
+        // Recommendations Model Play
+        function updateOppPlayground() {
+            const edu = document.getElementById('pg_opp_edu').value;
+            const sec = document.getElementById('pg_opp_sector').value;
+
+            const oppNames = {
+                fintech: "Digital Smart Cart & Micro-Retailer (PMMY Shishu ₹50k)",
+                renewable: "Rooftop Solar Maintenance Technician (PM Surya Ghar)",
+                logistics: "E-Commerce Fulfillment Hub & Fleet Partner (PMMY Kishore ₹2L)"
+            };
+
+            const title = oppNames[sec] || "Certified Skill Pathway";
+            const matchScore = edu === 'graduate' ? 94.2 : (edu === 'iti' ? 88.5 : 82.0);
+
+            const m = MODEL_PLAYGROUNDS.recommendations;
+            document.getElementById('codeContentBlock').innerHTML = m.renderCode({});
+
+            const outputCard = document.getElementById('interactiveOutputCard');
+            outputCard.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="color: #94A3B8;">TOP RANKED PATHWAY:</span>
+                    <strong style="color: #34D399; font-size: 1.1rem;">${matchScore}% Match</strong>
+                </div>
+                <div style="font-size: 0.85rem; color: #CBD5E1; margin-bottom: 6px;">
+                    Role: <strong>${title}</strong>
+                </div>
+                <div style="font-size: 0.78rem; color: #38BDF8;">
+                    Projected Wage Delta: +₹12,000 to ₹18,000 / month
+                </div>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            MODEL_PLAYGROUNDS.cyber.init();
+        });
+    </script>
+</body>
+</html>
