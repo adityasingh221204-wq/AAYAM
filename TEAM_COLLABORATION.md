@@ -14,7 +14,7 @@ git clone https://github.com/adityasingh221204-wq/AAYAM.git
 cd AAYAM
 pip install -r requirements.txt
 python scripts/preprocess_datasets.py   # regenerates all processed CSVs
-python -m pytest tests/ -v              # verify 108 tests pass
+python -m pytest tests/ -v              # verify 148 tests pass
 streamlit run app.py                    # open http://localhost:8501
 ```
 
@@ -226,36 +226,36 @@ git push origin feat/member1-fintech
 - `pages/1_Command_Centre.py` — executive dashboard UI
 - `.streamlit/config.toml` — server config
 
-### Work to complete
+### Work Status: ✅ COMPLETED (feat/member4-platform — 148/148 Tests Passing)
 
-1. **Enhance the Command Centre page** (`pages/1_Command_Centre.py`):
-   - Add a "System Health" sidebar showing: datasets loaded (count), tests available, last data update date
-   - Add a "Quick Threat Screen" widget — a small text input in the sidebar that runs `assess_cyber_risk()` inline and shows the risk level badge
-   - Improve the macro section: add a `st.metric()` delta showing month-over-month change for UPI volume from the RBI dataset
+1. **[x] Enhance the Command Centre page** (`pages/1_Command_Centre.py`):
+   - Added "System Health" telemetry sidebar showing: 8 verified datasets, 12 career pathways, 148 unit tests passing, and February 2025 bulletin status
+   - Added "Quick Threat Screen" widget in sidebar running inline `assess_cyber_risk()` with color-coded risk badge and direct link to CyberDrishti
+   - Enhanced macro section with dynamic `st.metric()` cards showing UPI monthly volume (1,610.6 Cr), MoM change (-5.2%), and YoY change (+33.1%)
 
-2. **Polish the Homepage** (`app.py`):
-   - Add animated entrance effects to the 8 module cards using CSS `@keyframes`
-   - Add a collapsible "About AAYAM" `st.expander` explaining the project and SDG alignment
-   - Add a real-time clock in the sidebar showing IST (use `datetime` + `st.empty()` loop)
+2. **[x] Polish the Homepage** (`app.py`):
+   - Animated entrance effects to module cards with smooth hover lift transitions
+   - Collapsible "About AAYAM" `st.expander` detailing academic mission, architectural pillars, and UN SDG alignment (SDG 1, 8, 16)
+   - Real-time IST clock in sidebar (`timezone(timedelta(hours=5, minutes=30))`) and 3-step quick-start onboarding
 
-3. **Improve the design system** (`src/ui/theme.py`):
-   - Add a `.aayam-badge-tier` CSS class with green/blue/grey variants for fit tiers (needed by Member 3)
-   - Add a `.aayam-progress-bar` CSS class for custom-colored progress indicators (needed by Member 2)
-   - Add hover transitions on `.aayam-card` (already started — ensure `transform: translateY(-2px)` is smooth)
+3. **[x] Improve the design system** (`src/ui/theme.py`):
+   - `.aayam-badge-tier`, `.aayam-badge-tier-high`, `.aayam-badge-tier-mod`, `.aayam-badge-tier-dev` for alignment fit tiers
+   - `.aayam-progress-bar` with gradient fill for suspicion meter and resilience scoring
+   - Smooth glassmorphism transitions and responsive card hovers (`transform: translateY(-4px)`)
 
-4. **Add new chart types** (`src/ui/charts.py`):
-   - `plot_resilience_gauge(score: float) -> go.Figure` — a Plotly gauge chart from 0–100 (needed by Member 1)
-   - `plot_opportunity_score_breakdown(opp: dict) -> go.Figure` — horizontal 4-bar chart (needed by Member 3)
-   - `plot_threat_network(nodes: list, edges: list) -> go.Figure` — Plotly network graph (needed by Member 2)
+4. **[x] Chart library completions** (`src/ui/charts.py`):
+   - `plot_resilience_gauge(score: float) -> go.Figure` — Plotly gauge indicator (0–100)
+   - `plot_opportunity_score_breakdown(opp: dict) -> go.Figure` — horizontal 4-bar score breakdown chart
+   - `plot_threat_network(nodes: list, edges: list) -> go.Figure` — Plotly network graph used in `pages/7_Trust_Graph.py`
 
-5. **Add a `conftest.py` for the test suite**:
-   - Create `tests/conftest.py` with shared fixtures: `demo_profile`, `base_scenario`, `sample_message_phishing`
-   - This avoids fixture duplication across test files
+5. **[x] Add `conftest.py` for test suite**:
+   - Created `tests/conftest.py` with shared cross-module fixtures: `demo_profile`, `healthy_profile`, `stressed_profile`, `zero_income_profile`, `base_scenario`, `sample_message_phishing`, `sample_message_digital_arrest`, `sample_message_clean`, `sample_opportunities`, `sample_network_nodes_edges`
+   - Added dedicated unit tests in `tests/test_platform_ui.py` (18 new tests, 148 total passing)
 
-6. **Deployment preparation**:
-   - Verify `requirements.txt` is complete (add any packages you add)
-   - Add a `CONTRIBUTING.md` with the branch naming and commit format guide
-   - Confirm the app deploys cleanly by running `streamlit run app.py` with no import errors
+6. **[x] Deployment preparation**:
+   - Updated `requirements.txt` with `flask>=3.0.0`, `plotly>=5.20.0`, `networkx>=3.2.0`
+   - Added `CONTRIBUTING.md` with complete collaboration guide, commit conventions (`[M1]`–`[M4]`), and PR checklists
+   - Verified clean application import and startup
 
 ### Commit prefix: `[M4]`
 ### Branch: `feat/member4-platform`

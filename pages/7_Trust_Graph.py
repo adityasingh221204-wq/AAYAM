@@ -4,13 +4,14 @@ NetworkX and Plotly knowledge graph mapping entities, threat vectors, delivery c
 financial consequences, and statutory defense frameworks.
 """
 import streamlit as st
+import pandas as pd
 import networkx as nx
-import plotly.graph_objects as go
 from src.ui.theme import apply_theme
 from src.ui.components import (
     render_header, render_kpi_card, render_alert_box,
     render_data_provenance, render_footer
 )
+from src.ui.charts import plot_threat_network
 from src.utils.config import COLOR_BORDER
 
 st.set_page_config(page_title="Trust Graph — AAYAM", page_icon="🕸️", layout="wide")
@@ -35,7 +36,7 @@ def build_knowledge_graph():
     G = nx.DiGraph()
     
     # Node types and styling
-    # Types: Channel, Threat, Target, Consequence, Defense
+    # Types: Channel, Threat, Vulnerability, Consequence, Defense
     nodes = [
         # Channels
         ("SMS_SMISHING", {"label": "SMS / Smishing", "type": "Channel", "color": "#6366F1"}),
@@ -108,9 +109,9 @@ def build_knowledge_graph():
     for u, v, attr in edges:
         G.add_edge(u, v, **attr)
         
-    return G
+    return G, nodes, edges
 
-G = build_knowledge_graph()
+G, nodes, edges = build_knowledge_graph()
 
 # 2. Controls & Search
 c1, c2 = st.columns([2, 1])
@@ -126,70 +127,8 @@ with c2:
         default=["Channel", "Threat", "Vulnerability", "Consequence", "Defense"]
     )
 
-# 3. Generate Graph Visualization using Plotly & Spring Layout
-pos = nx.spring_layout(G, seed=42, k=0.9, iterations=50)
-
-edge_x = []
-edge_y = []
-for edge in G.edges():
-    u, v = edge
-    # Check if both nodes pass filter
-    if G.nodes[u]["type"] in filter_type and G.nodes[v]["type"] in filter_type:
-        x0, y0 = pos[u]
-        x1, y1 = pos[v]
-        edge_x.extend([x0, x1, None])
-        edge_y.extend([y0, y1, None])
-
-edge_trace = go.Scatter(
-    x=edge_x, y=edge_y,
-    line=dict(width=1.5, color="rgba(148, 163, 184, 0.4)"),
-    hoverinfo="none",
-    mode="lines"
-)
-
-node_x = []
-node_y = []
-node_text = []
-node_colors = []
-
-for node in G.nodes():
-    if G.nodes[node]["type"] in filter_type:
-        x, y = pos[node]
-        node_x.append(x)
-        node_y.append(y)
-        attr = G.nodes[node]
-        node_text.append(f"{attr['label']} ({attr['type']})")
-        node_colors.append(attr["color"])
-
-node_trace = go.Scatter(
-    x=node_x, y=node_y,
-    mode="markers+text",
-    text=[G.nodes[n]["label"] for n in G.nodes() if G.nodes[n]["type"] in filter_type],
-    textposition="top center",
-    hovertext=node_text,
-    hoverinfo="text",
-    marker=dict(
-        showscale=False,
-        color=node_colors,
-        size=18,
-        line=dict(width=2, color="#090D16")
-    )
-)
-
-fig = go.Figure(
-    data=[edge_trace, node_trace],
-    layout=go.Layout(
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)",
-        showlegend=False,
-        hovermode="closest",
-        margin=dict(b=20, l=20, r=20, t=20),
-        xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-        yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-        height=560
-    )
-)
-
+# 3. Generate Graph Visualization using Plotly & Spring Layout via src.ui.charts
+fig = plot_threat_network(nodes, edges, filter_types=filter_type)
 st.plotly_chart(fig, use_container_width=True)
 
 # 4. Legend & Relationship Matrix

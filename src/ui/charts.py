@@ -56,12 +56,13 @@ def plot_cashflow_breakdown(income: float, essential: float, discretionary: floa
         totals={"marker": {"color": COLOR_ACCENT_SECONDARY}}
     ))
     
-    fig.update_layout(
-        **DARK_LAYOUT,
+    layout = dict(DARK_LAYOUT)
+    layout.update(
         title="Monthly Cash Flow Allocation Breakdown",
         showlegend=False,
         height=380
     )
+    fig.update_layout(**layout)
     return fig
 
 
@@ -92,13 +93,14 @@ def plot_scenario_trajectories(baseline_traj: list[dict], scenario_traj: list[di
         marker=dict(size=6)
     ))
     
-    fig.update_layout(
-        **DARK_LAYOUT,
+    layout = dict(DARK_LAYOUT)
+    layout.update(
         title=f"Savings Balance Trajectory: Baseline vs Scenario ({duration} Months)",
         xaxis_title="Month",
         yaxis_title="Savings Balance (₹ INR)",
         height=420
     )
+    fig.update_layout(**layout)
     return fig
 
 
@@ -127,11 +129,12 @@ def plot_rbi_payment_growth(df_payments: pd.DataFrame) -> go.Figure:
         labels={"volume_crore": "Volume (Crore Transactions)", "system_name": "Payment Channel"}
     )
     
-    fig.update_layout(
-        **DARK_LAYOUT,
+    layout = dict(DARK_LAYOUT)
+    layout.update(
         title="RBI Payment Volumes: YoY Growth (Feb 2024 vs Feb 2025)",
         height=380
     )
+    fig.update_layout(**layout)
     return fig
 
 
@@ -194,11 +197,12 @@ def plot_plfs_wpr_by_state(df_plfs: pd.DataFrame) -> go.Figure:
         labels={"wpr_pct": "Worker Population Ratio (%)", "ur_pct": "Unemployment Rate (%)", "state": "State"}
     )
     
-    fig.update_layout(
-        **DARK_LAYOUT,
+    layout = dict(DARK_LAYOUT)
+    layout.update(
         title="PLFS 2023-24: Worker Population Ratio & Unemployment Rate Across States",
         height=480
     )
+    fig.update_layout(**layout)
     return fig
 
 
@@ -218,11 +222,12 @@ def plot_hces_fractiles(df_hces: pd.DataFrame, sector: str = "Urban") -> go.Figu
         labels={"mpce_inr": "Monthly Per Capita Exp (₹)", "food_expenditure_share_pct": "Food Share (%)", "fractile_class": "Fractile Class"}
     )
     
-    fig.update_layout(
-        **DARK_LAYOUT,
+    layout = dict(DARK_LAYOUT)
+    layout.update(
         title=f"HCES 2023-24: Consumption Distribution & Food Share ({sector} India)",
         height=380
     )
+    fig.update_layout(**layout)
     return fig
 
 
@@ -257,12 +262,13 @@ def plot_resilience_gauge(score: float) -> go.Figure:
         }
     ))
     
-    fig.update_layout(
-        **DARK_LAYOUT,
+    layout = dict(DARK_LAYOUT)
+    layout.update(
         title={"text": "Composite Economic Resilience Index", "y": 0.95},
         height=280,
         margin=dict(l=30, r=30, t=50, b=20)
     )
+    fig.update_layout(**layout)
     return fig
 
 
@@ -293,14 +299,15 @@ def plot_resilience_components(component_scores: dict) -> go.Figure:
         marker=dict(color=colors, line=dict(color=COLOR_BORDER, width=1))
     ))
 
-    fig.update_layout(
-        **DARK_LAYOUT,
+    layout = dict(DARK_LAYOUT)
+    layout.update(
         title="Component Scores Breakdown (0–100 Scale)",
         xaxis=dict(range=[0, 38], title="Points Awarded", gridcolor=COLOR_BORDER),
         yaxis=dict(gridcolor="rgba(0,0,0,0)"),
         height=240,
         margin=dict(l=150, r=20, t=40, b=30)
     )
+    fig.update_layout(**layout)
     return fig
 
 
@@ -333,14 +340,15 @@ def plot_opportunity_score_breakdown(opp: dict) -> go.Figure:
         marker=dict(color=colors, line=dict(color=COLOR_BORDER, width=1))
     ))
     
-    fig.update_layout(
-        **DARK_LAYOUT,
+    layout = dict(DARK_LAYOUT)
+    layout.update(
         title=f"Score Breakdown: {opp.get('title', 'Opportunity')[:38]}",
         xaxis=dict(range=[0, 42], title="Score Points", gridcolor=COLOR_BORDER),
         yaxis=dict(gridcolor="rgba(0,0,0,0)"),
         height=220,
         margin=dict(l=140, r=20, t=40, b=30)
     )
+    fig.update_layout(**layout)
     return fig
 
 
@@ -363,12 +371,110 @@ def plot_rbi_system_trend(df_payments: pd.DataFrame, system_name: str = "UPI") -
         marker=dict(size=8, color="#34D399")
     ))
     
-    fig.update_layout(
-        **DARK_LAYOUT,
+    layout = dict(DARK_LAYOUT)
+    layout.update(
         title=f"Monthly Transaction Volume: {system_name}",
         xaxis_title="Reporting Period",
         yaxis_title="Volume (Crore Transactions)",
         height=360
     )
+    fig.update_layout(**layout)
     return fig
 
+
+def plot_threat_network(nodes: list, edges: list, filter_types: list[str] | None = None) -> go.Figure:
+    """
+    Render an interactive Plotly network knowledge graph of cyber threats and defense frameworks.
+    
+    Args:
+        nodes: List of (node_id, attr_dict) where attr_dict has 'label', 'type', 'color'
+        edges: List of (u, v, attr_dict) where attr_dict has 'relationship'
+        filter_types: Optional list of node category types to filter and display
+        
+    Returns:
+        Plotly Figure with interactive Scatter node and edge traces.
+    """
+    if not nodes:
+        return go.Figure()
+        
+    import networkx as nx
+    
+    G = nx.DiGraph()
+    for n, attr in nodes:
+        G.add_node(n, **attr)
+    for u, v, attr in edges:
+        G.add_edge(u, v, **attr)
+        
+    pos = nx.spring_layout(G, seed=42, k=0.9, iterations=50)
+    
+    # If no filter specified, include all types present
+    if filter_types is None:
+        active_types = {G.nodes[n].get("type", "") for n in G.nodes}
+    else:
+        active_types = set(filter_types)
+        
+    edge_x = []
+    edge_y = []
+    for u, v in G.edges():
+        if G.nodes[u].get("type") in active_types and G.nodes[v].get("type") in active_types:
+            if u in pos and v in pos:
+                x0, y0 = pos[u]
+                x1, y1 = pos[v]
+                edge_x.extend([x0, x1, None])
+                edge_y.extend([y0, y1, None])
+                
+    edge_trace = go.Scatter(
+        x=edge_x, y=edge_y,
+        line=dict(width=1.5, color="rgba(148, 163, 184, 0.4)"),
+        hoverinfo="none",
+        mode="lines"
+    )
+    
+    node_x = []
+    node_y = []
+    node_text = []
+    node_colors = []
+    node_labels = []
+    
+    for node in G.nodes():
+        if G.nodes[node].get("type") in active_types:
+            if node in pos:
+                x, y = pos[node]
+                node_x.append(x)
+                node_y.append(y)
+                attr = G.nodes[node]
+                lbl = attr.get("label", str(node))
+                ntype = attr.get("type", "Unknown")
+                node_labels.append(lbl)
+                node_text.append(f"{lbl} ({ntype})")
+                node_colors.append(attr.get("color", "#6366F1"))
+                
+    node_trace = go.Scatter(
+        x=node_x, y=node_y,
+        mode="markers+text",
+        text=node_labels,
+        textposition="top center",
+        hovertext=node_text,
+        hoverinfo="text",
+        marker=dict(
+            showscale=False,
+            color=node_colors,
+            size=18,
+            line=dict(width=2, color="#090D16")
+        )
+    )
+    
+    fig = go.Figure(
+        data=[edge_trace, node_trace],
+        layout=go.Layout(
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            showlegend=False,
+            hovermode="closest",
+            margin=dict(b=20, l=20, r=20, t=20),
+            xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+            yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+            height=560
+        )
+    )
+    return fig
