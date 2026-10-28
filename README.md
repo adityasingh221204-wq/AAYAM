@@ -5,7 +5,7 @@
 
 *A high-trust, multi-engine cyber-fintech intelligence platform built for India's digital citizen*
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?logo=vercel&style=for-the-badge)](https://aayam.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?logo=vercel&style=for-the-badge)](https://aayam-wine.vercel.app/)
 [![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python&style=for-the-badge)](https://python.org)
 [![Flask](https://img.shields.io/badge/Flask-3.0-green?logo=flask&style=for-the-badge)](https://flask.palletsprojects.com)
 [![Tests](https://img.shields.io/badge/Tests-130%20Passing-brightgreen?style=for-the-badge)](tests/)
@@ -207,36 +207,6 @@ python -m pytest tests/ -v
 # Expected: 130 passed
 ```
 
----
-
-## ☁️ Deploying to Vercel (3 Steps)
-
-### Method 1: Vercel Dashboard (Recommended)
-
-1. **Fork or clone** this repository to your GitHub account
-2. **Go to [vercel.com](https://vercel.com)** → New Project → Import Git Repository
-3. **Select your fork** of `AAYAM` → Vercel auto-detects `vercel.json` → click **Deploy**
-
-That's it. Your live URL will be `https://your-project.vercel.app` within ~90 seconds.
-
-### Method 2: Vercel CLI
-
-```bash
-# Install Vercel CLI
-npm install -g vercel
-
-# From the project root:
-vercel
-
-# Follow prompts → select project → deploy
-# For production:
-vercel --prod
-```
-
-### Environment Variables (None Required)
-AAYAM requires **zero API keys or secrets** — all computations are local and data-driven.
-
----
 
 ## 🧪 Test Coverage
 
@@ -283,21 +253,15 @@ AAYAM is built exclusively for **protective and educational purposes**:
 
 All outputs carry explicit uncertainty disclaimers. Citizens are always directed to official government portals (cybercrime.gov.in, rbi.org.in) for authoritative guidance.
 
-See [`/disclaimer`](https://aayam.vercel.app/disclaimer) for the full Ethical Guardrails page.
 
----
-
-## 📄 License
-
-MIT License — see [LICENSE](LICENSE) for details.
 
 ---
 
 <div align="center">
 
-Built with ❤️ for India's Digital Citizens  
+Built for India's Digital Citizens  
 **AAYAM** — Protecting Every Rupee, Every Connection
 
-[🌐 Live Demo](https://aayam.vercel.app) · [📖 Guide](https://aayam.vercel.app/guide) · [⚠️ Disclaimer](https://aayam.vercel.app/disclaimer)
+[🌐 Live Demo](https://aayam-wine.vercel.app/)
 
 </div>
