@@ -32,6 +32,30 @@ jobs:
         run: |
           mkdir -p reports
           python -m pytest tests/ -v --junitxml=reports/pytest.xml
+      - name: Start Flask app and verify live HTTP routes
+        run: |
+          set -e
+          python web/server.py > /tmp/aayam-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:5000/ -o /tmp/aayam-home.html; then
+              break
+            fi
+            sleep 1
+          done
+          test -s /tmp/aayam-home.html
+          curl --fail --silent http://127.0.0.1:5000/api/system/smoke-test -o /tmp/aayam-smoke.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          payload = json.loads(Path("/tmp/aayam-smoke.json").read_text(encoding="utf-8"))
+          assert payload.get("engine_checks_run") == 5, payload
+          assert payload.get("engine_checks_failed") == 0, payload
+          assert payload.get("status") == "success", payload
+          assert str(payload.get("pytest_suite_status", "")).startswith("NOT RUN"), payload
+          print("Live Flask HTTP smoke checks passed: homepage + 5 engine checks.")
+          PY
       - name: Convert JUnit output into dashboard report
         if: always()
         env:
