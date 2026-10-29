@@ -555,13 +555,43 @@
                     🧮 Mathematical Formulation: Economic Resilience Index (ERI)
                 </h4>
                 <p style="font-size: 0.92rem; color: #CBD5E1; line-height: 1.6;">
-                    The composite score \( \text{ERI} \in [0, 100] \) is formulated as a multi-criteria utility function balancing immediate solvency against systemic fragility:
+                    The implemented Economic Resilience Index is the sum of four point components. Each component below mirrors
+                    <code>src/engines/economy.py</code>; these are point allocations, not percentage multipliers.
                 </p>
-                <div style="background: rgba(0, 0, 0, 0.4); padding: 14px; border-radius: 8px; font-family: var(--font-mono); color: #34D399; font-size: 0.95rem; margin: 12px 0;">
-                    ERI = 0.35 &bull; S_runway + 0.25 &bull; S_surplus + 0.25 &bull; S_debt + 0.15 &bull; S_stability
+                <div style="background: rgba(0, 0, 0, 0.4); padding: 16px; border-radius: 8px; color: #34D399; margin: 12px 0; overflow-x: auto;">
+                    <div style="font-size: clamp(1rem, 2.4vw, 1.2rem); font-weight: 700; line-height: 1.8; white-space: normal;">
+                        ERI ∈ [0, 100]<br>
+                        ERI = S<sub>runway</sub> + S<sub>surplus</sub> + S<sub>debt</sub> + S<sub>stability</sub>
+                    </div>
                 </div>
-                <p style="font-size: 0.85rem; color: #94A3B8; margin: 0;">
-                    Where \( S_{\text{runway}} = \min(35, \frac{\text{Savings}}{\text{Expenses}} \cdot \frac{35}{6.0}) \), \( S_{\text{surplus}} = \min(25, \frac{\text{Surplus}}{\text{Income}} \cdot 50) \), and \( S_{\text{debt}} \) penalizes DTI exceeding 40%.
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 12px; color: #CBD5E1; font-size: 0.88rem; line-height: 1.65;">
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-card); border-radius: 8px; padding: 14px;">
+                        <strong style="color: #34D399;">Runway points (maximum 35)</strong>
+                        <div style="margin-top: 6px;">S<sub>runway</sub> = min(35, (runway months ÷ 6) × 35)</div>
+                        <div style="color: #94A3B8; margin-top: 6px;">Runway months = savings ÷ (essential expenses + monthly EMI). If that denominator is zero, the engine uses 12 months when savings are positive, otherwise 0.</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-card); border-radius: 8px; padding: 14px;">
+                        <strong style="color: #34D399;">Surplus points (maximum 30 for positive surplus)</strong>
+                        <div style="margin-top: 6px;">Let I = total monthly income and N = net monthly surplus after all outflows.</div>
+                        <div>S<sub>surplus</sub> = min(30, (N ÷ (0.20 × I)) × 30), when I &gt; 0 and N &gt; 0.</div>
+                        <div>S<sub>surplus</sub> = max(0, 10 − (|N| ÷ I) × 20), when I &gt; 0 and N ≤ 0.</div>
+                        <div>S<sub>surplus</sub> = 5, when I = 0.</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-card); border-radius: 8px; padding: 14px;">
+                        <strong style="color: #34D399;">Debt-service points (maximum 25)</strong>
+                        <div style="margin-top: 6px;">DTI = monthly EMI ÷ total monthly income × 100. With zero income, DTI is 100% if EMI is positive, otherwise 0%.</div>
+                        <div>S<sub>debt</sub> = 25, for DTI ≤ 20%.</div>
+                        <div>S<sub>debt</sub> = 25 − ((DTI − 20) ÷ 20) × 15, for 20% &lt; DTI ≤ 40%.</div>
+                        <div>S<sub>debt</sub> = max(2, 10 − ((DTI − 40) ÷ 20) × 8), for 40% &lt; DTI ≤ 60%.</div>
+                        <div>S<sub>debt</sub> = 0, for DTI &gt; 60%.</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-card); border-radius: 8px; padding: 14px;">
+                        <strong style="color: #34D399;">Income stability points (maximum 10)</strong>
+                        <div style="margin-top: 6px;">S<sub>stability</sub> = 10 when total monthly income &gt; 0; otherwise 0.</div>
+                    </div>
+                </div>
+                <p style="font-size: 0.82rem; color: #94A3B8; margin: 12px 0 0;">
+                    The engine clamps negative financial inputs to zero and reports validation warnings for invalid profiles. A zero-income profile, negative surplus, and zero-expense runway follow the explicit branches above; the score is a transparent heuristic, not a credit rating.
                 </p>
             </div>
 
@@ -640,24 +670,14 @@
                 <h3 style="font-family: var(--font-heading); color: #FFFFFF; font-size: 1.25rem; margin-bottom: 14px;">
                     🧪 Automated Verification Suite Status
                 </h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
-                    <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 10px; border-left: 3px solid #10B981;">
-                        <span style="font-size: 0.78rem; color: #94A3B8;">Cyber Engine Tests</span>
-                        <div style="font-size: 1.1rem; font-weight: 700; color: #34D399;">35 / 35 Passed</div>
-                    </div>
-                    <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 10px; border-left: 3px solid #06B6D4;">
-                        <span style="font-size: 0.78rem; color: #94A3B8;">Economy Engine Tests</span>
-                        <div style="font-size: 1.1rem; font-weight: 700; color: #67E8F9;">33 / 33 Passed</div>
-                    </div>
-                    <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 10px; border-left: 3px solid #A855F7;">
-                        <span style="font-size: 0.78rem; color: #94A3B8;">Recommendations Tests</span>
-                        <div style="font-size: 1.1rem; font-weight: 700; color: #C084FC;">43 / 43 Passed</div>
-                    </div>
-                    <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 10px; border-left: 3px solid #F59E0B;">
-                        <span style="font-size: 0.78rem; color: #94A3B8;">Simulator Engine Tests</span>
-                        <div style="font-size: 1.1rem; font-weight: 700; color: #FCD34D;">19 / 19 Passed</div>
-                    </div>
+                <div id="verificationSuiteStatus" aria-live="polite" style="margin-top: 12px;">
+                    <p style="color: #CBD5E1;">Loading the latest CI-generated test report. No test result is assumed from engine smoke checks.</p>
                 </div>
+                <div style="margin-top: 18px; border-top: 1px solid var(--border-card); padding-top: 14px; color: #CBD5E1; font-size: 0.88rem;">
+                    <strong>Reproducible command:</strong>
+                    <code style="display: inline-block; max-width: 100%; overflow-wrap: anywhere;">python -m pytest tests/ -v --junitxml=reports/pytest.xml</code>
+                    <p style="margin: 8px 0 0; color: #94A3B8;">The five-engine smoke test above is separate from the pytest suite. A missing, stale, or failed CI report is shown as such.</p>
+                </div>                </div>
             </div>
         </div>
 
@@ -857,39 +877,121 @@
             window.scrollTo({ top: 380, behavior: 'smooth' });
         }
 
+        function escapeVerificationText(value) {
+            return String(value == null ? "" : value).replace(/[&<>"']/g, ch => ({
+                "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+            }[ch]));
+        }
+
+        async function loadVerificationSuiteStatus() {
+            const host = document.getElementById('verificationSuiteStatus');
+            if (!host) return;
+            const reportUrl = 'https://raw.githubusercontent.com/adityasingh221204-wq/AAYAM/verification-results/verification.json';
+            try {
+                const responses = await Promise.all([
+                    fetch(reportUrl + '?t=' + Date.now(), { cache: 'no-store' }),
+                    fetch('https://api.github.com/repos/adityasingh221204-wq/AAYAM/commits/main', {
+                        headers: { 'Accept': 'application/vnd.github+json' },
+                        cache: 'no-store'
+                    })
+                ]);
+                if (responses[0].status === 404) {
+                    host.innerHTML = '<div style="padding:14px;border:1px solid #64748B;border-radius:10px;background:rgba(255,255,255,.03)"><strong>NOT RUN / NO PUBLISHED REPORT</strong><p style="margin:6px 0 0;color:#94A3B8">No CI-generated pytest report is available yet. Run the command above locally or wait for the verification workflow to publish a report from main.</p></div>';
+                    return;
+                }
+                if (!responses[0].ok) throw new Error('Report request returned HTTP ' + responses[0].status);
+                const report = await responses[0].json();
+                const mainResponse = responses[1];
+                const mainCommit = mainResponse.ok ? (await mainResponse.json()).sha : null;
+                const stale = !mainCommit || report.commit_sha !== mainCommit;
+                const counts = report.counts || {};
+                const status = report.status || 'UNKNOWN';
+                const statusColor = stale ? '#FBBF24' : (status === 'PASS' ? '#34D399' : '#FB7185');
+                const date = report.generated_at ? new Date(report.generated_at).toLocaleString() : 'Timestamp unavailable';
+                let html = '<div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px">' +
+                    '<div style="flex:1;min-width:120px;padding:12px;border:1px solid var(--border-card);border-radius:9px"><span style="color:#94A3B8;font-size:.78rem">CI RESULT</span><div style="font-size:1.1rem;font-weight:800;color:' + statusColor + '">' + escapeVerificationText(stale ? 'STALE' : status) + '</div></div>' +
+                    '<div style="flex:1;min-width:100px;padding:12px;border:1px solid var(--border-card);border-radius:9px"><span style="color:#94A3B8;font-size:.78rem">TOTAL</span><div style="font-size:1.1rem;font-weight:800">' + Number(counts.total || 0) + '</div></div>' +
+                    '<div style="flex:1;min-width:100px;padding:12px;border:1px solid var(--border-card);border-radius:9px"><span style="color:#94A3B8;font-size:.78rem">PASSED</span><div style="font-size:1.1rem;font-weight:800;color:#34D399">' + Number(counts.passed || 0) + '</div></div>' +
+                    '<div style="flex:1;min-width:100px;padding:12px;border:1px solid var(--border-card);border-radius:9px"><span style="color:#94A3B8;font-size:.78rem">FAILED / ERRORS</span><div style="font-size:1.1rem;font-weight:800;color:#FB7185">' + (Number(counts.failed || 0) + Number(counts.errors || 0)) + '</div></div>' +
+                    '<div style="flex:1;min-width:100px;padding:12px;border:1px solid var(--border-card);border-radius:9px"><span style="color:#94A3B8;font-size:.78rem">SKIPPED</span><div style="font-size:1.1rem;font-weight:800">' + Number(counts.skipped || 0) + '</div></div></div>' +
+                    '<p style="font-size:.82rem;color:#94A3B8;margin:0 0 12px">Last run: ' + escapeVerificationText(date) + ' · Commit: ' + escapeVerificationText(String(report.commit_sha || 'unknown').slice(0, 7)) + (report.workflow_url ? ' · <a target="_blank" rel="noopener noreferrer" href="' + escapeVerificationText(report.workflow_url) + '" style="color:#38BDF8">Open CI run</a>' : '') + '</p>';
+                if (stale) html += '<p style="color:#FBBF24">This report does not match the current main commit. It is shown for transparency, not as current verification.</p>';
+                if (report.error) html += '<p style="color:#FB7185">Report warning: ' + escapeVerificationText(report.error) + '</p>';
+                const files = Array.isArray(report.files) ? report.files : [];
+                if (files.length) {
+                    html += '<h4 style="margin:12px 0 6px">Test files executed</h4><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:.82rem"><thead><tr><th style="text-align:left;padding:8px">Test file</th><th>Passed</th><th>Failed</th><th>Skipped</th></tr></thead><tbody>';
+                    files.forEach(file => {
+                        const fc = file.counts || {};
+                        html += '<tr style="border-top:1px solid var(--border-card)"><td style="padding:8px;overflow-wrap:anywhere">' + escapeVerificationText(file.path) + '</td><td style="text-align:center">' + Number(fc.passed || 0) + '</td><td style="text-align:center">' + Number((fc.failed || 0) + (fc.errors || 0)) + '</td><td style="text-align:center">' + Number(fc.skipped || 0) + '</td></tr>';
+                    });
+                    html += '</tbody></table></div>';
+                }
+                const failures = Array.isArray(report.failures) ? report.failures : [];
+                if (failures.length) {
+                    html += '<details style="margin-top:12px"><summary style="cursor:pointer;color:#FB7185">Failure details (' + failures.length + ')</summary><ul style="padding-left:20px">';
+                    failures.forEach(item => {
+                        html += '<li style="margin:8px 0"><code>' + escapeVerificationText(item.nodeid) + '</code><pre style="white-space:pre-wrap;overflow-wrap:anywhere;color:#CBD5E1">' + escapeVerificationText(item.message || 'No failure message captured') + '</pre></li>';
+                    });
+                    html += '</ul></details>';
+                }
+                host.innerHTML = html;
+            } catch (error) {
+                host.innerHTML = '<div style="padding:14px;border:1px solid #FB7185;border-radius:10px"><strong>REPORT UNAVAILABLE</strong><p style="margin:6px 0 0;color:#CBD5E1">Could not retrieve the CI report: ' + escapeVerificationText(error.message) + '. No passing status is inferred.</p></div>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadVerificationSuiteStatus);
+
         async function runLiveSmokeTest() {
             const terminal = document.getElementById('liveEngineTerminal');
             const resultBox = document.getElementById('smokeTestResultBox');
             const latencySpan = document.getElementById('smokeLatency');
             const detailsDiv = document.getElementById('smokeDetails');
-
-            if (terminal) {
-                terminal.innerHTML = `> Initiating System Smoke Test on /api/system/smoke-test...\n> Executing Economy, Cyber, Opportunity, Simulator, and Recovery engines...`;
-            }
+            if (terminal) terminal.textContent = '> Running five live backend engine checks…';
+            if (resultBox) resultBox.style.display = 'none';
 
             try {
-                const res = await fetch('/api/system/smoke-test');
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                const data = await res.json();
-
+                const response = await fetch('/api/system/smoke-test', {cache: 'no-store'});
+                const data = await response.json();
+                const checks = Array.isArray(data.checks) ? data.checks : [];
+                const failed = Number(data.engine_checks_failed || 0);
+                const passed = Number(data.engine_checks_passed || 0);
                 if (terminal) {
-                    terminal.innerHTML = `> STATUS: ${data.status.toUpperCase()}\n> TIMESTAMP: ${data.timestamp}\n> LATENCY: ${data.latency_ms} ms\n> ENGINES RUN: ${data.tests_run} / ${data.tests_passed} PASSED\n> UNIT TEST SUITE: ${data.unit_test_suite_status}\n\n[DIAGNOSTICS]\n` + JSON.stringify(data.diagnostics, null, 2);
+                    terminal.textContent = '> STATUS: ' + String(data.status || 'unknown').toUpperCase() +
+                        '\n> TIMESTAMP: ' + String(data.timestamp || 'unavailable') +
+                        '\n> LATENCY: ' + String(data.latency_ms ?? 'N/A') + ' ms' +
+                        '\n> ENGINE CHECKS: ' + passed + ' passed / ' + failed + ' failed / ' + checks.length + ' run' +
+                        '\n> PYTEST SUITE: NOT RUN by this endpoint\n\n[ENGINE CHECKS]\n' +
+                        JSON.stringify(checks, null, 2) + '\n\n[DIAGNOSTICS]\n' +
+                        JSON.stringify(data.diagnostics || {}, null, 2);
                 }
-
                 if (resultBox && latencySpan && detailsDiv) {
                     resultBox.style.display = 'block';
-                    latencySpan.innerText = `Execution Latency: ${data.latency_ms}ms | Status: 200 OK`;
-                    detailsDiv.innerHTML = `
-                        <strong>All 5 Core Engines Verified:</strong> Economy (Resilience: ${data.diagnostics.economy_engine.resilience_score}/100, Surplus: ₹${data.diagnostics.economy_engine.net_surplus_inr}), Cyber (Score: ${data.diagnostics.cyber_engine.threat_score}), Opportunity (${data.diagnostics.opportunity_engine.matched_count} matches), Simulator (Horizon: 12 mos), Recovery (Playbook steps verified). <strong>130/130 Pytests Passed.</strong>
-                    `;
+                    const ok = response.ok && data.status === 'success' && failed === 0;
+                    resultBox.style.borderColor = ok ? '#10B981' : '#F43F5E';
+                    resultBox.style.background = ok ? 'rgba(16,185,129,.1)' : 'rgba(244,63,94,.1)';
+                    const heading = resultBox.querySelector('strong');
+                    const icon = resultBox.querySelector('span');
+                    if (heading) heading.textContent = ok ? 'Live Engine Verification: PASS' : 'Live Engine Verification: FAIL';
+                    if (icon) icon.textContent = ok ? '✓' : '!';
+                    latencySpan.textContent = 'Execution: ' + String(data.latency_ms ?? 'N/A') + 'ms · HTTP ' + response.status;
+                    detailsDiv.textContent = checks.map(item => item.name + ': ' + item.status + (item.detail ? ' (' + item.detail + ')' : '')).join('\n') +
+                        '\n\n' + String(data.pytest_suite_status || 'Pytest status unavailable.');
                 }
+                if (!response.ok) throw new Error('Smoke test reported ' + failed + ' failed check(s).');
             } catch (err) {
-                if (terminal) {
-                    terminal.innerHTML += `\n> Note: Running in client-side resilience verification mode (${err.message}).\n> All engines verified in local sandbox.`;
-                }
+                if (terminal) terminal.textContent += '\n> VERIFICATION FAILED / UNAVAILABLE: ' + err.message +
+                    '\n> No passing status is inferred. Check backend logs and CI pytest report.';
                 if (resultBox) {
                     resultBox.style.display = 'block';
-                    detailsDiv.innerHTML = `Client-side verification active. All engines operational in local browser sandbox.`;
+                    resultBox.style.borderColor = '#F43F5E';
+                    resultBox.style.background = 'rgba(244,63,94,.1)';
+                    const heading = resultBox.querySelector('strong');
+                    const icon = resultBox.querySelector('span');
+                    if (heading) heading.textContent = 'Live Engine Verification: FAILED / UNAVAILABLE';
+                    if (icon) icon.textContent = '!';
+                    if (latencySpan) latencySpan.textContent = 'Backend check failed';
+                    if (detailsDiv) detailsDiv.textContent = 'No successful engine verification can be claimed. ' + err.message;
                 }
             }
         }

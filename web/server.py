@@ -133,74 +133,90 @@ def page_models():
 
 @app.route("/api/system/smoke-test", methods=["GET", "POST"])
 def api_system_smoke_test():
-    """Live smoke test executing all 5 engines and verifying 100% operational status."""
+    """Run five live engine smoke checks; this endpoint does not execute pytest."""
     import time
     start_t = time.perf_counter()
-    
-    # 1. Economy Engine
-    econ_res = calculate_financial_indicators(DEFAULT_PROFILE)
-    
-    # 2. Cyber Threat Engine (Threat & Safe)
-    cyber_threat = assess_cyber_risk("CBI Officer: Digital arrest warrant issued. Transfer funds to avoid detention.")
-    cyber_safe = assess_cyber_risk("Your SBI salary credit of INR 35,000 is processed. Ref #42981.")
-    
-    # 3. Opportunity Engine
-    df_opps = load_public_dataset("opportunities")
-    opps = df_opps.to_dict(orient="records") if not df_opps.empty else []
-    ranked_opps = rank_opportunities(DEFAULT_PROFILE, opps)
-    
-    # 4. Simulation Engine
-    sim_res = simulate_economic_scenario(DEFAULT_PROFILE, {
-        "scenario_type": "job_loss",
-        "duration_months": 12,
-        "income_change_pct": -100.0,
-        "lump_sum_loss_inr": 0.0,
-        "expense_change_pct": 0.0
-    })
-    
-    # 5. Recovery Engine
-    rec_steps = get_recovery_steps("unauthorized_upi")
-    
-    elapsed_ms = round((time.perf_counter() - start_t) * 1000, 2)
-    
+    checks = []
+    diagnostics = {}
+
+    def run_check(name, operation, validate):
+        """Run one engine check and record its real result without hiding failures."""
+        try:
+            value = operation()
+            validate(value)
+            checks.append({"name": name, "status": "PASS", "detail": "Output contract validated."})
+            diagnostics[name] = value
+        except Exception as exc:
+            checks.append({"name": name, "status": "FAIL", "detail": f"{type(exc).__name__}: {exc}"})
+            diagnostics[name] = {"status": "FAIL", "error": f"{type(exc).__name__}: {exc}"}
+
+    def check_economy():
+        result = calculate_financial_indicators(DEFAULT_PROFILE)
+        assert isinstance(result, dict) and 0 <= float(result["resilience_score"]) <= 100
+        return {"status": "OPERATIONAL", "resilience_score": result.get("resilience_score"),
+                "net_surplus_inr": result.get("monthly_surplus_deficit"),
+                "runway_months": result.get("emergency_fund_months"),
+                "category": result.get("resilience_category")}
+
+    def check_cyber():
+        threat = assess_cyber_risk("CBI Officer: Digital arrest warrant issued. Transfer funds to avoid detention.")
+        safe = assess_cyber_risk("Your SBI salary credit of INR 35,000 is processed. Ref #42981.")
+        assert isinstance(threat, dict) and "risk_score" in threat
+        assert isinstance(safe, dict) and "risk_score" in safe
+        assert float(threat["risk_score"]) > float(safe["risk_score"])
+        return {"status": "OPERATIONAL", "threat_score": threat.get("risk_score"),
+                "threat_level": threat.get("risk_level"), "safe_score": safe.get("risk_score")}
+
+    def check_opportunities():
+        df = load_public_dataset("opportunities")
+        opportunities = df.to_dict(orient="records") if not df.empty else []
+        ranked = rank_opportunities(DEFAULT_PROFILE, opportunities)
+        assert isinstance(ranked, list)
+        if opportunities:
+            assert ranked, "Opportunity catalogue exists but ranking returned no results."
+            assert "match_score_pct" in ranked[0]
+        return {"status": "OPERATIONAL", "matched_count": len(ranked),
+                "top_recommendation": ranked[0].get("title") if ranked else None}
+
+    def check_simulator():
+        result = simulate_economic_scenario(DEFAULT_PROFILE, {
+            "scenario_type": "job_loss", "duration_months": 12,
+            "income_change_pct": -100.0, "lump_sum_loss_inr": 0.0, "expense_change_pct": 0.0
+        })
+        trajectory = result.get("scenario_trajectory")
+        assert isinstance(trajectory, list) and len(trajectory) == 12
+        return {"status": "OPERATIONAL", "depletion_month": result.get("months_to_depletion"),
+                "trajectory_steps": len(trajectory)}
+
+    def check_recovery():
+        steps = get_recovery_steps("unauthorized_upi")
+        assert isinstance(steps, list) and len(steps) > 0
+        return {"status": "OPERATIONAL", "playbook_steps": len(steps)}
+
+    run_check("economy_engine", check_economy, lambda value: value.update({"_validated": True}))
+    run_check("cyber_engine", check_cyber, lambda value: value.update({"_validated": True}))
+    run_check("opportunity_engine", check_opportunities, lambda value: value.update({"_validated": True}))
+    run_check("simulator_engine", check_simulator, lambda value: value.update({"_validated": True}))
+    run_check("recovery_engine", check_recovery, lambda value: value.update({"_validated": True}))
+
+    # Internal validation marker is not part of the public diagnostics contract.
+    for value in diagnostics.values():
+        if isinstance(value, dict):
+            value.pop("_validated", None)
+
+    passed = sum(check["status"] == "PASS" for check in checks)
+    failed = len(checks) - passed
     return jsonify({
-        "status": "success",
-        "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
-        "latency_ms": elapsed_ms,
-        "tests_run": 5,
-        "tests_passed": 5,
-        "unit_test_suite_status": "130/130 Passed",
-        "rubric_readiness": "100% Complete (30/30 Marks)",
-        "diagnostics": {
-            "economy_engine": {
-                "status": "OPERATIONAL",
-                "resilience_score": econ_res.get("resilience_score"),
-                "net_surplus_inr": econ_res.get("monthly_surplus_deficit"),
-                "runway_months": econ_res.get("emergency_fund_months"),
-                "category": econ_res.get("resilience_category")
-            },
-            "cyber_engine": {
-                "status": "OPERATIONAL",
-                "threat_score": cyber_threat.get("risk_score"),
-                "threat_level": cyber_threat.get("risk_level"),
-                "safe_score": cyber_safe.get("risk_score")
-            },
-            "opportunity_engine": {
-                "status": "OPERATIONAL",
-                "matched_count": len(ranked_opps),
-                "top_recommendation": ranked_opps[0].get("title") if ranked_opps else "N/A"
-            },
-            "simulator_engine": {
-                "status": "OPERATIONAL",
-                "depletion_month": sim_res.get("months_to_depletion"),
-                "trajectory_steps": len(sim_res.get("scenario_trajectory", []))
-            },
-            "recovery_engine": {
-                "status": "OPERATIONAL",
-                "playbook_steps": len(rec_steps)
-            }
-        }
-    })
+        "status": "success" if failed == 0 else "failure",
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "latency_ms": round((time.perf_counter() - start_t) * 1000, 2),
+        "engine_checks_run": len(checks),
+        "engine_checks_passed": passed,
+        "engine_checks_failed": failed,
+        "pytest_suite_status": "NOT RUN by this smoke-test endpoint; see the CI-generated verification report.",
+        "checks": checks,
+        "diagnostics": diagnostics
+    }), (200 if failed == 0 else 500)
 
 
 @app.route("/api/economy/calculate", methods=["POST"])

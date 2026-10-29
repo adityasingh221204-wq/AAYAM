@@ -501,37 +501,74 @@
             }
         }
 
-        function updateCyberPlayground() {
+        let cyberPlaygroundRequestId = 0;
+
+        async function updateCyberPlayground() {
             const input = document.getElementById('pg_cyber_text');
             const text = input ? input.value : "";
-            const res = assessCyberClient(text);
-
-            const m = MODEL_PLAYGROUNDS.cyber;
-            const codeBlock = document.getElementById('codeContentBlock');
-            if (codeBlock) {
-                codeBlock.innerHTML = m.renderCode({
-                    score: res.risk_score,
-                    level: res.risk_level,
-                    matches: res.identified_indicators.length
-                });
-            }
-
+            const requestId = ++cyberPlaygroundRequestId;
             const outputCard = document.getElementById('interactiveOutputCard');
+            const codeBlock = document.getElementById('codeContentBlock');
+
+            if (!text.trim()) {
+                if (outputCard) outputCard.innerHTML = '<p style="color:#94A3B8">Enter a message or choose a sample to run the threat heuristic. Empty input is not treated as a safe result.</p>';
+                if (codeBlock) codeBlock.innerHTML = MODEL_PLAYGROUNDS.cyber.renderCode({score: 0, level: 'NOT RUN', matches: 0});
+                return;
+            }
+            if (outputCard) outputCard.innerHTML = '<p role="status" style="color:#94A3B8">Analyzing current message…</p>';
+
+            let res;
+            let inferenceSource = 'Python engine API';
+            try {
+                const response = await fetch('/api/cyber/assess', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({text: text})
+                });
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                const payload = await response.json();
+                if (payload.status !== 'success' || !payload.result || !Number.isFinite(Number(payload.result.risk_score))) {
+                    throw new Error('The API returned an invalid assessment.');
+                }
+                res = payload.result;
+            } catch (error) {
+                // Vercel/offline fallback uses the repository's explicitly documented browser heuristic.
+                if (typeof clientSideAssessCyber !== 'function') {
+                    if (requestId === cyberPlaygroundRequestId && outputCard) {
+                        outputCard.innerHTML = '<p role="alert" style="color:#FB7185">Threat analysis failed: ' + escapePlaygroundText(error.message) + '</p>';
+                    }
+                    return;
+                }
+                res = clientSideAssessCyber(text);
+                inferenceSource = 'Browser heuristic fallback (Python API unavailable)';
+            }
+            if (requestId !== cyberPlaygroundRequestId) return;
+
+            const matches = Array.isArray(res.triggered_patterns) ? res.triggered_patterns.map(item => item.code || item.category) :
+                (Array.isArray(res.triggered_flags) ? res.triggered_flags : []);
+            const score = Math.max(0, Math.min(100, Number(res.risk_score) || 0));
+            const level = String(res.risk_level || 'UNKNOWN');
+            const vector = String(res.primary_threat_vector || 'Unclassified signal');
+            const m = MODEL_PLAYGROUNDS.cyber;
+            if (codeBlock) codeBlock.innerHTML = m.renderCode({score, level, matches: matches.length});
             if (outputCard) {
-                const color = res.risk_score >= 50 ? '#FB7185' : (res.risk_score >= 30 ? '#FBBF24' : '#34D399');
+                const color = score >= 60 ? '#FB7185' : (score >= 30 ? '#FBBF24' : '#34D399');
                 outputCard.innerHTML = `
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <span style="color: #94A3B8;">PREDICTION VERDICT:</span>
-                        <strong style="color: ${color}; font-size: 1.1rem;">${res.risk_level.toUpperCase()}</strong>
+                    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+                        <span style="color:#94A3B8">CURRENT INPUT ASSESSMENT</span>
+                        <strong style="color:${color};font-size:1.1rem">${escapePlaygroundText(level.toUpperCase())}</strong>
                     </div>
-                    <div style="font-size: 0.85rem; color: #CBD5E1; margin-bottom: 8px;">
-                        Threat Score: <strong style="color: ${color};">${res.risk_score} / 100</strong> | Vector: <strong>${res.primary_threat_vector}</strong>
-                    </div>
-                    <div style="font-size: 0.78rem; color: #94A3B8;">
-                        Matches Detected: ${res.identified_indicators.length > 0 ? res.identified_indicators.join(', ') : 'None (Benign communication)'}
-                    </div>
+                    <div style="font-size:.85rem;color:#CBD5E1;margin-bottom:8px">Threat score: <strong style="color:${color}">${score} / 100</strong> · Vector: <strong>${escapePlaygroundText(vector)}</strong></div>
+                    <div style="font-size:.78rem;color:#94A3B8">Matched signals: ${matches.length ? matches.map(escapePlaygroundText).join(', ') : 'No configured indicators matched.'}</div>
+                    <div style="font-size:.75rem;color:#94A3B8;margin-top:10px">Source: ${escapePlaygroundText(inferenceSource)}. This is a deterministic rule-based heuristic, not a trained NLP classifier.</div>
                 `;
             }
+        }
+
+        function escapePlaygroundText(value) {
+            return String(value == null ? '' : value).replace(/[&<>"']/g, ch => ({
+                '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+            }[ch]));
         }
 
         // Economy Model Play
@@ -615,36 +652,68 @@
             `;
         }
 
-        // Recommendations Model Play
-        function updateOppPlayground() {
-            const edu = document.getElementById('pg_opp_edu').value;
-            const sec = document.getElementById('pg_opp_sector').value;
-
-            const oppNames = {
-                fintech: "Digital Smart Cart & Micro-Retailer (PMMY Shishu ₹50k)",
-                renewable: "Rooftop Solar Maintenance Technician (PM Surya Ghar)",
-                logistics: "E-Commerce Fulfillment Hub & Fleet Partner (PMMY Kishore ₹2L)"
-            };
-
-            const title = oppNames[sec] || "Certified Skill Pathway";
-            const matchScore = edu === 'graduate' ? 94.2 : (edu === 'iti' ? 88.5 : 82.0);
-
-            const m = MODEL_PLAYGROUNDS.recommendations;
-            document.getElementById('codeContentBlock').innerHTML = m.renderCode({});
-
+        // Recommendations Model Play: rank the repository catalogue through the Python engine API.
+        let opportunityPlaygroundRequestId = 0;
+        async function updateOppPlayground() {
+            const eduControl = document.getElementById('pg_opp_edu');
+            const sectorControl = document.getElementById('pg_opp_sector');
             const outputCard = document.getElementById('interactiveOutputCard');
-            outputCard.innerHTML = `
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <span style="color: #94A3B8;">TOP RANKED PATHWAY:</span>
-                    <strong style="color: #34D399; font-size: 1.1rem;">${matchScore}% Match</strong>
-                </div>
-                <div style="font-size: 0.85rem; color: #CBD5E1; margin-bottom: 6px;">
-                    Role: <strong>${title}</strong>
-                </div>
-                <div style="font-size: 0.78rem; color: #38BDF8;">
-                    Projected Wage Delta: +₹12,000 to ₹18,000 / month
-                </div>
-            `;
+            if (!eduControl || !sectorControl || !outputCard) return;
+            const requestId = ++opportunityPlaygroundRequestId;
+            const edu = eduControl.value;
+            const sector = sectorControl.value;
+            const education = edu === 'graduate' ? 'Graduate / B.Com / B.Sc / B.A' :
+                (edu === 'iti' ? 'ITI / Vocational' : 'Higher Secondary (12th)');
+            const sectorTerms = {
+                fintech: ['banking', 'fintech', 'financial services', 'digital payments'],
+                renewable: ['renewable', 'solar', 'electrical'],
+                logistics: ['logistics', 'supply chain', 'fleet', 'fulfillment']
+            };
+            outputCard.innerHTML = '<p role="status" style="color:#94A3B8">Ranking catalogue opportunities for the selected education and sector…</p>';
+            try {
+                const response = await fetch('/api/recommendations/rank', {
+                    method: 'POST',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({profile: {
+                        education,
+                        skills: ['Customer Service', 'Computer Literacy', 'Digital Payments'],
+                        current_savings: 50000,
+                        monthly_take_home_income: 35000,
+                        region: 'Maharashtra'
+                    }})
+                });
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                const payload = await response.json();
+                if (requestId !== opportunityPlaygroundRequestId) return;
+                if (payload.status !== 'success' || !Array.isArray(payload.ranked)) throw new Error('Invalid ranking response');
+                const terms = sectorTerms[sector] || [];
+                const candidates = payload.ranked.filter(item => {
+                    const searchable = String(item.sector || '') + ' ' + String(item.title || '');
+                    return terms.some(term => searchable.toLowerCase().includes(term));
+                });
+                const ranked = candidates.slice().sort((a,b) => Number(b.match_score_pct || 0) - Number(a.match_score_pct || 0));
+                const top = ranked[0];
+                document.getElementById('codeContentBlock').innerHTML = MODEL_PLAYGROUNDS.recommendations.renderCode({});
+                if (!top) {
+                    outputCard.innerHTML = '<p style="color:#FBBF24">No opportunities were returned by the ranking engine for this selection.</p>';
+                    return;
+                }
+                const score = Number(top.match_score_pct);
+                const uplift = Number(top.projected_monthly_uplift_inr || 0);
+                outputCard.innerHTML = `
+                    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+                        <span style="color:#94A3B8">TOP RANKED PATHWAY</span>
+                        <strong style="color:#34D399;font-size:1.1rem">${Number.isFinite(score) ? score.toFixed(1) : 'N/A'}% Match</strong>
+                    </div>
+                    <div style="font-size:.85rem;color:#CBD5E1;margin-bottom:6px">Role: <strong>${escapePlaygroundText(top.title || 'Untitled opportunity')}</strong></div>
+                    <div style="font-size:.78rem;color:#38BDF8">Projected income uplift: ${uplift > 0 ? '+' : ''}₹${uplift.toLocaleString('en-IN')} / month (engine estimate)</div>
+                    <div style="font-size:.75rem;color:#94A3B8;margin-top:8px">Fit: ${escapePlaygroundText(top.fit_tier || 'Unclassified')} · Sector: ${escapePlaygroundText(top.sector || 'Not specified')}</div>
+                    <div style="font-size:.75rem;color:#94A3B8;margin-top:6px">Source: Python opportunity ranking engine and repository catalogue. Indicative estimate, not a guaranteed wage.</div>
+                `;
+            } catch (error) {
+                if (requestId !== opportunityPlaygroundRequestId) return;
+                outputCard.innerHTML = '<p role="alert" style="color:#FB7185">Ranking unavailable: ' + escapePlaygroundText(error.message) + '. The page will not substitute a fabricated score.</p>';
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
