@@ -1,0 +1,25 @@
+# Development-only files not needed by the Flask serverless function
+.github/
+docs/
+tests/
+scripts/
+pages/
+app.py
+.streamlit/
+notebooks/
+scratch/
+team_handoff/
+*.ipynb
+*.log
+.pytest_cache/
+.coverage
+htmlcov/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+
+# Raw/source datasets are not used by the production Flask API.
+# Keep data/processed and data/reference because the API reads their CSV files.
+data/raw/
+data/external/
+data/interim/
