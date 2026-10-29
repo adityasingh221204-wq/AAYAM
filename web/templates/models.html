@@ -691,7 +691,7 @@
                     const searchable = String(item.sector || '') + ' ' + String(item.title || '');
                     return terms.some(term => searchable.toLowerCase().includes(term));
                 });
-                const ranked = (candidates.length ? candidates : payload.ranked).slice().sort((a,b) => Number(b.match_score_pct || 0) - Number(a.match_score_pct || 0));
+                const ranked = candidates.slice().sort((a,b) => Number(b.match_score_pct || 0) - Number(a.match_score_pct || 0));
                 const top = ranked[0];
                 document.getElementById('codeContentBlock').innerHTML = MODEL_PLAYGROUNDS.recommendations.renderCode({});
                 if (!top) {
