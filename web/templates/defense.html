@@ -947,34 +947,51 @@
             const resultBox = document.getElementById('smokeTestResultBox');
             const latencySpan = document.getElementById('smokeLatency');
             const detailsDiv = document.getElementById('smokeDetails');
-
-            if (terminal) {
-                terminal.innerHTML = `> Initiating System Smoke Test on /api/system/smoke-test...\n> Executing Economy, Cyber, Opportunity, Simulator, and Recovery engines...`;
-            }
+            if (terminal) terminal.textContent = '> Running five live backend engine checks…';
+            if (resultBox) resultBox.style.display = 'none';
 
             try {
-                const res = await fetch('/api/system/smoke-test');
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                const data = await res.json();
-
+                const response = await fetch('/api/system/smoke-test', {cache: 'no-store'});
+                const data = await response.json();
+                const checks = Array.isArray(data.checks) ? data.checks : [];
+                const failed = Number(data.engine_checks_failed || 0);
+                const passed = Number(data.engine_checks_passed || 0);
                 if (terminal) {
-                    terminal.innerHTML = `> STATUS: ${data.status.toUpperCase()}\n> TIMESTAMP: ${data.timestamp}\n> LATENCY: ${data.latency_ms} ms\n> ENGINES RUN: ${data.tests_run} / ${data.tests_passed} PASSED\n> UNIT TEST SUITE: ${data.unit_test_suite_status}\n\n[DIAGNOSTICS]\n` + JSON.stringify(data.diagnostics, null, 2);
+                    terminal.textContent = '> STATUS: ' + String(data.status || 'unknown').toUpperCase() +
+                        '\n> TIMESTAMP: ' + String(data.timestamp || 'unavailable') +
+                        '\n> LATENCY: ' + String(data.latency_ms ?? 'N/A') + ' ms' +
+                        '\n> ENGINE CHECKS: ' + passed + ' passed / ' + failed + ' failed / ' + checks.length + ' run' +
+                        '\n> PYTEST SUITE: NOT RUN by this endpoint\n\n[ENGINE CHECKS]\n' +
+                        JSON.stringify(checks, null, 2) + '\n\n[DIAGNOSTICS]\n' +
+                        JSON.stringify(data.diagnostics || {}, null, 2);
                 }
-
                 if (resultBox && latencySpan && detailsDiv) {
                     resultBox.style.display = 'block';
-                    latencySpan.innerText = `Execution Latency: ${data.latency_ms}ms | Status: 200 OK`;
-                    detailsDiv.innerHTML = `
-                        <strong>All 5 Core Engines Verified:</strong> Economy (Resilience: ${data.diagnostics.economy_engine.resilience_score}/100, Surplus: ₹${data.diagnostics.economy_engine.net_surplus_inr}), Cyber (Score: ${data.diagnostics.cyber_engine.threat_score}), Opportunity (${data.diagnostics.opportunity_engine.matched_count} matches), Simulator (Horizon: 12 mos), Recovery (Playbook steps verified). <strong>130/130 Pytests Passed.</strong>
-                    `;
+                    const ok = response.ok && data.status === 'success' && failed === 0;
+                    resultBox.style.borderColor = ok ? '#10B981' : '#F43F5E';
+                    resultBox.style.background = ok ? 'rgba(16,185,129,.1)' : 'rgba(244,63,94,.1)';
+                    const heading = resultBox.querySelector('strong');
+                    const icon = resultBox.querySelector('span');
+                    if (heading) heading.textContent = ok ? 'Live Engine Verification: PASS' : 'Live Engine Verification: FAIL';
+                    if (icon) icon.textContent = ok ? '✓' : '!';
+                    latencySpan.textContent = 'Execution: ' + String(data.latency_ms ?? 'N/A') + 'ms · HTTP ' + response.status;
+                    detailsDiv.textContent = checks.map(item => item.name + ': ' + item.status + (item.detail ? ' (' + item.detail + ')' : '')).join('\n') +
+                        '\n\n' + String(data.pytest_suite_status || 'Pytest status unavailable.');
                 }
+                if (!response.ok) throw new Error('Smoke test reported ' + failed + ' failed check(s).');
             } catch (err) {
-                if (terminal) {
-                    terminal.innerHTML += `\n> Note: Running in client-side resilience verification mode (${err.message}).\n> All engines verified in local sandbox.`;
-                }
+                if (terminal) terminal.textContent += '\n> VERIFICATION FAILED / UNAVAILABLE: ' + err.message +
+                    '\n> No passing status is inferred. Check backend logs and CI pytest report.';
                 if (resultBox) {
                     resultBox.style.display = 'block';
-                    detailsDiv.innerHTML = `Client-side verification active. All engines operational in local browser sandbox.`;
+                    resultBox.style.borderColor = '#F43F5E';
+                    resultBox.style.background = 'rgba(244,63,94,.1)';
+                    const heading = resultBox.querySelector('strong');
+                    const icon = resultBox.querySelector('span');
+                    if (heading) heading.textContent = 'Live Engine Verification: FAILED / UNAVAILABLE';
+                    if (icon) icon.textContent = '!';
+                    if (latencySpan) latencySpan.textContent = 'Backend check failed';
+                    if (detailsDiv) detailsDiv.textContent = 'No successful engine verification can be claimed. ' + err.message;
                 }
             }
         }
