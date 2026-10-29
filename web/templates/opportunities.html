@@ -136,78 +136,16 @@
         <!-- ── OPPORTUNITY DIRECTORY SECTION ── -->
         <section style="margin-top: 30px;">
             <!-- Filter Bar -->
-            <div class="opp-filter-bar">
-                <button class="tab-btn active" onclick="filterOpps(event, 'all')">All Pathways (8)</button>
-                <button class="tab-btn" onclick="filterOpps(event, 'Wage Employment')">💼 Wage Employment</button>
-                <button class="tab-btn" onclick="filterOpps(event, 'Micro-Enterprise')">🏪 Micro-Enterprise (Mudra)</button>
+            <div class="opp-filter-bar" id="opp_filter_bar" role="group" aria-label="Filter opportunity pathways">
+                <button type="button" class="tab-btn active" data-track-filter="all" aria-pressed="true">All Pathways <span id="opp_all_count">(12)</span></button>
+                <button type="button" class="tab-btn" data-track-filter="Employment" aria-pressed="false">💼 Wage Employment <span id="opp_employment_count"></span></button>
+                <button type="button" class="tab-btn" data-track-filter="Micro-Enterprise" aria-pressed="false">🏪 Micro-Enterprise (Mudra) <span id="opp_enterprise_count"></span></button>
+                <button type="button" class="tab-btn" data-track-filter="Self-Employment" aria-pressed="false">🧑‍💼 Self-Employment <span id="opp_self_count"></span></button>
             </div>
 
-            <!-- Grid Container -->
-            <div id="opp_grid_container" class="opp-grid">
-                <!-- Fallback Cards (Rendered dynamically if backend available) -->
-                <div class="opp-item-card">
-                    <div>
-                        <div class="opp-title">Solar Rooftop PV Installation &amp; Maintenance Technician</div>
-                        <div class="opp-meta">Clean Energy &amp; Utilities &bull; Required Capital: ₹10,000</div>
-                        <p style="font-size: 0.82rem; color: #94A3B8; margin-bottom: 10px;">
-                            Install and maintain distributed residential and commercial solar panels under PM Surya Ghar Muft Bijli Yojana. High demand across Tier 2 and Tier 3 cities.
-                        </p>
-                    </div>
-                    <div class="opp-badge-row">
-                        <span class="opp-badge badge-wage">Wage Employment</span>
-                        <span class="opp-badge badge-emerald">₹28,000 - ₹45,000/mo</span>
-                        <span class="opp-badge badge-indigo">Suryamitra / PMKVY 4.0</span>
-                    </div>
-                </div>
-
-                <div class="opp-item-card">
-                    <div>
-                        <div class="opp-title">Cold-Chain Micro-Logistics &amp; Agri-Haulage Partner</div>
-                        <div class="opp-meta">Logistics &amp; Supply Chain &bull; Required Capital: ₹1,50,000</div>
-                        <p style="font-size: 0.82rem; color: #94A3B8; margin-bottom: 10px;">
-                            Operate small-scale EV/refrigerated delivery vehicles connecting rural produce clusters to urban retail hubs and quick-commerce dark stores.
-                        </p>
-                    </div>
-                    <div class="opp-badge-row">
-                        <span class="opp-badge badge-ent">Micro-Enterprise</span>
-                        <span class="opp-badge badge-emerald">₹40,000 - ₹75,000/mo</span>
-                        <span class="opp-badge badge-indigo">Mudra Kishore (₹5 Lakh)</span>
-                    </div>
-                </div>
-
-                <div class="opp-item-card">
-                    <div>
-                        <div class="opp-title">Digital Payments &amp; Merchant Operations Specialist</div>
-                        <div class="opp-meta">FinTech &amp; Digital Infrastructure &bull; Required Capital: ₹5,000</div>
-                        <p style="font-size: 0.82rem; color: #94A3B8; margin-bottom: 10px;">
-                            Support merchant onboarding, soundbox deployment, and POS reconciliation for UPI networks, small retailers, and rural cooperative societies.
-                        </p>
-                    </div>
-                    <div class="opp-badge-row">
-                        <span class="opp-badge badge-wage">Wage Employment</span>
-                        <span class="opp-badge badge-emerald">₹25,000 - ₹38,000/mo</span>
-                        <span class="opp-badge badge-indigo">BFSI Sector Skill Council</span>
-                    </div>
-                </div>
-
-                <div class="opp-item-card">
-                    <div>
-                        <div class="opp-title">Drone Agriculture Spraying &amp; Soil Mapping Service</div>
-                        <div class="opp-meta">AgriTech &amp; Precision Farming &bull; Required Capital: ₹2,50,000</div>
-                        <p style="font-size: 0.82rem; color: #94A3B8; margin-bottom: 10px;">
-                            Provide licensed pesticide spraying and drone crop monitoring services for farmer producer organizations under the Sub-Mission on Agricultural Mechanization.
-                        </p>
-                    </div>
-                    <div class="opp-badge-row">
-                        <span class="opp-badge badge-ent">Micro-Enterprise</span>
-                        <span class="opp-badge badge-emerald">₹50,000 - ₹95,000/mo</span>
-                        <span class="opp-badge badge-indigo">Mudra Tarun (₹10 Lakh)</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── REDIRECTION & NEXT STEPS ── -->
+            <p id="opp_status" role="status" aria-live="polite" style="color:var(--text-secondary);margin:14px 0;">Loading all verified opportunity pathways…</p>
+            <div id="opp_grid_container" class="opp-grid" aria-live="polite"></div>
+            <noscript><p>This directory needs JavaScript enabled to load and filter the full opportunity catalogue.</p></noscript>
         <section class="redirections-section" style="padding: 0;">
             <h3 class="redirections-title">Ecosystem Next Steps</h3>
             <p class="redirections-sub">Calculate how your new earnings impact household resilience:</p>
@@ -390,5 +328,116 @@
     </footer>
 
     <script src="/static/js/app.js"></script>
-</body>
+
+    <script>
+    (() => {
+        const grid = document.getElementById('opp_grid_container');
+        const status = document.getElementById('opp_status');
+        const filterBar = document.getElementById('opp_filter_bar');
+        if (!grid || !status || !filterBar) return;
+
+        let allOpportunities = [];
+        let activeTrack = 'all';
+
+        const safeText = (value, fallback = 'Not specified') => {
+            if (value === null || value === undefined || value === '') return fallback;
+            if (Array.isArray(value)) return value.join(', ');
+            return String(value);
+        };
+        const money = value => {
+            const amount = Number(value);
+            return Number.isFinite(amount) ? '₹' + amount.toLocaleString('en-IN') : 'Not specified';
+        };
+        const trackForFilter = raw => {
+            const track = String(raw || '').trim().toLowerCase().replace(/[_\s]+/g, '-');
+            if (track.includes('micro-enterprise') || track === 'enterprise') return 'Micro-Enterprise';
+            if (track.includes('self-employment') || track === 'self-employed') return 'Self-Employment';
+            if (track === 'employment' || track.includes('wage')) return 'Employment';
+            return 'Other';
+        };
+        const element = (tag, className, text) => {
+            const node = document.createElement(tag);
+            if (className) node.className = className;
+            if (text !== undefined) node.textContent = text;
+            return node;
+        };
+        function render() {
+            const visible = activeTrack === 'all'
+                ? allOpportunities
+                : allOpportunities.filter(item => trackForFilter(item.track) === activeTrack);
+            grid.replaceChildren();
+            visible.forEach(item => {
+                const card = element('article', 'opp-item-card');
+                const content = element('div', 'opp-card-content');
+                content.append(
+                    element('h3', 'opp-title', safeText(item.title, 'Untitled opportunity')),
+                    element('p', 'opp-meta', safeText(item.sector) + ' • ' + safeText(item.location_type, 'Location varies')),
+                    element('p', 'opp-description', safeText(item.description)),
+                    element('p', 'opp-meta', 'Required education: ' + safeText(item.required_education)),
+                    element('p', 'opp-meta', 'Skills: ' + safeText(item.required_skills)),
+                    element('p', 'opp-meta', 'Training: ' + safeText(item.training_duration_weeks, 'Varies') + ' weeks • Training cost: ' + money(item.training_cost_inr) + ' • Capital required: ' + money(item.capital_required_inr))
+                );
+                const badges = element('div', 'opp-badge-row');
+                const normalizedTrack = trackForFilter(item.track);
+                const trackClass = normalizedTrack === 'Employment' ? 'badge-wage' : 'badge-ent';
+                badges.append(
+                    element('span', 'opp-badge ' + trackClass, normalizedTrack === 'Employment' ? 'Wage Employment' : safeText(item.track)),
+                    element('span', 'opp-badge badge-emerald', money(item.estimated_monthly_income_min_inr) + ' – ' + money(item.estimated_monthly_income_max_inr) + '/mo'),
+                    element('span', 'opp-badge badge-indigo', safeText(item.scheme_linkage, 'Scheme linkage not listed'))
+                );
+                if (item.match_score_pct !== undefined && item.match_score_pct !== null) {
+                    badges.append(element('span', 'opp-badge badge-indigo', 'Profile match: ' + Number(item.match_score_pct).toFixed(1) + '%'));
+                }
+                card.append(content, badges);
+                grid.append(card);
+            });
+            const count = visible.length;
+            status.textContent = count
+                ? 'Showing ' + count + ' of ' + allOpportunities.length + ' pathways. Select a track to filter the directory.'
+                : 'No pathways match this filter.';
+            filterBar.querySelectorAll('[data-track-filter]').forEach(button => {
+                const selected = button.dataset.trackFilter === activeTrack;
+                button.classList.toggle('active', selected);
+                button.setAttribute('aria-pressed', String(selected));
+            });
+        }
+        filterBar.addEventListener('click', event => {
+            const button = event.target.closest('[data-track-filter]');
+            if (!button) return;
+            activeTrack = button.dataset.trackFilter;
+            render();
+        });
+        async function loadOpportunities() {
+            try {
+                const response = await fetch('/api/recommendations/rank', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({})
+                });
+                if (!response.ok) throw new Error('API returned HTTP ' + response.status);
+                const payload = await response.json();
+                if (payload.status !== 'success' || !Array.isArray(payload.ranked) || payload.ranked.length === 0) {
+                    throw new Error('The opportunity catalogue returned no records.');
+                }
+                allOpportunities = payload.ranked;
+                const counts = {
+                    all: allOpportunities.length,
+                    Employment: allOpportunities.filter(item => trackForFilter(item.track) === 'Employment').length,
+                    'Micro-Enterprise': allOpportunities.filter(item => trackForFilter(item.track) === 'Micro-Enterprise').length,
+                    'Self-Employment': allOpportunities.filter(item => trackForFilter(item.track) === 'Self-Employment').length
+                };
+                document.getElementById('opp_all_count').textContent = '(' + counts.all + ')';
+                document.getElementById('opp_employment_count').textContent = '(' + counts.Employment + ')';
+                document.getElementById('opp_enterprise_count').textContent = '(' + counts['Micro-Enterprise'] + ')';
+                document.getElementById('opp_self_count').textContent = '(' + counts['Self-Employment'] + ')';
+                render();
+            } catch (error) {
+                status.textContent = 'Could not load the full pathway catalogue. Please refresh the page or try again shortly.';
+                console.error('Opportunity catalogue failed to load:', error);
+            }
+        }
+        loadOpportunities();
+    })();
+    </script>
+\n</body>
 </html>
