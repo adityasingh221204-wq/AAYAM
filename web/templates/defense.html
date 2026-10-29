@@ -890,20 +890,20 @@
             try {
                 const responses = await Promise.all([
                     fetch(reportUrl + '?t=' + Date.now(), { cache: 'no-store' }),
-                    fetch('https://api.github.com/repos/adityasingh221204-wq/AAYAM/commits/main', {
+                    fetch('https://api.github.com/repos/adityasingh221204-wq/AAYAM/commits/trial', {
                         headers: { 'Accept': 'application/vnd.github+json' },
                         cache: 'no-store'
                     })
                 ]);
                 if (responses[0].status === 404) {
-                    host.innerHTML = '<div style="padding:14px;border:1px solid #64748B;border-radius:10px;background:rgba(255,255,255,.03)"><strong>NOT RUN / NO PUBLISHED REPORT</strong><p style="margin:6px 0 0;color:#94A3B8">No CI-generated pytest report is available yet. Run the command above locally or wait for the verification workflow to publish a report from main.</p></div>';
+                    host.innerHTML = '<div style="padding:14px;border:1px solid #64748B;border-radius:10px;background:rgba(255,255,255,.03)"><strong>NOT RUN / NO PUBLISHED REPORT</strong><p style="margin:6px 0 0;color:#94A3B8">No CI-generated pytest report is available yet. Run the command above locally or wait for the verification workflow to publish a report from trial.</p></div>';
                     return;
                 }
                 if (!responses[0].ok) throw new Error('Report request returned HTTP ' + responses[0].status);
                 const report = await responses[0].json();
                 const mainResponse = responses[1];
-                const mainCommit = mainResponse.ok ? (await mainResponse.json()).sha : null;
-                const stale = !mainCommit || report.commit_sha !== mainCommit;
+                const trialCommit = mainResponse.ok ? (await mainResponse.json()).sha : null;
+                const stale = !trialCommit || report.commit_sha !== trialCommit;
                 const counts = report.counts || {};
                 const status = report.status || 'UNKNOWN';
                 const statusColor = stale ? '#FBBF24' : (status === 'PASS' ? '#34D399' : '#FB7185');
@@ -915,7 +915,7 @@
                     '<div style="flex:1;min-width:100px;padding:12px;border:1px solid var(--border-card);border-radius:9px"><span style="color:#94A3B8;font-size:.78rem">FAILED / ERRORS</span><div style="font-size:1.1rem;font-weight:800;color:#FB7185">' + (Number(counts.failed || 0) + Number(counts.errors || 0)) + '</div></div>' +
                     '<div style="flex:1;min-width:100px;padding:12px;border:1px solid var(--border-card);border-radius:9px"><span style="color:#94A3B8;font-size:.78rem">SKIPPED</span><div style="font-size:1.1rem;font-weight:800">' + Number(counts.skipped || 0) + '</div></div></div>' +
                     '<p style="font-size:.82rem;color:#94A3B8;margin:0 0 12px">Last run: ' + escapeVerificationText(date) + ' · Commit: ' + escapeVerificationText(String(report.commit_sha || 'unknown').slice(0, 7)) + (report.workflow_url ? ' · <a target="_blank" rel="noopener noreferrer" href="' + escapeVerificationText(report.workflow_url) + '" style="color:#38BDF8">Open CI run</a>' : '') + '</p>';
-                if (stale) html += '<p style="color:#FBBF24">This report does not match the current main commit. It is shown for transparency, not as current verification.</p>';
+                if (stale) html += '<p style="color:#FBBF24">This report does not match the current trial commit. It is shown for transparency, not as current verification.</p>';
                 if (report.error) html += '<p style="color:#FB7185">Report warning: ' + escapeVerificationText(report.error) + '</p>';
                 const files = Array.isArray(report.files) ? report.files : [];
                 if (files.length) {
