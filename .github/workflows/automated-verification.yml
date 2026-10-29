@@ -3,6 +3,8 @@ name: Automated Verification Suite
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -16,7 +18,7 @@ jobs:
       - name: Check out source
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -39,7 +41,7 @@ jobs:
           GITHUB_SERVER_URL: ${{ github.server_url }}
         run: python scripts/publish_verification_report.py reports/pytest.xml reports/publish/verification.json
       - name: Publish report to verification-results branch
-        if: always()
+        if: always() && github.event_name != 'pull_request'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
