@@ -45,6 +45,9 @@ jobs:
             sleep 1
           done
           test -s /tmp/aayam-home.html
+          curl --fail --silent http://127.0.0.1:5000/opportunities -o /tmp/aayam-opportunities.html
+          grep -q "opp_grid_container" /tmp/aayam-opportunities.html
+          curl --fail --silent -X POST -H "Content-Type: application/json" -d '{}' http://127.0.0.1:5000/api/recommendations/rank -o /tmp/aayam-opportunities.json
           curl --fail --silent http://127.0.0.1:5000/api/system/smoke-test -o /tmp/aayam-smoke.json
           python - <<'PY'
           import json
@@ -54,7 +57,15 @@ jobs:
           assert payload.get("engine_checks_failed") == 0, payload
           assert payload.get("status") == "success", payload
           assert str(payload.get("pytest_suite_status", "")).startswith("NOT RUN"), payload
-          print("Live Flask HTTP smoke checks passed: homepage + 5 engine checks.")
+          opportunities = json.loads(Path("/tmp/aayam-opportunities.json").read_text(encoding="utf-8"))
+          ranked = opportunities.get("ranked", [])
+          assert opportunities.get("status") == "success", opportunities
+          assert len(ranked) == 12, f"Expected 12 pathways, got {len(ranked)}"
+          tracks = {str(item.get("track", "")).strip().lower() for item in ranked}
+          assert "employment" in tracks, tracks
+          assert "micro-enterprise" in tracks, tracks
+          assert "self-employment" in tracks, tracks
+          print("Live Flask smoke checks passed: homepage, opportunities page, all 12 pathways, and 5 engine checks.")
           PY
       - name: Convert JUnit output into dashboard report
         if: always()
