@@ -2,9 +2,9 @@ name: Automated Verification Suite
 
 on:
   push:
-    branches: [main]
+    branches: [main, trial]
   pull_request:
-    branches: [main]
+    branches: [main, trial]
   workflow_dispatch:
 
 permissions:
@@ -41,7 +41,7 @@ jobs:
           GITHUB_SERVER_URL: ${{ github.server_url }}
         run: python scripts/publish_verification_report.py reports/pytest.xml reports/publish/verification.json
       - name: Publish report to verification-results branch
-        if: always() && github.event_name != 'pull_request'
+        if: always() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
