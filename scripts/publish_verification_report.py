@@ -45,11 +45,15 @@ def main():
         for case in suite.findall("testcase"):
             name = case.get("name", "unknown")
             classname = case.get("classname", "")
-            file_path = classname.split(".")[0] if classname else suite.get("name", "unknown")
-            if file_path.startswith("tests."):
-                file_path = file_path.replace(".", "/", 1) + ".py"
-            elif not file_path.endswith(".py"):
-                file_path = suite.get("name", file_path)
+            module = classname.rsplit(".", 1)[0] if classname else ""
+            if module.startswith("tests."):
+                file_path = module.replace(".", "/") + ".py"
+            elif module.startswith("test_"):
+                file_path = "tests/" + module + ".py"
+            else:
+                file_path = suite.get("name", module or "unknown")
+                if not file_path.endswith(".py"):
+                    file_path += ".py"
             status = "passed"
             failure = case.find("failure")
             error = case.find("error")
